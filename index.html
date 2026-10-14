@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BDD10K Active Learning Lab — Human-in-the-Loop Vision Engine</title>
+  <meta name="description" content="Trải nghiệm giả lập toàn trình Pipeline Human-in-the-Loop cho thị giác xe tự hành BDD10K. Khám phá 9 chặng kỹ thuật, đấu trường benchmark mAP@50 và mini-studio thẩm định gán nhãn AI.">
+  <meta name="author" content="Nguyễn Xuân Huỳnh">
+  
+  <!-- Favicon / Icons -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚗</text></svg>">
+
+  <!-- Core & Component Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- KaTeX for IEEE/CVPR Paper LaTeX Math Formula Rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="brand">
+        <div class="brand-icon">🚗</div>
+        <div class="brand-title">
+          <span>BDD10K ActiveLab</span>
+          <span class="brand-badge">HITL v4.0</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#flywheel" class="nav-link active">Vòng Lặp 9 Chặng</a></li>
+          <li><a href="#oracle" class="nav-link">Trải Nghiệm Oracle</a></li>
+          <li><a href="#benchmarks" class="nav-link">Đấu Trường Điểm Số</a></li>
+          <li><a href="#calculator" class="nav-link">Bộ Tính ROI</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-cta">
+        <div class="status-indicator">
+          <span class="pulse-dot"></span>
+          <span>VICTORY_CONFIRMED</span>
+        </div>
+        <a href="#oracle" class="btn btn-primary btn-sm">Thử Gán Nhãn</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION: Live Mission Control HUD -->
+    <section class="hero-section container" id="overview">
+      <div class="hero-header">
+        <div class="hero-tag">
+          <span>⚡</span>
+          <span>HỆ THỐNG TỰ ĐỘNG HÓA VÒNG LẶP DỮ LIỆU XE TỰ HÀNH</span>
+        </div>
+        <h1 class="hero-title">
+          Đánh Bại <span class="gradient-text-gold">100% Dữ Liệu</span> Chỉ Với <span class="gradient-text-emerald">60% Mẫu</span> Bằng Vòng Lặp HITL
+        </h1>
+        <p class="hero-description">
+          Khám phá hệ thống Human-in-the-Loop khép kín trên tập BDD10K: Tích hợp lọc trùng cạnh biên <strong>pHash &gt;360 FPS</strong>, động cơ khai thác đa miền <strong>C6 Super-Fusion</strong>, và cơ chế định tuyến chuyên gia 2 tầng — Cắt giảm <strong>40.1% ngân sách nhãn</strong> và giải cứu triệt để các lớp giao thông hiếm.
+        </p>
+      </div>
+
+      <!-- Live Telemetry KPI Cards -->
+      <div class="telemetry-grid">
+        <div class="telemetry-card" style="--card-accent: var(--neon-emerald);">
+          <div class="telemetry-label">
+            <span>Cách biệt vs Random</span>
+            <span class="telemetry-badge badge-emerald">V5 Peak</span>
+          </div>
+          <div class="telemetry-val" id="counterDeltaMap">+4.95%</div>
+          <div class="telemetry-sub">27.85% vs 22.90% mAP@50</div>
+        </div>
+
+        <div class="telemetry-card" style="--card-accent: var(--neon-cyan);">
+          <div class="telemetry-label">
+            <span>Tiết kiệm Ngân Sách</span>
+            <span class="telemetry-badge badge-cyan">ROI</span>
+          </div>
+          <div class="telemetry-val" id="counterBudgetSaved">40.1%</div>
+          <div class="telemetry-sub">Chỉ cần 3.336 thay vì 5.565 ảnh</div>
+        </div>
+
+        <div class="telemetry-card" style="--card-accent: var(--neon-amber);">
+          <div class="telemetry-label">
+            <span>Vượt Trần 100% Target</span>
+            <span class="telemetry-badge badge-amber">Gate 1</span>
+          </div>
+          <div class="telemetry-val" id="counterPeakMap">27.85%</div>
+          <div class="telemetry-sub">+1.00% cao hơn trần 26.85%</div>
+        </div>
+
+        <div class="telemetry-card" style="--card-accent: var(--neon-purple);">
+          <div class="telemetry-label">
+            <span>Throughput FastDedup</span>
+            <span class="telemetry-badge badge-cyan">Edge CPU</span>
+          </div>
+          <div class="telemetry-val" id="counterDedupFps">>360 FPS</div>
+          <div class="telemetry-sub">pHash 64-bit HD &lt; 5 bit</div>
+        </div>
+
+        <div class="telemetry-card" style="--card-accent: var(--neon-emerald);">
+          <div class="telemetry-label">
+            <span>Data Leakage & Đĩa</span>
+            <span class="telemetry-badge badge-emerald">Symlink</span>
+          </div>
+          <div class="telemetry-val" id="counterStorageWaste">0 KB</div>
+          <div class="telemetry-sub">Zero Video Leakage 100%</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1: INTERACTIVE 9-STAGE FLYWHEEL SIMULATOR -->
+    <section class="container" id="flywheel" style="padding: 60px 0;">
+      <div class="section-header">
+        <div>
+          <div class="section-tag">
+            <span>🔄</span>
+            <span>CHẶNG 1 ĐẾN CHẶNG 9 LIÊN HOÀN</span>
+          </div>
+          <h2 class="section-title">Giả Lập Bánh Đà Tự Học Toàn Trình (HITL Flywheel)</h2>
+          <p class="section-desc">
+            Trải nghiệm từng bước chuỗi phản hồi đóng từ khi camera xe ghi hình cho đến khi mô hình lượng tử hóa INT8 được OTA cập nhật ngược về xe.
+          </p>
+        </div>
+        <div class="sim-btn-group">
+          <button class="btn btn-primary" id="simPlayPauseBtn">
+            <span>▶</span> Mô Phỏng Vòng Lặp
+          </button>
+        </div>
+      </div>
+
+      <div class="simulator-container">
+        <!-- Stage Step Navigation Track -->
+        <div class="stage-track" id="stageTrack"></div>
+
+        <!-- Simulator Sub-controls -->
+        <div class="sim-controls-bar">
+          <div class="sim-btn-group">
+            <button class="btn btn-secondary btn-sm" id="simPrevBtn">⏮ Chặng Trước</button>
+            <button class="btn btn-secondary btn-sm" id="simNextBtn">Chặng Tiếp ⏭</button>
+          </div>
+          <div class="sim-speed-selector">
+            <span>Tốc độ giả lập:</span>
+            <button class="speed-chip active" data-speed="1">1x</button>
+            <button class="speed-chip" data-speed="2">2x</button>
+            <button class="speed-chip" data-speed="4">4x</button>
+          </div>
+        </div>
+
+        <!-- Stage Main Presentation -->
+        <div class="stage-main-panel">
+          <!-- Left: Detailed Architecture & Math -->
+          <div class="glass-panel stage-content-card" id="stageContentCard">
+            <!-- Rendered by flywheel-simulator.js -->
+          </div>
+
+          <!-- Right: Interactive Sandbox Visualizer -->
+          <div class="glass-panel stage-sandbox-card" id="stageSandboxCard">
+            <!-- Rendered by flywheel-simulator.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: "BE THE HUMAN ORACLE" MINI-STUDIO -->
+    <section class="container" id="oracle" style="padding: 60px 0;">
+      <div class="section-header">
+        <div>
+          <div class="section-tag">
+            <span>🎮</span>
+            <span>INTERACTIVE HITL SANDBOX</span>
+          </div>
+          <h2 class="section-title">Nhập Vai "Human Oracle" (Trọng Tài Tối Cao)</h2>
+          <p class="section-desc">
+            Trực tiếp trải nghiệm cơ chế phân luồng 2 tầng: AI tự động duyệt các mẫu xe dễ (Tier 1), bạn thẩm định và sửa các trường hợp biên nguy hiểm ban đêm bị che khuất (Tier 2).
+          </p>
+        </div>
+        <button class="btn btn-secondary btn-sm" id="resetSceneBtn">🔄 Đổi Khung Hình Khác</button>
+      </div>
+
+      <div class="oracle-studio-wrapper">
+        <!-- Interactive Canvas Viewport -->
+        <div class="glass-panel oracle-canvas-card">
+          <div class="canvas-toolbar">
+            <div class="oracle-round-selector" id="oracleRoundSelector">
+              <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Chọn Hạt Giống:</span>
+              <button class="round-pill-btn" data-round="0">V1 (20%)</button>
+              <button class="round-pill-btn" data-round="1">V2 (30%)</button>
+              <button class="round-pill-btn" data-round="2">V3 (40%)</button>
+              <button class="round-pill-btn" data-round="3">V4 (50%)</button>
+              <button class="round-pill-btn active" data-round="4">V5 (Victory)</button>
+            </div>
+            <div class="canvas-legend-bar">
+              <div class="legend-item">
+                <span class="legend-color" style="background: #10b981;"></span>
+                <span>Tier 1: AI Auto (&ge;75%)</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-color" style="background: #f59e0b;"></span>
+                <span>Tier 2: Cần Thẩm Định</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-color" style="background: #06b6d4;"></span>
+                <span>Đã Sửa (BDD10K GT)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- BDD10K Ground-Truth Guarantee Badge -->
+          <div style="font-size: 0.72rem; color: var(--neon-cyan); background: rgba(6, 182, 212, 0.08); border: 1px solid rgba(6, 182, 212, 0.25); border-radius: 6px; padding: 6px 12px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+            <span>🛡️ <strong>Chân lý chuẩn:</strong> 100% Ảnh và Hộp nhãn đối chuẩn trực tiếp từ <code style="color: #fff;">data/bdd10k/bdd10k_metadata.json</code> (Read-Only)</span>
+            <span style="color: var(--neon-emerald); font-weight: 700;">Chân Lý Bất Biến ✓</span>
+          </div>
+
+          <div class="oracle-viewport-box">
+            <canvas id="oracleCanvas"></canvas>
+          </div>
+
+          <!-- Real Image Metadata HUD Info Bar -->
+          <div class="oracle-image-meta-bar" id="oracleImageMetaBar">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="telemetry-badge badge-emerald" id="oracleRoundBadge">SEED V5 (seed_v5)</span>
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-cyan);" id="oracleImageFile">0204aad7-4ebd19fa.jpg</span>
+            </div>
+            <div style="font-size: 0.74rem; color: var(--text-secondary); text-align: right;" id="oracleImageDesc">
+              V5 Victory: Đô thị mật độ dày 49 vật thể (xe tải, người lái xe, người đi bộ)
+            </div>
+          </div>
+        </div>
+
+        <!-- Oracle Action Deck & Accuracy Meter -->
+        <div class="glass-panel oracle-control-deck">
+          <div class="oracle-deck-header">
+            <div class="oracle-deck-title">
+              <span>⚖️</span>
+              <span>BÀN ĐIỀU KHIỂN CHUYÊN GIA</span>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-secondary);">
+              Các quyết định của bạn sẽ lập tức cập nhật trọng số và đóng gói Batch Dữ Liệu Vàng.
+            </p>
+          </div>
+
+          <!-- Live Accuracy Boost Meter -->
+          <div class="accuracy-boost-meter">
+            <div class="boost-header">
+              <span>ĐIỂM ĐÁNH GIÁ MÔ HÌNH DỰ KIẾN:</span>
+              <span style="color: var(--neon-cyan); font-family: var(--font-mono);">mAP@50</span>
+            </div>
+            <div class="boost-score-display" id="accuracyBoostVal">20.23%</div>
+            <div class="meter-track">
+              <div class="meter-fill" id="meterFill"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); font-family: var(--font-mono);">
+              <span>V0 Anchor: 20.23%</span>
+              <span style="color: var(--neon-emerald);">Victory Peak: 27.85%</span>
+            </div>
+          </div>
+
+          <!-- Interactive Action Buttons -->
+          <div class="oracle-action-btn-list">
+            <button class="btn btn-outline-cyan" id="approveTier1Btn">
+              <span>✓</span> Duyệt Nhanh Tier 1 (Xe Con & Đèn)
+            </button>
+            <button class="btn btn-secondary" id="correctTier2Btn" style="border-color: rgba(245, 158, 11, 0.4); color: #fbbf24;">
+              <span>✏️</span> Thẩm Định Sửa Tier 2 (Người Lái Xe & Đi Bộ Đêm)
+            </button>
+            <button class="btn btn-primary" id="submitBatchBtn">
+              <span>📦</span> Đóng Gói Batch Dữ Liệu Vàng
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: DYNAMIC BENCHMARK ARENA -->
+    <section class="container" id="benchmarks" style="padding: 60px 0;">
+      <div class="section-header">
+        <div>
+          <div class="section-tag">
+            <span>📈</span>
+            <span>ĐỐI CHUẨN KHOA HỌC THỰC NGHIỆM</span>
+          </div>
+          <h2 class="section-title">Đấu Trường Điểm Số & Tiến Hóa 10 Lớp Giao Thông</h2>
+          <p class="section-desc">
+            Kéo thanh trượt qua các vòng lặp V0 &rarr; V5 để chứng kiến cách Proposed Active vượt qua Random Baseline và đánh bại trần 100% Target.
+          </p>
+        </div>
+      </div>
+
+      <div class="benchmark-arena">
+        <!-- Iteration Timeline Scrubber -->
+        <div class="glass-panel timeline-scrubber-card">
+          <div class="scrubber-header">
+            <div>
+              <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Vòng lặp đang xem:</span>
+              <div style="font-size: 1.35rem; font-weight: 800; font-family: var(--font-mono); color: var(--neon-emerald); display: flex; align-items: center; gap: 10px;">
+                <span id="currentIterBadge">V5 (Victory)</span>
+                <span class="telemetry-badge badge-emerald" id="currentIterPoolPct">60% Pool (3.336 ảnh)</span>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Trạng thái vòng lặp:</span>
+              <div style="font-size: 0.85rem; color: var(--neon-cyan); font-weight: 600;" id="currentIterNote">
+                VICTORY_CONFIRMED: Đạt đỉnh 27.85% mAP, tiết kiệm 40.1% ngân sách!
+              </div>
+            </div>
+          </div>
+
+          <div class="scrubber-slider-wrapper">
+            <input type="range" min="0" max="5" step="1" value="5" class="iteration-range-slider" id="iterationSlider">
+          </div>
+
+          <div class="scrubber-ticks">
+            <span class="scrubber-tick-item" data-index="0">V0 (10% Seed)</span>
+            <span class="scrubber-tick-item" data-index="1">V1 (20%)</span>
+            <span class="scrubber-tick-item" data-index="2">V2 (30%)</span>
+            <span class="scrubber-tick-item" data-index="3">V3 (40%)</span>
+            <span class="scrubber-tick-item" data-index="4">V4 (50%)</span>
+            <span class="scrubber-tick-item active" data-index="5">V5 (60% Victory)</span>
+          </div>
+        </div>
+
+        <!-- Learning Curve Viewport & Equalizer Grid -->
+        <div class="benchmark-viewport-grid">
+          <!-- Learning Curve Chart -->
+          <div class="glass-panel chart-card">
+            <div class="chart-header">
+              <div>
+                <h3 style="font-size: 1.05rem;">Đường Cong Học Tập mAP@50 (%)</h3>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">Đo độc lập trên tập cố định Frozen Test (1.400 ảnh)</span>
+              </div>
+              <div style="display: flex; gap: 14px; font-size: 0.75rem; font-family: var(--font-mono);">
+                <span style="color: var(--neon-emerald); font-weight: 700;">● Proposed Active</span>
+                <span style="color: #f87171;">● Random Baseline</span>
+                <span style="color: #fbbf24;">-- 100% Target</span>
+              </div>
+            </div>
+
+            <div class="chart-canvas-container">
+              <canvas id="learningCurveCanvas"></canvas>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border-subtle); text-align: center;">
+              <div>
+                <div style="font-size: 0.7rem; color: var(--text-muted);">PROPOSED MAP</div>
+                <div style="font-size: 1.15rem; font-weight: 800; font-family: var(--font-mono); color: var(--neon-emerald);" id="currentProposedMap">27.85%</div>
+              </div>
+              <div>
+                <div style="font-size: 0.7rem; color: var(--text-muted);">RANDOM MAP</div>
+                <div style="font-size: 1.15rem; font-weight: 800; font-family: var(--font-mono); color: #f87171;" id="currentRandomMap">22.90%</div>
+              </div>
+              <div>
+                <div style="font-size: 0.7rem; color: var(--text-muted);">DELTA GAIN</div>
+                <div style="font-size: 1.15rem; font-weight: 800; font-family: var(--font-mono); color: var(--neon-emerald);" id="currentDeltaMap">+4.95%</div>
+              </div>
+              <div>
+                <div style="font-size: 0.7rem; color: var(--text-muted);">PROPOSED F1</div>
+                <div style="font-size: 1.15rem; font-weight: 800; font-family: var(--font-mono); color: var(--neon-cyan);" id="currentProposedF1">35.02%</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- C_w Equalizer -->
+          <div class="glass-panel cw-equalizer-card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <h3 style="font-size: 1.05rem;">Vector Thâm Hụt Lớp Động C<sub>w</sub></h3>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">Ghìm xe con 0.20x &mdash; Tăng tốc lớp hiếm (Train 25x, Motor 22x)</span>
+              </div>
+              <span class="telemetry-badge badge-amber">Anti-Starvation Clamp</span>
+            </div>
+
+            <div class="equalizer-channels" id="equalizerChannels"></div>
+
+            <div class="equalizer-explainer-banner">
+              <span style="font-size: 0.95rem;">🔒</span>
+              <div style="font-size: 0.72rem; line-height: 1.4; color: var(--text-secondary);">
+                <strong style="color: #f87171;">Giải mã tỷ lệ Car 0.20x:</strong> Xe con chiếm <strong>55.8%</strong> dữ liệu (6.262 / 11.230 hộp) và đã đạt đỉnh <strong>>60% mAP</strong>. Thuật toán C6 chủ động ghìm tỷ lệ Car xuống sàn an toàn <strong>0.20x</strong> để ngăn chặn hiện tượng <em>Pha loãng Gradient (Gradient Dilution)</em>, dồn toàn bộ hạn ngạch giải cứu các lớp hiếm (Train 25x, Motor 22x, Rider 21x).
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seed Diagnostics & Error Audit Panel (Mới bổ sung từ reports/seeds/) -->
+        <div class="glass-panel seed-diagnostic-card" id="seedDiagnosticCard">
+          <div class="diagnostic-header">
+            <div>
+              <div class="section-tag" style="margin-bottom: 2px;">
+                <span>🔬</span>
+                <span>CHẨN ĐOÁN HẠT GIỐNG DỮ LIỆU & LỖ HỔNG TRI THỨC</span>
+              </div>
+              <h3 style="font-size: 1.15rem; display: flex; align-items: center; gap: 8px;">
+                <span id="diagSeedTitle">Báo Cáo Chẩn Đoán Hạt Giống: SEED_V5</span>
+                <span class="telemetry-badge badge-cyan" id="diagEvalModel">Đo bởi: YOLO11n V4</span>
+              </h3>
+            </div>
+            <div style="text-align: right;">
+              <span class="telemetry-badge badge-emerald" id="diagDeltaGain">Tác động: Δ = +0.65% mAP</span>
+            </div>
+          </div>
+
+          <!-- 4 Mini KPI Badges -->
+          <div class="diag-metrics-grid">
+            <div class="diag-metric-box">
+              <div class="diag-metric-label">NHÃN VÀNG GROUND-TRUTH</div>
+              <div class="diag-metric-val" id="diagGtBoxes" style="color: var(--neon-emerald);">11,230</div>
+              <div class="diag-metric-sub">Hộp chuẩn xác tuyệt đối</div>
+            </div>
+            <div class="diag-metric-box">
+              <div class="diag-metric-label">MODEL V{K-1} DETECT TRƯỚC</div>
+              <div class="diag-metric-val" id="diagDetectBoxes" style="color: #38bdf8;">4,302</div>
+              <div class="diag-metric-sub" id="diagAvgConf">Độ tự tin TB: 0.496</div>
+            </div>
+            <div class="diag-metric-box">
+              <div class="diag-metric-label">LỖ HỔNG BỎ SÓT (FALSE NEGATIVE)</div>
+              <div class="diag-metric-val" id="diagFalseNeg" style="color: #f87171;">11,228</div>
+              <div class="diag-metric-sub" id="diagMissRate">Miss Rate: 100.0% (Cần vá)</div>
+            </div>
+            <div class="diag-metric-box">
+              <div class="diag-metric-label">ẢO GIÁC PHÁT HIỆN SAI (FP)</div>
+              <div class="diag-metric-val" id="diagFalsePos" style="color: #fbbf24;">4,300</div>
+              <div class="diag-metric-sub" id="diagConfusionsCount">8 cặp nhầm lẫn lớp</div>
+            </div>
+          </div>
+
+          <!-- Subgrid: Hard Slices & Top Confusions -->
+          <div class="diag-subgrid">
+            <!-- Hard Slices Distribution -->
+            <div class="diag-subcard">
+              <div style="font-size: 0.8rem; font-weight: 700; color: var(--neon-cyan); margin-bottom: 10px; display: flex; justify-content: space-between;">
+                <span>PHÂN BỔ 6 LÁT CẮT KHÓ (HARD SLICES)</span>
+                <span style="color: var(--text-muted); font-size: 0.72rem;" id="diagHardSlicesNote">556 ảnh hạt giống</span>
+              </div>
+              <div class="hard-slices-list" id="diagHardSlicesList"></div>
+            </div>
+
+            <!-- Top Confusion Pairs -->
+            <div class="diag-subcard">
+              <div style="font-size: 0.8rem; font-weight: 700; color: var(--neon-amber); margin-bottom: 10px; display: flex; justify-content: space-between;">
+                <span>CÁC CẶP NHẦM LỚP ĐIỂN HÌNH (CLASSIFICATION CONFUSION)</span>
+                <span style="color: var(--text-muted); font-size: 0.72rem;">IoU &ge; 0.45</span>
+              </div>
+              <div class="confusions-list" id="diagConfusionsList"></div>
+              <div class="diag-impact-banner" id="diagImpactBanner"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10 Classes Comparison Table -->
+        <div class="glass-panel ten-classes-card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <h3 style="font-size: 1.1rem;">Bảng Tiến Hóa Chi Tiết 10 Lớp Giao Thông BDD10K</h3>
+              <span style="font-size: 0.78rem; color: var(--text-secondary);">
+                Đo lường độ chính xác mAP@50 per-class tại vòng lặp đã chọn. Dấu ★ biểu thị lớp đã vượt trần 100% Target.
+              </span>
+            </div>
+          </div>
+
+          <div class="classes-table-container">
+            <table class="classes-table">
+              <thead>
+                <tr>
+                  <th>Danh Mục Lớp</th>
+                  <th>100% Target (Ceiling)</th>
+                  <th>Random Baseline</th>
+                  <th>Proposed Active</th>
+                  <th>Chênh Lệch (Delta)</th>
+                </tr>
+              </thead>
+              <tbody id="tenClassesTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: ROI & RESOURCE CALCULATOR -->
+    <section class="container" id="calculator" style="padding: 60px 0;">
+      <div class="section-header">
+        <div>
+          <div class="section-tag">
+            <span>💰</span>
+            <span>HIỆU QUẢ KINH TẾ & TỐI ƯU HÓA</span>
+          </div>
+          <h2 class="section-title">Máy Tính Tối Ưu Chi Phí Đội Xe (ROI Calculator)</h2>
+          <p class="section-desc">
+            Nhập quy mô đội xe và chi phí gán nhãn thực tế để ước tính ngân sách USD và thời gian làm việc được giải phóng nhờ kiến trúc HITL.
+          </p>
+        </div>
+      </div>
+
+      <div class="roi-calculator-grid">
+        <!-- Sliders Deck -->
+        <div class="glass-panel roi-inputs-card">
+          <h3 style="font-size: 1.1rem; margin-bottom: 6px;">Thông Số Hoạt Động Của Đội Xe</h3>
+
+          <div class="calc-control-group">
+            <div class="calc-control-label">
+              <span>Quy mô đội xe (Fleet Size):</span>
+              <span class="calc-control-val" id="calcFleetVal">10 xe</span>
+            </div>
+            <input type="range" min="1" max="100" step="1" value="10" class="calc-slider" id="calcFleetSize">
+          </div>
+
+          <div class="calc-control-group">
+            <div class="calc-control-label">
+              <span>Giờ chạy trung bình/ngày:</span>
+              <span class="calc-control-val" id="calcHoursVal">8 giờ/ngày</span>
+            </div>
+            <input type="range" min="1" max="24" step="1" value="8" class="calc-slider" id="calcOperatingHours">
+          </div>
+
+          <div class="calc-control-group">
+            <div class="calc-control-label">
+              <span>Chi phí gán nhãn thủ công ($/ảnh):</span>
+              <span class="calc-control-val" id="calcCostVal">$2.00/ảnh</span>
+            </div>
+            <input type="range" min="0.5" max="5.0" step="0.25" value="2.00" class="calc-slider" id="calcLabelCost">
+          </div>
+
+          <div id="calcFormulaNote" style="font-size: 0.78rem; color: var(--text-muted); background: rgba(255,255,255,0.02); padding: 12px; border-radius: 6px; border: 1px solid var(--border-subtle);">
+            💡 <em>Tính toán dựa trên chuẩn 50.000 ảnh chiến dịch. Kết hợp tiết kiệm 40% khối lượng nhờ C6 Active Mining và giảm 26.67% chi phí Tier 1 Pre-labeling.</em>
+          </div>
+        </div>
+
+        <!-- Calculated Results Deck -->
+        <div class="glass-panel roi-results-card">
+          <div class="roi-metric-big-box">
+            <div class="roi-big-label">ƯỚC TÍNH NGÂN SÁCH TIẾT KIỆM TRỰC TIẾP</div>
+            <div class="roi-big-val" id="calcTotalSavings">$42,670</div>
+            <div style="font-size: 0.8rem; color: var(--neon-emerald); font-weight: 600; margin-top: 4px;">
+              Tiết kiệm 40.1% chi phí gán nhãn so với nạp mù quáng
+            </div>
+          </div>
+
+          <div class="roi-metrics-subgrid">
+            <div class="roi-sub-box">
+              <div class="roi-sub-label">GIỜ LÀM VIỆC TIẾT KIỆM</div>
+              <div class="roi-sub-val" id="calcSavedHours">833 giờ</div>
+            </div>
+            <div class="roi-sub-box">
+              <div class="roi-sub-label">ẢNH RÁC BỊ LOẠI BỎ</div>
+              <div class="roi-sub-val" id="calcFilteredFrames">20.000 ảnh</div>
+            </div>
+            <div class="roi-sub-box">
+              <div class="roi-sub-label">GIẢM THẢI CO₂</div>
+              <div class="roi-sub-val" id="calcCo2Saved">900 kg CO₂</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-author">
+        <span>© 2026 <strong>BDD10K Active Learning Lab</strong> — Nghiên cứu & Phát triển: <strong>Nguyễn Xuân Huỳnh</strong></span>
+        <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 4px;">
+          Phiên bản Production v4.0 — Tương thích tuyệt đối với PyTorch, OpenCV, CVAT, Label Studio.
+        </div>
+      </div>
+      <ul class="footer-links">
+        <li><a href="#overview">Tổng quan</a></li>
+        <li><a href="#flywheel">9 Chặng HITL</a></li>
+        <li><a href="#oracle">Thẩm định Oracle</a></li>
+        <li><a href="#benchmarks">Bảng Benchmark</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- App Bootstrap Module -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

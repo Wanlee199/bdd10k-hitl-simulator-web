@@ -1,0 +1,94 @@
+/* ==========================================================================
+   BDD10K ACTIVE LEARNING LAB - RESPONSIVE STYLES
+   Breakpoints for Desktop, Laptop, Tablet, Mobile
+   ========================================================================== */
+
+@media (max-width: 1200px) {
+  .telemetry-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .stage-main-panel {
+    grid-template-columns: 1fr;
+  }
+  
+  .oracle-studio-wrapper {
+    grid-template-columns: 1fr;
+  }
+  
+  .benchmark-viewport-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .roi-calculator-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  
+  .stage-track {
+    grid-template-columns: repeat(5, 1fr);
+    overflow-x: auto;
+  }
+  
+  .telemetry-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .equalizer-channels {
+    grid-template-columns: repeat(5, 1fr);
+    height: 320px;
+  }
+
+  .diag-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .diag-subgrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .nav-links {
+    display: none; /* Can be toggled or kept minimal */
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-title {
+    font-size: 1.8rem;
+  }
+  
+  .telemetry-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .diag-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stage-track {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .stage-metrics-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .roi-metrics-subgrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .oracle-viewport-box {
+    height: 280px;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+}
