@@ -1,0 +1,5 @@
+Thuật Toán,TP,FP,TN,FN,Total,Accuracy,Precision,Recall,Specificity,F1_Score,Jaccard
+laplacian,50,0,50,0,100,100.0,100.0,100.0,100.0,100.0,100.0
+tenengrad,22,0,50,28,100,72.0,100.0,44.0,100.0,61.11,44.0
+fft_frequency,7,14,36,43,100,43.0,33.33,14.0,72.0,19.72,10.94
+hybrid_ensemble,50,0,50,0,100,100.0,100.0,100.0,100.0,100.0,100.0

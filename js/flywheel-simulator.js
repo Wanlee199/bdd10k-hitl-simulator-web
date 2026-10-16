@@ -143,7 +143,7 @@ export class FlywheelSimulator {
     this.contentContainer.innerHTML = `
       <div class="stage-badge-row">
         <span class="stage-tag-pill">${stage.tag}</span>
-        <span class="stage-hardware-pill">⚡ ${stage.hardware}</span>
+        <span class="stage-hardware-pill"><svg style="width: 12px; height: 12px; display: inline-block; vertical-align: middle; margin-top: -2px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> ${stage.hardware}</span>
         <span class="badge-emerald" style="margin-left: auto;">${stage.status}</span>
       </div>
       <div>
@@ -155,7 +155,7 @@ export class FlywheelSimulator {
       <div class="math-formula-box">
         <div class="formula-header">
           <div class="formula-label">
-            <span>📐</span>
+            <span><svg style="width: 12px; height: 12px; display: inline-block; vertical-align: middle; margin-top: -2px; color: #34d399;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 7-6 6"/><path d="m17 11-8 8"/><path d="m19 13-4 4"/><path d="m3 21 18-18"/></svg></span>
             <span>CÔNG THỨC TOÁN HỌC CỐT LÕI</span>
           </div>
           <span class="telemetry-badge badge-cyan" style="font-size: 0.65rem;">LaTeX / KaTeX</span>
@@ -283,7 +283,7 @@ export class FlywheelSimulator {
     this.sandboxContainer.innerHTML = `
       <div class="sandbox-header">
         <div class="sandbox-title">
-          <span>⚡</span>
+          <span><svg style="width: 12px; height: 12px; display: inline-block; vertical-align: middle; margin-top: -2px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
           <span>SANDBOX TRẢI NGHIỆM TRỰC QUAN: CHẶNG ${stage.id}</span>
         </div>
         <span class="telemetry-badge badge-cyan">LIVE SIMULATION</span>
@@ -300,31 +300,39 @@ export class FlywheelSimulator {
   /* --- Specific Stage Sandboxes --- */
   renderStage1Sandbox() {
     return `
-      <div style="width: 100%; height: 100%; padding: 16px; display: flex; flex-direction: column; justify-content: space-around;">
-        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px;">
-          <div style="flex: 1; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 10px; text-align: center;">
-            <div style="font-size: 0.72rem; color: var(--text-muted);">FRAME #1042 (T = 0.0s)</div>
-            <div style="margin: 8px 0; font-family: var(--font-mono); font-size: 0.7rem; color: #38bdf8;">pHash: a4f18c2b9e0711da</div>
-            <span class="badge-cyan" style="font-size: 0.7rem;">3 Vehicles</span>
-          </div>
-          <div style="display: flex; flex-direction: column; align-items: center;">
-            <span style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">DCT Hamming Dist</span>
-            <div id="simHammingValue" style="font-size: 1.5rem; font-weight: 800; font-family: var(--font-mono); color: var(--neon-crimson);">HD = 2</div>
-            <span style="font-size: 0.7rem; color: var(--text-muted);">&lt; Ngưỡng 5 bit</span>
-          </div>
-          <div style="flex: 1; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 10px; text-align: center;">
-            <div style="font-size: 0.72rem; color: var(--text-muted);">FRAME #1043 (T = 1.0s)</div>
-            <div style="margin: 8px 0; font-family: var(--font-mono); font-size: 0.7rem; color: #38bdf8;">pHash: a4f18c2b9e0711dc</div>
-            <span class="badge-emerald" style="font-size: 0.7rem;">5 Vehicles (Giữ)</span>
+      <div style="width: 100%; height: 100%; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; gap: 10px;">
+        <!-- Video Simulation Player Mini -->
+        <div style="position: relative; width: 100%; height: 210px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-subtle); background: #000;">
+          <video 
+            id="stage1MiniVideo" 
+            src="assets/fastdedup_pipeline_simulation.mp4" 
+            autoplay 
+            loop 
+            muted 
+            playsinline 
+            controls
+            style="width: 100%; height: 100%; object-fit: cover;"
+          ></video>
+          <div style="position: absolute; top: 8px; left: 8px; background: rgba(16, 185, 129, 0.9); color: #fff; font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono); display: flex; align-items: center; gap: 4px;">
+            <span><svg style="width: 12px; height: 12px; display: inline-block; vertical-align: middle; margin-top: -2px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg></span>
+            <span>VIDEO MÔ PHỎNG (GIỌNG NỮ MICROSOFT EDGE)</span>
           </div>
         </div>
 
-        <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 12px; display: flex; align-items: center; justify-content: space-between;">
+        <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 8px; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between;">
           <div>
-            <div style="font-weight: 700; color: #f87171; font-size: 0.85rem;">KẾT QUẢ KMV (KEEP-MOST-VEHICLES):</div>
-            <div style="font-size: 0.78rem; color: var(--text-secondary);">Loại bỏ Frame #1042 (trùng lặp góc nhìn khi dừng đèn đỏ), lưu trữ Frame #1043</div>
+            <div style="font-weight: 700; color: #34d399; font-size: 0.82rem;"><svg style="width: 12px; height: 12px; display: inline-block; vertical-align: middle; margin-top: -2px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> ĐỘNG CƠ DUAL-STREAM FAST DEDUPLICATION:</div>
+            <div style="font-size: 0.74rem; color: var(--text-secondary); margin-top: 2px;">
+              Stream 1 (pHash >390 FPS) + Stream 2 (Keep-Most-Vehicles cứu người đi bộ)
+            </div>
           </div>
-          <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-emerald); font-weight: 700;">TIẾT KIỆM 0 KB ĐĨA</span>
+          <a 
+            href="fastdedup-point1.html" 
+            class="btn btn-primary btn-sm" 
+            style="font-size: 0.72rem; padding: 6px 12px; text-decoration: none; white-space: nowrap; margin-left: 12px;"
+          >
+            Mở Trang Báo Cáo Point 1 ↗
+          </a>
         </div>
       </div>
     `;
@@ -351,7 +359,7 @@ export class FlywheelSimulator {
           </div>
         </div>
         <div style="padding: 10px; background: rgba(6, 182, 212, 0.08); border-radius: 6px; border: 1px solid rgba(6, 182, 212, 0.2); font-size: 0.8rem; color: var(--text-secondary);">
-          🎯 <strong>Tác vụ Profiling:</strong> Gắn nhãn phân loại tự động vào lát cắt <em>"Ban Đêm / Trời Mưa / Ngược Sáng"</em> để phục vụ thuật toán khai thác C6.
+          <svg style="width: 13px; height: 13px; display: inline-block; vertical-align: middle; margin-top: -2px; color: #34d399;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> <strong>Tác vụ Profiling:</strong> Gắn nhãn phân loại tự động vào lát cắt <em>"Ban Đêm / Trời Mưa / Ngược Sáng"</em> để phục vụ thuật toán khai thác C6.
         </div>
       </div>
     `;
@@ -362,7 +370,7 @@ export class FlywheelSimulator {
       <div style="width: 100%; height: 100%; padding: 14px; display: flex; flex-direction: column; justify-content: space-between; gap: 8px;">
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <div style="font-size: 0.78rem; font-family: var(--font-mono); color: var(--neon-emerald); font-weight: 700;">
-            🛡️ ZERO DATA LEAKAGE: CÁCH LY TUYỆT ĐỐI VIDEO ID
+            <svg style="width: 13px; height: 13px; display: inline-block; vertical-align: middle; margin-top: -2px; color: #34d399;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> ZERO DATA LEAKAGE: CÁCH LY TUYỆT ĐỐI VIDEO ID
           </div>
           <span class="telemetry-badge badge-emerald">AUDIT PASS (0 / 13.45M)</span>
         </div>
@@ -392,7 +400,7 @@ export class FlywheelSimulator {
 
         <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 6px; padding: 8px;">
           <div style="display: flex; justify-content: space-between; font-size: 0.72rem; font-family: var(--font-mono);">
-            <span style="color: var(--neon-emerald); font-weight: 700;">🏆 Quán Quân Tournament:</span>
+            <span style="color: var(--neon-emerald); font-weight: 700;"><svg style="width: 13px; height: 13px; display: inline-block; vertical-align: middle; margin-top: -2px; color: #fbbf24;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg> Quán Quân Tournament:</span>
             <span style="color: #fff; font-weight: 700;">Hybrid Mix 80/20 (Score: 93.59)</span>
           </div>
           <div style="font-size: 0.68rem; color: var(--text-secondary); margin-top: 3px;">

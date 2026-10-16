@@ -1,0 +1,5 @@
+Thuật Toán,TP,FP,TN,FN,Total,Accuracy,Precision,Recall,Specificity,F1_Score,Jaccard
+hsv_baseline,771,15,1164,50,2000,96.75,98.09,93.91,98.73,95.96,92.22
+ycbcr_percentiles,758,31,1148,63,2000,95.3,96.07,92.33,97.37,94.16,88.97
+retinex_ssr,793,18,1161,28,2000,97.7,97.78,96.59,98.47,97.18,94.52
+hybrid_ensemble_proposed,792,18,1161,29,2000,97.65,97.78,96.47,98.47,97.12,94.4
