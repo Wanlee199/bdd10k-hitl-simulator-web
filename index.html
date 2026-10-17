@@ -485,14 +485,14 @@
         </div>
 
         <!-- Khung Nhúng Trực Tiếp Master Pipeline Visualizer (Full Width & Dynamic Fit Height) -->
-        <div class="relative w-full rounded-2xl border border-[#E5E3DC] overflow-hidden shadow-soft bg-[#F9FAFB]">
+        <div class="relative w-full rounded-2xl border border-[#E5E3DC] shadow-soft bg-[#F9FAFB]">
           <iframe 
             id="pipelineVisualizerIframe"
             src="pipeline_visualizer.html" 
-            class="w-full border-0 transition-all duration-300" 
-            style="width: 100%; border: none; overflow: hidden; min-height: 1600px;"
-            scrolling="no"
-            loading="lazy" 
+            class="w-full border-0 transition-all duration-300 rounded-2xl" 
+            style="width: 100%; border: none; min-height: 2500px; height: 2600px;"
+            scrolling="auto"
+            loading="eager" 
             allow="autoplay"
             onload="autoResizePipelineIframe(this)"
             title="Master Pipeline Architecture Visualizer — BDD10K ActiveLab">

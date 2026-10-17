@@ -563,9 +563,6 @@ document.addEventListener("DOMContentLoaded", function () {
         tbody.appendChild(tr);
       });
     }
-        tbody.appendChild(tr);
-      });
-    }
   };
 
   // ===========================================================================
@@ -878,34 +875,52 @@ document.addEventListener("DOMContentLoaded", function () {
     window.switchIndexRound("v5");
   }
 
-  // Tự động đồng bộ chiều cao cho iframe Pipeline Visualizer vừa khít nội dung (Full Height, No Scroll)
+  // Tự động đồng bộ chiều cao cho iframe Pipeline Visualizer vừa khít nội dung 100% (Full Height, No Scroll)
   window.autoResizePipelineIframe = function (iframe) {
+    if (!iframe) return;
     try {
-      if (iframe && iframe.contentWindow && iframe.contentWindow.document.body) {
-        const mainEl = iframe.contentWindow.document.querySelector('main');
-        const contentH = mainEl ? mainEl.offsetHeight + 100 : 1650;
-        const safeH = Math.min(Math.max(contentH, 1300), 3800);
-        if (Math.abs(iframe.offsetHeight - safeH) > 20) {
-          iframe.style.height = safeH + "px";
-        }
-      }
-    } catch (e) {
-      // Giữ nguyên fallback nếu cross-origin
-    }
-  };
-
-  // Lắng nghe postMessage báo kích thước động từ iframe (chống vòng lặp vô hạn, không để scroll)
-  window.addEventListener("message", function (e) {
-    if (e.data && e.data.type === "PIPELINE_RESIZE" && e.data.height) {
-      const iframe = document.getElementById("pipelineVisualizerIframe");
-      if (iframe) {
-        const safeH = Math.min(Math.max(e.data.height + 30, 1300), 3800);
+      if (iframe.contentWindow && iframe.contentWindow.document) {
+        const doc = iframe.contentWindow.document;
+        const h = Math.max(
+          doc.documentElement ? doc.documentElement.scrollHeight : 0,
+          doc.body ? doc.body.scrollHeight : 0,
+          2650
+        );
+        const safeH = Math.min(h + 50, 7500);
         if (Math.abs(iframe.offsetHeight - safeH) > 15) {
           iframe.style.height = safeH + "px";
         }
       }
+    } catch (e) {
+      // Giữ nguyên fallback an toàn nếu cross-origin
+      if (parseInt(iframe.style.height || "0", 10) < 2650) {
+        iframe.style.height = "2750px";
+      }
+    }
+  };
+
+  // Lắng nghe postMessage báo kích thước động từ iframe (chống vòng lặp vô hạn, khớp full chiều cao)
+  window.addEventListener("message", function (e) {
+    if (e.data && e.data.type === "PIPELINE_RESIZE" && e.data.height) {
+      const iframe = document.getElementById("pipelineVisualizerIframe");
+      if (iframe) {
+        const targetH = Math.min(Math.max(e.data.height + 40, 2650), 7500);
+        if (Math.abs(iframe.offsetHeight - targetH) > 15) {
+          iframe.style.height = targetH + "px";
+        }
+      }
     }
   });
+
+  // Tự động thăm dò chiều cao sau khi load trang để đảm bảo hình ảnh và Tailwind styles render xong
+  const pipeIframe = document.getElementById("pipelineVisualizerIframe");
+  if (pipeIframe) {
+    [300, 800, 1500, 3000].forEach(function (ms) {
+      setTimeout(function () {
+        window.autoResizePipelineIframe(pipeIframe);
+      }, ms);
+    });
+  }
 
   // Kích hoạt render KaTeX nếu có
   if (window.renderMathInElement) {
