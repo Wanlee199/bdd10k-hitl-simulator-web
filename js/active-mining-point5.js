@@ -141,28 +141,30 @@ save_manifest("results/phase_05/manifest_v1.yaml")
     }
   }
 
-  playOverlayBtn.addEventListener('click', togglePlay);
-  ctrlPlayBtn.addEventListener('click', togglePlay);
+  if (playOverlayBtn) playOverlayBtn.addEventListener('click', togglePlay);
+  if (ctrlPlayBtn) ctrlPlayBtn.addEventListener('click', togglePlay);
 
   video.addEventListener('play', () => {
-    playIconSvg.classList.add('hidden');
-    pauseIconSvg.classList.remove('hidden');
-    ctrlPlaySvg.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
-    playOverlayBtn.classList.add('opacity-0');
+    if (playIconSvg) playIconSvg.classList.add('hidden');
+    if (pauseIconSvg) pauseIconSvg.classList.remove('hidden');
+    if (ctrlPlaySvg) ctrlPlaySvg.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+    if (playOverlayBtn) playOverlayBtn.classList.add('opacity-0');
   });
 
   video.addEventListener('pause', () => {
-    playIconSvg.classList.remove('hidden');
-    pauseIconSvg.classList.add('hidden');
-    ctrlPlaySvg.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"/>';
-    playOverlayBtn.classList.remove('opacity-0');
+    if (playIconSvg) playIconSvg.classList.remove('hidden');
+    if (pauseIconSvg) pauseIconSvg.classList.add('hidden');
+    if (ctrlPlaySvg) ctrlPlaySvg.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"/>';
+    if (playOverlayBtn) playOverlayBtn.classList.remove('opacity-0');
   });
 
   // Volume toggle
-  ctrlVolumeBtn.addEventListener('click', () => {
-    video.muted = !video.muted;
-    ctrlVolumeBtn.style.opacity = video.muted ? '0.5' : '1.0';
-  });
+  if (ctrlVolumeBtn) {
+    ctrlVolumeBtn.addEventListener('click', () => {
+      video.muted = !video.muted;
+      ctrlVolumeBtn.style.opacity = video.muted ? '0.5' : '1.0';
+    });
+  }
 
   // Time format helper
   function fmtTime(sec) {
@@ -177,9 +179,13 @@ save_manifest("results/phase_05/manifest_v1.yaml")
     const dur = video.duration || 48.5;
 
     // Progress Bar
-    const pct = (curr / dur) * 100;
-    progressBar.style.width = `${pct}%`;
-    timeDisplay.textContent = `${fmtTime(curr)} / ${fmtTime(dur)}`;
+    if (progressBar) {
+      const pct = (curr / dur) * 100;
+      progressBar.style.width = `${pct}%`;
+    }
+    if (timeDisplay) {
+      timeDisplay.textContent = `${fmtTime(curr)} / ${fmtTime(dur)}`;
+    }
 
     // Identify Current Stage
     let activeStage = STAGES[0];
@@ -199,12 +205,14 @@ save_manifest("results/phase_05/manifest_v1.yaml")
   });
 
   // Seek Progress
-  progressContainer.addEventListener('click', (e) => {
-    const rect = progressContainer.getBoundingClientRect();
-    const pos = (e.clientX - rect.left) / rect.width;
-    const dur = video.duration || 48.5;
-    video.currentTime = pos * dur;
-  });
+  if (progressContainer) {
+    progressContainer.addEventListener('click', (e) => {
+      const rect = progressContainer.getBoundingClientRect();
+      const pos = (e.clientX - rect.left) / rect.width;
+      const dur = video.duration || 48.5;
+      video.currentTime = pos * dur;
+    });
+  }
 
   // Stage Pills Jump
   stagePills.forEach(pill => {

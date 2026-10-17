@@ -151,3 +151,58 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* ========================================================================= */
+/* SIDEBAR COLLAPSED CONTROLLER (Zero Layout Collision / Pixel-Perfect)      */
+/* ========================================================================= */
+html.sidebar-is-collapsed #app-sidebar {
+  width: 5rem !important;
+}
+
+html.sidebar-is-collapsed #main-wrapper {
+  padding-left: 5rem !important;
+}
+
+html.sidebar-is-collapsed .sidebar-text-expand {
+  display: none !important;
+}
+
+/* Brand Header: Xếp dọc logo AL và nút đóng, căn giữa 100%, không bao giờ che khuất */
+html.sidebar-is-collapsed #sidebar-brand-header {
+  height: auto !important;
+  min-height: 4.5rem !important;
+  padding: 0.75rem 0.5rem !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+}
+
+html.sidebar-is-collapsed #sidebar-brand-header a {
+  margin: 0 auto !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+html.sidebar-is-collapsed #sidebar-toggle-btn {
+  margin: 0 auto !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* Căn giữa icon của các mục menu chuyên đề (01, 02, 03,...) */
+html.sidebar-is-collapsed .sidebar-item-link {
+  justify-content: center !important;
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+}
+
+/* Căn giữa các mục menu chữ cái (A, B, C,...) */
+html.sidebar-is-collapsed .sidebar-nav-letter {
+  justify-content: center !important;
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+}
+
