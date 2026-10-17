@@ -664,28 +664,72 @@
               </div>
             </div>
 
+            <!-- Inline Instant Dispatcher for Bảng 2 Round Tabs (Miễn nhiễm 100% với cache và delay nạp script) -->
+            <script>
+              window.switchIndexRound = function(roundKey) {
+                var roundKeys = ['v0', 'v1', 'v2', 'v3', 'v4', 'v5'];
+                if (roundKey === 'all') {
+                  roundKeys.forEach(function(k) {
+                    var p = document.getElementById('indexRoundPanel_' + k);
+                    if (p) p.classList.remove('hidden');
+                  });
+                } else {
+                  roundKeys.forEach(function(k) {
+                    var p = document.getElementById('indexRoundPanel_' + k);
+                    if (p) {
+                      if (k === roundKey) {
+                        p.classList.remove('hidden');
+                      } else {
+                        p.classList.add('hidden');
+                      }
+                    }
+                  });
+                }
+
+                var allTabKeys = ['v0', 'v1', 'v2', 'v3', 'v4', 'v5', 'all'];
+                allTabKeys.forEach(function(k) {
+                  var tab = document.getElementById('indexTab_' + k);
+                  if (!tab) return;
+                  var baseClasses = "index-round-tab px-2.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all whitespace-nowrap cursor-pointer";
+                  if (k === roundKey) {
+                    if (k === 'v5') {
+                      tab.className = baseClasses + " bg-[#2D5A34] text-white border border-[#2D5A34] shadow-sm flex items-center gap-1.5";
+                    } else {
+                      tab.className = baseClasses + " bg-[#2D5A34] text-white border border-[#2D5A34] shadow-sm";
+                    }
+                  } else {
+                    if (k === 'v5') {
+                      tab.className = baseClasses + " bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB] flex items-center gap-1.5";
+                    } else {
+                      tab.className = baseClasses + " bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB]";
+                    }
+                  }
+                });
+              };
+            </script>
+
             <!-- Round Selector Tabs (GreenSM Pill Style) -->
             <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
-              <button onclick="switchIndexRound('v0')" id="indexTab_v0" class="index-round-tab px-2.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB] whitespace-nowrap">
+              <button onclick="window.switchIndexRound('v0')" id="indexTab_v0" class="index-round-tab px-2.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB] whitespace-nowrap cursor-pointer">
                 V0: Anchor (10%)
               </button>
-              <button onclick="switchIndexRound('v1')" id="indexTab_v1" class="index-round-tab px-2.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB] whitespace-nowrap">
+              <button onclick="window.switchIndexRound('v1')" id="indexTab_v1" class="index-round-tab px-2.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB] whitespace-nowrap cursor-pointer">
                 V1: Lead (20%)
               </button>
-              <button onclick="switchIndexRound('v2')" id="indexTab_v2" class="index-round-tab px-2.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB] whitespace-nowrap">
+              <button onclick="window.switchIndexRound('v2')" id="indexTab_v2" class="index-round-tab px-2.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB] whitespace-nowrap cursor-pointer">
                 V2: All-Front (30%)
               </button>
-              <button onclick="switchIndexRound('v3')" id="indexTab_v3" class="index-round-tab px-2.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB] whitespace-nowrap">
+              <button onclick="window.switchIndexRound('v3')" id="indexTab_v3" class="index-round-tab px-2.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB] whitespace-nowrap cursor-pointer">
                 V3: Confirm (40%)
               </button>
-              <button onclick="switchIndexRound('v4')" id="indexTab_v4" class="index-round-tab px-2.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB] whitespace-nowrap">
+              <button onclick="window.switchIndexRound('v4')" id="indexTab_v4" class="index-round-tab px-2.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB] whitespace-nowrap cursor-pointer">
                 V4: Overtake (50%)
               </button>
-              <button onclick="switchIndexRound('v5')" id="indexTab_v5" class="index-round-tab px-2.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-[#2D5A34] text-white border border-[#2D5A34] shadow-sm whitespace-nowrap flex items-center gap-1.5">
+              <button onclick="window.switchIndexRound('v5')" id="indexTab_v5" class="index-round-tab px-2.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-[#2D5A34] text-white border border-[#2D5A34] shadow-sm whitespace-nowrap flex items-center gap-1.5 cursor-pointer">
                 <svg class="w-3.5 h-3.5 text-[#F59E0B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
                 <span>V5: Chung Cuộc (60%)</span>
               </button>
-              <button onclick="switchIndexRound('all')" id="indexTab_all" class="index-round-tab px-2.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB] whitespace-nowrap">
+              <button onclick="window.switchIndexRound('all')" id="indexTab_all" class="index-round-tab px-2.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB] whitespace-nowrap cursor-pointer">
                 Xem Tất Cả 6 Vòng
               </button>
             </div>
@@ -1608,6 +1652,6 @@
   <!-- JavaScript Controller (Point 07 Core) -->
   <script src="js/sidebar-toggle.js"></script>
   <script src="js/media-viewer.js"></script>
-  <script src="js/index.js"></script>
+  <script src="js/index.js?v=20261017_r4"></script>
 </body>
 </html>
