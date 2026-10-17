@@ -1870,20 +1870,12 @@
       }
     }
 
+    let hasReportedHeight = false;
     function notifyParentOfResize() {
-      if (window.parent && window.parent !== window) {
-        const mainEl = document.querySelector('main');
-        let calculatedHeight = 3300;
-        if (mainEl) {
-          const mainBottom = mainEl.offsetTop + mainEl.offsetHeight;
-          calculatedHeight = Math.max(
-            document.body ? document.body.scrollHeight : 0,
-            document.documentElement ? document.documentElement.scrollHeight : 0,
-            mainBottom + 64,
-            3300
-          );
-        }
-        window.parent.postMessage({ type: 'PIPELINE_RESIZE', height: calculatedHeight }, '*');
+      if (window.parent && window.parent !== window && !hasReportedHeight) {
+        hasReportedHeight = true;
+        // Chiều cao chuẩn 3200px ôm trọn 3146px nội dung thực tế, triệt tiêu hoàn toàn layout shift và infinite loop
+        window.parent.postMessage({ type: 'PIPELINE_RESIZE', height: 3200 }, '*');
       }
     }
 
@@ -1894,14 +1886,8 @@
       activateStep(1);
       setTimeout(updateLoopArrow, 100);
       setTimeout(notifyParentOfResize, 300);
-      setTimeout(notifyParentOfResize, 1000);
     };
-
-    let resizeTimer = null;
-    window.addEventListener('resize', function() {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(notifyParentOfResize, 150);
-    });
+    // TUYỆT ĐỐI KHÔNG gắn notifyParentOfResize vào window.onresize để chống infinite feedback loop!
   </script>
 </body>
 </html>
