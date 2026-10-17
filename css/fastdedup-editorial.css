@@ -212,3 +212,46 @@ html.sidebar-is-collapsed .sidebar-nav-letter {
   padding-right: 0.5rem !important;
 }
 
+/* ========================================================================= */
+/* EDITORIAL BASE TYPOGRAPHY (16px - 18px Cho Text Thuần / Body Prose)       */
+/* ========================================================================= */
+/* Áp dụng cho các thẻ đoạn văn, phán quyết, khối văn bản thuyết minh khoa học */
+p:not(.caption-small):not(.badge-text):not(.telemetry-label):not(.font-mono):not(td p):not(th p),
+.editorial-prose,
+.verdict-box,
+.prose-body,
+.prose-text,
+.academic-body {
+  font-size: 1.0625rem !important; /* 17px chuẩn giữa 16px và 18px */
+  line-height: 1.75 !important;
+}
+
+@media (min-width: 1024px) {
+  p:not(.caption-small):not(.badge-text):not(.telemetry-label):not(.font-mono):not(td p):not(th p),
+  .editorial-prose,
+  .verdict-box,
+  .prose-body,
+  .prose-text,
+  .academic-body {
+    font-size: 1.125rem !important; /* 18px tối ưu đọc màn hình lớn */
+    line-height: 1.75 !important;
+  }
+}
+
+@media (max-width: 640px) {
+  p:not(.caption-small):not(.badge-text):not(.telemetry-label):not(.font-mono):not(td p):not(th p),
+  .editorial-prose,
+  .verdict-box,
+  .prose-body,
+  .prose-text,
+  .academic-body {
+    font-size: 1rem !important; /* 16px */
+    line-height: 1.65 !important;
+  }
+}
+
+/* Bảo toàn bảng số liệu ma trận, nhãn badges và monospaced telemetry */
+table td, table th, .font-mono, .badge, .badge-text, .caption-small {
+  letter-spacing: -0.01em;
+}
+

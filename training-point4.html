@@ -393,25 +393,25 @@
         <div class="p-4 rounded-2xl bg-white border border-[#E5E3DC] shadow-soft">
           <div class="text-xs font-mono text-[#475254] uppercase tracking-wider">Tập Mầm Hạt Nhân</div>
           <div class="text-2xl font-bold font-mono text-[#1F2627] mt-1">500 Ảnh</div>
-          <div class="text-xs text-[#2D5A34] font-medium mt-0.5">9.887 GT boxes đối chuẩn BDD10K</div>
+          <div class="text-sm text-[#2D5A34] font-medium mt-0.5">9.887 GT boxes đối chuẩn BDD10K</div>
         </div>
 
         <div class="p-4 rounded-2xl bg-white border border-[#E5E3DC] shadow-soft">
           <div class="text-xs font-mono text-[#475254] uppercase tracking-wider">Quán Quân V0 mAP@50</div>
           <div class="text-2xl font-bold font-mono text-[#2D5A34] mt-1">20.23%</div>
-          <div class="text-xs text-[#2D5A34] font-medium mt-0.5">Vượt Naive SGD (+6.13% mAP)</div>
+          <div class="text-sm text-[#2D5A34] font-medium mt-0.5">Vượt Naive SGD (+6.13% mAP)</div>
         </div>
 
         <div class="p-4 rounded-2xl bg-white border border-[#E5E3DC] shadow-soft">
           <div class="text-xs font-mono text-[#475254] uppercase tracking-wider">Định Vị Chuẩn mAP@90</div>
           <div class="text-2xl font-bold font-mono text-[#1F2627] mt-1">2.28%</div>
-          <div class="text-xs text-[#2D5A34] font-medium mt-0.5">Lớp Car đạt đỉnh 10.21% AP90</div>
+          <div class="text-sm text-[#2D5A34] font-medium mt-0.5">Lớp Car đạt đỉnh 10.21% AP90</div>
         </div>
 
         <div class="p-4 rounded-2xl bg-white border border-[#E5E3DC] shadow-soft">
           <div class="text-xs font-mono text-[#475254] uppercase tracking-wider">Tốc Độ Suy Luận (MPS)</div>
           <div class="text-2xl font-bold font-mono text-[#1F2627] mt-1">151.5 FPS</div>
-          <div class="text-xs text-[#2D5A34] font-medium mt-0.5">1.2 ms/ảnh (Real-Time tự hành)</div>
+          <div class="text-sm text-[#2D5A34] font-medium mt-0.5">1.2 ms/ảnh (Real-Time tự hành)</div>
         </div>
       </div>
 
@@ -421,14 +421,14 @@
           <span class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">CƠ SỞ TOÁN HỌC & CÔNG THỨC TỐI ƯU HÓA (ADAMW, COSINE ANNEALING & CLASS PENALTY)</span>
           <span class="text-xs font-mono text-[#475254]">Hội tụ trên 500 ảnh mầm • 151.5 FPS</span>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <!-- Cột 1: AdamW Decoupled Weight Decay -->
           <div class="p-4 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC] space-y-2">
             <div class="text-xs font-mono font-bold text-[#2D5A34]">1. Cập Nhật Trọng Số Tách Biệt (AdamW):</div>
             <div class="text-center py-2 text-sm text-[#1F2627] overflow-x-auto">
               $$\mathbf{\theta}_{t+1} = \mathbf{\theta}_t - \eta_t \left( \frac{\hat{\mathbf{m}}_t}{\sqrt{\hat{\mathbf{v}}_t} + \epsilon} + \lambda \mathbf{\theta}_t \right)$$
             </div>
-            <div class="text-xs text-[#475254] leading-relaxed">
+            <div class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
               Tách rời suy giảm trọng số $\lambda \mathbf{\theta}_t$ khỏi động lượng gradient, ngăn chặn gradient bùng nổ khi gặp vật thể nhỏ.
             </div>
           </div>
@@ -439,7 +439,7 @@
             <div class="text-center py-2 text-sm text-[#1F2627] overflow-x-auto">
               $$\eta_t = \eta_{\min} + \frac{1}{2}(\eta_{\max} - \eta_{\min})\left(1 + \cos\left(\frac{t}{T_{\max}}\pi\right)\right)$$
             </div>
-            <div class="text-xs text-[#475254] leading-relaxed">
+            <div class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
               Giảm tốc độ học mượt mà theo hàm cosin, đưa mô hình chạm đáy cực tiểu địa phương tối ưu mà không bị văng khỏi hố năng lượng.
             </div>
           </div>
@@ -450,7 +450,7 @@
             <div class="text-center py-2 text-sm text-[#1F2627] overflow-x-auto">
               $$W_c = \left( \frac{\max_k N_k}{N_c + \epsilon} \right)^{\gamma}, \quad \mathcal{L}_{\text{box-cls}} = \sum_c W_c \cdot \mathcal{L}_{\text{BCE}}(p_c, y_c)$$
             </div>
-            <div class="text-xs text-[#475254] leading-relaxed">
+            <div class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
               Phạt nặng sai số trên các lớp hiếm (train, rider, motor) với lũy thừa làm mịn $\gamma = 0.5$ để triệt tiêu hiệu ứng áp đảo của lớp car.
             </div>
           </div>
@@ -463,7 +463,7 @@
         <div class="p-6 rounded-2xl bg-white border border-[#E5E3DC] shadow-soft space-y-3">
           <div class="w-8 h-8 rounded-lg bg-[#E8F0EA] text-[#2D5A34] flex items-center justify-center font-mono font-bold text-sm">1</div>
           <h3 class="font-bold text-base text-[#1F2627]">Backbone Freezing: Ngăn Ngừa Quên Tri Thức Cũ</h3>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Trên tập mầm chỉ 500 ảnh, nếu giải phóng toàn bộ tham số, gradient lỗi từ số ít ảnh sẽ làm xáo trộn các trọng số đã được tiền huấn luyện kỹ lưỡng trên COCO. Việc <strong>đóng băng 10 tầng đầu của Backbone</strong> giữ nguyên các bộ trích xuất đặc trưng hình học cơ bản (cạnh, góc, màu sắc) và chỉ tinh chỉnh Head nhận diện.
           </p>
         </div>
@@ -472,7 +472,7 @@
         <div class="p-6 rounded-2xl bg-white border border-[#E5E3DC] shadow-soft space-y-3">
           <div class="w-8 h-8 rounded-lg bg-[#E8F0EA] text-[#2D5A34] flex items-center justify-center font-mono font-bold text-sm">2</div>
           <h3 class="font-bold text-base text-[#1F2627]">AdamW + Cosine Annealing: Hội Tụ Đa Thang Đo</h3>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Thuật toán AdamW tách biệt hoàn toàn giữa suy giảm trọng số (Weight Decay) và cập nhật gradient bậc một/hai, giải quyết triệt để hiện tượng gradient bùng nổ khi gặp các batch vật thể nhỏ. Lịch hạ nhiệt <strong>Cosine Annealing</strong> giúp bước nhảy nhỏ dần mượt mà, đưa mô hình chạm đáy cực tiểu địa phương tối ưu mà không bị văng ra ngoài.
           </p>
         </div>
@@ -481,7 +481,7 @@
         <div class="p-6 rounded-2xl bg-white border border-[#E5E3DC] shadow-soft space-y-3">
           <div class="w-8 h-8 rounded-lg bg-[#E8F0EA] text-[#2D5A34] flex items-center justify-center font-mono font-bold text-sm">3</div>
           <h3 class="font-bold text-base text-[#1F2627]">Tại Sao Vision Transformer Chưa Thể Thắng Ở Seed V0?</h3>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             RT-DETR-L phụ thuộc vào cơ chế Global Attention và Hungarian Bipartite Matching, vốn không có sẵn giả định không gian cục bộ (Inductive Bias) như phép tích chập của CNN. Trên 500 ảnh mầm, Transformer không đủ mẫu để học ma trận tương quan toàn cục, do đó đóng vai trò là <strong>Mô hình Đối trọng kiểm chứng</strong> hơn là Động cơ Khai thác.
           </p>
         </div>
@@ -922,7 +922,7 @@
           <div class="rounded-xl overflow-hidden border border-[#E5E3DC]">
             <img src="assets/training/07_qualitative_detection_gallery_4slices.png" alt="Detection Gallery 4 Slices" class="w-full object-contain">
           </div>
-          <p class="text-xs text-[#475254]">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed mt-2">
             Trích xuất 4 khung hình đại diện từ Frozen Gold Test: Bắt trọn xe hơi ban đêm, người đi bộ che khuất, và biển báo giao thông nhỏ ở hậu cảnh xa.
           </p>
         </div>
@@ -963,7 +963,7 @@
             <span class="font-bold text-sm text-[#2D5A34]">yolo11n_v0_best.pt</span>
             <span class="text-xs text-[#475254]">5.45 MB • CNN</span>
           </div>
-          <div class="text-xs text-[#475254] font-sans">Quán Quân V0 • Động Cơ Khai Thác Mỏ (Mining Engine)</div>
+          <div class="text-sm md:text-base text-[#475254] font-sans">Quán Quân V0 • Động Cơ Khai Thác Mỏ (Mining Engine)</div>
           <div class="text-xs text-[#475254] break-all pt-1">
             SHA-256: <span class="text-[#1F2627]">fe8f63276ad5cacffeecec12c04c59fdb7485e7d9fe94206efdf85db7be03959</span>
           </div>
@@ -974,7 +974,7 @@
             <span class="font-bold text-sm text-[#2563EB]">rtdetr_v0_best.pt</span>
             <span class="text-xs text-[#475254]">66.25 MB • Transformer</span>
           </div>
-          <div class="text-xs text-[#475254] font-sans">Mô Hình Đối Trọng Kiểm Chứng (Counterpart Baseline)</div>
+          <div class="text-sm md:text-base text-[#475254] font-sans">Mô Hình Đối Trọng Kiểm Chứng (Counterpart Baseline)</div>
           <div class="text-xs text-[#475254] break-all pt-1">
             SHA-256: <span class="text-[#1F2627]">29be93ec14885c3fe954882d9a2f9ea98d8823f5ab8df985e6d370de86f1ffbf</span>
           </div>

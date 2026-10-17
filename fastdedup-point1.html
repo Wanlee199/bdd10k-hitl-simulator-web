@@ -385,7 +385,7 @@
         <h1 class="text-3xl md:text-5xl font-bold tracking-tight text-[#1F2627] font-editorial leading-tight">
           Tại Sao Chọn <span class="text-[#2D5A34] italic">Dual-Stream Fast Deduplication</span> Cho Bước 1?
         </h1>
-        <p class="text-sm md:text-base text-[#475254] w-full leading-relaxed">
+        <p class="text-base lg:text-[18px] text-[#475254] w-full leading-relaxed">
           Chứng minh bằng chứng khoa học thực nghiệm trên <strong>7.000 khung hình BDD10K</strong>: Cơ chế kết hợp giữa <strong>pHash CPU siêu tốc (>390 FPS)</strong> và thuật toán giải quyết xung đột <strong>Keep-Most-Vehicles</strong> giúp đánh bại hoàn toàn các mạng học sâu ResNet50 về tốc độ, đồng thời bảo toàn trọn vẹn các mẫu học quý hiếm (người đi bộ & xe nhỏ) cho Active Learning.
         </p>
       </div>
@@ -398,7 +398,7 @@
             <span class="px-1.5 py-0.5 rounded text-xs bg-[#E8F0EA] text-[#2D5A34] font-bold">ZERO GPU</span>
           </div>
           <div class="text-3xl font-bold font-mono text-[#2D5A34] mt-2">397.3 <span class="text-sm font-sans font-normal text-[#475254]">FPS</span></div>
-          <div class="text-xs text-[#475254] mt-1">Độ trễ 2.52 ms/ảnh — Nhanh gấp 14x lần ResNet50 (29.2 FPS)</div>
+          <div class="text-sm lg:text-[15px] text-[#475254] mt-1 leading-relaxed">Độ trễ 2.52 ms/ảnh — Nhanh gấp 14x lần ResNet50 (29.2 FPS)</div>
         </div>
 
         <div class="editorial-card p-5 bg-white border border-[#E5E3DC]">
@@ -407,7 +407,7 @@
             <span class="px-1.5 py-0.5 rounded text-xs bg-[#E8F0EA] text-[#2D5A34] font-bold">100% THẬT</span>
           </div>
           <div class="text-3xl font-bold font-mono text-[#2D5A34] mt-2">100.0%</div>
-          <div class="text-xs text-[#475254] mt-1">Bắt trúng 6/6 cặp xe dừng đèn đỏ, 0 báo động giả trên 34 cặp duyệt</div>
+          <div class="text-sm lg:text-[15px] text-[#475254] mt-1 leading-relaxed">Bắt trúng 6/6 cặp xe dừng đèn đỏ, 0 báo động giả trên 34 cặp duyệt</div>
         </div>
 
         <div class="editorial-card p-5 bg-white border border-[#E5E3DC]">
@@ -416,7 +416,7 @@
             <span class="px-1.5 py-0.5 rounded text-xs bg-[#DCEBE0] text-[#2D5A34] font-bold">NOVELTY</span>
           </div>
           <div class="text-3xl font-bold font-mono text-[#1F2627] mt-2">76 Xe / 50 Nhỏ</div>
-          <div class="text-xs text-[#475254] mt-1">Cứu sống 4 xe & người đi bộ so với cơ chế vứt bỏ Keep-First (72 xe)</div>
+          <div class="text-sm lg:text-[15px] text-[#475254] mt-1 leading-relaxed">Cứu sống 4 xe & người đi bộ so với cơ chế vứt bỏ Keep-First (72 xe)</div>
         </div>
 
         <div class="editorial-card p-5 bg-white border border-[#E5E3DC]">
@@ -425,7 +425,7 @@
             <span class="px-1.5 py-0.5 rounded text-xs bg-[#F0EEE6] text-[#475254] font-bold">6.994 SẠCH</span>
           </div>
           <div class="text-3xl font-bold font-mono text-[#1F2627] mt-2">0.09% <span class="text-sm font-sans font-normal text-[#475254]">(6 ảnh)</span></div>
-          <div class="text-xs text-[#475254] mt-1">Materialize bằng Symlink 0 KB dung lượng đĩa phụ trội</div>
+          <div class="text-sm lg:text-[15px] text-[#475254] mt-1 leading-relaxed">Materialize bằng Symlink 0 KB dung lượng đĩa phụ trội</div>
         </div>
       </div>
 
@@ -435,38 +435,38 @@
           <span class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">CƠ SỞ TOÁN HỌC & CÔNG THỨC BĂM TRI GIÁC (PHASH DCT & KEEP-MOST-VEHICLES)</span>
           <span class="text-xs font-mono text-[#475254]">Throughput 397 FPS trên CPU</span>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <!-- Form 1: 2D DCT -->
           <div class="p-4 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC] space-y-2">
-            <div class="text-xs font-mono font-bold text-[#2D5A34]">1. Biến Đổi Cosine Rời Rạc 2D (DCT):</div>
+            <div class="text-sm font-mono font-bold text-[#2D5A34]">1. Biến Đổi Cosine Rời Rạc 2D (DCT):</div>
             <div class="text-center py-2 text-sm text-[#1F2627] overflow-x-auto">
               $$F(u, v) = \frac{2}{\sqrt{MN}} C(u) C(v) \sum_{x=0}^{M-1} \sum_{y=0}^{N-1} f(x, y) \cos \left[\frac{(2x+1)u\pi}{2M}\right] \cos \left[\frac{(2y+1)v\pi}{2N}\right]$$
             </div>
-            <div class="text-xs text-[#475254] leading-relaxed">
+            <div class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
               Thu nhỏ ảnh về $32 \times 32$, trích xuất $8 \times 8$ hệ số tần số thấp để tạo mã băm 64-bit kháng nhiễu.
             </div>
           </div>
 
           <!-- Form 2: Hamming Distance -->
           <div class="p-4 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC] space-y-2">
-            <div class="text-xs font-mono font-bold text-[#2D5A34]">2. Khoảng Cách Hamming Quét Cặp:</div>
+            <div class="text-sm font-mono font-bold text-[#2D5A34]">2. Khoảng Cách Hamming Quét Cặp:</div>
             <div class="text-center py-2 text-sm text-[#1F2627] overflow-x-auto">
               $$D_H(h_A, h_B) = \sum_{i=0}^{63} \left( h_A[i] \oplus h_B[i] \right)$$
               $$\text{Conflict Flag} \iff D_H(h_A, h_B) < \tau_{\text{dedup}} = 5 \text{ bits}$$
             </div>
-            <div class="text-xs text-[#475254] leading-relaxed">
+            <div class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
               Phát hiện chính xác các khung hình trùng lặp khi dừng xe mà không cần nạp mô hình Deep Learning nặng nề.
             </div>
           </div>
 
           <!-- Form 3: Keep-Most-Vehicles -->
           <div class="p-4 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC] space-y-2">
-            <div class="text-xs font-mono font-bold text-[#2D5A34]">3. Hàm Giữ Đối Tượng Yếu Thế (KMV):</div>
+            <div class="text-sm font-mono font-bold text-[#2D5A34]">3. Hàm Giữ Đối Tượng Yếu Thế (KMV):</div>
             <div class="text-center py-2 text-sm text-[#1F2627] overflow-x-auto">
               $$S_{\text{KMV}}(I) = N_{\text{vehicles}}(I) + 3.0 \cdot N_{\text{vulnerable}}(I) + 0.1 \cdot \sigma^2(\nabla^2 I)$$
               $$I^* = \arg\max_{I \in \{A, B\}} S_{\text{KMV}}(I)$$
             </div>
-            <div class="text-xs text-[#475254] leading-relaxed">
+            <div class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
               Cứu sống 100% khung hình có người đi bộ và xe máy xuất hiện sau khi xe dừng đèn đỏ.
             </div>
           </div>
@@ -599,7 +599,7 @@
             <h3 id="simStageTitle" class="text-xl font-bold font-editorial text-[#1F2627]">
               Chặng 1: Nạp 7.000 Khung Hình Thô Từ Camera Hành Trình
             </h3>
-            <p id="simStageDesc" class="text-xs text-[#475254] leading-relaxed">
+            <p id="simStageDesc" class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
               Băng chuyền tiếp nhận 7.000 khung hình (1280x720) qua 598 chuỗi video. Các frame chứa vô số khung hình tĩnh dư thừa khi dừng đèn đỏ và kẹt xe kéo dài.
             </p>
           </div>
@@ -620,7 +620,7 @@
             <div class="font-bold flex items-center gap-1.5">
               <span class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-[#2D5A34] inline-block -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> <span>ĐIỂM SÁNG KỸ THUẬT:</span></span>
             </div>
-            <p class="text-[#3A5C3E]">
+            <p class="text-sm lg:text-base text-[#3A5C3E] leading-relaxed">
               Bấm vào các nút <strong>CHẶNG 1, 2, 3, 4</strong> phía trên để tua trực tiếp đến phân cảnh giải thuật tương ứng trong video.
             </p>
           </div>
@@ -641,7 +641,7 @@
             Bảng Đối Chuẩn Toàn Diện 6 Phương Pháp (Paper-Ready Leaderboard)
           </h2>
         </div>
-        <div class="text-xs text-[#475254]">
+        <div class="text-sm lg:text-base text-[#475254]">
           Chấm điểm dựa trên <strong>Human-Verified Ground Truth 100%</strong>
         </div>
       </div>
@@ -685,7 +685,7 @@
           <h2 class="text-2xl font-bold font-editorial text-[#1F2627] mt-1">
             Cổng Thẩm Định 34 Cặp Khung Hình Thực Nghiệm (Human Audit Gallery)
           </h2>
-          <p class="text-xs text-[#475254] mt-0.5">
+          <p class="text-base lg:text-[17px] text-[#475254] mt-1 leading-relaxed">
             Mỗi cặp đều được đối chiếu mắt nhìn thực tế, ghi rõ 4 khoảng cách và giải thích lý do vì sao máy bắt nhầm hoặc đúng.
           </p>
         </div>
@@ -731,7 +731,7 @@
         <h2 class="text-2xl font-bold font-editorial text-[#1F2627]">
           Tại Sao Keep-Most-Vehicles Cứu Sống Người Đi Bộ & Xe Nhỏ?
         </h2>
-        <p class="text-xs md:text-sm text-[#475254] leading-relaxed">
+        <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
           Khi xe dừng đèn đỏ nhưng có thêm người đi bộ bước vào khung hình (như bạn vừa phát hiện ở Cặp #01 và #03): Nếu dùng cơ chế vứt bỏ truyền thống (Keep-First hoặc Random-Drop), hệ thống sẽ đối mặt với thảm họa <strong>vứt nhầm khung hình có người</strong>!
         </p>
       </div>
@@ -751,7 +751,7 @@
               Giữ khung hình A: 16 Objects (+2 Người Đi Bộ)
             </div>
           </div>
-          <p class="text-xs text-[#2D5A34] leading-relaxed">
+          <p class="text-base lg:text-[17px] text-[#2D5A34] leading-relaxed">
             Thuật toán tự động tra cứu BBox hoặc chạy YOLOv11 để đếm xe và người. Khung hình có thêm người đi bộ được chấm điểm cao hơn $\Rightarrow$ Bắt buộc giữ lại trong dataset, làm giàu mẫu học cho Active Learning.
           </p>
         </div>
@@ -769,7 +769,7 @@
               Nguy cơ vứt bỏ khung hình có người nếu xuất hiện sau!
             </div>
           </div>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Các phương pháp lọc trùng truyền thống chỉ vứt khung hình theo thứ tự thời gian. Nếu người đi bộ xuất hiện ở frame thứ 2, nó sẽ bị xóa vĩnh viễn, khiến mô hình xe tự hành bị mất cơ hội học phát hiện người đi bộ!
           </p>
         </div>
@@ -785,7 +785,7 @@
         <div>
           <div class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">HARDWARE THROUGHPUT</div>
           <h3 class="font-editorial text-lg font-bold text-[#1F2627]">Thông Lượng FPS (Thang Logarit)</h3>
-          <p class="text-xs text-[#475254]">Proposed Method (397 FPS) vượt trội ResNet50 (29 FPS) gấp 14 lần trên CPU.</p>
+          <p class="text-sm lg:text-base text-[#475254] leading-relaxed">Proposed Method (397 FPS) vượt trội ResNet50 (29 FPS) gấp 14 lần trên CPU.</p>
         </div>
         <div class="h-64">
           <canvas id="chartSpeedFps"></canvas>
@@ -797,7 +797,7 @@
         <div>
           <div class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">OPTICAL ROBUSTNESS BENCHMARK</div>
           <h3 class="font-editorial text-lg font-bold text-[#1F2627]">Độ Bền Dưới 5 Biến Đổi Quang Học</h3>
-          <p class="text-xs text-[#475254]">Khả năng bắt đúng cặp trùng khi xe rung lắc, chói sáng, nén JPEG, nhiễu đêm.</p>
+          <p class="text-sm lg:text-base text-[#475254] leading-relaxed">Khả năng bắt đúng cặp trùng khi xe rung lắc, chói sáng, nén JPEG, nhiễu đêm.</p>
         </div>
         <div class="h-64">
           <canvas id="chartRobustness"></canvas>
@@ -813,7 +813,7 @@
         <div>
           <div class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">REPRODUCIBILITY LINEAGE</div>
           <h3 class="text-xl font-bold font-editorial text-[#1F2627] mt-0.5">Tải Dữ Liệu Kiểm Toán & Tái Lập Thực Nghiệm</h3>
-          <p class="text-xs text-[#475254]">Toàn bộ kết quả thực nghiệm có thể tái lập 100% bằng 1 dòng lệnh duy nhất.</p>
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">Toàn bộ kết quả thực nghiệm có thể tái lập 100% bằng 1 dòng lệnh duy nhất.</p>
         </div>
 
         <div class="flex items-center gap-2">
