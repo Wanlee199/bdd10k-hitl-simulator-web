@@ -413,20 +413,20 @@
             </div>
           </div>
 
-          <!-- Slot 1 Body: 2 Cột Đối Chuẩn -->
-          <div class="grid grid-cols-1 md:grid-cols-12 gap-4 my-auto py-3">
+          <!-- Slot 1 Body: Layout 1 Cột Tận Dụng Khoảng Trống Trên Dưới -->
+          <div class="flex flex-col space-y-3 my-auto py-2">
             
-            <!-- Cột Trái (7 cols): Bộ Ba Nguyên Tử Dữ Liệu (INPUT -> HANDLE -> OUTPUT) -->
-            <div class="md:col-span-7 flex flex-col justify-between space-y-2.5 p-3.5 bg-slate-50/90 rounded-xl border border-slate-200">
+            <!-- 1. KHỐI BỘ BA DỮ LIỆU NGUYÊN TỬ (INPUT ➔ HANDLE ➔ OUTPUT) - FULL WIDTH -->
+            <div class="space-y-2 p-3 bg-slate-50/90 rounded-xl border border-slate-200">
               
-              <!-- 1. INPUT BOX -->
+              <!-- 1.1 INPUT BOX -->
               <div class="p-2.5 bg-white rounded-lg border border-slate-200 space-y-1">
                 <div class="flex items-center justify-between text-[11px] font-bold text-slate-800">
                   <span class="flex items-center gap-1.5">
                     <span class="w-2 h-2 rounded-full bg-sky-500"></span>
                     <span>📥 INPUT (Dữ Liệu Đầu Vào)</span>
                   </span>
-                  <span id="slot1-input-source" class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 font-bold">10.000 Frames</span>
+                  <span id="slot1-input-source" class="text-[9px] font-mono px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-bold">10.000 Frames</span>
                 </div>
                 <p id="slot1-input-specs" class="text-[11px] text-slate-600 leading-snug font-sans">
                   Khung hình RGB 1280x720 trích xuất 1Hz từ 1.000 video BDD10K.
@@ -436,14 +436,14 @@
                 </div>
               </div>
 
-              <!-- 2. HANDLE BOX (QUÁN QUÂN ĐÃ CHỌN) -->
+              <!-- 1.2 HANDLE BOX (QUÁN QUÂN ĐÃ CHỌN) -->
               <div class="p-2.5 bg-sky-50/60 rounded-lg border border-sky-200 space-y-1">
                 <div class="flex items-center justify-between text-[11px] font-bold text-sky-900">
                   <span class="flex items-center gap-1.5">
                     <span class="w-2 h-2 rounded-full bg-amber-500"></span>
                     <span>⚙️ HANDLE (Quán Quân Đã Chọn)</span>
                   </span>
-                  <span id="slot1-handle-speed" class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">360.3 FPS</span>
+                  <span id="slot1-handle-speed" class="text-[9px] font-mono px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">360.3 FPS</span>
                 </div>
                 <p id="slot1-handle-algo" class="text-[11px] text-slate-700 leading-snug font-sans">
                   pHash 2D-DCT 64-bit fingerprint + chính sách Keep-Most-Vehicles (KMV) ưu tiên giữ khung hình giàu thông tin nhất.
@@ -453,14 +453,14 @@
                 </div>
               </div>
 
-              <!-- 3. OUTPUT & ARTIFACT BOX -->
+              <!-- 1.3 OUTPUT & ARTIFACT BOX -->
               <div class="p-2.5 bg-emerald-50/60 rounded-lg border border-emerald-200 space-y-1">
                 <div class="flex items-center justify-between text-[11px] font-bold text-emerald-900">
                   <span class="flex items-center gap-1.5">
                     <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
                     <span>📤 OUTPUT & ARTIFACT (Sản Phẩm Đầu Ra)</span>
                   </span>
-                  <span id="slot1-output-vol" class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">7.950 Ảnh</span>
+                  <span id="slot1-output-vol" class="text-[9px] font-mono px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">7.950 Ảnh</span>
                 </div>
                 <p id="slot1-output-art" class="text-[11px] text-slate-700 leading-snug font-sans">
                   Kho ảnh sạch Unique Pool không trùng lặp, bảo toàn 100% các biến thể giao thông độc bản.
@@ -472,11 +472,11 @@
 
             </div>
 
-            <!-- Cột Phải (5 cols): Visual Telemetry & 4 Metrics -->
-            <div class="md:col-span-5 flex flex-col justify-between space-y-2.5 p-3.5 bg-slate-50/90 rounded-xl border border-slate-200">
+            <!-- 2. KHỐI VISUAL TELEMETRY & 4 METRICS (NẰM DƯỚI) -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-3 p-3 bg-slate-50/90 rounded-xl border border-slate-200 items-stretch">
               
               <!-- Nhúng Hình Ảnh / Biểu Đồ Minh Họa -->
-              <div class="relative rounded-xl overflow-hidden border border-slate-200 bg-white shadow-2xs group flex items-center justify-center min-h-[140px]">
+              <div class="md:col-span-6 relative rounded-xl overflow-hidden border border-slate-200 bg-white shadow-2xs group flex items-center justify-center min-h-[140px]">
                 <img id="slot1-img" src="assets/review_pairs/pair_02.jpg" 
                      alt="Minh họa công đoạn" 
                      class="w-full h-36 object-contain p-1 transition-all duration-300" 
@@ -489,23 +489,23 @@
               </div>
 
               <!-- 4 Thẻ Metrics Đo Lường Vĩ Mô Của Node -->
-              <div class="grid grid-cols-2 gap-2 text-center font-mono">
-                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs">
+              <div class="md:col-span-6 grid grid-cols-2 gap-2 text-center font-mono">
+                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
                   <div id="slot1-m1-lbl" class="text-[9px] text-slate-500 uppercase">Thông Lượng</div>
                   <div id="slot1-m1-val" class="text-sm font-extrabold text-emerald-700 mt-0.5">360.3 FPS</div>
                   <div id="slot1-m1-sub" class="text-[8px] text-slate-400">CPU đơn nhân</div>
                 </div>
-                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs">
+                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
                   <div id="slot1-m2-lbl" class="text-[9px] text-slate-500 uppercase">Hamming Dist</div>
                   <div id="slot1-m2-val" class="text-sm font-extrabold text-sky-700 mt-0.5">D_H ≤ 5</div>
                   <div id="slot1-m2-sub" class="text-[8px] text-slate-400">64-bit DCT</div>
                 </div>
-                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs">
+                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
                   <div id="slot1-m3-lbl" class="text-[9px] text-slate-500 uppercase">Loại Trùng</div>
                   <div id="slot1-m3-val" class="text-sm font-extrabold text-rose-600 mt-0.5">50 Ảnh</div>
                   <div id="slot1-m3-sub" class="text-[8px] text-slate-400">Trùng sequence</div>
                 </div>
-                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs">
+                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
                   <div id="slot1-m4-lbl" class="text-[9px] text-slate-500 uppercase">Unique Pool</div>
                   <div id="slot1-m4-val" class="text-sm font-extrabold text-sky-800 mt-0.5">7.950 Ảnh</div>
                   <div id="slot1-m4-sub" class="text-[8px] text-slate-400">0 KB Symlinks</div>
@@ -513,6 +513,7 @@
               </div>
 
             </div>
+
           </div>
 
           <!-- Slot 1 Footer -->
@@ -655,20 +656,20 @@
             </div>
           </div>
 
-          <!-- Slot 2 Body: Chia làm 2 Cột Đối Chuẩn -->
-          <div class="grid grid-cols-1 md:grid-cols-12 gap-4 my-auto py-3">
+          <!-- Slot 2 Body: Layout 1 Cột Tận Dụng Khoảng Trống Trên Dưới -->
+          <div class="flex flex-col space-y-3 my-auto py-2">
             
-            <!-- Cột Trái (7 cols): Bộ Ba Nguyên Tử Dữ Liệu Biến Đổi Theo Vòng (INPUT -> HANDLE -> OUTPUT) -->
-            <div class="md:col-span-7 flex flex-col justify-between space-y-2.5 p-3.5 bg-slate-50/90 rounded-xl border border-slate-200">
+            <!-- 1. KHỐI BỘ BA DỮ LIỆU NGUYÊN TỬ BIẾN ĐỔI THEO VÒNG (INPUT ➔ HANDLE ➔ OUTPUT) - FULL WIDTH -->
+            <div class="space-y-2 p-3 bg-slate-50/90 rounded-xl border border-slate-200">
               
-              <!-- 1. INPUT BOX -->
+              <!-- 1.1 INPUT BOX -->
               <div class="p-2.5 bg-white rounded-lg border border-slate-200 space-y-1">
                 <div class="flex items-center justify-between text-[11px] font-bold text-slate-800">
                   <span class="flex items-center gap-1.5">
                     <span class="w-2 h-2 rounded-full bg-purple-500"></span>
                     <span>📥 INPUT (Dữ Liệu Vòng Hiện Tại)</span>
                   </span>
-                  <span id="slot2-input-source" class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">Unlabeled Pool: 1.691</span>
+                  <span id="slot2-input-source" class="text-[9px] font-mono px-2 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">Unlabeled Pool: 1.691</span>
                 </div>
                 <p id="slot2-input-specs" class="text-[11px] text-slate-600 leading-snug font-sans">
                   Model V4 (mAP 27.20%) làm nền tảng khai phá trên kho mỏ chưa gán nhãn còn lại.
@@ -678,14 +679,14 @@
                 </div>
               </div>
 
-              <!-- 2. HANDLE BOX (QUÁN QUÂN TẠI VÒNG HIỆN TẠI) -->
+              <!-- 1.2 HANDLE BOX (QUÁN QUÂN TẠI VÒNG HIỆN TẠI) -->
               <div class="p-2.5 bg-purple-50/60 rounded-lg border border-purple-200 space-y-1">
                 <div class="flex items-center justify-between text-[11px] font-bold text-purple-950">
                   <span class="flex items-center gap-1.5">
                     <span class="w-2 h-2 rounded-full bg-amber-500"></span>
                     <span>⚙️ HANDLE (Thuật Toán Vòng Lặp)</span>
                   </span>
-                  <span id="slot2-handle-speed" class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">Cw(4) Steering</span>
+                  <span id="slot2-handle-speed" class="text-[9px] font-mono px-2 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">Cw(4) Steering</span>
                 </div>
                 <p id="slot2-handle-algo" class="text-[11px] text-slate-700 leading-snug font-sans">
                   Áp dụng C6 Super-Fusion với vector trọng số thích ứng Cw(4): train 19.88x, rider 20.88x, motor 19.64x.
@@ -695,14 +696,14 @@
                 </div>
               </div>
 
-              <!-- 3. OUTPUT & ARTIFACT BOX -->
+              <!-- 1.3 OUTPUT & ARTIFACT BOX -->
               <div class="p-2.5 bg-emerald-50/60 rounded-lg border border-emerald-200 space-y-1">
                 <div class="flex items-center justify-between text-[11px] font-bold text-emerald-900">
                   <span class="flex items-center gap-1.5">
                     <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
                     <span>📤 OUTPUT & ARTIFACT (Kết Quả Vòng Lặp)</span>
                   </span>
-                  <span id="slot2-output-vol" class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">mAP@50: 27.85%</span>
+                  <span id="slot2-output-vol" class="text-[9px] font-mono px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">mAP@50: 27.85%</span>
                 </div>
                 <p id="slot2-output-art" class="text-[11px] text-slate-700 leading-snug font-sans">
                   Mô hình V5 đạt 27.85% mAP@50 (Vượt trần +1.00% so với 100% Target 26.85%), tiết kiệm 40.1% ngân sách.
@@ -714,14 +715,14 @@
 
             </div>
 
-            <!-- Cột Phải (5 cols): Biểu Đồ Thực Nghiệm, 4 Metrics & Bảng Lớp Hiếm -->
-            <div class="md:col-span-5 flex flex-col justify-between space-y-2.5 p-3.5 bg-slate-50/90 rounded-xl border border-slate-200">
+            <!-- 2. KHỐI BIỂU ĐỒ THỰC NGHIỆM, 4 METRICS & BẢNG LỚP HIẾM (NẰM DƯỚI) -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-3 p-3 bg-slate-50/90 rounded-xl border border-slate-200 items-stretch">
               
               <!-- Nhúng Biểu Đồ Thực Nghiệm Chuẩn 300 DPI -->
-              <div class="relative rounded-xl overflow-hidden border border-slate-200 bg-white shadow-2xs group flex items-center justify-center min-h-[140px]">
+              <div class="md:col-span-6 relative rounded-xl overflow-hidden border border-slate-200 bg-white shadow-2xs group flex items-center justify-center min-h-[150px]">
                 <img id="slot2-img" src="assets/autonomous_loop/figure_07a_active_learning_curve.png" 
                      alt="Biểu đồ vòng lặp thực nghiệm" 
-                     class="w-full h-36 object-contain p-1 transition-all duration-300" 
+                     class="w-full h-40 object-contain p-1 transition-all duration-300" 
                      loading="lazy" />
                 <div class="absolute inset-0 bg-slate-900/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                   <span id="slot2-img-caption" class="px-2 py-1 rounded bg-black/75 text-white text-[10px] font-mono font-bold text-center">
@@ -730,57 +731,63 @@
                 </div>
               </div>
 
-              <!-- 4 Thẻ Metrics Đo Lường Vĩ Mô Vòng Lặp -->
-              <div class="grid grid-cols-2 gap-2 text-center font-mono">
-                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs">
-                  <div id="slot2-m1-lbl" class="text-[9px] text-slate-500 uppercase">mAP@50 Đỉnh</div>
-                  <div id="slot2-m1-val" class="text-sm font-extrabold text-emerald-700 mt-0.5">27.85%</div>
-                  <div id="slot2-m1-sub" class="text-[8px] text-sky-700 font-bold">+1.00% vs Target</div>
+              <!-- Cột Phải Dưới: 4 Metrics + Bảng Tiến Hóa Lớp Yếu Thế -->
+              <div class="md:col-span-6 flex flex-col justify-between space-y-2">
+                
+                <!-- 4 Thẻ Metrics Đo Lường Vĩ Mô Vòng Lặp -->
+                <div class="grid grid-cols-2 gap-2 text-center font-mono">
+                  <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
+                    <div id="slot2-m1-lbl" class="text-[9px] text-slate-500 uppercase">mAP@50 Đỉnh</div>
+                    <div id="slot2-m1-val" class="text-sm font-extrabold text-emerald-700 mt-0.5">27.85%</div>
+                    <div id="slot2-m1-sub" class="text-[8px] text-sky-700 font-bold">+1.00% vs Target</div>
+                  </div>
+                  <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
+                    <div id="slot2-m2-lbl" class="text-[9px] text-slate-500 uppercase">mAP@50:95</div>
+                    <div id="slot2-m2-val" class="text-sm font-extrabold text-purple-700 mt-0.5">16.15%</div>
+                    <div id="slot2-m2-sub" class="text-[8px] text-sky-700 font-bold">+0.75% vs Target</div>
+                  </div>
+                  <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
+                    <div id="slot2-m3-lbl" class="text-[9px] text-slate-500 uppercase">Recall</div>
+                    <div id="slot2-m3-val" class="text-sm font-extrabold text-emerald-700 mt-0.5">30.64%</div>
+                    <div id="slot2-m3-sub" class="text-[8px] text-sky-700 font-bold">+1.14% vs Target</div>
+                  </div>
+                  <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
+                    <div id="slot2-m4-lbl" class="text-[9px] text-slate-500 uppercase">CF-Score</div>
+                    <div id="slot2-m4-val" class="text-sm font-extrabold text-purple-800 mt-0.5">25.18</div>
+                    <div id="slot2-m4-sub" class="text-[8px] text-sky-700 font-bold">+0.97 vs Target</div>
+                  </div>
                 </div>
-                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs">
-                  <div id="slot2-m2-lbl" class="text-[9px] text-slate-500 uppercase">mAP@50:95</div>
-                  <div id="slot2-m2-val" class="text-sm font-extrabold text-purple-700 mt-0.5">16.15%</div>
-                  <div id="slot2-m2-sub" class="text-[8px] text-sky-700 font-bold">+0.75% vs Target</div>
-                </div>
-                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs">
-                  <div id="slot2-m3-lbl" class="text-[9px] text-slate-500 uppercase">Recall</div>
-                  <div id="slot2-m3-val" class="text-sm font-extrabold text-emerald-700 mt-0.5">30.64%</div>
-                  <div id="slot2-m3-sub" class="text-[8px] text-sky-700 font-bold">+1.14% vs Target</div>
-                </div>
-                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs">
-                  <div id="slot2-m4-lbl" class="text-[9px] text-slate-500 uppercase">CF-Score</div>
-                  <div id="slot2-m4-val" class="text-sm font-extrabold text-purple-800 mt-0.5">25.18</div>
-                  <div id="slot2-m4-sub" class="text-[8px] text-sky-700 font-bold">+0.97 vs Target</div>
-                </div>
-              </div>
 
-              <!-- Bảng Giải Cứu Lớp Yếu Thế (Thay Đổi Theo Vòng) -->
-              <div class="p-2 bg-white rounded-lg border border-slate-200 space-y-1 font-mono text-[10px]">
-                <div class="text-[9px] font-bold text-slate-700 flex items-center justify-between border-b border-slate-100 pb-1">
-                  <span>Tiến Hóa Lớp Yếu Thế</span>
-                  <span id="slot2-class-round-lbl" class="text-[8px] text-purple-700 font-bold">VÒNG 5</span>
+                <!-- Bảng Giải Cứu Lớp Yếu Thế (Thay Đổi Theo Vòng) -->
+                <div class="p-2 bg-white rounded-lg border border-slate-200 space-y-1 font-mono text-[10px]">
+                  <div class="text-[9px] font-bold text-slate-700 flex items-center justify-between border-b border-slate-100 pb-1">
+                    <span>Tiến Hóa Lớp Yếu Thế</span>
+                    <span id="slot2-class-round-lbl" class="text-[8px] text-purple-700 font-bold">VÒNG 5</span>
+                  </div>
+                  <div class="grid grid-cols-2 gap-x-2 gap-y-0.5">
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-500">🏍️ rider:</span>
+                      <span id="slot2-cls-rider" class="font-bold text-emerald-700">10.1% (+7.9%)</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-500">🚂 train:</span>
+                      <span id="slot2-cls-train" class="font-bold text-emerald-700">16.2% (+16.2%)</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-500">🛵 motor:</span>
+                      <span id="slot2-cls-motor" class="font-bold text-emerald-700">14.8% (+12.7%)</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-500">🚗 car:</span>
+                      <span id="slot2-cls-car" class="font-bold text-slate-700">64.9% (Chuẩn)</span>
+                    </div>
+                  </div>
                 </div>
-                <div class="grid grid-cols-2 gap-x-2 gap-y-0.5">
-                  <div class="flex justify-between items-center">
-                    <span class="text-slate-500">🏍️ rider:</span>
-                    <span id="slot2-cls-rider" class="font-bold text-emerald-700">10.1% (+7.9%)</span>
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="text-slate-500">🚂 train:</span>
-                    <span id="slot2-cls-train" class="font-bold text-emerald-700">16.2% (+16.2%)</span>
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="text-slate-500">🛵 motor:</span>
-                    <span id="slot2-cls-motor" class="font-bold text-emerald-700">14.8% (+12.7%)</span>
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="text-slate-500">🚗 car:</span>
-                    <span id="slot2-cls-car" class="font-bold text-slate-700">64.9% (Chuẩn)</span>
-                  </div>
-                </div>
+
               </div>
 
             </div>
+
           </div>
 
           <!-- Slot 2 Footer -->
