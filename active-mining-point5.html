@@ -398,25 +398,25 @@
         <div class="p-4 rounded-2xl bg-white border border-[#E5E3DC] shadow-soft">
           <div class="text-xs font-mono text-[#475254] uppercase tracking-wider">Kho Chưa Gán Nhãn</div>
           <div class="text-2xl font-bold font-mono text-[#1F2627] mt-1">4.394 Ảnh</div>
-          <div class="text-xs text-[#2D5A34] font-medium mt-0.5">PCA 32D • Margin U_i • QBC D_i</div>
+          <div class="text-sm text-[#2D5A34] font-medium mt-0.5">PCA 32D • Margin U_i • QBC D_i</div>
         </div>
 
         <div class="p-4 rounded-2xl bg-white border border-[#E5E3DC] shadow-soft">
           <div class="text-xs font-mono text-[#475254] uppercase tracking-wider">Ngân Sách Tuyển Chọn</div>
           <div class="text-2xl font-bold font-mono text-[#2D5A34] mt-1">K = 250 Ảnh</div>
-          <div class="text-xs text-[#2D5A34] font-medium mt-0.5">5.69% kho dữ liệu thô</div>
+          <div class="text-sm text-[#2D5A34] font-medium mt-0.5">5.69% kho dữ liệu thô</div>
         </div>
 
         <div class="p-4 rounded-2xl bg-white border border-[#E5E3DC] shadow-soft">
           <div class="text-xs font-mono text-[#475254] uppercase tracking-wider">Vật Thể Hiếm Săn Được</div>
           <div class="text-2xl font-bold font-mono text-[#2D5A34] mt-1">655 Objects</div>
-          <div class="text-xs text-[#2D5A34] font-medium mt-0.5">Gấp 3.45x Random (190 objs)</div>
+          <div class="text-sm text-[#2D5A34] font-medium mt-0.5">Gấp 3.45x Random (190 objs)</div>
         </div>
 
         <div class="p-4 rounded-2xl bg-white border border-[#E5E3DC] shadow-soft">
           <div class="text-xs font-mono text-[#475254] uppercase tracking-wider">Bán Kính Phủ R_cov</div>
           <div class="text-2xl font-bold font-mono text-[#1F2627] mt-1">6.45</div>
-          <div class="text-xs text-[#2D5A34] font-medium mt-0.5">Dàn đều PCA 32D • Không tụ cụm</div>
+          <div class="text-sm text-[#2D5A34] font-medium mt-0.5">Dàn đều PCA 32D • Không tụ cụm</div>
         </div>
       </div>
 
@@ -426,14 +426,14 @@
           <span class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">CƠ SỞ TOÁN HỌC: TỔ HỢP ĐA MỤC TIÊU & SUBMODULAR FACILITY LOCATION</span>
           <span class="text-xs font-mono text-[#475254]">Tối ưu hóa Lazy Greedy • Triệt tiêu bẫy Outlier</span>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <!-- Cột 1: Điểm Tuyển Chọn Đa Mục Tiêu -->
           <div class="p-4 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC] space-y-2">
             <div class="font-bold font-mono text-[#2D5A34] text-xs uppercase">1. Điểm Tuyển Chọn Đa Mục Tiêu</div>
             <div class="p-2.5 rounded-lg bg-white border border-[#E5E3DC] font-mono text-xs overflow-x-auto text-center">
               $$S(x_i) = \left[0.6 U_i + 0.4 D_i^{\text{QBC}}\right] \cdot C_w \cdot W_i$$
             </div>
-            <p class="text-[#475254] leading-relaxed text-xs">
+            <p class="text-[#475254] leading-relaxed text-base lg:text-[17px] mt-2">
               Tích hợp độ bối rối nhận thức của YOLO11n ($U_i$), sự bất đồng liên kiến trúc CNN vs Transformer ($D_i^{\text{QBC}}$), hệ số cứu 6 lớp điểm liệt ($C_w$), và trọng số lát cắt khó ($W_i$).
             </p>
           </div>
@@ -444,7 +444,7 @@
             <div class="p-2.5 rounded-lg bg-white border border-[#E5E3DC] font-mono text-xs overflow-x-auto text-center">
               $$F(S) = \sum_{i \in V} \max_{j \in S} \text{Sim}(x_i, x_j)$$
             </div>
-            <p class="text-[#475254] leading-relaxed text-xs">
+            <p class="text-[#475254] leading-relaxed text-base lg:text-[17px] mt-2">
               Tối đa hóa mức độ tương đồng giữa tập mẫu được chọn $S$ và toàn bộ kho ảnh $V$ trên không gian PCA 32D, ép các ảnh được bốc phải rải đều, tránh hiện tượng trùng lặp góc máy.
             </p>
           </div>
@@ -455,7 +455,7 @@
             <div class="p-2.5 rounded-lg bg-white border border-[#E5E3DC] font-mono text-xs overflow-x-auto text-center">
               $$\Delta(e | S) \le \Delta(e | S'), \quad S' \subseteq S$$
             </div>
-            <p class="text-[#475254] leading-relaxed text-xs">
+            <p class="text-[#475254] leading-relaxed text-base lg:text-[17px] mt-2">
               Nhờ tính chất suy giảm lợi nhuận biên (Submodularity), hàng đợi ưu tiên Max-Heap giúp thuật toán chọn đúng $K = 250$ ảnh chỉ trong 0.039 giây mà không cần tính lại toàn bộ ma trận khoảng cách.
             </p>
           </div>
@@ -468,7 +468,7 @@
         <div class="p-6 rounded-2xl bg-white border border-[#E5E3DC] shadow-soft space-y-3">
           <div class="w-8 h-8 rounded-lg bg-[#E8F0EA] text-[#2D5A34] flex items-center justify-center font-mono font-bold text-sm">1</div>
           <h3 class="font-bold text-base text-[#1F2627]">Tại Sao Random Sampling Thất Bại?</h3>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Bốc ngẫu nhiên (Random Sampling) chỉ phản ánh đúng phân bố tự nhiên bị lệch của dữ liệu. Trong 250 ảnh, Random chỉ bắt được trung bình <strong>0.76 đối tượng hiếm/ảnh</strong> (chủ yếu là xe con tầm thường), tàu hỏa <code>train</code> bị 0 con. Nếu đưa tập này vào huấn luyện, Model V1 sẽ tiếp tục bị liệt các lớp hiếm.
           </p>
         </div>
@@ -477,7 +477,7 @@
         <div class="p-6 rounded-2xl bg-white border border-[#E5E3DC] shadow-soft space-y-3">
           <div class="w-8 h-8 rounded-lg bg-[#E8F0EA] text-[#2D5A34] flex items-center justify-center font-mono font-bold text-sm">2</div>
           <h3 class="font-bold text-base text-[#1F2627]">Tại Sao Không Bốc Thuần Theo Metadata Phase 02?</h3>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Metadata chỉ biết hoàn cảnh chụp (trời tối, sương mù), hoàn toàn mù nội dung nhận thức (ảnh đêm vắng xe không có giá trị học máy) và dễ dính <strong>Bẫy tụ cụm video 40s</strong> (bốc 30 ảnh cùng một ngã tư). Thực nghiệm chứng minh chiến lược bốc thuần metadata C3 đứng bét bảng với chỉ <strong>91 vật thể hiếm</strong>, thua xa cả Random!
           </p>
         </div>
@@ -486,7 +486,7 @@
         <div class="p-6 rounded-2xl bg-white border border-[#E5E3DC] shadow-soft space-y-3">
           <div class="w-8 h-8 rounded-lg bg-[#E8F0EA] text-[#2D5A34] flex items-center justify-center font-mono font-bold text-sm">3</div>
           <h3 class="font-bold text-base text-[#1F2627]">Tại Sao Super Fusion C4 Vô Địch?</h3>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             C4 kết hợp cả hai thế giới: lấy độ bối rối của mô hình ($U + D$) nhân với trọng số metadata ($W_i$) và hệ số cứu lớp liệt ($C_w$), rồi tản đều không gian bằng Facility Location. Nhờ vậy, C4 lập kỷ lục bắt <strong>655 vật thể hiếm</strong> (gấp 3.45 lần Random, gấp 7.2 lần lọc metadata), giữ vững bán kính phủ $R_{\text{cov}} = 6.45$.
           </p>
         </div>
@@ -859,7 +859,7 @@
           <div class="rounded-xl overflow-hidden border border-[#E5E3DC] bg-[#F9FAFB]">
             <img src="assets/active_mining/figure_01_rare_classes_breakdown.png" alt="Figure 1 Rare Classes Breakdown" class="w-full h-auto object-cover">
           </div>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed mt-2">
             Biểu đồ cột nhóm so sánh số lượng bounding boxes thực tế của 6 lớp điểm liệt. Quán quân Super Fusion (cột xanh lá) áp đảo toàn diện ở cả 6 lớp, đặc biệt là người lái mô tô (155 boxes) và người đi xe đạp (192 boxes).
           </p>
         </div>
@@ -873,7 +873,7 @@
           <div class="rounded-xl overflow-hidden border border-[#E5E3DC] bg-[#F9FAFB]">
             <img src="assets/active_mining/figure_02_pca_spatial_distribution.png" alt="Figure 2 PCA Spatial Distribution" class="w-full h-auto object-cover">
           </div>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed mt-2">
             Scatter plot phân bố 250 ảnh trên không gian 2D PCA. Trong khi Pure Uncertainty C2 (bên trái) bị co cụm vào một vùng biên hẹp ($R_{\text{cov}} = 7.48$), thì Super Fusion C4 (bên phải) rải đều khắp không gian biểu diễn ($R_{\text{cov}} = 6.45$).
           </p>
         </div>
@@ -922,7 +922,7 @@
             </div>
           </div>
 
-          <div class="space-y-2 text-xs text-[#475254] leading-relaxed pt-2">
+          <div class="space-y-3 text-base lg:text-[17px] text-[#475254] leading-relaxed pt-2">
             <p>
               • <strong>Symlink Materialization</strong>: Toàn bộ 750 ảnh trong <code>data/splits/train_v1/images/</code> được tạo bằng symbolic links trỏ về ảnh gốc, giữ mức tăng dung lượng đĩa = <strong>0 KB</strong>.
             </p>

@@ -1,7 +1,7 @@
 # Báo cáo thực nghiệm kỹ thuật: Tái huấn luyện mô hình lũy tiến & Giải đấu Gold Benchmark (Phase 06)
 
 > **Mã tài liệu**: `docs/experiments/06_retraining.md`  
-> **Dự án**: BDD10K Active Learning Lab (Hệ thống thị giác máy tính Human-in-the-Loop cho xe tự hành)  
+> **Dự án**: BDD10K Active Learning Lab: Hệ Thống Tự Động Hóa Vòng Lặp Dữ Liệu Học Tập Chủ Động (Human-in-the-Loop)  
 > **Notebook thực nghiệm chính**: `notebooks/06_model_v1_retraining_and_gold_benchmark.ipynb`  
 > **Mã nguồn chính**: `src/train_v1_engine.py`  
 > **Nguồn repository thượng nguồn**: `/Users/huynh/orca/workspaces/BuildPhase/tang`  

@@ -400,7 +400,7 @@
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
           </div>
           <h2 class="text-lg font-bold font-editorial text-[#1F2627]">1. Thất Bại Của Random Baseline</h2>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Nếu chia ngẫu nhiên thuần túy, các khung hình trong cùng chuyến xe (video sequence) sẽ phân tán khắp nơi. Model học thuộc lòng cảnh vật dẫn đến <strong>điểm mAP ảo tăng vọt</strong> nhưng sụp đổ trong thực tế. Đồng thời, tập Test ngẫu nhiên sẽ bỏ sót tới 65% các ca biên ban đêm và sương mù.
           </p>
           <div class="text-xs font-mono text-[#DC2626] font-semibold bg-[#FEF2F2] px-2.5 py-1.5 rounded-lg border border-[#FCA5A5]">
@@ -414,7 +414,7 @@
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           </div>
           <h2 class="text-lg font-bold font-editorial text-[#1F2627]">2. Cạm Bẫy Outliers Của K-Center</h2>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Nếu tối ưu 100% hình học Minimax theo K-Center Greedy (Gonzalez 1985), thuật toán sẽ bị thu hút mãnh liệt bởi các điểm ngoại lai (nhiễu camera, giọt nước trên kính), khiến sai số hạn ngạch phân tầng tăng vọt (QAE = 11.9%) và phá vỡ cấu trúc phân phối tự nhiên.
           </p>
           <div class="text-xs font-mono text-[#D97706] font-semibold bg-[#FFFBEB] px-2.5 py-1.5 rounded-lg border border-[#FDE68A]">
@@ -428,7 +428,7 @@
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
           </div>
           <h2 class="text-lg font-bold font-editorial text-[#2D5A34]">3. Quán Quân Hybrid Mix 80/20</h2>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Dung hòa hoàn hảo: <strong>80% Facility Location</strong> tối ưu hóa mật độ tự nhiên (đạt F_score = 0.971), kết hợp <strong>20% K-Center Greedy</strong> kéo bán kính phủ R_cov xuống kỷ lục <strong>3.35</strong>. Cùng với rào chắn gom cụm 4.277 chuỗi Video ID, triệt tiêu 100% rò rỉ dữ liệu.
           </p>
           <div class="text-xs font-mono text-[#2D5A34] font-semibold bg-[#E8F0EA] px-2.5 py-1.5 rounded-lg border border-[#CDE0D1]">
@@ -443,36 +443,36 @@
           <span class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">CƠ SỞ TOÁN HỌC & CÔNG THỨC PHÂN CHIA (COMPOSITE BENCHMARK SCORE & HYBRID MIX)</span>
           <span class="text-xs font-mono text-[#475254]">Thang điểm chuẩn hóa: 0 — 100 CBS</span>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <!-- Cột 1: CBS -->
           <div class="p-4 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC] space-y-2">
-            <div class="text-xs font-mono font-bold text-[#2D5A34]">1. Hàm Xếp Hạng Tuyến Tính (CBS):</div>
+            <div class="text-sm font-mono font-bold text-[#2D5A34]">1. Hàm Xếp Hạng Tuyến Tính (CBS):</div>
             <div class="text-center py-2 text-sm text-[#1F2627] overflow-x-auto">
               $$\text{CBS} = 0.35 S_{\text{quota}} + 0.25 S_{\text{class}} + 0.20 S_{R_{\text{cov}}} + 0.20 S_{F_{\text{loc}}} - P_{\text{leak}}$$
             </div>
-            <div class="text-xs text-[#475254] leading-relaxed">
+            <div class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
               Thang điểm tổng hòa 4 trục tiêu chí: sai số hạn ngạch, độ cosine 10 lớp, bán kính phủ và phạt nặng rò rỉ video.
             </div>
           </div>
 
           <!-- Cột 2: Facility Location -->
           <div class="p-4 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC] space-y-2">
-            <div class="text-xs font-mono font-bold text-[#2D5A34]">2. Submodular Facility Location (80%):</div>
+            <div class="text-sm font-mono font-bold text-[#2D5A34]">2. Submodular Facility Location (80%):</div>
             <div class="text-center py-2 text-sm text-[#1F2627] overflow-x-auto">
               $$F_{\text{loc}}(S) = \frac{1}{|V|} \sum_{i \in V} \max_{j \in S} \text{sim}(\mathbf{x}_i, \mathbf{x}_j)$$
             </div>
-            <div class="text-xs text-[#475254] leading-relaxed">
+            <div class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
               Tối đa hóa mức độ đại diện mật độ tự nhiên, đạt $F_{\text{score}} = 0.971$ trên toàn bộ không gian đặc trưng.
             </div>
           </div>
 
           <!-- Cột 3: Gonzalez k-Center -->
           <div class="p-4 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC] space-y-2">
-            <div class="text-xs font-mono font-bold text-[#2D5A34]">3. Gonzalez Minimax k-Center (20%):</div>
+            <div class="text-sm font-mono font-bold text-[#2D5A34]">3. Gonzalez Minimax k-Center (20%):</div>
             <div class="text-center py-2 text-sm text-[#1F2627] overflow-x-auto">
               $$R_{\text{cov}}(S) = \max_{i \in V} \min_{j \in S} \|\mathbf{x}_i - \mathbf{x}_j\|_2$$
             </div>
-            <div class="text-xs text-[#475254] leading-relaxed">
+            <div class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
               Thu hẹp bán kính bao phủ xa nhất, kéo $R_{\text{cov}}$ xuống 3.35 để bắt trọn các ca biên cực khó.
             </div>
           </div>
@@ -490,7 +490,7 @@
           <h2 class="text-2xl md:text-3xl font-bold font-editorial text-[#1F2627] mt-1">
             Trình Mô Phỏng Quy Trình Phân Chia Bất Biến & Chống Rò Rỉ Kép
           </h2>
-          <p class="text-xs md:text-sm text-[#475254] mt-0.5">
+          <p class="text-base lg:text-[17px] text-[#475254] mt-1 leading-relaxed">
             Master Video MP4 (1280x720 @ 30 FPS, H.264/AAC) đồng bộ trực tiếp với Bảng Telemetry và Mã giả (Pseudo-code) thời gian thực.
           </p>
         </div>
@@ -594,7 +594,7 @@ assert len(video_records) == 4277  # 100% video sequences</code></pre>
           <h2 class="text-2xl md:text-3xl font-bold font-editorial text-[#1F2627] mt-1">
             Bảng Xếp Hạng Đấu Trường 6 Chiến Lược Tuyển Chọn (Tournament Leaderboard)
           </h2>
-          <p class="text-xs md:text-sm text-[#475254] mt-0.5">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed mt-1">
             Dữ liệu thực nghiệm chính xác 100% trích xuất từ <code class="font-mono text-[#2D5A34]">results/phase_03/tables/table_01_strategy_tournament_leaderboard.json</code>.
           </p>
         </div>
@@ -740,7 +740,7 @@ assert len(video_records) == 4277  # 100% video sequences</code></pre>
         <h2 class="text-2xl md:text-3xl font-bold font-editorial text-[#1F2627] mt-1">
           Đối Sánh Trực Quan Đa Trục (Radar 5D) & Độ Phân Tán Không Gian Đặc Trưng (PCA)
         </h2>
-        <p class="text-xs md:text-sm text-[#475254] mt-0.5">
+        <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed mt-1">
           Minh chứng khoa học về khả năng bao bọc không gian đặc trưng và dàn trải đồng đều của tập Test và Seed V0.
         </p>
       </div>
@@ -755,7 +755,7 @@ assert len(video_records) == 4277  # 100% video sequences</code></pre>
           <div class="rounded-xl overflow-hidden border border-[#E5E3DC] bg-[#F9FAFB]">
             <img src="assets/splits/figure_04_strategy_tournament_radar.png" alt="Radar Chart 5 Trục Phase 03" class="w-full h-auto object-contain">
           </div>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Đường bao màu xanh lục đậm của <strong>Hybrid Mix 80/20</strong> phình rộng tối đa trên cả 5 trục: vượt trội ở <em>Coverage Score</em> ($R_{\text{cov}} = 3.35$), giữ vững <em>Facility Location Score</em> ($0.971$), và bảo tồn 10/10 lớp giao thông.
           </p>
         </div>
@@ -769,7 +769,7 @@ assert len(video_records) == 4277  # 100% video sequences</code></pre>
           <div class="rounded-xl overflow-hidden border border-[#E5E3DC] bg-[#F9FAFB]">
             <img src="assets/splits/figure_02_pca_test_diversity_dispersion.png" alt="Phân Tán PCA 2D Phase 03" class="w-full h-auto object-contain">
           </div>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Các điểm tròn màu xanh lam của <strong>Fixed Test (1.400 ảnh)</strong> bao bọc toàn bộ chu vi đám mây điểm, không tạo ra bất kỳ vùng trũng nào. Tập <strong>Seed V0 (500 ảnh)</strong> phân bố cân đối ở trung tâm và các nhánh ca khó.
           </p>
         </div>
@@ -786,7 +786,7 @@ assert len(video_records) == 4277  # 100% video sequences</code></pre>
           <h2 class="text-2xl md:text-3xl font-bold font-editorial text-[#1F2627] mt-1">
             Bảng Phân Bổ Per-Class 10 Lớp Giao Thông Chuẩn BDD10K Qua 4 Phân Tập
           </h2>
-          <p class="text-xs md:text-sm text-[#475254] mt-0.5">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed mt-1">
             Tổng cộng <strong>129.914 Bounding Boxes</strong>. Chứng minh tỷ lệ bảo tồn 100% cho các lớp hiếm (<code class="font-mono text-[#2D5A34]">train</code>, <code class="font-mono text-[#2D5A34]">motor</code>, <code class="font-mono text-[#2D5A34]">rider</code>).
           </p>
         </div>
@@ -900,7 +900,7 @@ assert len(video_records) == 4277  # 100% video sequences</code></pre>
         <h2 class="text-2xl md:text-3xl font-bold font-editorial text-[#1F2627] mt-1">
           Kiểm Toán Rò Rỉ Kép 4 Chiều (Zero Data Leakage Gatekeeper)
         </h2>
-        <p class="text-xs md:text-sm text-[#475254] mt-0.5">
+        <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed mt-1">
           Quét chéo toàn diện <strong>13.454.400 cặp ảnh</strong> giữa 4 phân tập để chứng minh tính độc lập tuyệt đối.
         </p>
       </div>
@@ -915,7 +915,7 @@ assert len(video_records) == 4277  # 100% video sequences</code></pre>
           <div class="rounded-xl overflow-hidden border border-[#E5E3DC] bg-[#F9FAFB]">
             <img src="assets/splits/figure_06_anti_leakage_audit_matrix.png" alt="Anti-Leakage Audit Matrix Phase 03" class="w-full h-auto object-contain">
           </div>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Nửa trên ma trận: Toàn bộ các ô giao thoa Video Overlap đều bằng <strong>0</strong> (Màu xanh đậm). Nửa dưới ma trận: Khoảng cách băm tri giác cực tiểu đạt $HD_{\min} = 6 \ge 5$ bit (Không có cặp vi phạm).
           </p>
         </div>
@@ -927,39 +927,39 @@ assert len(video_records) == 4277  # 100% video sequences</code></pre>
           <div class="space-y-3">
             <div class="p-3.5 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC] flex items-center justify-between">
               <div>
-                <div class="font-bold text-xs text-[#1F2627]">1. Video Sequence Isolation (Giao Thoa Chuỗi Hành Trình)</div>
-                <div class="text-xs text-[#475254]">Kiểm tra toàn bộ 4.277 chuỗi video sequences qua 4 phân tập</div>
+                <div class="font-bold text-sm md:text-base text-[#1F2627]">1. Video Sequence Isolation (Giao Thoa Chuỗi Hành Trình)</div>
+                <div class="text-sm md:text-[15px] text-[#475254] mt-0.5">Kiểm tra toàn bộ 4.277 chuỗi video sequences qua 4 phân tập</div>
               </div>
               <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-full bg-[#E8F0EA] text-[#2D5A34]">0 CẶP TRÙNG (PASS)</span>
             </div>
 
             <div class="p-3.5 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC] flex items-center justify-between">
               <div>
-                <div class="font-bold text-xs text-[#1F2627]">2. pHash Hamming Distance Cross-Scan (Khoảng Cách Thị Giác)</div>
-                <div class="text-xs text-[#475254]">Quét chéo 13.454.400 cặp ảnh giữa (Test, Val, Seed, Pool) với ngưỡng vi phạm HD &lt; 5</div>
+                <div class="font-bold text-sm md:text-base text-[#1F2627]">2. pHash Hamming Distance Cross-Scan (Khoảng Cách Thị Giác)</div>
+                <div class="text-sm md:text-[15px] text-[#475254] mt-0.5">Quét chéo 13.454.400 cặp ảnh giữa (Test, Val, Seed, Pool) với ngưỡng vi phạm HD &lt; 5</div>
               </div>
               <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-full bg-[#E8F0EA] text-[#2D5A34]">0 VI PHẠM (PASS)</span>
             </div>
 
             <div class="p-3.5 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC] flex items-center justify-between">
               <div>
-                <div class="font-bold text-xs text-[#1F2627]">3. Symlink Materialization Integrity (Tính Toàn Vẹn Liên Kết)</div>
-                <div class="text-xs text-[#475254]">Kiểm tra đường dẫn vật lý của 13.988 symlinks ảnh và nhãn</div>
+                <div class="font-bold text-sm md:text-base text-[#1F2627]">3. Symlink Materialization Integrity (Tính Toàn Vẹn Liên Kết)</div>
+                <div class="text-sm md:text-[15px] text-[#475254] mt-0.5">Kiểm tra đường dẫn vật lý của 13.988 symlinks ảnh và nhãn</div>
               </div>
               <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-full bg-[#E8F0EA] text-[#2D5A34]">0 BROKEN LINK (PASS)</span>
             </div>
 
             <div class="p-3.5 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC] flex items-center justify-between">
               <div>
-                <div class="font-bold text-xs text-[#1F2627]">4. Label & Coordinate Integrity (Tính Chuẩn Xác Tọa Độ)</div>
-                <div class="text-xs text-[#475254]">So khớp tọa độ 100% bounding box với bdd10k_metadata.json (Read-Only)</div>
+                <div class="font-bold text-sm md:text-base text-[#1F2627]">4. Label & Coordinate Integrity (Tính Chuẩn Xác Tọa Độ)</div>
+                <div class="text-sm md:text-[15px] text-[#475254] mt-0.5">So khớp tọa độ 100% bounding box với bdd10k_metadata.json (Read-Only)</div>
               </div>
               <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-full bg-[#E8F0EA] text-[#2D5A34]">KHỚP 100% (PASS)</span>
             </div>
           </div>
 
-          <div class="p-3 bg-[#E8F0EA] rounded-xl border border-[#CDE0D1] text-xs text-[#2D5A34] font-semibold flex items-center gap-2">
-            <svg class="w-4 h-4 text-[#2D5A34] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div class="p-3.5 bg-[#E8F0EA] rounded-xl border border-[#CDE0D1] text-sm md:text-base text-[#2D5A34] font-semibold flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#2D5A34] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             <span>RÀO CHẮN AN TOÀN TUYỆT ĐỐI: Đạt chuẩn Zero Data Leakage theo yêu cầu khắt khe của hội nghị quốc tế CVPR/ICCV.</span>
           </div>
         </div>
@@ -975,7 +975,7 @@ assert len(video_records) == 4277  # 100% video sequences</code></pre>
         <h2 class="text-2xl md:text-3xl font-bold font-editorial text-[#1F2627] mt-1">
           Bằng Chứng Thị Giác Thực Tế: 16 Mẫu Ảnh Đại Diện Cho 4 Lát Cắt Khó
         </h2>
-        <p class="text-xs md:text-sm text-[#475254] mt-0.5">
+        <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed mt-1">
           Thẩm định trực quan tính đa dạng và độ chân thực của ảnh được bốc vào 4 phân tập.
         </p>
       </div>
@@ -984,22 +984,22 @@ assert len(video_records) == 4277  # 100% video sequences</code></pre>
         <div class="rounded-xl overflow-hidden border border-[#E5E3DC] bg-[#F9FAFB]">
           <img src="assets/splits/figure_08_splits_visual_gallery.png" alt="Gallery 16 Ảnh BDD10K Phase 03" class="w-full h-auto object-contain">
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2 text-xs">
-          <div class="p-3 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC]">
-            <div class="font-bold text-[#2D5A34]">1. Lát Cắt Ban Đêm (35%)</div>
-            <div class="text-xs text-[#475254] mt-0.5">Bắt trọn lóa đèn pha, đường tối thiếu sáng</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
+          <div class="p-3.5 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC]">
+            <div class="font-bold text-sm md:text-base text-[#2D5A34]">1. Lát Cắt Ban Đêm (35%)</div>
+            <div class="text-sm md:text-[15px] text-[#475254] mt-0.5 leading-normal">Bắt trọn lóa đèn pha, đường tối thiếu sáng</div>
           </div>
-          <div class="p-3 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC]">
-            <div class="font-bold text-[#2D5A34]">2. Lát Cắt Vật Thể Nhỏ (20%)</div>
-            <div class="text-xs text-[#475254] mt-0.5">Người đi bộ và xe máy ở cự ly xa</div>
+          <div class="p-3.5 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC]">
+            <div class="font-bold text-sm md:text-base text-[#2D5A34]">2. Lát Cắt Vật Thể Nhỏ (20%)</div>
+            <div class="text-sm md:text-[15px] text-[#475254] mt-0.5 leading-normal">Người đi bộ và xe máy ở cự ly xa</div>
           </div>
-          <div class="p-3 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC]">
-            <div class="font-bold text-[#2D5A34]">3. Lát Cắt Bị Che Khuất (20%)</div>
-            <div class="text-xs text-[#475254] mt-0.5">Hàng rào xe ô tô đỗ che tầm nhìn</div>
+          <div class="p-3.5 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC]">
+            <div class="font-bold text-sm md:text-base text-[#2D5A34]">3. Lát Cắt Bị Che Khuất (20%)</div>
+            <div class="text-sm md:text-[15px] text-[#475254] mt-0.5 leading-normal">Hàng rào xe ô tô đỗ che tầm nhìn</div>
           </div>
-          <div class="p-3 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC]">
-            <div class="font-bold text-[#2D5A34]">4. Lát Cắt Ban Ngày (25%)</div>
-            <div class="text-xs text-[#475254] mt-0.5">Đô thị đông đúc, đường cao tốc ánh sáng chuẩn</div>
+          <div class="p-3.5 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC]">
+            <div class="font-bold text-sm md:text-base text-[#2D5A34]">4. Lát Cắt Ban Ngày (25%)</div>
+            <div class="text-sm md:text-[15px] text-[#475254] mt-0.5 leading-normal">Đô thị đông đúc, đường cao tốc ánh sáng chuẩn</div>
           </div>
         </div>
       </div>
@@ -1015,7 +1015,7 @@ assert len(video_records) == 4277  # 100% video sequences</code></pre>
           <h2 class="text-2xl font-bold font-editorial text-[#1F2627] mt-0.5">
             Niêm Phong Bất Biến Bằng Mã Băm SHA-256 & Bàn Giao Cho Phase 04
           </h2>
-          <p class="text-xs text-[#475254]">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed mt-1">
             Khởi tạo 13.988 Symlinks tức thì, tăng dung lượng đĩa = 0 KB, niêm phong toàn vẹn bằng chữ ký số.
           </p>
         </div>
@@ -1036,7 +1036,7 @@ assert len(video_records) == 4277  # 100% video sequences</code></pre>
         <div class="font-mono text-xs text-[#1F2627] bg-white p-3 rounded-lg border border-[#E5E3DC] break-all select-all">
           445c31e6c1324213f1d71d7a47fe339c29fbefab26d7fded6c854140b3e101a2  splits_manifest.json
         </div>
-        <div class="text-xs text-[#475254]">
+        <div class="text-sm md:text-base text-[#475254] leading-relaxed">
           Chữ ký này bảo đảm 100% tính toàn vẹn của file manifest phân chia dữ liệu, không thể bị sửa đổi hoặc tráo đổi ngoài ý muốn.
         </div>
       </div>

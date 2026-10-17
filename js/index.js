@@ -417,19 +417,21 @@ function showToast(message) {
 // =============================================================================
 window.autoResizePipelineIframe = function (iframe) {
   if (!iframe) return;
-  // Khóa cứng chiều cao tối ưu 2750px để ôm trọn 2738px nội dung thực tế, triệt tiêu hoàn toàn layout shift và hiện tượng trôi cuộn
-  iframe.style.height = "2750px";
+  // Chiều cao tiêu chuẩn 3200px ôm trọn 3146px nội dung thực tế, triệt tiêu hoàn toàn layout shift
+  iframe.style.height = "3200px";
 };
 
-// Lắng nghe postMessage báo kích thước động từ iframe (chống feedback loop)
+// Lắng nghe postMessage báo kích thước với cơ chế khóa 1 lần (Hard Lock Once) chống feedback loop
+let isPipelineHeightSet = false;
 window.addEventListener("message", function (e) {
   if (e.data && e.data.type === "PIPELINE_RESIZE" && e.data.height) {
     const iframe = document.getElementById("pipelineVisualizerIframe");
-    if (iframe) {
-      const targetH = Math.min(Math.max(e.data.height, 2750), 2850);
-      if (Math.abs(iframe.offsetHeight - targetH) > 40) {
-        iframe.style.height = targetH + "px";
-      }
+    if (iframe && !isPipelineHeightSet) {
+      isPipelineHeightSet = true;
+      // Khóa trần cứng trong khoảng [3180, 3250]px để ngăn chặn triệt để mọi hành vi cộng dồn vô hạn
+      const rawH = parseInt(e.data.height, 10) || 3200;
+      const targetH = Math.min(Math.max(rawH, 3180), 3250);
+      iframe.style.height = targetH + "px";
     }
   }
 });
@@ -448,7 +450,7 @@ function initIndexLab() {
   // Khóa chiều cao cố định cho iframe visualizer
   const pipeIframe = document.getElementById("pipelineVisualizerIframe");
   if (pipeIframe) {
-    pipeIframe.style.height = "2750px";
+    pipeIframe.style.height = "3200px";
   }
 
   // Kích hoạt render KaTeX nếu có

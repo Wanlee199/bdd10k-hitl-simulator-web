@@ -465,24 +465,24 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
         <div class="editorial-card p-6 space-y-3">
           <div class="text-xs font-mono font-bold uppercase tracking-wider text-[#2D5A34]">BƯỚC 1: VIẾT METADATA TỪNG ẢNH</div>
-          <h3 class="text-base font-bold font-editorial text-[#1F2627]">Sinh 6 Cờ Lát Cắt & 17 Điểm Số Đo Đạc</h3>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <h3 class="text-lg font-bold font-editorial text-[#1F2627]">Sinh 6 Cờ Lát Cắt & 17 Điểm Số Đo Đạc</h3>
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Mỗi ảnh trong 6.994 ảnh kho Unique Pool được chạy qua các thuật toán trích xuất để sinh ra các cờ định danh: <code class="text-[#2D5A34] font-mono">is_night</code>, <code class="text-[#2D5A34] font-mono">is_blur</code>, <code class="text-[#2D5A34] font-mono">is_weather_degraded</code>, <code class="text-[#2D5A34] font-mono">is_high_occlusion</code>, <code class="text-[#2D5A34] font-mono">is_small_object_slice</code>, <code class="text-[#2D5A34] font-mono">is_dense</code>.
           </p>
         </div>
 
         <div class="editorial-card p-6 space-y-3">
           <div class="text-xs font-mono font-bold uppercase tracking-wider text-[#0284c7]">BƯỚC 2: SO KHỚP VỚI METADATA GỐC</div>
-          <h3 class="text-base font-bold font-editorial text-[#1F2627]">Đối Chuẩn Khách Quan Để Chọn Thuật Toán</h3>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <h3 class="text-lg font-bold font-editorial text-[#1F2627]">Đối Chuẩn Khách Quan Để Chọn Thuật Toán</h3>
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Tại mỗi Sub-Point, các thuật toán đối đầu trực tiếp với nhau và so khớp với nhãn gốc BDD10K (nhãn UC Berkeley) hoặc 100 ảnh kiểm toán mắt người. Thuật toán đạt F1 cao nhất và khử sạch cảnh báo giả sẽ được trao quyền ghi dữ liệu vào Manifest.
           </p>
         </div>
 
         <div class="editorial-card p-6 space-y-3">
           <div class="text-xs font-mono font-bold uppercase tracking-wider text-[#d97706]">BƯỚC 3: CĂN CỨ VỮNG CHẮC CHO PHASE 03</div>
-          <h3 class="text-base font-bold font-editorial text-[#1F2627]">Phân Tầng Tuyệt Đối Chuẩn Quy Chuẩn Rule 8</h3>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <h3 class="text-lg font-bold font-editorial text-[#1F2627]">Phân Tầng Tuyệt Đối Chuẩn Quy Chuẩn Rule 8</h3>
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Phase 03 bắt buộc phải đọc file Manifest này để bốc chính xác 500 ảnh mầm <code class="text-[#2D5A34] font-mono">seed_v0</code> theo tỷ lệ: <strong>35% Đêm, 20% Nhỏ, 20% Che khuất, 25% Ngày</strong>. Nếu không có bộ metadata đã kiểm định của Phase 02, Phase 03 sẽ hoàn toàn bất khả thi trong việc bốc mẫu!
           </p>
         </div>
@@ -521,38 +521,38 @@
           <span class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">CƠ SỞ TOÁN HỌC & CHỈ SỐ QUANG HỌC 5D (OPTICAL & SPATIAL FORMULATIONS)</span>
           <span class="text-xs font-mono text-[#475254]">5 Trục Thuộc Tính Khai Phá</span>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <!-- Form 1: Ánh Sáng YCbCr -->
           <div class="p-4 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC] space-y-2">
-            <div class="text-xs font-mono font-bold text-[#2D5A34]">1. Phân Vị Trung Vị Ánh Sáng (P50 Y):</div>
+            <div class="text-sm font-mono font-bold text-[#2D5A34]">1. Phân Vị Trung Vị Ánh Sáng (P50 Y):</div>
             <div class="text-center py-2 text-sm text-[#1F2627] overflow-x-auto">
               $$Y(x,y) = 0.299R + 0.587G + 0.114B$$
               $$\text{IsNight}(I) \iff P_{50}(Y) \le 45$$
             </div>
-            <div class="text-xs text-[#475254] leading-relaxed">
+            <div class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
               Khử lóa đèn pha đối diện, đạt F1 = 97.12% so khớp với <em>timeofday</em> gốc.
             </div>
           </div>
 
           <!-- Form 2: Độ Mờ Laplacian & Tenengrad -->
           <div class="p-4 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC] space-y-2">
-            <div class="text-xs font-mono font-bold text-[#2D5A34]">2. Phương Sai Laplacian & Tần Số:</div>
+            <div class="text-sm font-mono font-bold text-[#2D5A34]">2. Phương Sai Laplacian & Tần Số:</div>
             <div class="text-center py-2 text-sm text-[#1F2627] overflow-x-auto">
               $$\sigma^2(\nabla^2 I) = \frac{1}{|I|} \sum_{(x,y)} \left(\nabla^2 I(x,y) - \overline{\nabla^2 I}\right)^2$$
               $$\text{Score}_{\text{blur}} = \text{Tenengrad} \times \text{Slope}_{\text{FFT2D}}$$
             </div>
-            <div class="text-xs text-[#475254] leading-relaxed">
+            <div class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
               Bắt trọn 100% rung lắc quang học, đạt F1 = 100% trên tập 100 ảnh thẩm định mắt người.
             </div>
           </div>
 
           <!-- Form 3: Che Khuất Đồ Thị DAG -->
           <div class="p-4 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC] space-y-2">
-            <div class="text-xs font-mono font-bold text-[#2D5A34]">3. Đồ Thị Có Hướng Che Khuất (DAG):</div>
+            <div class="text-sm font-mono font-bold text-[#2D5A34]">3. Đồ Thị Có Hướng Che Khuất (DAG):</div>
             <div class="text-center py-2 text-sm text-[#1F2627] overflow-x-auto">
               $$(u \to v) \in \mathcal{E} \iff \begin{cases} \text{IoU}(u, v) > 0.15 \\ y_{\text{bottom}}(u) < y_{\text{bottom}}(v) \end{cases}$$
             </div>
-            <div class="text-xs text-[#475254] leading-relaxed">
+            <div class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
               Phân định vật cản trước/sau qua tọa độ chân tiếp đất, đạt F1 = 93.80% trên 70.091 hộp nhãn.
             </div>
           </div>
@@ -573,7 +573,7 @@
           <h2 class="text-2xl font-bold font-editorial text-[#1F2627] mt-1">
             Mô Phỏng Trực Quan Hoạt Động Của Thuật Toán Point 2 (Simulation Player)
           </h2>
-          <p class="text-xs text-[#475254] mt-0.5">
+          <p class="text-base lg:text-[17px] text-[#475254] mt-1 leading-relaxed">
             Video HD có thuyết minh tiếng Việt: Dữ liệu nạp từ kho Unique Pool → Phân nhánh qua 5 Sub-Points thực nghiệm đối đầu → So khớp trực tiếp Metadata gốc BDD10K → Xuất bản Manifest bàn giao Phase 03.
           </p>
         </div>
@@ -688,11 +688,11 @@
               </span>
             </div>
 
-            <h3 id="simStageTitle" class="text-base font-bold font-editorial text-[#1F2627]">
+            <h3 id="simStageTitle" class="text-lg font-bold font-editorial text-[#1F2627]">
               1. Nạp 6.994 ảnh từ kho Unique Pool & Tra cứu Metadata Gốc O(1)
             </h3>
 
-            <p id="simStageDesc" class="text-xs text-[#475254] leading-relaxed">
+            <p id="simStageDesc" class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
               Đọc 6.994 ảnh duy nhất từ kho Unique Pool bằng Symbolic Link (Dung lượng đĩa = 0 KB). Đồng thời tra cứu lập tức các thuộc tính gốc do UC Berkeley gán nhãn: timeofday, weather, scene, objects để chuẩn bị mỏ neo kiểm định.
             </p>
           </div>
@@ -734,7 +734,7 @@
         <h2 class="text-2xl md:text-3xl font-bold font-editorial text-[#1F2627]">
           Bộ So Khớp Cặp Song Song: Metadata Gốc BDD10K vs Metadata Thuật Toán Sinh Ra
         </h2>
-        <p class="text-xs md:text-sm text-[#475254] mt-1 w-full">
+        <p class="text-base lg:text-[17px] text-[#475254] mt-1 w-full leading-relaxed">
           Bấm chọn các mẫu ảnh tiêu biểu dưới đây để soi chiếu trực tiếp 2 bảng Metadata: Cột trái là Ground-Truth do UC Berkeley gán nhãn, cột phải là kết quả do thuật toán Phase 02 tính toán, và cột thứ ba là trạng thái đánh giá độ tin cậy để làm căn cứ cho Phase 03.
         </p>
       </div>
@@ -827,7 +827,7 @@
         <h2 class="text-2xl md:text-3xl font-bold font-editorial text-[#1F2627]">
           5 Sub-Points: Thực Nghiệm Nhiều Thuật Toán Để Chọn Phương Pháp Ghi Metadata
         </h2>
-        <p class="text-xs md:text-sm text-[#475254] mt-1 w-full">
+        <p class="text-base lg:text-[17px] text-[#475254] mt-1 w-full leading-relaxed">
           Tại mỗi Sub-Point của Pipeline, chúng tôi không áp đặt chủ quan một phương pháp mà đưa nhiều thuật toán đối đầu trực tiếp, so khớp với Ground-Truth để tìm ra thuật toán Quán Quân có quyền ghi đè Metadata vào file Manifest.
         </p>
       </div>
@@ -911,7 +911,7 @@
           </table>
         </div>
 
-        <div class="p-4 rounded-xl bg-[#E8F0EA] border border-[#CDE0D1] text-xs text-[#1F2627] leading-relaxed">
+        <div class="p-4 rounded-xl bg-[#E8F0EA] border border-[#CDE0D1] text-base lg:text-[17px] text-[#1F2627] leading-relaxed">
           <strong class="text-[#2D5A34]">Quyết định cấp quyền ghi Manifest:</strong> Thuật toán <strong>YCbCr P50</strong> thắng tuyệt đối, được chọn tính toán chính thức để ghi trường <code class="font-mono text-[#2D5A34]">is_night</code> cho toàn bộ 6.994 ảnh (xác định 2.678 ảnh ban đêm, chiếm 38.29% pool) để làm căn cứ cho Phase 03 bốc 35% quota ban đêm cho tập mầm Seed V0.
         </div>
       </div>
@@ -969,7 +969,7 @@
           </table>
         </div>
 
-        <div class="p-4 rounded-xl bg-[#E8F0EA] border border-[#CDE0D1] text-xs text-[#1F2627] leading-relaxed">
+        <div class="p-4 rounded-xl bg-[#E8F0EA] border border-[#CDE0D1] text-base lg:text-[17px] text-[#1F2627] leading-relaxed">
           <strong class="text-[#2D5A34]">Quyết định cấp quyền ghi Manifest:</strong> Thuật toán <strong>Tenengrad + 2D-FFT</strong> đạt điểm tuyệt đối 100% trên 100 ảnh kiểm toán mắt người của Chuyên gia T018, được chọn ghi trường <code class="font-mono text-[#2D5A34]">is_blur</code> (xác định 926 ảnh mờ nhòe rung lắc) để cô lập chất lượng dữ liệu.
         </div>
       </div>
@@ -1031,7 +1031,7 @@
           </table>
         </div>
 
-        <div class="p-4 rounded-xl bg-[#FDF8E8] border border-[#EEDFA6] text-xs text-[#7A5E12] leading-relaxed">
+        <div class="p-4 rounded-xl bg-[#FDF8E8] border border-[#EEDFA6] text-base lg:text-[17px] text-[#7A5E12] leading-relaxed">
           <strong class="font-bold">Vạch trần Nghịch lý Độ chính xác (Accuracy Paradox):</strong> Nếu dùng Accuracy mù quáng, phương pháp C2 đạt 83.45% nhưng thực chất F1 chỉ có 2.93% do báo giả tràn lan. Việc bổ sung <strong>Clear Day Guard</strong> giúp loại bỏ 971 cảnh báo giả trên đường nhựa sẫm màu, được trao quyền ghi trường <code class="font-mono">is_weather_degraded</code>.
         </div>
       </div>
@@ -1093,7 +1093,7 @@
           </table>
         </div>
 
-        <div class="p-4 rounded-xl bg-[#E8F0EA] border border-[#CDE0D1] text-xs text-[#1F2627] leading-relaxed">
+        <div class="p-4 rounded-xl bg-[#E8F0EA] border border-[#CDE0D1] text-base lg:text-[17px] text-[#1F2627] leading-relaxed">
           <strong class="text-[#2D5A34]">Bản chất hình học không gian:</strong> Vật thể nào đứng gần camera hơn sẽ có tọa độ chân tiếp đất thấp hơn trên mặt phẳng ảnh ($y_{\text{bottom}}$ lớn hơn $\Rightarrow$ đứng trước và che khuất). Thuật toán <strong>Directed DAG</strong> đạt F1 = 93.80%, vượt trội +36.05% so với Naive IoU, được trao quyền ghi trường <code class="font-mono text-[#2D5A34]">is_high_occlusion</code> phục vụ chia quota 20% che khuất cho Phase 03.
         </div>
       </div>
@@ -1140,7 +1140,7 @@
           </table>
         </div>
 
-        <div class="p-4 rounded-xl bg-[#E8F0EA] border border-[#CDE0D1] text-xs text-[#1F2627] leading-relaxed">
+        <div class="p-4 rounded-xl bg-[#E8F0EA] border border-[#CDE0D1] text-base lg:text-[17px] text-[#1F2627] leading-relaxed">
           <strong class="text-[#2D5A34]">Quyết định cấp quyền ghi Manifest:</strong> Thuật toán <strong>Shannon Scale Entropy</strong> được chọn ghi 2 cờ <code class="font-mono text-[#2D5A34]">is_small_object_slice</code> và <code class="font-mono text-[#2D5A34]">is_dense</code> để phục vụ phân chia quota 20% vật thể nhỏ cho Phase 03.
         </div>
       </div>
@@ -1223,7 +1223,7 @@
           <h2 class="text-2xl md:text-3xl font-bold font-editorial text-[#1F2627]">
             Thư Viện Kiểm Toán 100 Ảnh Mắt Người Thẩm Định Thật
           </h2>
-          <p class="text-xs md:text-sm text-[#475254] mt-1 w-full">
+          <p class="text-base lg:text-[17px] text-[#475254] mt-1 w-full leading-relaxed">
             Vì bộ dữ liệu BDD10K gốc không có nhãn độ mờ (blur), chuyên gia <strong>T018</strong> đã trực tiếp soi chiếu và thẩm định từng điểm ảnh của 100 mẫu độc lập để thiết lập mỏ neo Ground-Truth chuẩn mực cho Sub-Point 2.2.
           </p>
         </div>
@@ -1280,7 +1280,7 @@
         <h2 class="text-2xl md:text-3xl font-bold font-editorial text-[#1F2627]">
           Bàn Giao Căn Cứ Khoa Học Cho Phase 03 (Data Splitting & Active Learning)
         </h2>
-        <p class="text-xs md:text-sm text-[#475254] mt-1 w-full">
+        <p class="text-base lg:text-[17px] text-[#475254] mt-1 w-full leading-relaxed">
           Tại sao Phase 03 bắt buộc phải dùng bảng Metadata do Phase 02 sinh ra? Vì Rule 8 trong quy chuẩn <code class="font-mono text-[#2D5A34]">AGENTS.md</code> yêu cầu phân bổ tập mầm Seed V0 (500 ảnh) theo 4 lát cắt khó nghiêm ngặt. Nếu không có bộ Metadata đã kiểm định này, Phase 03 sẽ hoàn toàn bất khả thi trong việc bốc mẫu!
         </p>
       </div>
@@ -1292,8 +1292,8 @@
             <span class="font-bold text-[#2D5A34]">SEED V0: BAN ĐÊM</span>
             <span class="px-2 py-0.5 rounded bg-[#E8F0EA] text-[#2D5A34] font-bold">35% QUOTA (175 ẢNH)</span>
           </div>
-          <div class="text-2xl font-bold font-editorial text-[#1F2627]">Lọc: is_night == true</div>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <div class="text-xl font-bold font-editorial text-[#1F2627]">Lọc: is_night == true</div>
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Nhờ thuật toán YCbCr P50 đã kiểm định khớp 97.12% với bdd_metadata gốc, Phase 03 bốc chuẩn xác 175 ảnh đêm hiểm hóc.
           </p>
         </div>
@@ -1303,8 +1303,8 @@
             <span class="font-bold text-[#0284c7]">SEED V0: VẬT THỂ NHỎ</span>
             <span class="px-2 py-0.5 rounded bg-[#E0F2FE] text-[#0369a1] font-bold">20% QUOTA (100 ẢNH)</span>
           </div>
-          <div class="text-2xl font-bold font-editorial text-[#1F2627]">Lọc: is_small_object</div>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <div class="text-xl font-bold font-editorial text-[#1F2627]">Lọc: is_small_object</div>
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Nhờ Shannon Scale Entropy, Phase 03 bốc trúng các khung hình có độ phân tán kích thước lớn, xe ở xa khó nhận diện.
           </p>
         </div>
@@ -1314,8 +1314,8 @@
             <span class="font-bold text-[#d97706]">SEED V0: CHE KHUẤT CAO</span>
             <span class="px-2 py-0.5 rounded bg-[#FEF3C7] text-[#92400E] font-bold">20% QUOTA (100 ẢNH)</span>
           </div>
-          <div class="text-2xl font-bold font-editorial text-[#1F2627]">Lọc: is_high_occlusion</div>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <div class="text-xl font-bold font-editorial text-[#1F2627]">Lọc: is_high_occlusion</div>
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Nhờ Directed DAG y_bottom đã kiểm định khớp 93.80% trên 70k nhãn Berkeley, Phase 03 bốc đúng 100 ảnh che khuất dày đặc.
           </p>
         </div>
@@ -1325,8 +1325,8 @@
             <span class="font-bold text-[#475254]">SEED V0: BAN NGÀY</span>
             <span class="px-2 py-0.5 rounded bg-[#F9FAFB] text-[#475254] font-bold">25% QUOTA (125 ẢNH)</span>
           </div>
-          <div class="text-2xl font-bold font-editorial text-[#1F2627]">Lọc: is_night == false</div>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <div class="text-xl font-bold font-editorial text-[#1F2627]">Lọc: is_night == false</div>
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Bổ sung 125 ảnh ban ngày tiêu chuẩn để làm mỏ neo cân bằng ổn định gradient cho Model V0.
           </p>
         </div>
@@ -1342,7 +1342,7 @@
             <h3 class="text-base font-bold font-editorial text-[#1F2627]">
               Tải Xuống Bộ Căn Cước Metadata Đã Kiểm Định Để Tái Lập Thực Nghiệm
             </h3>
-            <p class="text-xs text-[#475254] mt-1">
+            <p class="text-base lg:text-[17px] text-[#475254] mt-1 leading-relaxed">
               File Manifest chính thức chứa toàn bộ 6.994 hồ sơ ảnh đã kiểm định, sẵn sàng chuyển giao cho Phase 03.
             </p>
           </div>

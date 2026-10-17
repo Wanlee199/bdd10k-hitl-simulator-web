@@ -1,7 +1,7 @@
 # Báo cáo chuyên đề kỹ thuật: Học tập chủ động & Tái huấn luyện mô hình đa chu kỳ
 
 > **Mã tài liệu**: `docs/experiments/02_active_learning.md`  
-> **Dự án**: BDD10K Active Learning Lab (Hệ thống thị giác máy tính Human-in-the-Loop cho xe tự hành)  
+> **Dự án**: BDD10K Active Learning Lab: Hệ Thống Tự Động Hóa Vòng Lặp Dữ Liệu Học Tập Chủ Động (Human-in-the-Loop)  
 > **Các notebook thực nghiệm chính**:  
 >   - `notebooks/05_active_mining_tournament_and_hitl.ipynb` (Phase 05 — Giải đấu lựa chọn mẫu chủ động)  
 >   - `notebooks/06_model_v1_retraining_and_gold_benchmark.ipynb` (Phase 06 — Tái huấn luyện mô hình V1)  

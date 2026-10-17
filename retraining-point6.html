@@ -442,8 +442,8 @@
           <div class="w-8 h-8 rounded-lg bg-[#E8F0EA] text-[#2D5A34] flex items-center justify-center font-mono font-bold text-xs">
             01
           </div>
-          <h3 class="font-bold text-[#1F2627] text-sm">Giao Thức Công Bằng Tuyệt Đối</h3>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <h3 class="font-bold text-[#1F2627] text-base">Giao Thức Công Bằng Tuyệt Đối</h3>
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Cùng ngân sách đúng <strong>750 ảnh</strong>, cùng kiến trúc YOLO11n (2.6M params), cùng optimizer AdamW và lịch Cosine Annealing 10 epochs trên Apple Silicon MPS.
           </p>
         </div>
@@ -453,8 +453,8 @@
           <div class="w-8 h-8 rounded-lg bg-[#E8F0EA] text-[#2D5A34] flex items-center justify-center font-mono font-bold text-xs">
             02
           </div>
-          <h3 class="font-bold text-[#1F2627] text-sm">Frozen Gold Test Cách Ly</h3>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <h3 class="font-bold text-[#1F2627] text-base">Frozen Gold Test Cách Ly</h3>
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Chấm thi độc lập trên <strong>1.400 ảnh Gold Test</strong> (28.094 GT boxes) được đóng băng vĩnh viễn từ Phase 03. Đảm bảo cách ly tuyệt đối Zero Data Leakage.
           </p>
         </div>
@@ -464,8 +464,8 @@
           <div class="w-8 h-8 rounded-lg bg-[#E8F0EA] text-[#2D5A34] flex items-center justify-center font-mono font-bold text-xs">
             03
           </div>
-          <h3 class="font-bold text-[#1F2627] text-sm">Hiện Tượng Precision-First Gain</h3>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <h3 class="font-bold text-[#1F2627] text-base">Hiện Tượng Precision-First Gain</h3>
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Active Learning tạo bước nhảy vọt Precision đạt <strong>38.82% (+6.34% vs Random)</strong>, hồi sinh mạnh mẽ các lớp yếu thế <code>rider</code> và <code>truck</code>.
           </p>
         </div>
@@ -595,12 +595,12 @@
             <span class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">TRỤ CỘT 01</span>
             <span class="text-xs font-mono text-[#475254]">Optimization</span>
           </div>
-          <h3 class="font-bold text-[#1F2627] text-sm">Fine-tuning & Lịch Cosine Annealing</h3>
+          <h3 class="font-bold text-[#1F2627] text-base">Fine-tuning & Lịch Cosine Annealing</h3>
           <div class="p-3 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC] text-xs font-mono overflow-x-auto text-[#1F2627]">
             $$\mathcal{L}_{\text{total}} = \lambda_{\text{box}} \mathcal{L}_{\text{box}} + \lambda_{\text{cls}} \mathcal{L}_{\text{cls}} + \lambda_{\text{dfl}} \mathcal{L}_{\text{dfl}}$$
             $$\eta_t = \eta_{\min} + \frac{1}{2}(\eta_{\max} - \eta_{\min})\left(1 + \cos\left(\frac{t}{T}\pi\right)\right)$$
           </div>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Tối ưu hóa bằng <strong>AdamW</strong> (\(\text{decay}=0.0005\)). Tốc độ học giảm mượt mà theo hàm cosin, triệt tiêu xung đột gradient giữa mẫu cũ và mẫu khó mới nạp.
           </p>
         </div>
@@ -611,12 +611,12 @@
             <span class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">TRỤ CỘT 02</span>
             <span class="text-xs font-mono text-[#475254]">Evaluation</span>
           </div>
-          <h3 class="font-bold text-[#1F2627] text-sm">Phép Đo Macro-Average mAP Kép</h3>
+          <h3 class="font-bold text-[#1F2627] text-base">Phép Đo Macro-Average mAP Kép</h3>
           <div class="p-3 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC] text-xs font-mono overflow-x-auto text-[#1F2627]">
             $$\text{mAP}@50 = \frac{1}{C}\sum_{c=1}^{C} \text{AP}_{50}^{(c)}$$
             $$\text{mAP}@[50:95] = \frac{1}{10}\sum_{t=0.50}^{0.95} \text{mAP}@t$$
           </div>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Chỉ số vĩ mô chia đều qua <strong>10 lớp giao thông BDD10K</strong> mà không bị thiên lệch bởi số lượng áp đảo của xe ô tô (15.608 instances trong Gold Test).
           </p>
         </div>
@@ -627,12 +627,12 @@
             <span class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">TRỤ CỘT 03</span>
             <span class="text-xs font-mono text-[#475254]">Dynamics</span>
           </div>
-          <h3 class="font-bold text-[#1F2627] text-sm">Precision Gain & Điểm F-score</h3>
+          <h3 class="font-bold text-[#1F2627] text-base">Precision Gain & Điểm F-score</h3>
           <div class="p-3 rounded-xl bg-[#F9FAFB] border border-[#E5E3DC] text-xs font-mono overflow-x-auto text-[#1F2627]">
             $$\Delta \text{Prec} = \text{P}_{\text{Active}} - \text{P}_{\text{Random}} = +6.34\%$$
             $$F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}} = 24.87\%$$
           </div>
-          <p class="text-xs text-[#475254] leading-relaxed">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
             Mẫu khó Active Learning ép mạng siết chặt biên quyết định, <strong>triệt tiêu cảnh báo giả (false positives)</strong>, đẩy Precision tăng vọt trước khi mAP tích lũy ở các vòng sau.
           </p>
         </div>
@@ -1775,18 +1775,18 @@
         </h2>
       </div>
 
-      <div class="p-6 rounded-2xl bg-white border border-[#E5E3DC] shadow-soft space-y-4 text-xs font-sans text-[#475254] leading-relaxed">
-        <h3 class="font-bold text-sm text-[#1F2627]">1. Luận giải bản chất "Precision-First Gain" ở vòng khởi đầu (\(K=250\) ảnh):</h3>
+      <div class="p-6 md:p-8 rounded-2xl bg-white border border-[#E5E3DC] shadow-soft space-y-5 text-base lg:text-[17px] font-sans text-[#475254] leading-relaxed">
+        <h3 class="font-bold text-base md:text-lg text-[#1F2627]">1. Luận giải bản chất "Precision-First Gain" ở vòng khởi đầu (\(K=250\) ảnh):</h3>
         <p>
           Trong bài toán phát hiện đối tượng, các mẫu khó do Active Learning khai thác (vật thể bị che khuất một phần, điều kiện thiếu sáng hoặc thời tiết sương mù) đóng vai trò là các "ràng buộc biên" khắt khe. Chúng ép mạng nơ-ron phải định hình lại biên giới phân loại (decision boundary), loại bỏ các dự đoán quá tự tin nhưng sai lệch (overconfident false positives). Kết quả là chỉ số <strong>Precision tăng vọt +6.34%</strong> (từ 32.48% lên 38.82%), mang lại độ tin cậy vận hành rất lớn cho xe tự hành.
         </p>
 
-        <h3 class="font-bold text-sm text-[#1F2627] pt-2 border-t border-[#E5E3DC]">2. Sự khác biệt giữa mAP vĩ mô và AP từng lớp:</h3>
+        <h3 class="font-bold text-base md:text-lg text-[#1F2627] pt-2 border-t border-[#E5E3DC]">2. Sự khác biệt giữa mAP vĩ mô và AP từng lớp:</h3>
         <p>
           Chỉ số macro-average mAP@50 tăng nhẹ +0.06% so với Random Baseline do ở ngân sách 750 ảnh (chỉ bằng ~10% tổng pool), các lớp đuôi dài cực đoan như <code>train</code> (chỉ có duy nhất 1 box trong Gold Test và 0 box trong tập train) vẫn chưa có đủ mẫu để kéo điểm trung bình lên cao. Tuy nhiên, ở các lớp yếu thế có mẫu như <code>rider</code> (+1.95% vs Random, F1 đạt 10.30%) và <code>truck</code> (+0.45% vs Random, F1 đạt 28.05%), Active Learning đã phát huy hiệu quả cứu vãn rõ rệt.
         </p>
 
-        <h3 class="font-bold text-sm text-[#1F2627] pt-2 border-t border-[#E5E3DC]">3. Tính trung thực học thuật & Lộ trình Phase 07:</h3>
+        <h3 class="font-bold text-base md:text-lg text-[#1F2627] pt-2 border-t border-[#E5E3DC]">3. Tính trung thực học thuật & Lộ trình Phase 07:</h3>
         <p>
           Chúng tôi kiên quyết bác bỏ các con số placeholder không có cơ sở thực nghiệm (như 25.48% hay 3.24% ở phiên bản cũ) để công bố kết quả thực đo 100%. Đây là nền tảng khoa học vững chắc để Phase 07 triển khai vòng lặp tự động đa vòng (\(V_1 \to V_2 \to V_3\)), nơi mà khoảng cách mAP giữa Active Learning và Random được kỳ vọng sẽ tiếp tục mở rộng rõ nét khi kho dữ liệu chưa gán nhãn được khai thác sâu hơn.
         </p>
