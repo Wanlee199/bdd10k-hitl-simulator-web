@@ -417,33 +417,17 @@ function showToast(message) {
 // =============================================================================
 window.autoResizePipelineIframe = function (iframe) {
   if (!iframe) return;
-  try {
-    if (iframe.contentWindow && iframe.contentWindow.document) {
-      const doc = iframe.contentWindow.document;
-      const h = Math.max(
-        doc.documentElement ? doc.documentElement.scrollHeight : 0,
-        doc.body ? doc.body.scrollHeight : 0,
-        2650
-      );
-      const safeH = Math.min(h + 50, 7500);
-      if (Math.abs(iframe.offsetHeight - safeH) > 15) {
-        iframe.style.height = safeH + "px";
-      }
-    }
-  } catch (e) {
-    if (parseInt(iframe.style.height || "0", 10) < 2650) {
-      iframe.style.height = "2750px";
-    }
-  }
+  // Khóa cứng chiều cao tối ưu 2750px để ôm trọn 2738px nội dung thực tế, triệt tiêu hoàn toàn layout shift và hiện tượng trôi cuộn
+  iframe.style.height = "2750px";
 };
 
-// Lắng nghe postMessage báo kích thước động từ iframe
+// Lắng nghe postMessage báo kích thước động từ iframe (chống feedback loop)
 window.addEventListener("message", function (e) {
   if (e.data && e.data.type === "PIPELINE_RESIZE" && e.data.height) {
     const iframe = document.getElementById("pipelineVisualizerIframe");
     if (iframe) {
-      const targetH = Math.min(Math.max(e.data.height + 40, 2650), 7500);
-      if (Math.abs(iframe.offsetHeight - targetH) > 15) {
+      const targetH = Math.min(Math.max(e.data.height, 2750), 2850);
+      if (Math.abs(iframe.offsetHeight - targetH) > 40) {
         iframe.style.height = targetH + "px";
       }
     }
@@ -461,14 +445,10 @@ function initIndexLab() {
     window.switchIndexRound("v5");
   }
 
-  // Thăm dò chiều cao iframe sau khi nạp để bảo đảm Tailwind render hoàn tất
+  // Khóa chiều cao cố định cho iframe visualizer
   const pipeIframe = document.getElementById("pipelineVisualizerIframe");
   if (pipeIframe) {
-    [300, 800, 1500, 3000].forEach(function (ms) {
-      setTimeout(function () {
-        window.autoResizePipelineIframe(pipeIframe);
-      }, ms);
-    });
+    pipeIframe.style.height = "2750px";
   }
 
   // Kích hoạt render KaTeX nếu có

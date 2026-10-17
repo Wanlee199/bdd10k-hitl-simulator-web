@@ -180,15 +180,9 @@
         </button>
 
         <!-- Play / Pause Auto Tour -->
-        <button id="btn-play" onclick="toggleAutoTour()" class="px-3.5 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs shadow-sm flex items-center gap-1.5 transition active:scale-95">
+        <button id="btn-play" onclick="toggleAutoTour()" class="px-3.5 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs shadow-sm flex items-center gap-1.5 transition active:scale-95 cursor-pointer">
           <i id="icon-play" class="fa-solid fa-play"></i>
           <span id="text-play">Auto Tour</span>
-        </button>
-
-        <!-- Auto Replay Button (Luôn sẵn sàng nhấn) -->
-        <button id="btn-auto-replay" onclick="triggerAutoReplay()" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-sm flex items-center gap-1.5 transition active:scale-95 cursor-pointer" title="Tự Động Chạy Lại Toàn Bộ Quy Trình Từ Đầu">
-          <i class="fa-solid fa-arrows-rotate"></i>
-          <span id="text-auto-replay">Tự Động Chạy Lại</span>
         </button>
 
         <!-- Next Step -->
@@ -1397,15 +1391,6 @@
       playVictoryFanfare();
       startFireworks();
 
-      // Mở khóa nút Tự Động Chạy Lại (gỡ bỏ trạng thái disabled, sáng đèn nổi bật)
-      const btnReplay = document.getElementById('btn-auto-replay');
-      if (btnReplay) {
-        btnReplay.disabled = false;
-        btnReplay.className = "px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md flex items-center gap-1.5 transition active:scale-95 cursor-pointer animate-pulse";
-        const textReplay = document.getElementById('text-auto-replay');
-        if (textReplay) textReplay.innerText = "Tự Động Chạy Lại";
-      }
-
       // Cập nhật thông điệp chiến thắng trên thanh trạng thái
       const statusTitle = document.getElementById('active-step-title');
       if (statusTitle) {
@@ -1416,16 +1401,6 @@
       setTimeout(() => {
         stopFireworks();
       }, 10000);
-    }
-
-    function triggerAutoReplay() {
-      stopFireworks();
-      resetPipeline();
-
-      // Tự động bắt đầu Auto Tour chạy lại từ đầu ngay lập tức
-      if (!isAutoTourRunning) {
-        toggleAutoTour();
-      }
     }
 
     function closeVictoryModal() {
@@ -1458,6 +1433,13 @@
     }
 
     function toggleAutoTour() {
+      // Khi đã chạy xong toàn bộ hoặc đang ở Step 16 / Hoàn thành Vòng 5:
+      // Tự động reset lại từ node đầu tiên (Step 1, V0 Baseline) trước khi bắt đầu tour!
+      if (currentStepIndex >= 16 || (currentIteration >= 5 && currentStepIndex >= 15)) {
+        stopFireworks();
+        resetPipeline();
+      }
+
       isAutoTourRunning = !isAutoTourRunning;
       const btnPlay = document.getElementById('btn-play');
       const iconPlay = document.getElementById('icon-play');
@@ -1736,15 +1718,28 @@
     }
 
     function resetPipeline() {
-      if (isAutoTourRunning) toggleAutoTour();
+      stopFireworks();
+      if (isAutoTourRunning) {
+        clearInterval(tourTimer);
+        isAutoTourRunning = false;
+        const btnPlay = document.getElementById('btn-play');
+        const iconPlay = document.getElementById('icon-play');
+        const textPlay = document.getElementById('text-play');
+        if (iconPlay) iconPlay.className = "fa-solid fa-play";
+        if (textPlay) textPlay.innerText = "Auto Tour";
+        if (btnPlay) btnPlay.className = btnPlay.className.replace('bg-amber-600 hover:bg-amber-500', 'bg-sky-600 hover:bg-sky-500');
+      }
       currentStepIndex = 1;
       currentIteration = 0;
       unlabeledPoolCount = 3915;
       labeledTrainCount = 979;
       
-      document.getElementById('pool-count-text').innerText = '3.915 Ảnh';
-      document.getElementById('train-count-text').innerText = 'D_train(k) = D_prev ∪ Batch';
-      document.getElementById('current-map-text').innerText = 'mAP@50: 20.23%';
+      const poolEl = document.getElementById('pool-count-text');
+      const trainEl = document.getElementById('train-count-text');
+      const mapEl = document.getElementById('current-map-text');
+      if (poolEl) poolEl.innerText = '3.915 Ảnh';
+      if (trainEl) trainEl.innerText = 'D_train(k) = D_prev ∪ Batch';
+      if (mapEl) mapEl.innerText = 'mAP@50: 20.23%';
       
       selectIteration(0);
       activateStep(1);
@@ -1852,8 +1847,6 @@
           });
         }
       }
-
-      setTimeout(notifyParentOfResize, 60);
     }
 
     function updateDataCounts() {
@@ -1866,22 +1859,12 @@
       }
     }
 
-    let lastSentHeight = 0;
+    let hasSentHeight = false;
     function notifyParentOfResize() {
-      if (window.parent && window.parent !== window) {
-        const doc = document.documentElement;
-        const body = document.body;
-        const mainEl = document.querySelector('main');
-        const h = Math.max(
-          doc ? doc.scrollHeight : 0,
-          body ? body.scrollHeight : 0,
-          mainEl ? mainEl.offsetHeight + 180 : 0,
-          2650
-        );
-        if (Math.abs(h - lastSentHeight) > 10) {
-          lastSentHeight = h;
-          window.parent.postMessage({ type: 'PIPELINE_RESIZE', height: h }, '*');
-        }
+      if (window.parent && window.parent !== window && !hasSentHeight) {
+        hasSentHeight = true;
+        // Chiều cao đo được thực tế là 2738px, gửi 2750px cố định để chống layout shift và feedback loop
+        window.parent.postMessage({ type: 'PIPELINE_RESIZE', height: 2750 }, '*');
       }
     }
 
@@ -1891,10 +1874,7 @@
       renderSlot2(10, 0);
       activateStep(1);
       setTimeout(updateLoopArrow, 100);
-      setTimeout(notifyParentOfResize, 200);
-      setTimeout(notifyParentOfResize, 600);
-      setTimeout(notifyParentOfResize, 1500);
-      setTimeout(notifyParentOfResize, 3000);
+      setTimeout(notifyParentOfResize, 300);
     };
     // KHÔNG addEventListener('resize', notifyParentOfResize) để chống vòng lặp vô hạn!
   </script>
