@@ -422,7 +422,7 @@
           <h2 class="text-2xl lg:text-3xl font-bold font-editorial text-[#1F2627]">
             Vì Sao Cách Tiếp Cận Đơn Lẻ Hoặc Ngẫu Nhiên Là Chưa Đủ?
           </h2>
-          <p class="text-sm md:text-base text-[#475254] leading-relaxed max-w-3xl">
+          <p class="text-base lg:text-lg text-[#475254] leading-relaxed max-w-3xl">
             Để giải quyết bài toán dữ liệu lớn trong xe tự hành, nhiều hệ sinh thái thường áp dụng các giải pháp riêng rẽ. Tuy nhiên, qua phân tích lý thuyết và thực nghiệm trên BDD10K, các phương pháp này đều bộc lộ những rào cản chí mạng:
           </p>
         </div>
@@ -435,7 +435,7 @@
               <span class="text-sm font-mono font-bold text-[#991B1B]">1. Lấy mẫu ngẫu nhiên (Uniform Random)</span>
               <span class="text-xs font-mono px-2 py-0.5 rounded bg-[#FEE2E2] text-[#991B1B] font-semibold shrink-0">Kém hiệu quả ngân sách</span>
             </div>
-            <div class="text-sm text-[#475254] space-y-1.5 leading-relaxed">
+            <div class="text-base lg:text-[17px] text-[#475254] space-y-2 leading-relaxed">
               <p><strong>Cơ chế:</strong> Chọn mẫu ngẫu nhiên từ kho dữ liệu chưa gán nhãn mà không qua chọn lọc.</p>
               <p><strong>Hạn chế thực tế:</strong> Thổi phồng số lượng cảnh xe hơi ban ngày ($>60\%$), bỏ đói các lớp hiếm (Tail Collapse). Gradient từ các mẫu dễ tiệm cận 0, gây lãng phí 70–80% chi phí gán nhãn thủ công.</p>
               <p class="text-[#2D5A34]"><strong>Giải pháp Pipeline:</strong> Lọc trùng băm tri giác CPU + Khai phá C6 Super-Fusion kết hợp vector phạt thâm hụt lớp $C_w$ ghìm xe con ở sàn $0.20\times$.</p>
@@ -448,7 +448,7 @@
               <span class="text-sm font-mono font-bold text-[#991B1B]">2. Chỉ dùng độ bất định đơn lẻ (Pure Uncertainty)</span>
               <span class="text-xs font-mono px-2 py-0.5 rounded bg-[#FEE2E2] text-[#991B1B] font-semibold shrink-0">Bẫy co cụm không gian</span>
             </div>
-            <div class="text-sm text-[#475254] space-y-1.5 leading-relaxed">
+            <div class="text-base lg:text-[17px] text-[#475254] space-y-2 leading-relaxed">
               <p><strong>Cơ chế:</strong> Chỉ chọn các mẫu có Entropy hoặc Margin Uncertainty cao nhất.</p>
               <p><strong>Hạn chế thực tế:</strong> Thực nghiệm Phase 05 chứng minh chiến lược này bị rơi vào bẫy co cụm: bán kính phủ $R_{\text{cov}}$ vọt lên 7.48 (kém hơn cả Random 5.86). Các mẫu bất định bị gom vào cùng một đoạn video rung lắc hoặc bẩn cảm biến.</p>
               <p class="text-[#2D5A34]"><strong>Giải pháp Pipeline:</strong> Tích hợp Submodular Facility Location trên không gian PCA 32D để phân tán mẫu đều khắp manifold.</p>
@@ -461,7 +461,7 @@
               <span class="text-sm font-mono font-bold text-[#991B1B]">3. Huấn luyện cố định một lần (Static One-Shot)</span>
               <span class="text-xs font-mono px-2 py-0.5 rounded bg-[#FEE2E2] text-[#991B1B] font-semibold shrink-0">Không có phản hồi thích ứng</span>
             </div>
-            <div class="text-sm text-[#475254] space-y-1.5 leading-relaxed">
+            <div class="text-base lg:text-[17px] text-[#475254] space-y-2 leading-relaxed">
               <p><strong>Cơ chế:</strong> Gán nhãn một tập dữ liệu cố định rồi huấn luyện mô hình một lần duy nhất.</p>
               <p><strong>Hạn chế thực tế:</strong> Mô hình không có khả năng tự chẩn đoán điểm mù tri thức để bù đắp; khi nạp dữ liệu mới từ đầu dễ bị hiện tượng quên thảm họa (Catastrophic Forgetting) hoặc sốc gradient.</p>
               <p class="text-[#2D5A34]"><strong>Giải pháp Pipeline:</strong> Vòng lặp phản hồi Active Flywheel với cơ chế Warm-Start kế thừa trọng số và Replay Buffer mỏ neo.</p>
@@ -474,7 +474,7 @@
               <span class="text-sm font-mono font-bold text-[#991B1B]">4. Chia dữ liệu theo ảnh ngẫu nhiên (Image-level Split)</span>
               <span class="text-xs font-mono px-2 py-0.5 rounded bg-[#FEE2E2] text-[#991B1B] font-semibold shrink-0">Rò rỉ video nghiêm trọng</span>
             </div>
-            <div class="text-sm text-[#475254] space-y-1.5 leading-relaxed">
+            <div class="text-base lg:text-[17px] text-[#475254] space-y-2 leading-relaxed">
               <p><strong>Cơ chế:</strong> Phân chia train/val/test ngẫu nhiên theo từng tệp ảnh độc lập.</p>
               <p><strong>Hạn chế thực tế:</strong> Khung hình $t$ ở tập train và khung hình $t+1$ ở tập test thuộc cùng một chuỗi video hành trình &rarr; mô hình học vẹt cảnh nền, tạo ra điểm mAP cao giả tạo nhưng bất lực ngoài thực địa.</p>
               <p class="text-[#2D5A34]"><strong>Giải pháp Pipeline:</strong> Khóa chặt phân vùng theo mã định danh chuỗi video (Group-Aware Video Isolation), cam kết 0% rò rỉ dữ liệu.</p>
