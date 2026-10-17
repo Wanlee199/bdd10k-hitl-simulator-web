@@ -16,17 +16,17 @@
 const pipelineStepsData = {
   step1: {
     title: "1. Dữ Liệu Thô BDD10K (Raw Dashcam Videos)",
-    input: "10.000 khung hình video 720p @ 30 FPS thuộc 598 chuỗi video hành trình",
+    input: "7.000 khung hình video 720p @ 30 FPS thuộc 598 chuỗi video hành trình",
     method: "Trích xuất khung hình giây thứ 10 từ tập train gốc (Immutable Read-Only 100%)",
-    output: "10.000 khung hình chưa lọc trùng (Raw Video Pool)",
+    output: "7.000 khung hình chưa lọc trùng (Raw Video Pool)",
     rationale: "BDD10K là tập dữ liệu lái xe đa dạng nhất thế giới với nhiều điều kiện thời tiết, ánh sáng và bối cảnh đô thị thực tế tại Mỹ.",
     artifact: "data/bdd10k/images/train/ (Read-Only)",
   },
   step2: {
     title: "2. Lọc Trùng Băm Tri Giác FastDedup Cạnh Biên (CPU)",
-    input: "10.000 ảnh thô BDD10K",
+    input: "7.000 ảnh thô BDD10K",
     method: "Perceptual Hash (pHash) 2D-DCT 64-bit (Hamming Distance < 5) + Keep-Most-Vehicles (KMV)",
-    output: "6.994 ảnh duy nhất (Unique Pool sạch, loại bỏ 3.006 ảnh lặp lại, tiết kiệm 30.06% dữ liệu rác)",
+    output: "6.994 ảnh duy nhất (Unique Pool sạch, loại bỏ 6 ảnh trùng lặp qua pHash)",
     rationale: "Đạt thông lượng 360.3 FPS trên CPU đơn nhân (nhanh gấp 15.4× so với ResNet50 23.3 FPS), Precision 100%, Recall 100%, giải cứu 100% xe nhỏ bị che khuất.",
     artifact: "data/processed/unique_pool/ (Symlinks 0 KB) & fastdedup_manifest.json",
   },

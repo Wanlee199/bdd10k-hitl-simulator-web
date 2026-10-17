@@ -280,7 +280,7 @@
                 <i class="fa-solid fa-film text-sky-600"></i>
                 <span class="truncate">Video Thô BDD10K</span>
               </div>
-              <div class="text-xs text-slate-400 font-mono">10.000 Frames (1Hz)</div>
+              <div class="text-xs text-slate-400 font-mono">7.000 Frames (1Hz)</div>
             </div>
 
             <!-- Connector Down -->
@@ -432,10 +432,10 @@
                     <span class="w-2 h-2 rounded-full bg-sky-500"></span>
                     <span>📥 INPUT (Dữ Liệu Đầu Vào)</span>
                   </span>
-                  <span id="slot1-input-source" class="text-xs font-mono px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-bold">10.000 Frames</span>
+                  <span id="slot1-input-source" class="text-xs font-mono px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-bold">7.000 Frames</span>
                 </div>
                 <p id="slot1-input-specs" class="text-xs text-slate-600 leading-snug font-sans">
-                  Khung hình RGB 1280x720 trích xuất 1Hz từ 1.000 video BDD10K.
+                  Khung hình RGB 1280x720 trích xuất 1Hz từ 598 video BDD10K.
                 </p>
                 <div id="slot1-input-precond" class="text-xs text-slate-400 font-mono">
                   Phân theo sequence ID, cần loại bỏ các khung hình trùng lặp.
@@ -1058,7 +1058,7 @@
 
     // Step Configuration Mapping
     const stepConfigs = [
-      { id: "step-1",  title: "Raw Dataset Ingestion (10.000 Frames)", tier: 1 },
+      { id: "step-1",  title: "Raw Dataset Ingestion (7.000 Frames)", tier: 1 },
       { id: "step-2",  title: "Phase 01: FastDeduplication pHash DCT", tier: 1 },
       { id: "step-3",  title: "Kho Ảnh Sạch Unique Pool (6.994 Ảnh)", tier: 1 },
       { id: "step-4",  title: "Phase 02: Automated 5D Data Profiling", tier: 1 },

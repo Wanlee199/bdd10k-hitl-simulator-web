@@ -284,7 +284,6 @@
   <!-- ========================================================================= -->
   <header class="sticky top-0 z-40 bg-[#F9FAFB]/95 backdrop-blur-md border-b border-[#E5E3DC] h-16 w-full">
     <div class="h-full w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
-    <div class="h-full w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
       
       <!-- Zone 1: Breadcrumb & Title -->
       <div class="flex items-center gap-2 text-xs font-mono text-[#475254]">
@@ -295,14 +294,46 @@
         <span>/</span>
         <span class="text-[#475254] font-semibold">Phase 06</span>
         <span>/</span>
-        <span class="text-[#2D5A34] font-bold">Model V1 Retraining & Gold Benchmark Tournament</span>
+        <span class="text-[#2D5A34] font-bold bg-[#E8F0EA] px-2 py-0.5 rounded-md border border-[#CDE0D1]">Model V1 Retraining</span>
       </div>
 
-      <!-- Zone 2: Action Tools -->
-      <div class="flex items-center gap-3">
-        <a href="https://github.com/nguyenhuynhdt37/autonomous-driving-active-learning-lab/blob/main/notebooks/06_model_v1_retraining_and_gold_benchmark.ipynb" target="_blank" class="px-3 py-1.5 rounded-lg border border-[#E5E3DC] bg-white text-xs font-mono text-[#475254] hover:border-[#B7CDBB] hover:text-[#2D5A34] transition-all flex items-center gap-1.5 shadow-sm">
+      <!-- Zone 2: Real-time Status Chips -->
+      <div class="hidden xl:flex items-center gap-2 text-xs font-mono">
+        <div class="inline-flex items-center px-2.5 py-1 rounded-lg bg-white border border-[#E5E3DC] text-[#475254]">
+          <span>Ngân Sách: <strong class="text-[#2D5A34]">750 Ảnh / Nhánh</strong></span>
+        </div>
+        <div class="inline-flex items-center px-2.5 py-1 rounded-lg bg-white border border-[#E5E3DC] text-[#475254]">
+          <span>Precision Gain: <strong class="text-[#2D5A34]">+6.34% vs Random</strong></span>
+        </div>
+        <div class="inline-flex items-center px-2.5 py-1 rounded-lg bg-white border border-[#E5E3DC] text-[#475254]">
+          <span>Gold Test: <strong class="text-[#1F2627]">1.400 Ảnh Đóng Băng</strong></span>
+        </div>
+      </div>
+
+      <!-- Zone 3: Action Tools -->
+      <div class="flex items-center gap-2">
+        <a href="https://github.com/nguyenhuynhdt37/autonomous-driving-active-learning-lab/blob/main/notebooks/06_model_v1_retraining_and_gold_benchmark.ipynb" target="_blank" class="px-3 py-1.5 rounded-xl border border-[#E5E3DC] bg-white text-xs font-mono text-[#475254] hover:border-[#B7CDBB] hover:text-[#2D5A34] transition-all flex items-center gap-1.5 shadow-soft-sm">
           <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
-          <span>Notebook 06</span>
+          <span class="hidden sm:inline">Notebook 06</span>
+        </a>
+        <button 
+          onclick="togglePlay()"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#2D5A34] text-white hover:bg-[#234729] shadow-soft-sm transition-all cursor-pointer"
+        >
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <span class="hidden sm:inline">Phát Video</span>
+        </button>
+        <a 
+          href="index.html" 
+          class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#E8F0EA] text-[#2D5A34] hover:bg-[#DCEBE0] transition-all border border-[#CDE0D1] shadow-soft-sm"
+        >
+          <span>Trang Chủ</span>
+        </a>
+        <a 
+          href="autonomous-loop-point7.html" 
+          class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#E8F0EA] text-[#2D5A34] hover:bg-[#DCEBE0] transition-all border border-[#CDE0D1] shadow-soft-sm"
+        >
+          <span>Point 7 →</span>
         </a>
       </div>
 
@@ -769,8 +800,8 @@
         </button>
       </div>
 
-      <div class="bg-white rounded-2xl border border-[#E5E3DC] overflow-hidden shadow-soft">
-        <div class="overflow-x-auto">
+      <div class="w-full bg-white rounded-2xl border border-[#E5E3DC] overflow-hidden shadow-soft">
+        <div class="w-full overflow-x-auto">
           <table class="w-full text-left text-xs font-mono">
             <thead class="bg-[#F9FAFB] text-[#475254] border-b border-[#E5E3DC] uppercase tracking-wider text-xs">
               <tr>
@@ -898,7 +929,7 @@
       <!-- ========================================================================= -->
       <!-- BẢNG 1: VÒNG 1 PROPOSED (QUÁN QUÂN ACTIVE MINING SUPER-FUSION - 750 ẢNH) -->
       <!-- ========================================================================= -->
-      <div id="panel-round-v1-proposed" class="round-panel bg-white rounded-2xl border border-[#CDE0D1] overflow-hidden shadow-soft space-y-0">
+      <div id="panel-round-v1-proposed" class="round-panel w-full bg-white rounded-2xl border border-[#CDE0D1] overflow-hidden shadow-soft space-y-0">
         <div class="p-4 bg-[#E8F0EA] border-b border-[#CDE0D1] flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div class="flex items-center gap-2.5">
             <span class="w-6 h-6 rounded-lg bg-[#2D5A34] text-white font-mono font-bold text-xs flex items-center justify-center">V1</span>
@@ -915,7 +946,7 @@
           </button>
         </div>
 
-        <div class="overflow-x-auto">
+        <div class="w-full overflow-x-auto">
           <table class="w-full text-left text-xs font-mono">
             <thead class="bg-[#F9FAFB] text-[#475254] border-b border-[#E5E3DC] uppercase tracking-wider text-xs">
               <tr>
@@ -1073,7 +1104,7 @@
       <!-- ========================================================================= -->
       <!-- BẢNG 2: VÒNG 1 RANDOM (SÀN ĐỐI CHỨNG RANDOM FLOOR BASELINE - 750 ẢNH) -->
       <!-- ========================================================================= -->
-      <div id="panel-round-v1-random" class="round-panel bg-white rounded-2xl border border-[#E5E3DC] overflow-hidden shadow-soft space-y-0 hidden">
+      <div id="panel-round-v1-random" class="round-panel w-full bg-white rounded-2xl border border-[#E5E3DC] overflow-hidden shadow-soft space-y-0 hidden">
         <div class="p-4 bg-[#F9FAFB] border-b border-[#E5E3DC] flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div class="flex items-center gap-2.5">
             <span class="w-6 h-6 rounded-lg bg-[#6B7677] text-white font-mono font-bold text-xs flex items-center justify-center">V1</span>
@@ -1090,7 +1121,7 @@
           </button>
         </div>
 
-        <div class="overflow-x-auto">
+        <div class="w-full overflow-x-auto">
           <table class="w-full text-left text-xs font-mono">
             <thead class="bg-[#F9FAFB] text-[#475254] border-b border-[#E5E3DC] uppercase tracking-wider text-xs">
               <tr>
@@ -1248,7 +1279,7 @@
       <!-- ========================================================================= -->
       <!-- BẢNG 3: VÒNG 0 (MỐC QUY CHIẾU SEED V0 ANCHOR - 500 ẢNH) -->
       <!-- ========================================================================= -->
-      <div id="panel-round-v0-anchor" class="round-panel bg-white rounded-2xl border border-[#E5E3DC] overflow-hidden shadow-soft space-y-0 hidden">
+      <div id="panel-round-v0-anchor" class="round-panel w-full bg-white rounded-2xl border border-[#E5E3DC] overflow-hidden shadow-soft space-y-0 hidden">
         <div class="p-4 bg-[#F9FAFB] border-b border-[#E5E3DC] flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div class="flex items-center gap-2.5">
             <span class="w-6 h-6 rounded-lg bg-[#6B7677] text-white font-mono font-bold text-xs flex items-center justify-center">V0</span>
@@ -1265,7 +1296,7 @@
           </button>
         </div>
 
-        <div class="overflow-x-auto">
+        <div class="w-full overflow-x-auto">
           <table class="w-full text-left text-xs font-mono">
             <thead class="bg-[#F9FAFB] text-[#475254] border-b border-[#E5E3DC] uppercase tracking-wider text-xs">
               <tr>
@@ -1423,7 +1454,7 @@
       <!-- ========================================================================= -->
       <!-- BẢNG 4: MA TRẬN ĐỐI CHUẨN ĐỐI ĐẦU GIỮA CÁC VÒNG (DELTA TOURNAMENT MATRIX) -->
       <!-- ========================================================================= -->
-      <div id="panel-round-delta" class="round-panel bg-white rounded-2xl border border-[#B7CDBB] overflow-hidden shadow-soft space-y-0 hidden">
+      <div id="panel-round-delta" class="round-panel w-full bg-white rounded-2xl border border-[#B7CDBB] overflow-hidden shadow-soft space-y-0 hidden">
         <div class="p-4 bg-[#F9FAFB] border-b border-[#E5E3DC] flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div class="flex items-center gap-2.5">
             <span class="w-6 h-6 rounded-lg bg-[#2D5A34] text-white font-mono font-bold text-xs flex items-center justify-center">Δ</span>
@@ -1440,7 +1471,7 @@
           </button>
         </div>
 
-        <div class="overflow-x-auto">
+        <div class="w-full overflow-x-auto">
           <table class="w-full text-left text-xs font-mono">
             <thead class="bg-[#F9FAFB] text-[#475254] border-b border-[#E5E3DC] uppercase tracking-wider text-xs">
               <tr>
@@ -1760,9 +1791,40 @@
           Chúng tôi kiên quyết bác bỏ các con số placeholder không có cơ sở thực nghiệm (như 25.48% hay 3.24% ở phiên bản cũ) để công bố kết quả thực đo 100%. Đây là nền tảng khoa học vững chắc để Phase 07 triển khai vòng lặp tự động đa vòng (\(V_1 \to V_2 \to V_3\)), nơi mà khoảng cách mAP giữa Active Learning và Random được kỳ vọng sẽ tiếp tục mở rộng rõ nét khi kho dữ liệu chưa gán nhãn được khai thác sâu hơn.
         </p>
       </div>
+
+      <!-- Bottom Nav Bar Chuẩn GreenSM Full-Width -->
+      <div class="flex items-center justify-between pt-4 border-t border-[#E5E3DC] w-full">
+        <a href="active-mining-point5.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-white border border-[#E5E3DC] text-[#475254] hover:bg-[#F9FAFB] transition-all">
+          <span>&larr; Quay Lại Point 5 (Active Mining)</span>
+        </a>
+        <div class="flex items-center gap-3">
+          <a href="index.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-white border border-[#E5E3DC] text-[#475254] hover:bg-[#F9FAFB] transition-all">
+            <span>Trang Chủ</span>
+          </a>
+          <a href="autonomous-loop-point7.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold bg-[#2D5A34] text-white hover:bg-[#234729] transition-all shadow-soft">
+            <span>Tiến Tới Phase 07: Autonomous Loop &rarr;</span>
+          </a>
+        </div>
+      </div>
     </section>
 
   </main>
+
+  <!-- Editorial Footer -->
+  <footer class="border-t border-[#E5E3DC] bg-[#F9FAFB] py-8 px-4 text-center text-xs text-[#475254] space-y-2 w-full">
+    <div class="w-full px-4 sm:px-6 lg:px-8 space-y-2">
+      <div class="font-editorial text-sm font-bold text-[#1F2627]">BDD10K Active Learning Lab — Research Publication Series</div>
+      <div>Tác giả: <strong>T018</strong> | Thiết kế kế thừa chuẩn <strong>GreenSM Editorial Canvas</strong></div>
+      <div class="text-xs font-mono text-[#8A9697]">
+        Mã nguồn & Bằng chứng thực nghiệm: 
+        <a href="https://github.com/nguyenhuynhdt37/autonomous-driving-active-learning-lab" target="_blank" class="text-[#2D5A34] underline font-bold">
+          nguyenhuynhdt37/autonomous-driving-active-learning-lab
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  </div><!-- Đóng #main-wrapper -->
 
   <!-- ========================================================================= -->
   <!-- FIGURE MODAL PREVIEW -->
