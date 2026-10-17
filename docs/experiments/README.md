@@ -8,16 +8,17 @@ Mỗi giai đoạn phản ánh một bài toán kỹ thuật độc lập đã �
 
 ## 📋 Danh Sách Các Giai Đoạn Thực Nghiệm
 
-| Giai Đoạn | Tên File Báo Cáo | Bài Toán Nghiên Cứu | Notebook Tương Ứng |
-| :---: | :--- | :--- | :--- |
-| **01** | [01_fast_dedup.md](01_fast_dedup.md) | Lọc trùng băm tri giác pHash & bảo tồn đối tượng KMV | `01_dual_stream_fastdedup_benchmark.ipynb` |
-| **02** | [02_data_profiling.md](02_data_profiling.md) | Trích xuất hồ sơ quang học 5D không giám sát | `02_automated_data_profiling_benchmark.ipynb` |
-| **03** | [03_frozen_splits.md](03_frozen_splits.md) | Phân chia tập Test/Val đóng băng & chống rò rỉ kép | `03_shared_frozen_test_val_splits.ipynb` |
-| **04** | [04_seed_baseline.md](04_seed_baseline.md) | Huấn luyện mô hình hạt giống V0 & kiểm chuẩn lát cắt khó | `04_seed_v0_training_ablation.ipynb` |
-| **05** | [05_active_mining.md](05_active_mining.md) | Đấu trường khai phá chủ động C6 & điều hướng HITL | `05_active_mining_tournament_and_hitl.ipynb` |
-| **06** | [06_retraining.md](06_retraining.md) | Huấn luyện lại với Replay Buffer & cân bằng thâm hụt lớp | `06_model_v1_retraining_and_gold_benchmark.ipynb` |
-| **07** | [07_end_to_end_loop.md](07_end_to_end_loop.md) | Vòng lặp học tập toàn trình tự động V0 &rarr; V5 | `07_end_to_end_autonomous_active_loop.ipynb` |
-| **08** | [08_production_hitl.md](08_production_hitl.md) | Rào chắn kiểm định chất lượng sản xuất & lượng tử hóa | `08_production_hitl_and_safety_gates.ipynb` (TBD) |
+| Giai Đoạn | Tên File Báo Cáo | Bài Toán Nghiên Cứu | Notebook Tương Ứng | Trạng Thái |
+| :---: | :--- | :--- | :--- | :---: |
+| **01** | [01_fast_dedup.md](01_fast_dedup.md) | Lọc trùng băm tri giác pHash & bảo tồn đối tượng KMV | `01_dual_stream_fastdedup_benchmark.ipynb` | `VERIFIED` |
+| **02** | [02_data_profiling.md](02_data_profiling.md) | Trích xuất hồ sơ quang học 5D không giám sát | `02_automated_data_profiling_benchmark.ipynb` | `VERIFIED` |
+| **AL** | [02_active_learning.md](02_active_learning.md) | Báo cáo chuyên đề: Học tập chủ động & Tái huấn luyện | `05_active_mining` + `06_retraining` + `07_loop` | `VERIFIED` |
+| **03** | [03_frozen_splits.md](03_frozen_splits.md) | Phân chia tập Test/Val đóng băng & chống rò rỉ kép | `03_shared_frozen_test_val_splits.ipynb` | `VERIFIED` |
+| **04** | [04_seed_baseline.md](04_seed_baseline.md) | Huấn luyện mô hình hạt giống V0 & kiểm chuẩn lát cắt khó | `04_seed_v0_training_ablation.ipynb` | `VERIFIED` |
+| **05** | [05_active_mining.md](05_active_mining.md) | Đấu trường khai phá chủ động C6 & điều hướng HITL | `05_active_mining_tournament_and_hitl.ipynb` | `VERIFIED` |
+| **06** | [06_retraining.md](06_retraining.md) | Huấn luyện lại với Replay Buffer & cân bằng thâm hụt lớp | `06_model_v1_retraining_and_gold_benchmark.ipynb` | `VERIFIED` |
+| **07** | [07_end_to_end_loop.md](07_end_to_end_loop.md) | Vòng lặp học tập toàn trình tự động V0 &rarr; V5 | `07_end_to_end_autonomous_active_loop.ipynb` | `AUDIT_PASSED` |
+| **08** | [08_production_hitl.md](08_production_hitl.md) | Rào chắn sản xuất, kiểm định HITL & Lộ trình kiến trúc | `08_production_hitl_and_safety_gates.ipynb` (Roadmap) | `RESEARCH_SPEC` |
 
 ---
 

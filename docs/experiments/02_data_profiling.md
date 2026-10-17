@@ -1,49 +1,49 @@
-# Technical Experiment Report: Multi-Domain 5D Data Profiling & Quality Benchmark (Phase 02)
+# Báo cáo thực nghiệm kỹ thuật: Phân tích đặc tính dữ liệu 5 chiều đa miền & Benchmark chất lượng (Phase 02)
 
-> **Document ID**: `docs/experiments/02_data_profiling.md`  
-> **Project**: BDD10K Active Learning Lab (Autonomous Driving Human-in-the-Loop Vision Engine)  
-> **Primary Experiment Notebook**: `notebooks/02_automated_data_profiling_benchmark.ipynb`  
-> **Upstream Repository Source**: `/Users/huynh/orca/workspaces/BuildPhase/tang`  
-> **Author / Research Group**: T018  
-> **Status**: Production Verified / Evidence-Based  
-
----
-
-## 1. Experiment Overview
-
-### 1.1 Purpose and Research Rationale
-In autonomous driving perception, dataset curation cannot rely solely on raw image counts or pre-existing human annotations. Many critical operational domains—such as extreme nighttime darkness, optical motion blur caused by pothole impacts, adverse weather, and high-density occlusion queues—are either underrepresented or completely unlabelled in raw dashcam video streams.
-
-The objective of Phase 02 is to build an automated, unsupervised **Multi-Domain 5D Profiling Engine** that quantitatively analyzes every clean frame in the deduplicated pool ($N = 6,994$) across five physical and geometric dimensions without requiring human labeling. To ensure statistical rigor, tournament benchmarks were executed across candidate algorithms for each sub-problem against independent ground-truth anchors.
-
-### 1.2 The Five Profiling Dimensions (5D Taxonomy)
-The profiling engine characterizes each frame along five orthogonal physical axes:
-1. **Sub-Point 2.1 (Illuminance & Night)**: Classifies nighttime driving conditions (`is_night`) while resisting localized false positives caused by oncoming vehicle headlight glare.
-2. **Sub-Point 2.2 (Optical Sharpness & Motion Blur)**: Quantifies high-frequency energy degradation (`is_blur`) to identify camera shake and sensor vibration.
-3. **Sub-Point 2.3 (Adverse Weather Degradation)**: Detects atmospheric contrast attenuation caused by rain, fog, or haze (`is_weather_degraded`).
-4. **Sub-Point 2.4 (Geometric Occlusion Topology)**: Reconstructs physical vehicle overlap relationships (`is_high_occlusion`) using roadway perspective geometry.
-5. **Sub-Point 2.5 (Traffic Density & Scale)**: Identifies crowded urban scenes (`is_dense`) based on instance count and bounding box scale distribution.
+> **Mã tài liệu**: `docs/experiments/02_data_profiling.md`  
+> **Dự án**: BDD10K Active Learning Lab (Hệ thống thị giác máy tính Human-in-the-Loop cho xe tự hành)  
+> **Notebook thực nghiệm chính**: `notebooks/02_automated_data_profiling_benchmark.ipynb`  
+> **Nguồn repository thượng nguồn**: `/Users/huynh/orca/workspaces/BuildPhase/tang`  
+> **Tác giả / Nhóm nghiên cứu**: T018  
+> **Trạng thái**: Đã kiểm chứng production / Dựa trên bằng chứng thực nghiệm  
 
 ---
 
-## 2. Problem Definition
+## 1. Tổng quan thực nghiệm
 
-### 2.1 Inputs and Operational Constraints
-- **Input**: The 6,994 clean frames materialized in `data/processed/unique_pool/` from Phase 01.
-- **Reference Ground-Truth Anchors**:
-  - BDD10K official metadata attributes (`timeofday = "night"`, `weather in ["rainy", "snowy", "foggy"]`, `scene = "highway" / "city street"`).
-  - UC Berkeley verified bounding box occlusion tags (`occluded: true`).
-  - Independent 100-image human verification audit specifically assessing motion blur and sensor shake.
-- **Expected Output**: A standardized profiling manifest (`data/processed/reports/data_profiling_manifest.json`) containing continuous metrics and binary slice flags for all 6,994 frames.
+### 1.1 Mục đích và cơ sở nghiên cứu
+Trong hệ thống nhận thức của xe tự hành, việc tuyển chọn và quản lý tập dữ liệu không thể chỉ dựa vào số lượng ảnh thô hoặc các nhãn gán sẵn của con người. Nhiều miền vận hành mang tính sống còn—chẳng hạn như ban đêm tối mịt, mờ quang học do xe rung lắc khi đi qua ổ gà, thời tiết khắc nghiệt, và các hàng xe ùn tắc che khuất mật độ cao—thường bị thiếu hụt mẫu hoặc hoàn toàn không được gán nhãn trong luồng video dashcam thô.
+
+Mục tiêu của Phase 02 là xây dựng một **Engine phân tích đặc tính dữ liệu 5 chiều (Multi-Domain 5D Profiling Engine)** tự động, không giám sát, nhằm phân tích định lượng từng khung hình sạch trong kho dữ liệu đã khử trùng lặp ($N = 6.994$) qua 5 trục vật lý và hình học mà không đòi hỏi con người phải gán nhãn thủ công. Để bảo đảm tính chặt chẽ về mặt thống kê, các giải đấu benchmark đối đầu (tournament benchmark) đã được thực thi giữa các thuật toán ứng viên cho từng bài toán con dựa trên các mốc ground-truth độc lập.
+
+### 1.2 Năm chiều phân tích đặc tính (Hệ phân loại 5D)
+Engine phân tích đặc tính mô tả mỗi khung hình theo 5 trục vật lý trực giao:
+1. **Điểm phụ 2.1 (Độ rọi & Ban đêm)**: Phân loại điều kiện lái xe ban đêm (`is_night`) đồng thời chống các trường hợp dương tính giả cục bộ do lóa đèn pha của xe đối diện.
+2. **Điểm phụ 2.2 (Độ sắc nét quang học & Mờ chuyển động)**: Đo lường định lượng sự suy giảm năng lượng tần số cao (`is_blur`) để phát hiện rung lắc camera và chấn động cảm biến.
+3. **Điểm phụ 2.3 (Suy giảm do thời tiết bất lợi)**: Phát hiện sự suy giảm độ tương phản khí quyển do mưa, sương mù hoặc mù khói (`is_weather_degraded`).
+4. **Điểm phụ 2.4 (Cấu trúc tô-pô che khuất hình học)**: Tái tạo các mối quan hệ chồng lấn vật lý giữa các phương tiện (`is_high_occlusion`) dựa trên hình học phối cảnh mặt đường.
+5. **Điểm phụ 2.5 (Mật độ giao thông & Quy mô đối tượng)**: Nhận diện các khung cảnh đô thị đông đúc (`is_dense`) dựa trên số lượng đối tượng và phân bố kích thước hộp bao (bounding box).
+
+---
+
+## 2. Định nghĩa bài toán
+
+### 2.1 Đầu vào và các ràng buộc vận hành
+- **Đầu vào**: 6.994 khung hình sạch được lưu trữ tại `data/processed/unique_pool/` từ Phase 01.
+- **Các mốc tham chiếu Ground-Truth**:
+  - Các thuộc tính siêu dữ liệu chính thức của BDD10K (`timeofday = "night"`, `weather in ["rainy", "snowy", "foggy"]`, `scene = "highway" / "city street"`).
+  - Nhãn che khuất hộp bao đã được xác minh bởi UC Berkeley (`occluded: true`).
+  - Kiểm toán xác minh độc lập của con người trên 100 ảnh nhằm đánh giá riêng hiện tượng mờ do chuyển động và rung lắc cảm biến.
+- **Đầu ra kỳ vọng**: Manifest phân tích đặc tính chuẩn hóa (`data/processed/reports/data_profiling_manifest.json`) chứa các chỉ số liên tục và các cờ phân lát nhị phân (binary slice flags) cho toàn bộ 6.994 khung hình.
 
 ```mermaid
 flowchart TD
-    A["Unique Pool (6,994 Frames)"] --> B["Sub-Point 2.1: Retinex SSR + YCbCr (Night Lux)"]
-    A --> C["Sub-Point 2.2: Tenengrad + 2D-FFT Energy Slope (Blur)"]
-    A --> D["Sub-Point 2.3: Dark Channel Prior + Clear Day Guard (Weather)"]
-    A --> E["Sub-Point 2.4: Directed Ground-Contact DAG (Occlusion)"]
-    A --> F["Sub-Point 2.5: Box Scale & Congestion Entropy (Density)"]
-    B --> G["data_profiling_manifest.json (6,994 Records)"]
+    A["Unique Pool (6.994 Khung hình)"] --> B["Điểm phụ 2.1: Retinex SSR + YCbCr (Độ rọi ban đêm)"]
+    A --> C["Điểm phụ 2.2: Tenengrad + Độ dốc năng lượng 2D-FFT (Độ mờ)"]
+    A --> D["Điểm phụ 2.3: Dark Channel Prior + Bộ lọc Clear Day Guard (Thời tiết)"]
+    A --> E["Điểm phụ 2.4: Đồ thị tiếp xúc mặt đường có hướng DAG (Che khuất)"]
+    A --> F["Điểm phụ 2.5: Tỷ lệ hộp bao & Entropy ùn tắc (Mật độ)"]
+    B --> G["data_profiling_manifest.json (6.994 Bản ghi)"]
     C --> G
     D --> G
     E --> G
@@ -52,212 +52,212 @@ flowchart TD
 
 ---
 
-## 3. Algorithms and Similarity Measures by Dimension
+## 3. Các thuật toán và thước đo tương đồng theo từng chiều
 
-### 3.1 Sub-Point 2.1: Illumination & Night Condition
-- **HSV Luminance Baseline**: Extracts the $V$ (Value) channel from HSV space and applies fixed thresholding ($V_{\text{mean}} < 45$). Highly sensitive to headlight beams.
-- **YCbCr Percentile Model**: Analyzes the 50th percentile of the $Y$ (Luma) channel.
-- **Single-Scale Retinex (Retinex SSR)**: Decomposes the image $I(x, y)$ into reflectance $R(x, y)$ and illumination $L(x, y)$ via Gaussian surround filtering:
+### 3.1 Điểm phụ 2.1: Điều kiện chiếu sáng & Ban đêm
+- **HSV Luminance Baseline**: Trích xuất kênh $V$ (Value) từ không gian HSV và áp dụng ngưỡng cố định ($V_{\text{mean}} < 45$). Rất nhạy cảm với chùm sáng đèn pha xe.
+- **Mô hình bách phân vị YCbCr**: Phân tích bách phân vị thứ 50 của kênh $Y$ (Luma).
+- **Single-Scale Retinex (Retinex SSR)**: Phân rã ảnh $I(x, y)$ thành độ phản xạ $R(x, y)$ và độ rọi $L(x, y)$ thông qua bộ lọc bao quanh Gaussian (Gaussian surround filtering):
   $$\log R(x, y) = \log I(x, y) - \log [F(x, y) * I(x, y)]$$
-- **Champion (Hybrid Ensemble)**: Combines Retinex illumination decomposition with $Y$-channel percentile thresholds. Effectively suppresses high-intensity headlights while correctly classifying ambient darkness ($F_1 = 97.12\%$).
+- **Thuật toán quán quân (Hybrid Ensemble)**: Kết hợp phân rã độ rọi Retinex với các ngưỡng bách phân vị của kênh $Y$. Triệt tiêu hiệu quả đèn pha cường độ cao trong khi vẫn phân loại chính xác độ tối môi trường xung quanh ($F_1 = 97,12\%$).
 
-### 3.2 Sub-Point 2.2: Sharpness and Motion Blur
-- **Laplacian Variance**: Computes the variance of the 2D Laplacian operator $\sigma^2(\nabla^2 I)$. Fails on smooth sky regions, falsely flagging clean highway images as blurry.
-- **Edge-Gated Tenengrad**: Measures squared Sobel gradient magnitude only on pixels exceeding a noise floor threshold:
-  $$\text{Tenengrad} = \sum_{x, y} \left( G_x(x, y)^2 + G_y(x, y)^2 \right) \quad \text{for } \sqrt{G_x^2 + G_y^2} > \tau$$
-- **Champion (Dual-Domain Hybrid Ensemble: Tenengrad + 2D-FFT Energy Slope)**: Combines spatial gradient magnitude with frequency-domain Fourier transform analysis. Analyzes the slope of the radially averaged 2D power spectrum:
+### 3.2 Điểm phụ 2.2: Độ sắc nét và Mờ chuyển động
+- **Phương sai Laplacian**: Tính phương sai của toán tử Laplacian 2D $\sigma^2(\nabla^2 I)$. Thất bại trên các vùng bầu trời mịn, gắn cờ nhầm ảnh đường cao tốc rõ nét thành ảnh mờ.
+- **Edge-Gated Tenengrad**: Đo lường bình phương độ lớn gradient Sobel chỉ trên các điểm ảnh vượt qua ngưỡng nền nhiễu:
+  $$\text{Tenengrad} = \sum_{x, y} \left( G_x(x, y)^2 + G_y(x, y)^2 \right) \quad \text{với } \sqrt{G_x^2 + G_y^2} > \tau$$
+- **Thuật toán quán quân (Dual-Domain Hybrid Ensemble: Tenengrad + Độ dốc năng lượng 2D-FFT)**: Kết hợp độ lớn gradient không gian với phân tích biến đổi Fourier miền tần số. Phân tích độ dốc của phổ công suất 2D lấy trung bình xuyên tâm:
   $$\log P(f) = -\alpha \log f + c$$
-  Images with mechanical camera shake exhibit steep drop-offs in high-frequency spectral energy, achieving 100% precision and recall on the human verification audit.
+  Các ảnh có rung chấn cơ học của camera thể hiện sự sụt giảm mạnh năng lượng phổ tần số cao, đạt độ chính xác (Precision) và độ nhạy (Recall) 100% trên tập kiểm toán con người.
 
-### 3.3 Sub-Point 2.3: Weather Degradation
-- **Dark Channel Prior (DCP Baseline)**: Based on He et al., computing the minimum intensity across color channels over a localized patch:
+### 3.3 Điểm phụ 2.3: Suy giảm do thời tiết
+- **Dark Channel Prior (DCP Baseline)**: Dựa trên nghiên cứu của He và cộng sự, tính toán cường độ tối thiểu qua các kênh màu trên một vùng lân cận cục bộ:
   $$J^{\text{dark}}(x) = \min_{y \in \Omega(x)} \left( \min_{c \in \{r, g, b\}} I^c(y) \right)$$
-- **Champion (C5 Multi-Domain Ensemble)**: Integrates transmission map estimation, rain streak directional morphological filters, and a **Clear Day Guard** that suppresses false alarms on bright summer skies and reflective asphalt.
+- **Thuật toán quán quân (C5 Multi-Domain Ensemble)**: Tích hợp ước lượng bản đồ truyền dẫn (transmission map), bộ lọc hình thái định hướng vệt mưa, và bộ lọc **Clear Day Guard** giúp loại trừ báo động giả trên bầu trời mùa hè chói sáng và mặt đường nhựa phản chiếu.
 
-### 3.4 Sub-Point 2.4: Spatial Occlusion Topology
-- **Naive 2D Overlap Baseline**: Evaluates horizontal bounding box intersection:
-  $$\text{IoU}_{2\text{D}} = \frac{\text{Area}(B_1 \cap B_2)}{\text{Area}(B_1 \cup B_2)} > 0.15$$
-  Severely underperforms on vehicle queues where trailing cars have non-overlapping 2D bounding boxes despite being physically occluded.
-- **Champion (Directed Occlusion Graph — DAG)**: Constructs a directed acyclic graph based on road ground-contact plane coordinates ($y_{\text{bottom}}$). For any pair of vehicles sharing a lane bearing, the object with smaller $y_{\text{bottom}}$ is positioned further down the road plane:
+### 3.4 Điểm phụ 2.4: Cấu trúc tô-pô che khuất không gian
+- **Naive 2D Overlap Baseline**: Đánh giá phần giao của các hộp bao 2D theo chiều ngang:
+  $$\text{IoU}_{2\text{D}} = \frac{\text{Area}(B_1 \cap B_2)}{\text{Area}(B_1 \cup B_2)} > 0,15$$
+  Kém hiệu quả nghiêm trọng trên các hàng xe ùn tắc nối đuôi nhau, nơi các xe phía sau không chồng lấn hộp bao 2D nhưng trên thực tế vật lý lại bị che khuất một phần.
+- **Thuật toán quán quân (Directed Occlusion Graph — DAG)**: Xây dựng đồ thị có hướng không chu trình dựa trên tọa độ mặt phẳng tiếp xúc mặt đường ($y_{\text{bottom}}$). Với bất kỳ cặp xe nào cùng nằm trên một làn đường, đối tượng có $y_{\text{bottom}}$ nhỏ hơn sẽ nằm xa hơn trên mặt phẳng đường:
   $$\text{Edge}(i \to j) \iff \left( y_{\text{bottom}}^{(i)} < y_{\text{bottom}}^{(j)} \right) \land \left( x_{\text{overlap}}(i, j) > \tau_x \right)$$
-  Achieves a **$+36.0\%$ F1-Score improvement** over naive 2D overlap.
+  Đạt mức **cải thiện $+36,0\%$ F1-Score** so với phương pháp chồng lấn 2D ngây thơ (Naive 2D Overlap).
 
 ---
 
-## 4. Experimental Setup
+## 4. Thiết lập thực nghiệm
 
-- **Dataset**: 2,000 representative frames sampled from the BDD10K dataset for tournament benchmarking; full profiling materialized across all 6,994 unique frames.
-- **Ground Truth Sources**:
-  - `timeofday`: Human-annotated labels from UC Berkeley metadata.
-  - `weather`: Ground-truth weather tags (`clear`, `rainy`, `snowy`, `foggy`).
-  - `occluded`: Official object-level occlusion tags.
-  - `blur`: Dedicated human verification manifest (100 audited images) cataloged in `results/phase_02/tables/human_blur_ground_truth_manifest.json`.
-- **Runtime Environment**: Executed on a single-core CPU workstation, verifying high-throughput scalability for edge preprocessing.
-
----
-
-## 5. Evaluation Methodology
-
-- **Binary Classification Metrics**: Accuracy, Precision, Recall, Specificity, F1-Score, and Jaccard Index (IoU).
-- **Statistical Significance**: Bootstrap resampling ($B = 1,000$ iterations) computing $95\%$ confidence intervals ($[CI_{\text{low}}, CI_{\text{high}}]$).
-- **Failure Analysis**: Explicit tracking of False Positive counts (e.g., bright sky falsely flagged as haze).
+- **Tập dữ liệu**: 2.000 khung hình đại diện được lấy mẫu từ tập BDD10K cho giải đấu benchmark đối đầu; việc phân tích đặc tính hoàn chỉnh được hiện thực hóa trên toàn bộ 6.994 khung hình duy nhất.
+- **Nguồn Ground Truth**:
+  - `timeofday`: Nhãn do con người gán từ siêu dữ liệu UC Berkeley.
+  - `weather`: Nhãn thời tiết chuẩn (`clear`, `rainy`, `snowy`, `foggy`).
+  - `occluded`: Nhãn che khuất cấp độ đối tượng chính thức.
+  - `blur`: Manifest kiểm toán xác minh chuyên biệt bởi con người (100 ảnh được rà soát kỹ lưỡng) lưu trữ tại `results/phase_02/tables/human_blur_ground_truth_manifest.json`.
+- **Môi trường thực thi**: Chạy trên máy trạm CPU đơn nhân, xác minh khả năng mở rộng thông lượng cao cho tiền xử lý tại biên (edge).
 
 ---
 
-## 6. Experimental Results
+## 5. Phương pháp luận đánh giá
 
-### 6.1 Phase 02 Paper-Ready Summary Benchmark
+- **Các chỉ số phân loại nhị phân**: Accuracy (Độ chính xác tổng thể), Precision (Độ chuẩn xác), Recall (Độ nhạy), Specificity (Độ đặc hiệu), F1-Score, và Jaccard Index (IoU).
+- **Ý nghĩa thống kê**: Tái lấy mẫu Bootstrap ($B = 1.000$ lần lặp) tính toán khoảng tin cậy $95\%$ ($[CI_{\text{low}}, CI_{\text{high}}]$).
+- **Phân tích lỗi**: Theo dõi tường minh số lượng Dương tính giả (False Positive - ví dụ: bầu trời chói sáng bị gắn cờ nhầm thành sương mù).
 
-Recorded directly from `results/phase_02/tables/phase_02_paper_ready_summary_table.md`:
+---
 
-| Profiling Slice | Evaluated Algorithm | Ground-Truth Source | Accuracy | Precision | Recall | F1-Score | Key Scientific Contribution |
+## 6. Kết quả thực nghiệm
+
+### 6.1 Bảng Benchmark tóm tắt phục vụ công bố khoa học (Phase 02)
+
+Được trích xuất trực tiếp từ `results/phase_02/tables/phase_02_paper_ready_summary_table.md`:
+
+| Lát cắt phân tích | Thuật toán đánh giá | Nguồn Ground-Truth | Accuracy | Precision | Recall | F1-Score | Đóng góp khoa học cốt lõi |
 | :--- | :--- | :--- | :---: | :---: | :---: | :---: | :--- |
-| **1. Night Condition** | 🏆 **Hybrid Ensemble** | BDD10K `timeofday` (Human) | **97.65%** | **97.78%** | **96.47%** | **97.12%** | Suppresses oncoming headlight glare via YCbCr + Retinex |
-| **2. Blur (Controlled)** | 🏆 **Dual-Domain Ensemble** | Synthetic Perturbations (300 imgs) | **97.33%** | **96.15%** | **100.0%** | **98.04%** | Spatial Tenengrad + 2D-FFT frequency slope |
-| **2b. Blur (Human Audit)** | 🏆 **Dual-Domain Ensemble** | Human Verification Audit (100 imgs) | **100.0%** | **100.0%** | **100.0%** | **100.0%** | Confirmed 100% on real dashcam vibration samples |
-| **3. Adverse Weather** | 🏆 **C5 Multi-Domain** | BDD10K `weather` (Human) | **41.05%** | **14.65%** | **76.19%** | **24.57%** | Clear Day Guard suppresses bright sky false alarms |
-| **4. Spatial Occlusion** | 🏆 **Directed DAG** | BDD10K `occluded: true` (UC Berkeley) | **89.15%** | **96.47%** | **91.27%** | **93.80%** | Reconstructs traffic queues; **$+36.0\%$ F1** over Naive 2D |
+| **1. Điều kiện ban đêm** | 🏆 **Hybrid Ensemble** | BDD10K `timeofday` (Người gán) | **97,65%** | **97,78%** | **96,47%** | **97,12%** | Triệt tiêu ánh sáng lóa của đèn pha ngược chiều qua YCbCr + Retinex |
+| **2. Mờ (Kiểm soát)** | 🏆 **Dual-Domain Ensemble** | Nhiễu nhân tạo (300 ảnh) | **97,33%** | **96,15%** | **100,0%** | **98,04%** | Kết hợp Tenengrad không gian + độ dốc tần số 2D-FFT |
+| **2b. Mờ (Kiểm toán người)** | 🏆 **Dual-Domain Ensemble** | Kiểm toán xác minh bởi con người (100 ảnh) | **100,0%** | **100,0%** | **100,0%** | **100,0%** | Xác nhận 100% trên các mẫu rung lắc dashcam thực tế |
+| **3. Thời tiết bất lợi** | 🏆 **C5 Multi-Domain** | BDD10K `weather` (Người gán) | **41,05%** | **14,65%** | **76,19%** | **24,57%** | Clear Day Guard triệt tiêu báo động giả do bầu trời sáng |
+| **4. Che khuất không gian** | 🏆 **Directed DAG** | BDD10K `occluded: true` (UC Berkeley) | **89,15%** | **96,47%** | **91,27%** | **93,80%** | Tái tạo các hàng xe ùn tắc; **$+36,0\%$ F1** so với Naive 2D |
 
 ---
 
-### 6.2 Sub-Point 2.1: Illumination Benchmark Metrics ($N = 2,000$)
+### 6.2 Điểm phụ 2.1: Các chỉ số benchmark điều kiện chiếu sáng ($N = 2.000$)
 
-Recorded from `results/phase_02/tables/illumination_comparative_metrics.md`:
+Được trích xuất từ `results/phase_02/tables/illumination_comparative_metrics.md`:
 
-| Algorithm | TP | FP | TN | FN | Accuracy (%) | Precision (%) | Recall (%) | F1-Score (%) | Jaccard (%) |
+| Thuật toán | TP | FP | TN | FN | Accuracy (%) | Precision (%) | Recall (%) | F1-Score (%) | Jaccard (%) |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **HSV Baseline** | 771 | 15 | 1,164 | 50 | 96.75% | **98.09%** | 93.91% | 95.96% | 92.22% |
-| **YCbCr Percentiles** | 758 | 31 | 1,148 | 63 | 95.30% | 96.07% | 92.33% | 94.16% | 88.97% |
-| **Retinex SSR** | **793** | 18 | 1,161 | **28** | **97.70%** | 97.78% | **96.59%** | **97.18%** | **94.52%** |
-| **Hybrid Ensemble (Champion)** | 792 | 18 | 1,161 | 29 | 97.65% | 97.78% | 96.47% | 97.12% | 94.40% |
+| **HSV Baseline** | 771 | 15 | 1.164 | 50 | 96,75% | **98,09%** | 93,91% | 95,96% | 92,22% |
+| **YCbCr Percentiles** | 758 | 31 | 1.148 | 63 | 95,30% | 96,07% | 92,33% | 94,16% | 88,97% |
+| **Retinex SSR** | **793** | 18 | 1.161 | **28** | **97,70%** | 97,78% | **96,59%** | **97,18%** | **94,52%** |
+| **Hybrid Ensemble (Quán quân)** | 792 | 18 | 1.161 | 29 | 97,65% | 97,78% | 96,47% | 97,12% | 94,40% |
 
 ---
 
-### 6.3 Sub-Point 2.2: Motion Blur Human Verification Benchmark ($N = 100$)
+### 6.3 Điểm phụ 2.2: Benchmark kiểm toán mờ chuyển động bởi con người ($N = 100$)
 
-Recorded from `results/phase_02/tables/blur_human_verified_metrics.md`:
+Được trích xuất từ `results/phase_02/tables/blur_human_verified_metrics.md`:
 
-| Algorithm | TP | FP | TN | FN | Accuracy (%) | Precision (%) | Recall (%) | F1-Score (%) | Jaccard (%) |
+| Thuật toán | TP | FP | TN | FN | Accuracy (%) | Precision (%) | Recall (%) | F1-Score (%) | Jaccard (%) |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Laplacian Variance** | 50 | 0 | 50 | 0 | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| **Tenengrad** | 22 | 0 | 50 | 28 | 72.00% | 100.0% | 44.00% | 61.11% | 44.00% |
-| **2D-FFT Frequency** | 7 | 14 | 36 | 43 | 43.00% | 33.33% | 14.00% | 19.72% | 10.94% |
-| **Hybrid Ensemble (Champion)** | **50** | **0** | **50** | **0** | **100.0%** | **100.0%** | **100.0%** | **100.0%** | **100.0%** |
+| **Phương sai Laplacian** | 50 | 0 | 50 | 0 | 100,0% | 100,0% | 100,0% | 100,0% | 100,0% |
+| **Tenengrad** | 22 | 0 | 50 | 28 | 72,00% | 100,0% | 44,00% | 61,11% | 44,00% |
+| **2D-FFT Frequency** | 7 | 14 | 36 | 43 | 43,00% | 33,33% | 14,00% | 19,72% | 10,94% |
+| **Hybrid Ensemble (Quán quân)** | **50** | **0** | **50** | **0** | **100,0%** | **100,0%** | **100,0%** | **100,0%** | **100,0%** |
 
-*Note: While pure Laplacian performed well on the 100 curated samples, on open-world highway datasets it frequently misclassifies clear sky as blurry. The Dual-Domain Hybrid Ensemble guards against this failure mode.*
+*Ghi chú: Mặc dù toán tử Laplacian thuần túy hoạt động rất tốt trên 100 mẫu tuyển chọn, trên tập dữ liệu đường cao tốc thế giới mở nó thường xuyên phân loại nhầm bầu trời trong xanh thành ảnh mờ. Mô hình kết hợp kép Dual-Domain Hybrid Ensemble giúp phòng ngừa triệt để dạng lỗi này.*
 
 ---
 
-### 6.4 Sub-Point 2.3: Weather Tournament Metrics ($N = 2,000$)
+### 6.4 Điểm phụ 2.3: Các chỉ số giải đấu thời tiết ($N = 2.000$)
 
-Recorded from `results/phase_02/tables/weather_tournament_metrics.md`:
+Được trích xuất từ `results/phase_02/tables/weather_tournament_metrics.md`:
 
-| Candidate Algorithm | TP | FP | TN | FN | Accuracy (%) | Precision (%) | Recall (%) | F1-Score (%) |
+| Thuật toán ứng viên | TP | FP | TN | FN | Accuracy (%) | Precision (%) | Recall (%) | F1-Score (%) |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **C1: Dark Channel Prior (DCP Baseline)** | 131 | 971 | 777 | 121 | 45.40% | 11.89% | 51.98% | 19.35% |
-| **C2: Transmission Map** | 5 | 84 | 1,664 | 247 | 83.45% | 5.62% | 1.98% | 2.93% |
-| **C3: Rain Streak Filters** | 1 | 13 | 1,735 | 251 | **86.80%** | 7.14% | 0.40% | 0.75% |
-| **C4: Color Contrast Degradation** | 34 | 249 | 1,499 | 218 | 76.65% | 12.01% | 13.49% | 12.71% |
-| **C5: Multi-Domain Ensemble (Champion)** | **192** | 1,119 | 629 | **60** | 41.05% | **14.65%** | **76.19%** | **24.57%** |
+| **C1: Dark Channel Prior (DCP Baseline)** | 131 | 971 | 777 | 121 | 45,40% | 11,89% | 51,98% | 19,35% |
+| **C2: Transmission Map** | 5 | 84 | 1.664 | 247 | 83,45% | 5,62% | 1,98% | 2,93% |
+| **C3: Rain Streak Filters** | 1 | 13 | 1.735 | 251 | **86,80%** | 7,14% | 0,40% | 0,75% |
+| **C4: Color Contrast Degradation** | 34 | 249 | 1.499 | 218 | 76,65% | 12,01% | 13,49% | 12,71% |
+| **C5: Multi-Domain Ensemble (Quán quân)** | **192** | 1.119 | 629 | **60** | 41,05% | **14,65%** | **76,19%** | **24,57%** |
 
 ---
 
-### 6.5 Sub-Point 2.4: Occlusion Topology Benchmark ($N = 2,000$)
+### 6.5 Điểm phụ 2.4: Benchmark cấu trúc tô-pô che khuất ($N = 2.000$)
 
-Recorded from `results/phase_02/tables/geometric_topology_human_benchmarks.md`:
+Được trích xuất từ `results/phase_02/tables/geometric_topology_human_benchmarks.md`:
 
-| Algorithm | TP | FP | TN | FN | Accuracy (%) | Precision (%) | Recall (%) | F1-Score (%) | Net Improvement |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Naive 2D Overlap (Baseline)** | 732 | 5 | 197 | 1,066 | 46.45% | **99.32%** | 40.71% | 57.75% | Baseline reference |
-| **Directed Occlusion Graph (DAG)** | **1,641** | 60 | 142 | **157** | **89.15%** | 96.47% | **91.27%** | **93.80%** | **$+36.05\%$ F1-Score** |
+| Thuật toán | TP | FP | TN | FN | Accuracy (%) | Precision (%) | Recall (%) | F1-Score (%) | Mức cải thiện thực tế |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
+| **Naive 2D Overlap (Baseline)** | 732 | 5 | 197 | 1.066 | 46,45% | **99,32%** | 40,71% | 57,75% | Mốc tham chiếu Baseline |
+| **Đồ thị che khuất có hướng (DAG)** | **1.641** | 60 | 142 | **157** | **89,15%** | 96,47% | **91,27%** | **93,80%** | **$+36,05\%$ F1-Score** |
 
 ---
 
-### 6.6 Statistical Bootstrap Confidence Intervals ($B = 1,000$)
+### 6.6 Khoảng tin cậy Bootstrap thống kê ($B = 1.000$)
 
-Recorded from `results/phase_02/tables/statistical_bootstrap_confidence_intervals.md`:
+Được trích xuất từ `results/phase_02/tables/statistical_bootstrap_confidence_intervals.md`:
 
-| Evaluation Dimension | Evaluated Method | F1-Score (95% CI) | Precision (95% CI) | Recall (95% CI) |
+| Chiều đánh giá | Phương pháp đánh giá | F1-Score (95% CI) | Precision (95% CI) | Recall (95% CI) |
 | :--- | :--- | :---: | :---: | :---: |
-| **Occlusion Topology** | Naive 2D Overlap | 57.8% [55.4% - 60.0%] | 99.3% [98.6% - 99.9%] | 40.7% [38.4% - 43.0%] |
-| **Occlusion Topology** | **Directed Occlusion DAG** | **93.8% [93.0% - 94.6%]** | **96.5% [95.5% - 97.3%]** | **91.3% [90.0% - 92.5%]** |
-| **Motion Blur Audit** | Laplacian Variance | 100.0% [100.0% - 100.0%] | 100.0% [100.0% - 100.0%] | 100.0% [100.0% - 100.0%] |
-| **Motion Blur Audit** | Tenengrad Gradient | 60.7% [45.2% - 72.7%] | 100.0% [100.0% - 100.0%] | 43.6% [29.2% - 57.2%] |
-| **Motion Blur Audit** | 2D-FFT Spectral | 19.1% [6.5% - 31.2%] | 33.3% [12.5% - 55.0%] | 13.5% [4.3% - 23.6%] |
-| **Motion Blur Audit** | **Hybrid Dual-Domain** | **100.0% [100.0% - 100.0%]** | **100.0% [100.0% - 100.0%]** | **100.0% [100.0% - 100.0%]** |
+| **Tô-pô che khuất** | Naive 2D Overlap | 57,8% [55,4% - 60,0%] | 99,3% [98,6% - 99,9%] | 40,7% [38,4% - 43,0%] |
+| **Tô-pô che khuất** | **Đồ thị che khuất DAG** | **93,8% [93,0% - 94,6%]** | **96,5% [95,5% - 97,3%]** | **91,3% [90,0% - 92,5%]** |
+| **Kiểm toán mờ chuyển động** | Phương sai Laplacian | 100,0% [100,0% - 100,0%] | 100,0% [100,0% - 100,0%] | 100,0% [100,0% - 100,0%] |
+| **Kiểm toán mờ chuyển động** | Gradient Tenengrad | 60,7% [45,2% - 72,7%] | 100,0% [100,0% - 100,0%] | 43,6% [29,2% - 57,2%] |
+| **Kiểm toán mờ chuyển động** | Phổ 2D-FFT | 19,1% [6,5% - 31,2%] | 33,3% [12,5% - 55,0%] | 13,5% [4,3% - 23,6%] |
+| **Kiểm toán mờ chuyển động** | **Hybrid Dual-Domain** | **100,0% [100,0% - 100,0%]** | **100,0% [100,0% - 100,0%]** | **100,0% [100,0% - 100,0%]** |
 
 ---
 
-## 7. Analysis and Interpretation
+## 7. Phân tích và Diễn giải
 
-### 7.1 Why Retinex Eliminates Headlight Glare
-Standard luminance metrics fail at night because oncoming high-beam headlights illuminate a local cluster of pixels to pure white ($255$), skewing the frame mean. Retinex Gaussian surround filtering isolates high-frequency reflectance from low-frequency ambient illuminance, correctly recognizing that the surrounding road plane remains in total darkness.
+### 7.1 Vì sao Retinex loại bỏ được hiện tượng lóa đèn pha
+Các chỉ số độ sáng tiêu chuẩn thường thất bại vào ban đêm vì các chùm đèn pha pha ngược chiều chiếu sáng một cụm điểm ảnh cục bộ lên mức trắng tuyệt đối ($255$), làm sai lệch giá trị trung bình của toàn khung hình. Bộ lọc bao quanh Gaussian của Retinex cô lập thành phần phản xạ tần số cao khỏi thành phần chiếu sáng môi trường tần số thấp, giúp nhận diện chính xác rằng mặt phẳng đường xung quanh thực tế vẫn chìm trong bóng tối.
 
-### 7.2 The Power of 2D-FFT Energy Slope for Mechanical Blur
-Mechanical camera vibration in moving vehicles typically manifests as directional or motion blur. While spatial gradients (Tenengrad) miss subtle horizontal smearing (Recall drops to $44.0\%$), the slope of radial Fourier power spectra drops off steeply in the direction of vibration, enabling the hybrid ensemble to achieve **100% recall** on audited blurred frames.
+### 7.2 Sức mạnh của độ dốc năng lượng 2D-FFT đối với hiện tượng mờ cơ học
+Rung lắc cơ học của camera trên các phương tiện đang di chuyển thường biểu hiện dưới dạng vệt mờ có hướng hoặc mờ chuyển động. Trong khi gradient không gian (Tenengrad) bỏ sót các vệt mờ ngang tinh vi (Độ nhạy Recall giảm xuống còn $44,0\%$), thì độ dốc của phổ công suất Fourier lấy trung bình xuyên tâm lại sụt giảm rất dốc theo hướng rung lắc, cho phép mô hình kết hợp lai đạt **100% Recall** trên các khung hình mờ được kiểm toán bởi con người.
 
-### 7.3 Honest Accounting: The Weather Detection Bottleneck
-The recorded results openly document that adverse weather detection remains the most challenging task ($F_1 = 24.57\%$, Precision = $14.65\%$). In driving videos, smooth overexposed skies, sun glint, and light-colored concrete pavements produce high dark-channel values, triggering $1,119$ false positive detections. While the Clear Day Guard improves recall to $76.19\%$, production deployment requires multi-frame temporal consensus or dedicated deep classification networks.
+### 7.3 Báo cáo trung thực: Nút thắt cổ chai trong phát hiện thời tiết
+Các kết quả ghi nhận đã thẳng thắn chỉ ra rằng phát hiện thời tiết bất lợi vẫn là tác vụ thách thức nhất ($F_1 = 24,57\%$, Precision = $14,65\%$). Trong video lái xe, bầu trời mịn bị cháy sáng, ánh sáng mặt trời phản chiếu và mặt đường bê tông màu sáng tạo ra giá trị kênh tối (dark channel) cao, gây ra $1.119$ trường hợp phát hiện dương tính giả. Mặc dù bộ lọc Clear Day Guard đã cải thiện độ nhạy Recall lên $76,19\%$, việc triển khai trong môi trường production thực tế vẫn đòi hỏi cơ chế đồng thuận thời gian đa khung hình (multi-frame temporal consensus) hoặc các mạng nơ-ron phân loại sâu chuyên biệt.
 
-### 7.4 Breakthrough in Traffic Queue Occlusion Modeling
-The Directed Occlusion DAG achieved the single largest performance jump in Phase 02 (**$+36.05\%$ F1 gain**). By exploiting the perspective property that objects further down the roadway possess higher vertical ground-contact coordinates ($y_{\text{bottom}}$), the DAG models depth ordering without requiring LiDAR or stereo depth sensors.
-
----
-
-## 8. Role in the End-to-End Pipeline
-
-The output of Phase 02 (`data_profiling_manifest.json`) is an essential dependency for all subsequent active learning phases:
-1. **Input to Phase 03 (Splitting)**: The stratified **Hybrid Mix 80/20** algorithm uses the 5D profile to guarantee that the 1,400-frame Frozen Gold Test set contains balanced quotas of night ($40.8\%$), blur ($13.2\%$), and high occlusion ($28.5\%$).
-2. **Input to Phase 05 (Active Mining)**: The **C4/C6 Super-Fusion** acquisition engine directly queries the profile to reward candidate frames that exhibit rare environmental conditions ($\mathcal{G}_{\text{env}}(x)$).
+### 7.4 Đột phá trong mô hình hóa che khuất hàng xe ùn tắc
+Đồ thị che khuất có hướng DAG đã mang lại mức nhảy vọt hiệu năng lớn nhất trong Phase 02 (**tăng $+36,05\%$ điểm F1**). Bằng cách khai thác đặc tính phối cảnh rằng các đối tượng ở xa hơn trên mặt đường có tọa độ tiếp xúc mặt đất thẳng đứng ($y_{\text{bottom}}$) cao hơn, mô hình DAG sắp xếp thứ tự chiều sâu không gian mà không cần đến cảm biến LiDAR hay camera độ sâu stereo đắt đỏ.
 
 ---
 
-## 9. Limitations and Threats to Validity
+## 8. Vai trò trong quy trình End-to-End toàn trình
 
-1. **Weather Precision Bottleneck**: As documented in Section 6.4, Dark Channel Prior algorithms suffer high false positive rates ($14.65\%$ Precision) due to sky overexposure.
-2. **Monocular Perspective Assumption in DAG**: The occlusion DAG assumes a relatively flat road surface. In severe uphill or downhill scenarios, $y_{\text{bottom}}$ ordering may introduce topological edge inversions.
-3. **Fixed Empirical Thresholds**: Thresholds for Retinex lux and Tenengrad were calibrated on BDD10K optics; cameras with different focal lengths or dynamic range sensors will require recalibration.
+Đầu ra của Phase 02 (`data_profiling_manifest.json`) là phụ thuộc thiết yếu cho toàn bộ các phase Active Learning tiếp theo:
+1. **Đầu vào cho Phase 03 (Phân chia tập dữ liệu)**: Thuật toán phân tầng **Hybrid Mix 80/20** sử dụng hồ sơ đặc tính 5D để đảm bảo rằng tập Frozen Gold Test gồm 1.400 khung hình chứa tỷ lệ hạn ngạch cân bằng về ban đêm ($40,8\%$), ảnh mờ ($13,2\%$), và che khuất cao ($28,5\%$).
+2. **Đầu vào cho Phase 05 (Active Mining)**: Engine truy xuất mẫu **C4/C6 Super-Fusion** trực tiếp truy vấn hồ sơ đặc tính này để chấm điểm thưởng cho các khung hình ứng viên mang điều kiện môi trường hiếm gặp ($\mathcal{G}_{\text{env}}(x)$).
 
 ---
 
-## 10. Reproducibility
+## 9. Hạn chế và các mối đe dọa đối với tính hợp lệ
 
-### 10.1 Running the Benchmark
-The complete evaluation is contained in `notebooks/02_automated_data_profiling_benchmark.ipynb`:
+1. **Nút thắt về độ chuẩn xác thời tiết**: Như đã ghi nhận tại Mục 6.4, các thuật toán Dark Channel Prior chịu tỷ lệ dương tính giả cao (Precision chỉ $14,65\%$) do hiện tượng cháy sáng bầu trời.
+2. **Giả định phối cảnh đơn nhãn trong đồ thị DAG**: Đồ thị DAG che khuất giả định mặt đường tương đối bằng phẳng. Trong các tình huống dốc lên hoặc dốc xuống gắt, thứ tự $y_{\text{bottom}}$ có thể dẫn đến việc đảo ngược cạnh tô-pô.
+3. **Các ngưỡng thực nghiệm cố định**: Các ngưỡng độ rọi Retinex và Tenengrad được hiệu chuẩn dựa trên đặc tính quang học của BDD10K; các loại camera có tiêu cự hoặc dải tương phản động (dynamic range) khác nhau sẽ cần phải hiệu chuẩn lại.
+
+---
+
+## 10. Khả năng tái lập (Reproducibility)
+
+### 10.1 Chạy quy trình Benchmark
+Toàn bộ quá trình đánh giá được đóng gói hoàn chỉnh trong `notebooks/02_automated_data_profiling_benchmark.ipynb`:
 ```bash
-# Activate environment
+# Kích hoạt môi trường ảo
 source .venv/bin/activate
 
-# Execute notebook sequentially via nbconvert
+# Thực thi tuần tự notebook thông qua nbconvert
 python3 -m jupyter nbconvert --to notebook --execute \
   notebooks/02_automated_data_profiling_benchmark.ipynb \
   --output notebooks/02_automated_data_profiling_benchmark_reproduced.ipynb
 ```
 
-### 10.2 Verified Artifact Locations
-- **Master Profiling Manifest**: `data/processed/reports/data_profiling_manifest.json` (6,994 records).
-- **Summary Metrics Table**: `results/phase_02/tables/phase_02_paper_ready_summary_table.md`.
-- **Human Blur Ground Truth**: `results/phase_02/tables/human_blur_ground_truth_manifest.json`.
+### 10.2 Vị trí các artifact đã được kiểm chứng
+- **Master Profiling Manifest**: `data/processed/reports/data_profiling_manifest.json` (6.994 bản ghi).
+- **Bảng chỉ số tóm tắt**: `results/phase_02/tables/phase_02_paper_ready_summary_table.md`.
+- **Ground Truth kiểm toán mờ bởi con người**: `results/phase_02/tables/human_blur_ground_truth_manifest.json`.
 
 ---
 
-## 11. Conclusion
+## 11. Kết luận
 
-The Phase 02 Data Profiling experiment successfully establishes an automated, multi-domain profiling engine across all 6,994 frames of the BDD10K unique pool. By conducting rigorous multi-algorithm tournaments, the project demonstrated that:
-- Retinex decomposition eliminates headlight glare at night ($F_1 = 97.12\%$).
-- Dual-domain Tenengrad + 2D-FFT captures mechanical motion blur with 100% human audit precision and recall.
-- Ground-contact directed graphs boost traffic queue occlusion modeling by **$+36.05\%$ F1-score**.
+Thực nghiệm Phân tích đặc tính dữ liệu Phase 02 đã thiết lập thành công engine phân tích đa miền tự động trên toàn bộ 6.994 khung hình của kho dữ liệu BDD10K duy nhất. Thông qua các giải đấu benchmark đa thuật toán nghiêm ngặt, dự án đã chứng minh rằng:
+- Phân rã Retinex triệt tiêu hiệu quả lóa đèn pha vào ban đêm ($F_1 = 97,12\%$).
+- Phối hợp miền kép Tenengrad + 2D-FFT bắt trọn các hiện tượng mờ chuyển động cơ học với độ chính xác và độ nhạy đạt 100% trên tập kiểm toán con người.
+- Đồ thị có hướng tiếp xúc mặt đường giúp tăng vọt khả năng mô hình hóa che khuất hàng xe ùn tắc thêm **$+36,05\%$ điểm F1**.
 
-While atmospheric weather classification remains an identified technical limitation ($F_1 = 24.57\%$), the materialized 5D profiling manifest provides the foundational substrate for video-isolated splitting in Phase 03 and guided active mining in Phase 05.
+Dù phân loại thời tiết khí quyển vẫn là một hạn chế kỹ thuật được xác định rõ ($F_1 = 24,57\%$), manifest hồ sơ 5D đã cung cấp nền tảng vật lý vững chắc cho việc phân chia tập dữ liệu cô lập video ở Phase 03 và định hướng khai thác chủ động ở Phase 05.
 
 ---
 
-## 12. References to Project Files
+## 12. Liên kết các file trong dự án
 
-- **Primary Notebook**: [`notebooks/02_automated_data_profiling_benchmark.ipynb`](file:///Users/huynh/orca/workspaces/BuildPhase/tang/notebooks/02_automated_data_profiling_benchmark.ipynb)
+- **Notebook chính**: [`notebooks/02_automated_data_profiling_benchmark.ipynb`](file:///Users/huynh/orca/workspaces/BuildPhase/tang/notebooks/02_automated_data_profiling_benchmark.ipynb)
 - **Master Profiling Manifest**: [`data/processed/reports/data_profiling_manifest.json`](file:///Users/huynh/orca/workspaces/BuildPhase/tang/paper_v4_10k/data/processed/reports/data_profiling_manifest.json)
 - **Human Blur Audit Manifest**: [`results/phase_02/tables/human_blur_ground_truth_manifest.json`](file:///Users/huynh/orca/bdd10k-hitl-simulator-web/results/phase_02/tables/human_blur_ground_truth_manifest.json)
-- **Preceding Phase Report (Fast Dedup)**: [`docs/experiments/01_fast_dedup.md`](01_fast_dedup.md)
-- **Subsequent Phase Report (Frozen Splits)**: [`docs/experiments/03_frozen_splits.md`](03_frozen_splits.md)
-- **Active Mining Report**: [`docs/experiments/05_active_mining.md`](05_active_mining.md)
-- **Synthesis Benchmark Report**: [`docs/03_experiment_results.md`](../03_experiment_results.md)
+- **Báo cáo phase trước (Fast Dedup)**: [`docs/experiments/01_fast_dedup.md`](file:///Users/huynh/orca/bdd10k-hitl-simulator-web/docs/experiments/01_fast_dedup.md)
+- **Báo cáo phase sau (Frozen Splits)**: [`docs/experiments/03_frozen_splits.md`](file:///Users/huynh/orca/bdd10k-hitl-simulator-web/docs/experiments/03_frozen_splits.md)
+- **Báo cáo Active Mining**: [`docs/experiments/05_active_mining.md`](file:///Users/huynh/orca/bdd10k-hitl-simulator-web/docs/experiments/05_active_mining.md)
+- **Báo cáo tổng hợp kết quả**: [`docs/03_experiment_results.md`](file:///Users/huynh/orca/bdd10k-hitl-simulator-web/docs/03_experiment_results.md)

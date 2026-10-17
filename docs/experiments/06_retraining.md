@@ -1,46 +1,46 @@
-# Technical Experiment Report: Progressive Model Retraining & Gold Benchmark Tournament (Phase 06)
+# Báo cáo thực nghiệm kỹ thuật: Tái huấn luyện mô hình lũy tiến & Giải đấu Gold Benchmark (Phase 06)
 
-> **Document ID**: `docs/experiments/06_retraining.md`  
-> **Project**: BDD10K Active Learning Lab (Autonomous Driving Human-in-the-Loop Vision Engine)  
-> **Primary Experiment Notebook**: `notebooks/06_model_v1_retraining_and_gold_benchmark.ipynb`  
-> **Primary Source Code**: `src/train_v1_engine.py`  
-> **Upstream Repository Source**: `/Users/huynh/orca/workspaces/BuildPhase/tang`  
-> **Author / Research Group**: T018  
-> **Status**: Production Verified / Evidence-Based  
+> **Mã tài liệu**: `docs/experiments/06_retraining.md`  
+> **Dự án**: BDD10K Active Learning Lab (Hệ thống thị giác máy tính Human-in-the-Loop cho xe tự hành)  
+> **Notebook thực nghiệm chính**: `notebooks/06_model_v1_retraining_and_gold_benchmark.ipynb`  
+> **Mã nguồn chính**: `src/train_v1_engine.py`  
+> **Nguồn repository thượng nguồn**: `/Users/huynh/orca/workspaces/BuildPhase/tang`  
+> **Tác giả / Nhóm nghiên cứu**: T018  
+> **Trạng thái**: Đã kiểm chứng production / Dựa trên bằng chứng thực nghiệm  
 
 ---
 
-## 1. Experiment Overview
+## 1. Tổng quan thực nghiệm
 
-### 1.1 Purpose and Rationale
-In an iterative data-centric active learning system, acquiring high-value labeled samples through human-in-the-loop (HITL) auditing is only the first half of the flywheel. The second and equally critical half is **Model Retraining**: integrating newly verified annotations into the model's parameter weights without degrading previously learned representations or overfitting to newly introduced edge cases.
+### 1.1 Mục đích và cơ sở nghiên cứu
+Trong một hệ thống Active Learning lấy dữ liệu làm trung tâm mang tính lặp đi lặp lại, việc thu nạp các mẫu gán nhãn có giá trị cao thông qua kiểm toán Human-in-the-Loop (HITL) mới chỉ là một nửa của bánh đà. Nửa thứ hai và có tầm quan trọng tương đương là **Tái huấn luyện mô hình (Model Retraining)**: tích hợp các nhãn mới được xác minh vào trọng số tham số của mô hình mà không làm suy giảm các biểu diễn đã học trước đó hoặc gây quá khớp (overfitting) vào các trường hợp biên mới đưa vào.
 
-Phase 06 evaluates the practical transition from baseline model $\mathcal{M}_0$ (trained on the 500-image seed set $\mathcal{D}_{\text{seed}}^{(0)}$) to iteration model $\mathcal{M}_1$ (trained on the expanded 750-image set $\mathcal{D}_{\text{train}}^{(1)}$). Rather than assuming that adding more data automatically yields higher validation scores, this experiment conducts an empirical **Three-Way Head-to-Head Tournament** on the immutable Frozen Gold Test suite ($N = 1,400$ frames, 28,094 instances) comparing:
-1. **Anchor Model ($\mathcal{M}_0$)**: Baseline YOLO11n trained on the initial 500 seed frames.
-2. **Random Baseline ($\mathcal{M}_{1,\text{rnd}}$)**: YOLO11n retrained on 500 seed frames plus 250 randomly sampled frames ($N = 750$).
-3. **Proposed Active Model ($\mathcal{M}_{1,\text{active}}$)**: YOLO11n retrained on 500 seed frames plus 250 multi-objective Super-Fusion mined frames ($N = 750$) audited by the HITL oracle in Phase 05.
+Phase 06 đánh giá bước chuyển đổi thực tế từ mô hình cơ sở $\mathcal{M}_0$ (được huấn luyện trên tập hạt giống 500 ảnh $\mathcal{D}_{\text{seed}}^{(0)}$) sang mô hình vòng lặp $\mathcal{M}_1$ (được huấn luyện trên tập mở rộng 750 ảnh $\mathcal{D}_{\text{train}}^{(1)}$). Thay vì mặc định cho rằng thêm dữ liệu sẽ tự động đem lại điểm số validation cao hơn, thực nghiệm này tiến hành một **Giải đấu đối đầu tay ba (Three-Way Head-to-Head Tournament)** trên bộ kiểm thử Fixed Gold Test bất biến ($N = 1.400$ khung hình, 28.094 đối tượng) so sánh giữa:
+1. **Mô hình mốc neo ($\mathcal{M}_0$)**: YOLO11n cơ sở được huấn luyện trên 500 khung hình hạt giống ban đầu.
+2. **Mô hình đối chứng ngẫu nhiên ($\mathcal{M}_{1,\text{rnd}}$)**: YOLO11n được tái huấn luyện trên 500 khung hình hạt giống cộng với 250 khung hình lấy mẫu ngẫu nhiên đồng nhất ($N = 750$).
+3. **Mô hình chủ động đề xuất ($\mathcal{M}_{1,\text{active}}$)**: YOLO11n được tái huấn luyện trên 500 khung hình hạt giống cộng với 250 khung hình được khai thác bằng thuật toán Super-Fusion đa mục tiêu ($N = 750$) đã được kiểm toán bởi HITL oracle ở Phase 05.
 
 ```mermaid
 flowchart TD
-    subgraph Data Input
-        S["Seed Dataset V0 (500 Frames)"]
-        A["Active Mining C6 Batch (+250 Frames)"]
-        R["Random Baseline Batch (+250 Frames)"]
+    subgraph Dữ liệu đầu vào
+        S["Tập hạt giống V0 (500 Khung hình)"]
+        A["Lô khai thác chủ động C6 (+250 Khung hình)"]
+        R["Lô đối chứng ngẫu nhiên (+250 Khung hình)"]
     end
 
-    subgraph Training Datasets
-        S & A --> D_act["train_v1 (750 Frames)"]
-        S & R --> D_rnd["train_random_v1 (750 Frames)"]
+    subgraph Các tập dữ liệu huấn luyện
+        S & A --> D_act["train_v1 (750 Khung hình)"]
+        S & R --> D_rnd["train_random_v1 (750 Khung hình)"]
     end
 
-    subgraph Retraining Engine with 4 Anti-Overfit Shields
-        Init["Prior Checkpoint:<br>yolo11n_v0_best.pt"]
-        Init -->|Warm Fine-Tuning| E1["YOLO11n V1 Proposed"]
-        Init -->|Warm Fine-Tuning| E2["YOLO11n V1 Random"]
+    subgraph Engine tái huấn luyện với 4 lá chắn chống quá khớp
+        Init["Checkpoint trước:<br>yolo11n_v0_best.pt"]
+        Init -->|Tinh chỉnh ấm| E1["YOLO11n V1 Đề xuất"]
+        Init -->|Tinh chỉnh ấm| E2["YOLO11n V1 Ngẫu nhiên"]
     end
 
-    subgraph Frozen Evaluation
-        GoldTest["Frozen Gold Test Set<br>(1,400 Frames / 28,094 Objects)"]
+    subgraph Đánh giá trên tập đóng băng
+        GoldTest["Fixed Gold Test Set<br>(1.400 Khung hình / 28.094 Đối tượng)"]
         E1 --> GoldTest
         E2 --> GoldTest
         Init --> GoldTest
@@ -52,82 +52,82 @@ flowchart TD
 
 ---
 
-## 2. Retraining Workflow
+## 2. Quy trình tái huấn luyện
 
-The retraining engine is implemented in `src/train_v1_engine.py` via the `ModelV1TrainingEngine` class. The executed operational workflow comprises 8 discrete stages:
+Engine tái huấn luyện được triển khai trong `src/train_v1_engine.py` thông qua lớp `ModelV1TrainingEngine`. Quy trình vận hành đã thực thi gồm 8 giai đoạn riêng biệt:
 
-1. **Identifying Existing Labeled Corpus**: Inspecting `data/splits/autonomous_loop/seed_v0/` ($N = 500$ frames) and verifying label integrity across the 10 BDD10K categories.
-2. **Incorporating Newly Labeled Samples**: Ingesting the $K = 250$ newly annotated frames audited in Phase 05 from `results/phase_05/tables/hitl_human_annotated_pool_v1.json` (or 250 uniform random samples for the control run).
-3. **Constructing the Next Training Split**: Generating symbolic links under `data/splits/autonomous_loop/train_v1/` ($N = 750$ images and 750 label files) and formalizing the configuration file `bdd10k_splits_v1.yaml`.
-4. **Loading Prior Model Weights**: Initializing the training instance directly from the previous cycle's best checkpoint:
+1. **Xác định kho dữ liệu có nhãn hiện có**: Kiểm tra `data/splits/autonomous_loop/seed_v0/` ($N = 500$ khung hình) và xác minh tính toàn vẹn của nhãn trên 10 hạng mục BDD10K.
+2. **Tích hợp các mẫu mới được gán nhãn**: Tiếp nhận $K = 250$ khung hình mới được gán nhãn đã qua kiểm toán ở Phase 05 từ `results/phase_05/tables/hitl_human_annotated_pool_v1.json` (hoặc 250 mẫu ngẫu nhiên đồng nhất cho lần chạy đối chứng).
+3. **Xây dựng tập phân chia huấn luyện tiếp theo**: Tạo các liên kết tượng trưng (symbolic links) tại `data/splits/autonomous_loop/train_v1/` ($N = 750$ ảnh và 750 file nhãn) và chuẩn hóa file cấu hình `bdd10k_splits_v1.yaml`.
+4. **Nạp trọng số mô hình trước đó**: Khởi tạo phiên bản huấn luyện trực tiếp từ checkpoint tốt nhất của chu kỳ trước:
    $$\mathbf{\theta}_{\text{init}}^{(1)} \leftarrow \mathbf{\theta}_{\text{best}}^{(0)} \quad (\text{Checkpoint: } \texttt{paper\_v4\_10k/models/yolo11n\_v0\_best.pt})$$
-5. **Executing Warm Fine-Tuning with 4 Anti-Overfit Shields**: Running bounded fine-tuning under strict regularization to prevent catastrophic forgetting and feature distortion.
-6. **Materializing and Checkpoint Verification**: Saving intermediate run weights under `results/phase_06/runs/` and copying the top-performing model to `models/yolo11n_v1_best.pt`.
-7. **Independent Gold Test Evaluation**: Evaluating all three competing checkpoints on the permanent `fixed_test` split ($N = 1,400$).
-8. **Tournament Scoring and Lineage Registration**: Computing macro and per-class performance differentials ($\Delta_{\text{active vs. random}}$ and $\Delta_{\text{active vs. V0}}$) and sealing SHA-256 signatures in `models_lineage.json`.
+5. **Thực thi tinh chỉnh khởi động ấm với 4 lá chắn chống quá khớp**: Chạy quy trình tinh chỉnh bị ràng buộc dưới sự điều chuẩn nghiêm ngặt nhằm ngăn chặn hiện tượng quên thảm họa (catastrophic forgetting) và méo mó đặc trưng.
+6. **Hiện thực hóa và xác minh checkpoint**: Lưu các trọng số trung gian tại `results/phase_06/runs/` và sao chép mô hình đạt hiệu năng cao nhất vào `models/yolo11n_v1_best.pt`.
+7. **Đánh giá độc lập trên tập Gold Test**: Đánh giá toàn bộ 3 checkpoint cạnh tranh trên tập kiểm thử vĩnh viễn `fixed_test` ($N = 1.400$).
+8. **Chấm điểm giải đấu và Đăng ký phả hệ**: Tính toán độ chênh lệch hiệu năng vĩ mô và theo từng lớp ($\Delta_{\text{active vs. random}}$ và $\Delta_{\text{active vs. V0}}$) đồng thời niêm phong chữ ký SHA-256 vào `models_lineage.json`.
 
 ---
 
-## 3. Dataset Versions and Training Data
+## 3. Các phiên bản tập dữ liệu và Dữ liệu huấn luyện
 
-### 3.1 Split Growth and Sample Accounting
-The training data scales strictly according to the active learning budget allocations:
+### 3.1 Sự tăng trưởng tập dữ liệu và Thống kê mẫu
+Dữ liệu huấn luyện mở rộng quy mô tuân thủ nghiêm ngặt theo các phân bổ ngân sách Active Learning:
 
-| Dataset Identifier | Split Role | Frame Count | Cumulative Budget | Data Composition | Manifest Reference |
+| Mã định danh dữ liệu | Vai trò tập phân chia | Số khung hình | Ngân sách tích lũy | Thành phần dữ liệu | Tham chiếu Manifest |
 | :--- | :--- | :---: | :---: | :--- | :--- |
-| `seed_v0` | Initial Base | 500 | 500 (10.2% of Bank) | 4-Slice Stratified Seed | `dataset_splits_manifest.json` |
-| `train_random_v1` | Control Baseline | 750 | 750 (15.3% of Bank) | 500 Seed + 250 Random Uniform | `bdd10k_splits_random_v1.yaml` |
-| `train_v1` | Proposed Active | 750 | 750 (15.3% of Bank) | 500 Seed + 250 C4/C6 Super-Fusion | `bdd10k_splits_v1.yaml` |
-| `fixed_val` | Shared Validation | 700 | 700 (10.0% of Pool) | Fixed Hyperparameter Tuning | `dataset_splits_manifest.json` |
-| `fixed_test` | Frozen Gold Test | 1,400 | 1,400 (20.0% of Pool) | Fixed Benchmark (28,094 Objects) | `dataset_splits_manifest.json` |
+| `seed_v0` | Mốc cơ sở ban đầu | 500 | 500 (10,2% Ngân hàng) | Hạt giống phân tầng 4 lát cắt | `dataset_splits_manifest.json` |
+| `train_random_v1` | Đối chứng cơ sở | 750 | 750 (15,3% Ngân hàng) | 500 Hạt giống + 250 Ngẫu nhiên | `bdd10k_splits_random_v1.yaml` |
+| `train_v1` | Chủ động đề xuất | 750 | 750 (15,3% Ngân hàng) | 500 Hạt giống + 250 Super-Fusion | `bdd10k_splits_v1.yaml` |
+| `fixed_val` | Kiểm định dùng chung | 700 | 700 (10,0% Kho tổng) | Tinh chỉnh siêu tham số cố định | `dataset_splits_manifest.json` |
+| `fixed_test` | Fixed Gold Test | 1.400 | 1.400 (20,0% Kho tổng) | Mốc chuẩn cố định (28.094 Đối tượng) | `dataset_splits_manifest.json` |
 
-### 3.2 Environmental and Class Composition in the Active Batch
-In Phase 05, the C4/C6 Super-Fusion active mining algorithm extracted 250 frames that specifically addressed the vulnerabilities identified in Phase 04. In contrast to the uniform random batch (which was dominated by ordinary daytime cars), the 250 active frames contained:
-- **655 Rare Class Instances** (compared to only 190 in the random control batch, a $3.45\times$ enrichment factor).
-- **Substantial Vulnerable Road User (VRU) Presence**: 23 `rider`, 41 `motor`, 68 `bike`, and 104 `truck` instances.
-- **Extreme Scenario Alignment**: 98 night frames ($39.2\%$) and 84 high-occlusion scenes ($33.6\%$).
+### 3.2 Thành phần môi trường và lớp trong lô mẫu chủ động
+Trong Phase 05, thuật toán khai thác chủ động C4/C6 Super-Fusion đã trích xuất 250 khung hình giải quyết cụ thể các điểm yếu được nhận diện ở Phase 04. Ngược lại với lô ngẫu nhiên đồng nhất (vốn bị chi phối bởi các xe hơi ban ngày thông thường), 250 khung hình chủ động chứa:
+- **655 Đối tượng thuộc lớp hiếm** (so với chỉ 190 ở lô ngẫu nhiên đối chứng, đạt hệ số làm giàu gấp $3,45\times$).
+- **Sự hiện diện vượt trội của người tham gia giao thông yếu thế (VRU)**: 23 `rider`, 41 `motor`, 68 `bike`, và 104 `truck`.
+- **Độ ăn khớp với các kịch bản khắc nghiệt**: 98 khung hình ban đêm ($39,2\%$) và 84 khung cảnh che khuất cao ($33,6\%$).
 
 ---
 
-## 4. Model Initialization and Training Configuration
+## 4. Khởi tạo mô hình và Cấu hình huấn luyện
 
-### 4.1 Fine-Tuning vs. Retraining from Scratch
-The repository implementation explicitly adopts **Warm Fine-Tuning** from the preceding checkpoint ($\mathcal{M}_0$) rather than retraining from scratch or re-initializing from MS COCO pretrained weights (`yolo11n.pt`).
+### 4.1 Tinh chỉnh khởi động ấm (Warm Fine-Tuning) so với Huấn luyện lại từ đầu
+Mã nguồn của repository lựa chọn một cách tường minh phương pháp **Tinh chỉnh khởi động ấm (Warm Fine-Tuning)** từ checkpoint trước đó ($\mathcal{M}_0$) thay vì huấn luyện lại từ đầu (from scratch) hoặc khởi tạo lại từ trọng số tiền huấn luyện MS COCO (`yolo11n.pt`).
 
-**Scientific Rationale**:
-- Training from scratch on small datasets ($N = 750$) discards the fine-grained visual representations learned during the 41 epochs of Phase 04 convergence.
-- Fine-tuning preserves the spatial feature hierarchy while allowing gradient updates to adjust decision boundaries for underrepresented classes.
+**Cơ sở khoa học**:
+- Huấn luyện lại từ đầu trên các tập dữ liệu nhỏ ($N = 750$) sẽ làm mất đi các biểu diễn thị giác chi tiết đã học được qua 41 epoch hội tụ ở Phase 04.
+- Tinh chỉnh ấm bảo tồn được hệ phân cấp đặc trưng không gian trong khi cho phép các cập nhật gradient điều chỉnh lại ranh giới quyết định cho các lớp thiếu hụt mẫu.
 
-### 4.2 Training Hyperparameters
-The training procedure adheres to the winning `cfg_3_adamw_cosine` formula established in Phase 04, augmented by 4 anti-overfit mechanisms:
+### 4.2 Các siêu tham số huấn luyện
+Quy trình huấn luyện tuân thủ công thức quán quân `cfg_3_adamw_cosine` được xác lập ở Phase 04, được tăng cường bởi 4 cơ chế chống quá khớp:
 
-| Hyperparameter | Configured Value | Implementation Role |
+| Siêu tham số | Giá trị cấu hình | Vai trò triển khai |
 | :--- | :---: | :--- |
-| **Model Architecture** | Ultralytics YOLO11n | Lightweight CNN (~2.59M parameters) |
-| **Initial Weights** | `yolo11n_v0_best.pt` | Warm initialization from Phase 04 checkpoint |
-| **Input Resolution** | $640 \times 640$ pixels | Multi-scale anchor-free detection |
-| **Batch Size** | 16 | Mini-batch stochastic optimization |
-| **Epochs** | 8 – 10 epochs | Bounded iteration to avoid over-adapting to the new batch |
-| **Early Stopping** | Patience = 8 epochs | Monitored on validation loss |
-| **Optimizer** | AdamW | Decoupled weight decay ($0.01$) |
-| **Base Learning Rate ($\text{lr}_0$)** | $0.002$ | Conservative fine-tuning rate |
-| **Final Learning Rate ($\text{lrf}$)** | $0.01$ ($\eta_{\min} = 2 \times 10^{-5}$) | Cosine Annealing decay |
-| **Augmentation** | Mosaic ($1.0$) + Affine | Synthesizes 4-image combinations to expand spatial context |
-| **Hardware** | Apple Silicon MPS | PyTorch Metal Performance Shaders (`device = "mps"`) |
-| **Reproducibility Seed** | `seed = 42` | Deterministic initialization across all runs |
+| **Kiến trúc mô hình** | Ultralytics YOLO11n | CNN nhẹ (~2,59M tham số) |
+| **Trọng số khởi tạo** | `yolo11n_v0_best.pt` | Khởi động ấm từ checkpoint Phase 04 |
+| **Độ phân giải đầu vào** | $640 \times 640$ điểm ảnh | Phát hiện anchor-free đa tỉ lệ |
+| **Kích thước Batch** | 16 | Tối ưu hóa ngẫu nhiên theo mini-batch |
+| **Số epoch** | 8 – 10 epoch | Số vòng lặp bị giới hạn để tránh thích nghi quá mức với lô mới |
+| **Dừng sớm** | Kiên nhẫn (patience) = 8 epoch | Theo dõi trên hàm mất mát validation |
+| **Bộ tối ưu** | AdamW | Suy giảm trọng số tách rời ($0,01$) |
+| **Tốc độ học cơ sở ($\text{lr}_0$)** | $0,002$ | Tốc độ tinh chỉnh thận trọng |
+| **Tốc độ học cuối ($\text{lrf}$)** | $0,01$ ($\eta_{\min} = 2 \times 10^{-5}$) | Suy giảm theo Cosine Annealing |
+| **Tăng cường dữ liệu** | Mosaic ($1,0$) + Affine | Tổng hợp tổ hợp 4 ảnh mở rộng ngữ cảnh không gian |
+| **Phần cứng** | Apple Silicon MPS | PyTorch Metal Performance Shaders (`device = "mps"`) |
+| **Hạt giống tái lập** | `seed = 42` | Khởi tạo tất định xuyên suốt các lần chạy |
 
-### 4.3 The 4 Anti-Overfit Shields
-To prevent the model from memorizing the relatively small 250-sample increment, `src/train_v1_engine.py` enforces four defensive constraints:
-1. **Mosaic Augmentation (Factor 1.0)**: Forces the model to detect objects at varying scales and positions within concatenated 4-quadrant images.
-2. **Cosine Annealing with Warmup**: Eliminates sudden gradient spikes that could destabilize existing weights during the initial epochs.
-3. **Decoupled Weight Decay ($\lambda = 0.01$)**: Penalizes excessive weight expansion on frequently appearing categories (`car`).
-4. **Strict Isolation of Frozen Gold Test**: The test set is completely invisible during training, validation, and checkpoint selection.
+### 4.3 Bốn lá chắn chống quá khớp (Anti-Overfit Shields)
+Để ngăn mô hình học vẹt lô dữ liệu bổ sung 250 mẫu tương đối nhỏ, `src/train_v1_engine.py` áp đặt 4 ràng buộc phòng vệ:
+1. **Tăng cường dữ liệu Mosaic (Hệ số 1,0)**: Buộc mô hình phải phát hiện các đối tượng ở nhiều kích thước và vị trí khác nhau trong ảnh ghép 4 góc.
+2. **Cosine Annealing kết hợp khởi động (Warmup)**: Loại bỏ các xung đột gradient đột ngột có thể làm mất ổn định các trọng số đã có trong các epoch ban đầu.
+3. **Suy giảm trọng số tách rời ($\lambda = 0,01$)**: Trừng phạt sự gia tăng quá mức của trọng số trên các hạng mục xuất hiện thường xuyên (`car`).
+4. **Cô lập nghiêm ngặt tập Fixed Gold Test**: Tập kiểm thử hoàn toàn ẩn giấu trong suốt quá trình huấn luyện, kiểm định và chọn checkpoint.
 
 ---
 
-## 5. Model Versioning and Lineage Tracking
+## 5. Quản lý phiên bản mô hình và Truy vết phả hệ
 
-Model artifacts and dataset connections are systematically tracked through `models/models_lineage.json` and verified with SHA-256 cryptographic hashes:
+Các artifact mô hình và liên kết tập dữ liệu được theo dõi có hệ thống qua file `models/models_lineage.json` và được xác minh bằng mã băm mật mã SHA-256:
 
 ```mermaid
 classDiagram
@@ -144,123 +144,123 @@ classDiagram
     }
 ```
 
-### Verified Checkpoint Lineage Records:
+### Các bản ghi phả hệ checkpoint đã xác minh:
 
-| Model Version | File Name | Checkpoint Path | SHA-256 Checksum Signature |
+| Phiên bản mô hình | Tên file | Đường dẫn Checkpoint | Chữ ký mã băm SHA-256 |
 | :--- | :--- | :--- | :--- |
-| **YOLO11n V0 (Anchor)** | `yolo11n_v0_best.pt` | `paper_v4_10k/models/yolo11n_v0_best.pt` | `fe8f63276ad5cacffeecec12c04c59fdb7485e7d9fe94206efdf85db7be03959` |
-| **YOLO11n V1 Random** | `best.pt` | `results/phase_06/runs/yolo11n_v1_random/weights/best.pt` | `c338b0bbc94d2929365d06a3efb59c663e00a42d351c1433057c6715841b86ba` |
-| **YOLO11n V1 Proposed** | `yolo11n_v1_best.pt`| `paper_v4_10k/models/yolo11n_v1_best.pt` | `218418b822a11904dbfd89c988a3b87cca5fc0390ca9e57bbcf2ae3465969425` |
+| **YOLO11n V0 (Mốc neo)** | `yolo11n_v0_best.pt` | `paper_v4_10k/models/yolo11n_v0_best.pt` | `fe8f63276ad5cacffeecec12c04c59fdb7485e7d9fe94206efdf85db7be03959` |
+| **YOLO11n V1 Ngẫu nhiên** | `best.pt` | `results/phase_06/runs/yolo11n_v1_random/weights/best.pt` | `c338b0bbc94d2929365d06a3efb59c663e00a42d351c1433057c6715841b86ba` |
+| **YOLO11n V1 Đề xuất** | `yolo11n_v1_best.pt`| `paper_v4_10k/models/yolo11n_v1_best.pt` | `218418b822a11904dbfd89c988a3b87cca5fc0390ca9e57bbcf2ae3465969425` |
 
-All three checkpoints have verified, distinct SHA-256 signatures, proving that the models represent distinct states in weight space.
-
----
-
-## 6. Evaluation Protocol
-
-### 6.1 Evaluation Benchmark (`fixed_test`)
-To eliminate evaluation bias, all models are tested exclusively against the permanent **Frozen Gold Test Set**:
-- **Dataset**: `data/splits/autonomous_loop/fixed_test/`
-- **Scale**: 1,400 driving scenes ($100\%$ untouched during all training phases).
-- **Ground-Truth Support**: 28,094 bounding box instances.
-- **Hardware & Software**: Identical Ultralytics evaluation harness (`conf=0.001`, `iou=0.60`, `imgsz=640`).
-
-### 6.2 Evaluated Metrics
-1. **$mAP_{50}$**: Macro-averaged detection accuracy at IoU threshold $0.50$.
-2. **$mAP_{90}$**: High-precision localization accuracy at strict IoU threshold $0.90$.
-3. **$mAP_{50-95}$**: Standard COCO composite metric across 10 IoU steps.
-4. **Precision ($P$) & Recall ($R$)**: Macro-averaged across 10 classes at operational confidence threshold $\tau = 0.25$.
-5. **Macro $F_1$-Score**: Harmonic mean of Precision and Recall.
+Cả 3 checkpoint đều sở hữu chữ ký SHA-256 riêng biệt đã được kiểm chứng, khẳng định các mô hình đại diện cho các trạng thái tham số hoàn toàn độc lập trong không gian trọng số.
 
 ---
 
-## 7. Experimental Results
+## 6. Giao thức đánh giá
 
-### 7.1 Macro-Average Benchmark on Frozen Gold Test (1,400 Images)
-The three models were evaluated head-to-head under identical conditions. The verified results recorded in `results/phase_06/tables/macro_comparison_table.md` are:
+### 6.1 Mốc đánh giá chuẩn (`fixed_test`)
+Để loại bỏ thiên lệch đánh giá, toàn bộ các mô hình được kiểm thử độc quyền trên **Fixed Gold Test Set** vĩnh viễn:
+- **Tập dữ liệu**: `data/splits/autonomous_loop/fixed_test/`
+- **Quy mô**: 1.400 khung cảnh lái xe ($100\%$ không bị can thiệp trong toàn bộ các phase huấn luyện).
+- **Hỗ trợ Ground-Truth**: 28.094 đối tượng hộp bao.
+- **Phần cứng & Phần mềm**: Cùng một harness đánh giá Ultralytics giống hệt nhau (`conf=0.001`, `iou=0.60`, `imgsz=640`).
 
-| Model Evaluation Target | Labeled Budget | Data Selection Strategy | $mAP_{50}$ (%) | $mAP_{90}$ (%) | $mAP_{50-95}$ (%) | Precision (%) | Recall (%) | Checkpoint Signature |
+### 6.2 Các chỉ số được đánh giá
+1. **$mAP_{50}$**: Độ chính xác phát hiện trung bình vĩ mô tại ngưỡng IoU $0,50$.
+2. **$mAP_{90}$**: Độ chính xác định vị khắt khe tại ngưỡng IoU cao $0,90$.
+3. **$mAP_{50-95}$**: Chỉ số tổng hợp tiêu chuẩn COCO qua 10 bước IoU.
+4. **Precision ($P$) & Recall ($R$)**: Trung bình vĩ mô trên 10 lớp tại ngưỡng tin cậy vận hành $\tau = 0,25$.
+5. **Macro $F_1$-Score**: Trung bình điều hòa giữa Precision và Recall.
+
+---
+
+## 7. Kết quả thực nghiệm
+
+### 7.1 Benchmark trung bình vĩ mô trên Fixed Gold Test (1.400 Ảnh)
+3 mô hình được đánh giá đối đầu trong cùng điều kiện thực nghiệm. Các kết quả đã xác minh được ghi nhận trong `results/phase_06/tables/macro_comparison_table.md` gồm:
+
+| Đối tượng mô hình đánh giá | Ngân sách nhãn | Chiến lược chọn dữ liệu | $mAP_{50}$ (%) | $mAP_{90}$ (%) | $mAP_{50-95}$ (%) | Precision (%) | Recall (%) | Chữ ký Checkpoint |
 | :--- | :---: | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
-| **YOLO11n V0 (Anchor)** | 500 frames | Hybrid Mix 80/20 Seed | **19.37%** | **2.05%** | **9.71%** | 29.14% | 21.50% | `fe8f63276ad5cacf...` |
-| **YOLO11n V1 Random** | 750 frames | +250 Random Uniform | **19.65%** | 1.68% | 9.65% | 32.48% | 22.96% | `c338b0bbc94d2929...` |
-| **YOLO11n V1 Proposed** | 750 frames | **+250 Active Super-Fusion**| **19.71%** | 1.62% | 9.59% | **38.82%** | **23.54%** | `218418b822a11904...` |
-| **Performance Delta ($\Delta$ vs. Random)** | *Same 750 Budget*| *Active vs. Random* | **+0.06%** | **-0.06%** | **-0.06%** | **+6.34%** | **+0.58%** | **Decisive Precision Gain** |
-| **Performance Delta ($\Delta$ vs. V0)** | *+50% Budget* | *V0 $\to$ V1 Evolution* | **+0.34%** | **-0.43%** | **-0.12%** | **+9.68%** | **+2.04%** | **Consistent Overall Growth** |
+| **YOLO11n V0 (Mốc neo)** | 500 ảnh | Hybrid Mix 80/20 Seed | **19,37%** | **2,05%** | **9,71%** | 29,14% | 21,50% | `fe8f63276ad5cacf...` |
+| **YOLO11n V1 Ngẫu nhiên** | 750 ảnh | +250 Ngẫu nhiên đồng nhất | **19,65%** | 1,68% | 9,65% | 32,48% | 22,96% | `c338b0bbc94d2929...` |
+| **YOLO11n V1 Đề xuất** | 750 ảnh | **+250 Active Super-Fusion**| **19,71%** | 1,62% | 9,59% | **38,82%** | **23,54%** | `218418b822a11904...` |
+| **Độ lệch ($\Delta$ vs. Ngẫu nhiên)** | *Cùng 750 ảnh*| *Active vs. Random* | **+0,06%** | **-0,06%** | **-0,06%** | **+6,34%** | **+0,58%** | **Vượt trội dứt khoát Precision** |
+| **Độ lệch ($\Delta$ vs. V0)** | *Tăng +50% ảnh* | *Tiến trình V0 $\to$ V1* | **+0,34%** | **-0,43%** | **-0,12%** | **+9,68%** | **+2,04%** | **Tăng trưởng tổng thể ổn định** |
 
-### 7.2 Per-Class Breakdown across 10 Traffic Categories
-The class-by-class evaluation recorded in `results/phase_06/tables/per_class_model_v1_comparison.md` provides critical insight into where the active data made an impact:
+### 7.2 Bóc tách chi tiết theo từng lớp trên 10 hạng mục giao thông
+Đánh giá theo từng lớp được ghi nhận trong `results/phase_06/tables/per_class_model_v1_comparison.md` cung cấp cái nhìn chi tiết về vị trí dữ liệu chủ động phát huy tác dụng:
 
-| ID | Category Name | Support (Objects) | V0 $mAP_{50}$ | Rnd $mAP_{50}$ | **V1 $mAP_{50}$** | V1 $mAP_{90}$ | $\Delta$ vs. Rnd | $\Delta$ vs. V0 | V1 $F_1$-Score | Operational Status |
+| ID | Tên hạng mục | Hỗ trợ (Đối tượng) | V0 $mAP_{50}$ | Rnd $mAP_{50}$ | **V1 $mAP_{50}$** | V1 $mAP_{90}$ | $\Delta$ vs. Rnd | $\Delta$ vs. V0 | V1 $F_1$-Score | Trạng thái vận hành |
 | :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| 1 | `person` | 2,104 | 34.35% | 33.41% | **33.42%** | 0.12% | +0.01% | -0.93% | 39.35% | Stable Baseline |
-| 2 | `rider` | 85 | 2.78% | 4.42% | **6.37%** | 0.00% | **+1.95%** | **+3.59%** | 10.30% | 🔥 **Breakthrough Recovery** |
-| 3 | `car` | 15,608 | 57.42% | 57.08% | **56.65%** | 8.67% | -0.43% | -0.77% | 54.84% | Saturated Majority |
-| 4 | `truck` | 641 | 17.45% | 18.04% | **18.49%** | 1.35% | **+0.45%** | **+1.04%** | 28.05% | 🔥 **Breakthrough Recovery** |
-| 5 | `bus` | 219 | 17.83% | 16.17% | **15.51%** | 4.54% | -0.66% | -2.32% | 26.47% | Stable Baseline |
-| 6 | `train` | 1 | 0.00% | 0.00% | **0.00%** | 0.00% | +0.00% | +0.00% | 0.00% | Insufficient Test Samples |
-| 7 | `motor` | 79 | 2.33% | 3.37% | **3.36%** | 0.00% | -0.01% | **+1.03%** | 2.32% | Growth Observed |
-| 8 | `bike` | 153 | 6.32% | 8.06% | **7.28%** | 0.17% | -0.78% | **+0.96%** | 14.39% | Growth Observed |
-| 9 | `traffic light` | 4,090 | 25.59% | 26.18% | **26.47%** | 0.50% | **+0.29%** | **+0.88%** | 36.23% | Continuous Improvement |
-| 10 | `traffic sign` | 5,114 | 29.58% | 29.82% | **29.57%** | 0.87% | -0.25% | -0.01% | 36.71% | Stable Baseline |
-| **$\Sigma$** | **All Categories** | **28,094** | **19.37%** | **19.65%** | **19.71%** | **1.62%** | **+0.06%** | **+0.34%** | **$38.82\%$ (P) / $23.54\%$ (R)** | **Active Selection Superiority** |
+| 1 | `person` | 2.104 | 34,35% | 33,41% | **33,42%** | 0,12% | +0,01% | -0,93% | 39,35% | Cơ sở ổn định |
+| 2 | `rider` | 85 | 2,78% | 4,42% | **6,37%** | 0,00% | **+1,95%** | **+3,59%** | 10,30% | 🔥 **Phục hồi đột phá** |
+| 3 | `car` | 15.608 | 57,42% | 57,08% | **56,65%** | 8,67% | -0,43% | -0,77% | 54,84% | Bão hòa lớp đa số |
+| 4 | `truck` | 641 | 17,45% | 18,04% | **18,49%** | 1,35% | **+0,45%** | **+1,04%** | 28,05% | 🔥 **Phục hồi đột phá** |
+| 5 | `bus` | 219 | 17,83% | 16,17% | **15,51%** | 4,54% | -0,66% | -2,32% | 26,47% | Cơ sở ổn định |
+| 6 | `train` | 1 | 0,00% | 0,00% | **0,00%** | 0,00% | +0,00% | +0,00% | 0,00% | Không đủ mẫu kiểm thử |
+| 7 | `motor` | 79 | 2,33% | 3,37% | **3,36%** | 0,00% | -0,01% | **+1,03%** | 2,32% | Ghi nhận tăng trưởng |
+| 8 | `bike` | 153 | 6,32% | 8,06% | **7,28%** | 0,17% | -0,78% | **+0,96%** | 14,39% | Ghi nhận tăng trưởng |
+| 9 | `traffic light` | 4.090 | 25,59% | 26,18% | **26,47%** | 0,50% | **+0,29%** | **+0,88%** | 36,23% | Cải thiện liên tục |
+| 10 | `traffic sign` | 5.114 | 29,58% | 29,82% | **29,57%** | 0,87% | -0,25% | -0,01% | 36,71% | Cơ sở ổn định |
+| **$\Sigma$** | **Toàn bộ hạng mục** | **28.094** | **19,37%** | **19,65%** | **19,71%** | **1,62%** | **+0,06%** | **+0,34%** | **$38,82\%$ (P) / $23,54\%$ (R)** | **Ưu thế chọn mẫu Active** |
 
 ---
 
-## 8. Analysis and Interpretation
+## 8. Phân tích và Diễn giải
 
-### 8.1 Precision Surge: Mitigating False Alarms
-The single most prominent outcome of Phase 06 retraining is the **dramatic leap in detection precision**:
-- Baseline V0 Precision: **$29.14\%$**
-- Random V1 Precision: **$32.48\%$** ($+3.34\%$ over V0)
-- Proposed Active V1 Precision: **$38.82\%$** (**$+9.68\%$ over V0**, **$+6.34\%$ over Random V1**)
+### 8.1 Bước nhảy vọt về độ chính xác Precision: Giảm thiểu báo động giả
+Kết quả nổi bật nhất của quá trình tái huấn luyện Phase 06 là **bước nhảy vọt ấn tượng về độ chuẩn xác Precision**:
+- Baseline V0 Precision: **$29,14\%$**
+- Random V1 Precision: **$32,48\%$** ($+3,34\%$ so với V0)
+- Proposed Active V1 Precision: **$38,82\%$** (**$+9,68\%$ so với V0**, **$+6,34\%$ so với Random V1**)
 
-In real-world autonomous driving, low precision implies excessive false positive detections (e.g., phantom braking triggered by roadside shadows or ambiguous reflections). Randomly adding images modestly increases general coverage but introduces more easy, background-heavy frames. In contrast, Super-Fusion active mining specifically targeted high-entropy, boundary-uncertain candidate frames, forcing the model to distinguish true objects from complex background clutter.
+Trong bài toán xe tự hành thực tế, độ chính xác thấp đồng nghĩa với việc phát sinh quá nhiều dương tính giả (ví dụ: hiện tượng phanh gấp do bóng râm trên đường hoặc phản chiếu ánh sáng nhập nhằng). Việc thêm ảnh ngẫu nhiên chỉ làm tăng nhẹ độ bao phủ chung nhưng lại đưa thêm nhiều khung hình nền dễ. Ngược lại, thuật toán Super-Fusion nhắm trúng các khung hình ứng viên có entropy cao và ranh giới bất định, buộc mô hình phải phân biệt đối tượng thực sự khỏi các vùng nền phức tạp.
 
-### 8.2 Deficit Recovery on Vulnerable Road Users (`rider`)
-The empirical per-class numbers confirm that active mining successfully remedied the blind spots observed in Phase 04:
-- In baseline V0, the model had near-zero capability on `rider` ($mAP_{50} = 2.78\%$, $\text{Recall} = 3.53\%$).
-- Random sampling yielded only marginal improvement ($4.42\%$).
-- Proposed active retraining elevated `rider` $mAP_{50}$ to **$6.37\%$** (an increase of **$+129\%$ relative to V0** and $+44\%$ over Random).
-- Similarly, `truck` detection increased from $17.45\%$ to **$18.49\%$**.
+### 8.2 Phục hồi sự thiếu hụt ở nhóm người tham gia giao thông yếu thế (`rider`)
+Các con số thực nghiệm theo từng lớp khẳng định việc khai thác chủ động đã khắc phục thành công điểm mù quan sát được ở Phase 04:
+- Ở baseline V0, mô hình gần như bất lực trước lớp `rider` ($mAP_{50} = 2,78\%$, $\text{Recall} = 3,53\%$).
+- Lấy mẫu ngẫu nhiên chỉ mang lại cải thiện nhỏ ($4,42\%$).
+- Tái huấn luyện chủ động đề xuất đã nâng $mAP_{50}$ của `rider` lên **$6,37\%$** (tăng **$+129\%$ so với V0** và $+44\%$ so với ngẫu nhiên).
+- Tương tự, độ chính xác phát hiện `truck` tăng từ $17,45\%$ lên **$18,49\%$**.
 
-### 8.3 Why Did Macro $mAP_{50}$ Increase by Only $+0.06\%$ over Random?
-A critical scientific inquiry is why the macro-average $mAP_{50}$ gain between Active V1 and Random V1 appears modest ($19.71\%$ vs. $19.65\%$, $+0.06\%$):
-1. **Majority Class Dilution**: In the 28,094 ground-truth annotations of the test set, common classes (`car`, `person`, `traffic sign`, `traffic light`) constitute over **$96.0\%$** of all objects. Any dramatic percentage gain on rare classes (`rider`, `motor`) is mathematically compressed when computing an unweighted arithmetic macro-average.
-2. **Trade-off on Dense Categories**: As the model allocated representational capacity to resolve small, occluded, and rare road users, minor fluctuations occurred in dense car clusters ($57.08\% \to 56.65\%$).
-3. **Small Annotation Increment ($K = 250$)**: Adding 250 images represents a $+50\%$ increase over the seed set, but only $5.1\%$ of the total available training bank (4,894 images). Meaningful multi-point macro $mAP$ divergence requires compounding over multiple active learning cycles ($V_1 \to V_5$).
-
----
-
-## 9. Failure Modes and Limitations
-
-1. **Extreme Class Under-Representation in Test Ground Truth**:
-   - The official BDD10K test split contains only **1 instance of `train`** across 1,400 frames. Consequently, evaluating train detection is statistically meaningless ($0.0\%$ mAP across all models).
-2. **Single-Cycle Scope**:
-   - Phase 06 evaluates only the first iteration ($V_0 \to V_1$). While multi-round loop infrastructure is verified in Phase 07 (`DRY_RUN = True`), completed GPU physical checkpoints for $V_2, V_3, V_4, V_5$ are subject to ongoing compute availability.
-3. **Fine-Tuning Epoch Sensitivity**:
-   - With $N = 750$ images, training beyond 12 epochs causes validation loss divergence on tail classes. Strict adherence to early stopping (patience = 8) is required to avoid over-fitting to the 250 active additions.
-4. **Hardware Specifics**:
-   - Checkpoints were fine-tuned using PyTorch Metal Performance Shaders (`mps`). Minor floating-point non-determinism ($\le 0.2\%$ mAP) may arise when converting weights to CUDA or TensorRT runtimes.
+### 8.3 Vì sao $mAP_{50}$ vĩ mô chỉ tăng $+0,06\%$ so với ngẫu nhiên?
+Một câu hỏi khoa học quan trọng là vì sao mức tăng $mAP_{50}$ trung bình vĩ mô giữa Active V1 và Random V1 có vẻ khiêm tốn ($19,71\%$ so với $19,65\%$, $+0,06\%$):
+1. **Sự pha loãng của lớp đa số**: Trong 28.094 nhãn ground-truth của tập test, các lớp phổ biến (`car`, `person`, `traffic sign`, `traffic light`) chiếm hơn **$96,0\%$** tổng số đối tượng. Mọi mức tăng tỷ lệ phần trăm đột phá ở các lớp hiếm (`rider`, `motor`) đều bị nén toán học khi tính trung bình số học vĩ mô không trọng số.
+2. **Sự đánh đổi trên các hạng mục mật độ cao**: Khi mô hình phân bổ dung lượng biểu diễn để xử lý các đối tượng nhỏ, bị che khuất và hiếm gặp, các dao động nhỏ đã xảy ra trên các cụm ô tô dày đặc ($57,08\% \to 56,65\%$).
+3. **Mức tăng mẫu còn nhỏ ($K = 250$)**: Thêm 250 ảnh đại diện cho mức tăng $+50\%$ so với tập hạt giống, nhưng chỉ chiếm $5,1\%$ tổng ngân hàng huấn luyện sẵn có (4.894 ảnh). Sự phân kỳ $mAP$ vĩ mô nhiều điểm phần trăm đòi hỏi hiệu ứng tích lũy qua nhiều chu kỳ Active Learning ($V_1 \to V_5$).
 
 ---
 
-## 10. Reproducibility
+## 9. Các dạng lỗi và Hạn chế
 
-### 10.1 Inspection and Verification Commands
-To inspect the retraining metrics and verify the lineage records:
+1. **Thiếu hụt mẫu kiểm thử cực đoan đối với lớp `train`**:
+   - Tập kiểm thử BDD10K chính thức chỉ chứa đúng **1 đối tượng `train`** trên 1.400 khung hình. Do đó, việc đánh giá lớp tàu hỏa không mang ý nghĩa thống kê ($0,0\%$ mAP trên mọi mô hình).
+2. **Phạm vi đơn chu kỳ**:
+   - Phase 06 chỉ đánh giá vòng lặp đầu tiên ($V_0 \to V_1$). Mặc dù hạ tầng vòng lặp nhiều vòng đã được kiểm chứng ở Phase 07 (`DRY_RUN = True`), các checkpoint GPU hoàn chỉnh cho $V_2, V_3, V_4, V_5$ vẫn đang phụ thuộc vào tài nguyên tính toán sẵn có.
+3. **Độ nhạy cảm với số epoch tinh chỉnh**:
+   - Với quy mô $N = 750$ ảnh, việc huấn luyện vượt quá 12 epoch sẽ dẫn đến hiện tượng phân kỳ loss validation trên các lớp đuôi dài. Cần tuân thủ nghiêm ngặt cơ chế dừng sớm (patience = 8) để tránh quá khớp với 250 mẫu mới.
+4. **Đặc thù phần cứng**:
+   - Các checkpoint được tinh chỉnh bằng PyTorch Metal Performance Shaders (`mps`). Biến động tính toán số học dấu phẩy động nhỏ ($\le 0,2\%$ mAP) có thể xuất hiện khi chuyển trọng số sang môi trường CUDA hoặc TensorRT.
+
+---
+
+## 10. Khả năng tái lập (Reproducibility)
+
+### 10.1 Các câu lệnh kiểm tra và xác minh
+Để kiểm tra các chỉ số tái huấn luyện và xác minh bản ghi phả hệ:
 
 ```bash
-# 1. Navigate to workspace
+# 1. Điều hướng tới không gian làm việc
 cd /Users/huynh/orca/bdd10k-hitl-simulator-web
 
-# 2. Display macro benchmark table from recorded artifacts
+# 2. Hiển thị bảng benchmark vĩ mô từ các artifact đã lưu
 python3 -c "
 import json
 with open('/Users/huynh/orca/workspaces/BuildPhase/tang/results/phase_06/tables/macro_comparison_table.json') as f:
     print(json.dumps(json.load(f), indent=2))
 "
 
-# 3. Verify SHA-256 cryptographic signatures
+# 3. Xác minh chữ ký mật mã SHA-256
 python3 -c "
 import hashlib
 for path in [
@@ -276,8 +276,8 @@ for path in [
 "
 ```
 
-### 10.2 Headless Execution
-To re-run the Phase 06 evaluation notebook headlessly:
+### 10.2 Thực thi chế độ Headless
+Để chạy lại notebook đánh giá Phase 06 ở chế độ headless:
 
 ```bash
 python -m jupyter nbconvert --to notebook --execute \
@@ -287,23 +287,23 @@ python -m jupyter nbconvert --to notebook --execute \
 
 ---
 
-## 11. Conclusion
+## 11. Kết luận
 
-The Phase 06 retraining experiment yields four conclusive, evidence-backed findings:
-1. **Warm Fine-Tuning Feasibility**: Fine-tuning directly from the prior checkpoint ($\mathcal{M}_0$) using AdamW, Cosine Annealing, and Mosaic augmentation enables rapid, stable convergence on a 250-sample increment without catastrophic forgetting.
-2. **Definitive Precision Superiority**: Active learning delivered a **$+6.34\%$ Precision advantage** over random selection ($38.82\%$ vs. $32.48\%$), drastically reducing dangerous false positive detections.
-3. **Targeted Deficit Recovery**: Rare Vulnerable Road User performance surged ($mAP_{50}$ on `rider` jumped from $2.78\%$ to $6.37\%$, outperforming the random baseline's $4.42\%$).
-4. **Rigorous Audit Compliance**: All evaluations were executed on the fixed, untouched 1,400-frame Gold Test split with all checkpoints verified and registered under SHA-256 lineage tracking.
+Thực nghiệm tái huấn luyện Phase 06 mang lại 4 phát hiện mang tính kết luận dựa trên bằng chứng:
+1. **Tính khả thi của Tinh chỉnh khởi động ấm**: Tinh chỉnh trực tiếp từ checkpoint trước ($\mathcal{M}_0$) sử dụng AdamW, Cosine Annealing, và tăng cường Mosaic mang lại sự hội tụ nhanh, ổn định trên mức tăng 250 mẫu mà không bị quên thảm họa.
+2. **Ưu thế dứt khoát về độ chuẩn xác Precision**: Active Learning mang lại **ưu thế vượt trội $+6,34\%$ Precision** so với lựa chọn ngẫu nhiên ($38,82\%$ so với $32,48\%$), giảm đáng kể các cảnh báo dương tính giả nguy hiểm.
+3. **Phục hồi có mục tiêu các điểm thiếu hụt**: Hiệu năng trên nhóm đối tượng tham gia giao thông yếu thế tăng vọt ($mAP_{50}$ của `rider` tăng từ $2,78\%$ lên $6,37\%$, vượt xa mức $4,42\%$ của mốc ngẫu nhiên).
+4. **Tuân thủ kiểm toán nghiêm ngặt**: Mọi đánh giá được thực hiện trên tập Gold Test 1.400 ảnh cố định, nguyên bản với toàn bộ các checkpoint được xác minh và đăng ký theo dõi phả hệ SHA-256.
 
 ---
 
-## 12. Related Documentation
+## 12. Tài liệu liên quan
 
-- [Project Overview](../README.md): Mission, scope, and end-to-end active learning vision.
-- [Pipeline Architecture](../02_pipeline_architecture.md): Complete 8-stage data-centric architecture.
-- [Overall Experiment Results](../03_experiment_results.md): High-level multi-phase performance metrics.
-- [Reproduction Guide](../04_reproduction_guide.md): Operational guide for running notebooks and codebase.
-- [Phase 04 Seed Baseline Report](04_seed_baseline.md): Seed dataset generation and $\mathcal{M}_0$ ablation.
-- [Phase 05 Active Mining Report](05_active_mining.md): C4/C6 Super-Fusion mining tournament and HITL oracle review.
-- [Phase 07 Autonomous Loop Report](07_end_to_end_loop.md): End-to-end multi-cycle loop orchestration.
-- [Experiment Directory README](README.md): Complete index of all 8 experiment reports.
+- [Tổng quan dự án](../README.md): Sứ mệnh, phạm vi và tầm nhìn Active Learning toàn trình.
+- [Kiến trúc Pipeline](../02_pipeline_architecture.md): Toàn bộ kiến trúc 8 giai đoạn lấy dữ liệu làm trung tâm.
+- [Tổng hợp kết quả thực nghiệm](../03_experiment_results.md): Các chỉ số hiệu năng đa phase cấp cao.
+- [Hướng dẫn tái lập](../04_reproduction_guide.md): Hướng dẫn vận hành chạy notebook và codebase.
+- [Báo cáo Phase 04 Seed Baseline](04_seed_baseline.md): Tạo tập hạt giống và bóc tách $\mathcal{M}_0$.
+- [Báo cáo Phase 05 Active Mining](05_active_mining.md): Giải đấu khai thác Super-Fusion C4/C6 và duyệt HITL oracle.
+- [Báo cáo Phase 07 Vòng lặp tự động](07_end_to_end_loop.md): Điều phối vòng lặp đa chu kỳ toàn trình.
+- [README thư mục thực nghiệm](README.md): Danh mục đầy đủ toàn bộ 8 báo cáo thực nghiệm.
