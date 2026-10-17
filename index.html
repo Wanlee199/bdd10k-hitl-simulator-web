@@ -115,6 +115,38 @@
         line-height: 1.65 !important;
       }
     }
+
+    /* Enhanced Table Typography - Bảng Số Liệu Khoa Học */
+    table {
+      font-size: 0.875rem !important; /* 14px chuẩn khoa học thay vì 12px */
+      line-height: 1.5 !important;
+    }
+    table thead th {
+      font-size: 0.875rem !important; /* 14px */
+      font-weight: 700 !important;
+      letter-spacing: 0.01em;
+      padding-top: 0.7rem !important;
+      padding-bottom: 0.7rem !important;
+      padding-left: 0.75rem !important;
+      padding-right: 0.75rem !important;
+    }
+    table tbody td {
+      font-size: 0.875rem !important; /* 14px */
+      padding-top: 0.6rem !important;
+      padding-bottom: 0.6rem !important;
+      padding-left: 0.75rem !important;
+      padding-right: 0.75rem !important;
+    }
+    table tbody tr td span.text-xs {
+      font-size: 0.75rem !important; /* Giữ 12px cho các badge trạng thái VERIFIED gọn gàng */
+    }
+    table .font-mono.text-xs {
+      font-size: 0.875rem !important; /* 14px cho các số liệu âm/dương thay vì bị thu nhỏ 12px */
+    }
+    .table-section-title {
+      font-size: 0.875rem !important; /* 14px */
+      font-weight: 700 !important;
+    }
   </style>
 </head>
 <body class="bg-[#F9FAFB] text-[#1F2627] font-sans antialiased selection:bg-[#DCEBE0]">
@@ -599,18 +631,18 @@
         <!-- Tầng 1: Số Liệu Thực Đo Đã Xác Minh (VERIFIED) V0 vs Random V1 vs Active V1 -->
         <div class="space-y-3">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-mono font-bold text-[#1F2627] flex items-center gap-2">
+            <span class="text-sm font-mono font-bold text-[#1F2627] flex items-center gap-2">
               <span class="w-2.5 h-2.5 rounded-full bg-[#2D5A34]"></span>
               Bảng 1: Kết Quả Thực Đo V0 & V1 Đã Xác Minh (Verified Trên 1.400 Ảnh Test)
             </span>
-            <span class="text-xs font-mono text-[#2D5A34] font-bold bg-[#E8F0EA] px-2 py-0.5 rounded">
+            <span class="text-xs sm:text-sm font-mono text-[#2D5A34] font-bold bg-[#E8F0EA] px-2.5 py-1 rounded">
               Trích xuất từ Phase 06 Notebook & Tables
             </span>
           </div>
 
           <div class="overflow-x-auto border-t border-b border-[#E5E3DC]">
-            <table class="w-full text-left text-xs">
-              <thead class="bg-transparent font-mono text-[#1F2627] font-bold text-xs border-b border-[#E5E3DC]">
+            <table class="w-full text-left text-sm">
+              <thead class="bg-transparent font-mono text-[#1F2627] font-bold text-sm border-b border-[#E5E3DC]">
                 <tr>
                   <th class="py-2.5 px-3">Mô Hình Đánh Giá</th>
                   <th class="py-2.5 px-3 text-center">Ngân Sách Train</th>
@@ -657,21 +689,21 @@
                   <td class="py-2.5 px-3 font-mono text-right font-bold text-[#2D5A34]">6.37%</td>
                   <td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded bg-[#E8F0EA] text-[#2D5A34] font-mono text-xs font-bold">VERIFIED</span></td>
                 </tr>
-                <tr class="bg-[#F9FAFB] font-semibold text-xs">
-                  <td class="py-2 px-3 text-[#1E40AF]">Độ Chênh Lệch (Δ Active vs Random)</td>
-                  <td class="py-2 px-3 text-center font-mono text-[#475254]">Cùng 750 ảnh</td>
-                  <td class="py-2 px-3 font-mono text-right text-[#2D5A34]">+0.06%</td>
-                  <td class="py-2 px-3 font-mono text-right text-[#475254]">-0.06%</td>
-                  <td class="py-2 px-3 font-mono text-right text-[#475254]">-0.06%</td>
-                  <td class="py-2 px-3 font-mono text-right text-[#2D5A34] font-bold">+6.34%</td>
-                  <td class="py-2 px-3 font-mono text-right text-[#2D5A34]">+0.58%</td>
-                  <td class="py-2 px-3 font-mono text-right text-[#2D5A34] font-bold">+1.95%</td>
-                  <td class="py-2 px-3 text-center text-[#2D5A34] font-mono text-xs">Ưu thế rõ rệt</td>
+                <tr class="bg-[#F9FAFB] font-semibold text-sm">
+                  <td class="py-2.5 px-3 text-[#1E40AF]">Độ Chênh Lệch (Δ Active vs Random)</td>
+                  <td class="py-2.5 px-3 text-center font-mono text-[#475254]">Cùng 750 ảnh</td>
+                  <td class="py-2.5 px-3 font-mono text-right text-[#2D5A34]">+0.06%</td>
+                  <td class="py-2.5 px-3 font-mono text-right text-[#475254]">-0.06%</td>
+                  <td class="py-2.5 px-3 font-mono text-right text-[#475254]">-0.06%</td>
+                  <td class="py-2.5 px-3 font-mono text-right text-[#2D5A34] font-bold">+6.34%</td>
+                  <td class="py-2.5 px-3 font-mono text-right text-[#2D5A34]">+0.58%</td>
+                  <td class="py-2.5 px-3 font-mono text-right text-[#2D5A34] font-bold">+1.95%</td>
+                  <td class="py-2.5 px-3 text-center text-[#2D5A34] font-mono text-sm font-semibold">Ưu thế rõ rệt</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <div class="text-xs text-[#475254] italic">
+          <div class="text-sm text-[#475254] italic leading-relaxed">
             * Nhận xét: Với cùng ngân sách 750 ảnh, Active V1 tăng vọt độ chuẩn xác <strong>Precision +6.34%</strong> (ít báo động giả hơn), đồng thời giải cứu lớp hiếm nguy hiểm <strong>rider từ 2.78% lên 6.37%</strong> (cao hơn Random V1 +1.95%).
           </div>
         </div>
@@ -681,14 +713,14 @@
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-[#E5E3DC] pb-4">
             <div>
               <div class="flex items-center gap-2">
-                <span class="text-xs font-mono font-bold text-[#1F2627]">
+                <span class="text-sm font-mono font-bold text-[#1F2627]">
                   Bảng 2: Hệ Thống Đối Chuẩn Tiến Hóa Theo Từng Vòng Lặp (Round Showdown System)
                 </span>
-                <span class="text-xs font-mono px-2 py-0.5 rounded font-bold bg-[#2D5A34] text-white">
+                <span class="text-xs sm:text-sm font-mono px-2 py-0.5 rounded font-bold bg-[#2D5A34] text-white">
                   ROUND-BY-ROUND
                 </span>
               </div>
-              <div class="text-xs text-[#475254] mt-0.5">
+              <div class="text-sm text-[#475254] mt-1 leading-relaxed">
                 Đối đầu 3 chiều trực diện trong từng vòng: Proposed Active vs Random Floor Baseline vs 100% Target Pool (5.565 ảnh). Gộp cả 6 chỉ số vĩ mô và 10 lớp giao thông.
               </div>
             </div>
@@ -793,10 +825,10 @@
 
             <!-- 1. BẢNG VĨ MÔ VÒNG 0 -->
             <div class="space-y-1.5">
-              <div class="text-xs font-mono font-bold text-[#1F2627]">1. ĐỐI CHUẨN 6 CHỈ SỐ VĨ MÔ (V0 VS 100% TARGET POOL):</div>
+              <div class="text-sm font-mono font-bold text-[#1F2627]">1. ĐỐI CHUẨN 6 CHỈ SỐ VĨ MÔ (V0 VS 100% TARGET POOL):</div>
               <div class="overflow-x-auto border-t border-b border-[#E5E3DC]">
-                <table class="w-full text-left text-xs font-mono">
-                  <thead class="bg-transparent text-[#1F2627] font-bold text-xs border-b border-[#E5E3DC]">
+                <table class="w-full text-left text-sm font-mono">
+                  <thead class="bg-transparent text-[#1F2627] font-bold text-sm border-b border-[#E5E3DC]">
                     <tr>
                       <th class="py-2.5 px-3">Chỉ Số Đánh Giá</th>
                       <th class="py-2.5 px-3 text-right font-bold text-[#1F2627]">V0 Anchor (556 ảnh)</th>
@@ -876,10 +908,10 @@
 
             <!-- 2. BẢNG 10 LỚP VÒNG 0 -->
             <div class="space-y-1.5">
-              <div class="text-xs font-mono font-bold text-[#1F2627]">2. ĐỐI CHUẨN 10 LỚP GIAO THÔNG BDD10K (mAP@50 % V0 VS 100% TARGET):</div>
+              <div class="text-sm font-mono font-bold text-[#1F2627]">2. ĐỐI CHUẨN 10 LỚP GIAO THÔNG BDD10K (mAP@50 % V0 VS 100% TARGET):</div>
               <div class="overflow-x-auto border-t border-b border-[#E5E3DC]">
-                <table class="w-full text-left text-xs font-mono">
-                  <thead class="bg-transparent text-[#1F2627] font-bold text-xs border-b border-[#E5E3DC]">
+                <table class="w-full text-left text-sm font-mono">
+                  <thead class="bg-transparent text-[#1F2627] font-bold text-sm border-b border-[#E5E3DC]">
                     <tr>
                       <th class="py-2.5 px-3 text-center">STT</th>
                       <th class="py-2.5 px-3">Lớp Giao Thông</th>
@@ -939,10 +971,10 @@
 
             <!-- 1. BẢNG VĨ MÔ VÒNG 1 -->
             <div class="space-y-1.5">
-              <div class="text-xs font-mono font-bold text-[#1F2627]">1. ĐỐI CHUẨN 6 CHỈ SỐ VĨ MÔ (ACTIVE V1 VS RANDOM V1 VS 100% TARGET):</div>
+              <div class="text-sm font-mono font-bold text-[#1F2627]">1. ĐỐI CHUẨN 6 CHỈ SỐ VĨ MÔ (ACTIVE V1 VS RANDOM V1 VS 100% TARGET):</div>
               <div class="overflow-x-auto border-t border-b border-[#E5E3DC]">
-                <table class="w-full text-left text-xs font-mono">
-                  <thead class="bg-transparent text-[#1F2627] font-bold text-xs border-b border-[#E5E3DC]">
+                <table class="w-full text-left text-sm font-mono">
+                  <thead class="bg-transparent text-[#1F2627] font-bold text-sm border-b border-[#E5E3DC]">
                     <tr>
                       <th class="py-2.5 px-3">Chỉ Số Đánh Giá</th>
                       <th class="py-2.5 px-3 text-right font-bold text-[#2D5A34] bg-[#E8F0EA]/50">Proposed Active V1</th>
@@ -968,10 +1000,10 @@
 
             <!-- 2. BẢNG 10 LỚP VÒNG 1 -->
             <div class="space-y-1.5">
-              <div class="text-xs font-mono font-bold text-[#1F2627]">2. ĐỐI CHUẨN 10 LỚP GIAO THÔNG BDD10K (mAP@50 % ACTIVE V1 VS RANDOM V1 VS 100% TARGET):</div>
+              <div class="text-sm font-mono font-bold text-[#1F2627]">2. ĐỐI CHUẨN 10 LỚP GIAO THÔNG BDD10K (mAP@50 % ACTIVE V1 VS RANDOM V1 VS 100% TARGET):</div>
               <div class="overflow-x-auto border-t border-b border-[#E5E3DC]">
-                <table class="w-full text-left text-xs font-mono">
-                  <thead class="bg-transparent text-[#1F2627] font-bold text-xs border-b border-[#E5E3DC]">
+                <table class="w-full text-left text-sm font-mono">
+                  <thead class="bg-transparent text-[#1F2627] font-bold text-sm border-b border-[#E5E3DC]">
                     <tr>
                       <th class="py-2.5 px-3 text-center">STT</th>
                       <th class="py-2.5 px-3">Lớp Giao Thông</th>
@@ -1031,10 +1063,10 @@
 
             <!-- 1. BẢNG VĨ MÔ VÒNG 2 -->
             <div class="space-y-1.5">
-              <div class="text-xs font-mono font-bold text-[#1F2627]">1. ĐỐI CHUẨN 6 CHỈ SỐ VĨ MÔ (ACTIVE V2 VS RANDOM V2 VS 100% TARGET):</div>
+              <div class="text-sm font-mono font-bold text-[#1F2627]">1. ĐỐI CHUẨN 6 CHỈ SỐ VĨ MÔ (ACTIVE V2 VS RANDOM V2 VS 100% TARGET):</div>
               <div class="overflow-x-auto border-t border-b border-[#E5E3DC]">
-                <table class="w-full text-left text-xs font-mono">
-                  <thead class="bg-transparent text-[#1F2627] font-bold text-xs border-b border-[#E5E3DC]">
+                <table class="w-full text-left text-sm font-mono">
+                  <thead class="bg-transparent text-[#1F2627] font-bold text-sm border-b border-[#E5E3DC]">
                     <tr>
                       <th class="py-2.5 px-3">Chỉ Số Đánh Giá</th>
                       <th class="py-2.5 px-3 text-right font-bold text-[#E65100] bg-[#FFF3E0]/50">Proposed Active V2</th>
@@ -1060,10 +1092,10 @@
 
             <!-- 2. BẢNG 10 LỚP VÒNG 2 -->
             <div class="space-y-1.5">
-              <div class="text-xs font-mono font-bold text-[#1F2627]">2. ĐỐI CHUẨN 10 LỚP GIAO THÔNG BDD10K (mAP@50 % ACTIVE V2 VS RANDOM V2 VS 100% TARGET):</div>
+              <div class="text-sm font-mono font-bold text-[#1F2627]">2. ĐỐI CHUẨN 10 LỚP GIAO THÔNG BDD10K (mAP@50 % ACTIVE V2 VS RANDOM V2 VS 100% TARGET):</div>
               <div class="overflow-x-auto border-t border-b border-[#E5E3DC]">
-                <table class="w-full text-left text-xs font-mono">
-                  <thead class="bg-transparent text-[#1F2627] font-bold text-xs border-b border-[#E5E3DC]">
+                <table class="w-full text-left text-sm font-mono">
+                  <thead class="bg-transparent text-[#1F2627] font-bold text-sm border-b border-[#E5E3DC]">
                     <tr>
                       <th class="py-2.5 px-3 text-center">STT</th>
                       <th class="py-2.5 px-3">Lớp Giao Thông</th>
@@ -1123,10 +1155,10 @@
 
             <!-- 1. BẢNG VĨ MÔ VÒNG 3 -->
             <div class="space-y-1.5">
-              <div class="text-xs font-mono font-bold text-[#1F2627]">1. ĐỐI CHUẨN 6 CHỈ SỐ VĨ MÔ (ACTIVE V3 VS RANDOM V3 VS 100% TARGET):</div>
+              <div class="text-sm font-mono font-bold text-[#1F2627]">1. ĐỐI CHUẨN 6 CHỈ SỐ VĨ MÔ (ACTIVE V3 VS RANDOM V3 VS 100% TARGET):</div>
               <div class="overflow-x-auto border-t border-b border-[#E5E3DC]">
-                <table class="w-full text-left text-xs font-mono">
-                  <thead class="bg-transparent text-[#1F2627] font-bold text-xs border-b border-[#E5E3DC]">
+                <table class="w-full text-left text-sm font-mono">
+                  <thead class="bg-transparent text-[#1F2627] font-bold text-sm border-b border-[#E5E3DC]">
                     <tr>
                       <th class="py-2.5 px-3">Chỉ Số Đánh Giá</th>
                       <th class="py-2.5 px-3 text-right font-bold text-[#1A237E] bg-[#E8EAF6]/50">Proposed Active V3</th>
@@ -1152,10 +1184,10 @@
 
             <!-- 2. BẢNG 10 LỚP VÒNG 3 -->
             <div class="space-y-1.5">
-              <div class="text-xs font-mono font-bold text-[#1F2627]">2. ĐỐI CHUẨN 10 LỚP GIAO THÔNG BDD10K (mAP@50 % ACTIVE V3 VS RANDOM V3 VS 100% TARGET):</div>
+              <div class="text-sm font-mono font-bold text-[#1F2627]">2. ĐỐI CHUẨN 10 LỚP GIAO THÔNG BDD10K (mAP@50 % ACTIVE V3 VS RANDOM V3 VS 100% TARGET):</div>
               <div class="overflow-x-auto border-t border-b border-[#E5E3DC]">
-                <table class="w-full text-left text-xs font-mono">
-                  <thead class="bg-transparent text-[#1F2627] font-bold text-xs border-b border-[#E5E3DC]">
+                <table class="w-full text-left text-sm font-mono">
+                  <thead class="bg-transparent text-[#1F2627] font-bold text-sm border-b border-[#E5E3DC]">
                     <tr>
                       <th class="py-2.5 px-3 text-center">STT</th>
                       <th class="py-2.5 px-3">Lớp Giao Thông</th>
@@ -1215,10 +1247,10 @@
 
             <!-- 1. BẢNG VĨ MÔ VÒNG 4 -->
             <div class="space-y-1.5">
-              <div class="text-xs font-mono font-bold text-[#1F2627]">1. ĐỐI CHUẨN 6 CHỈ SỐ VĨ MÔ (ACTIVE V4 VS RANDOM V4 VS 100% TARGET):</div>
+              <div class="text-sm font-mono font-bold text-[#1F2627]">1. ĐỐI CHUẨN 6 CHỈ SỐ VĨ MÔ (ACTIVE V4 VS RANDOM V4 VS 100% TARGET):</div>
               <div class="overflow-x-auto border-t border-b border-[#E5E3DC]">
-                <table class="w-full text-left text-xs font-mono">
-                  <thead class="bg-transparent text-[#1F2627] font-bold text-xs border-b border-[#E5E3DC]">
+                <table class="w-full text-left text-sm font-mono">
+                  <thead class="bg-transparent text-[#1F2627] font-bold text-sm border-b border-[#E5E3DC]">
                     <tr>
                       <th class="py-2.5 px-3">Chỉ Số Đánh Giá</th>
                       <th class="py-2.5 px-3 text-right font-bold text-[#0284C7] bg-[#E0F2FE]/50">Proposed Active V4</th>
@@ -1244,10 +1276,10 @@
 
             <!-- 2. BẢNG 10 LỚP VÒNG 4 -->
             <div class="space-y-1.5">
-              <div class="text-xs font-mono font-bold text-[#1F2627]">2. ĐỐI CHUẨN 10 LỚP GIAO THÔNG BDD10K (mAP@50 % ACTIVE V4 VS RANDOM V4 VS 100% TARGET):</div>
+              <div class="text-sm font-mono font-bold text-[#1F2627]">2. ĐỐI CHUẨN 10 LỚP GIAO THÔNG BDD10K (mAP@50 % ACTIVE V4 VS RANDOM V4 VS 100% TARGET):</div>
               <div class="overflow-x-auto border-t border-b border-[#E5E3DC]">
-                <table class="w-full text-left text-xs font-mono">
-                  <thead class="bg-transparent text-[#1F2627] font-bold text-xs border-b border-[#E5E3DC]">
+                <table class="w-full text-left text-sm font-mono">
+                  <thead class="bg-transparent text-[#1F2627] font-bold text-sm border-b border-[#E5E3DC]">
                     <tr>
                       <th class="py-2.5 px-3 text-center">STT</th>
                       <th class="py-2.5 px-3">Lớp Giao Thông</th>
@@ -1309,10 +1341,10 @@
 
             <!-- 1. BẢNG VĨ MÔ VÒNG 5 -->
             <div class="space-y-1.5">
-              <div class="text-xs font-mono font-bold text-[#1F2627]">1. ĐỐI CHUẨN 6 CHỈ SỐ VĨ MÔ (ACTIVE V5 VS RANDOM V5 VS 100% TARGET):</div>
+              <div class="text-sm font-mono font-bold text-[#1F2627]">1. ĐỐI CHUẨN 6 CHỈ SỐ VĨ MÔ (ACTIVE V5 VS RANDOM V5 VS 100% TARGET):</div>
               <div class="overflow-x-auto border-t border-b border-[#E5E3DC]">
-                <table class="w-full text-left text-xs font-mono">
-                  <thead class="bg-transparent text-[#1F2627] font-bold text-xs border-b border-[#E5E3DC]">
+                <table class="w-full text-left text-sm font-mono">
+                  <thead class="bg-transparent text-[#1F2627] font-bold text-sm border-b border-[#E5E3DC]">
                     <tr>
                       <th class="py-2.5 px-3">Chỉ Số Đánh Giá</th>
                       <th class="py-2.5 px-3 text-right font-bold text-[#2D5A34] bg-[#E8F0EA]/50">Proposed Active V5</th>
@@ -1338,10 +1370,10 @@
 
             <!-- 2. BẢNG 10 LỚP VÒNG 5 -->
             <div class="space-y-1.5">
-              <div class="text-xs font-mono font-bold text-[#1F2627]">2. ĐỐI CHUẨN 10 LỚP GIAO THÔNG BDD10K (mAP@50 % ACTIVE V5 VS RANDOM V5 VS 100% TARGET):</div>
+              <div class="text-sm font-mono font-bold text-[#1F2627]">2. ĐỐI CHUẨN 10 LỚP GIAO THÔNG BDD10K (mAP@50 % ACTIVE V5 VS RANDOM V5 VS 100% TARGET):</div>
               <div class="overflow-x-auto border-t border-b border-[#E5E3DC]">
-                <table class="w-full text-left text-xs font-mono">
-                  <thead class="bg-transparent text-[#1F2627] font-bold text-xs border-b border-[#E5E3DC]">
+                <table class="w-full text-left text-sm font-mono">
+                  <thead class="bg-transparent text-[#1F2627] font-bold text-sm border-b border-[#E5E3DC]">
                     <tr>
                       <th class="py-2.5 px-3 text-center">STT</th>
                       <th class="py-2.5 px-3">Lớp Giao Thông</th>
