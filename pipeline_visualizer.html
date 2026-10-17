@@ -11,6 +11,14 @@
     tailwind.config = {
       theme: {
         extend: {
+          fontSize: {
+            'xs': ['0.8125rem', { lineHeight: '1.25rem' }], /* 13px (from 12px) */
+            'sm': ['0.9375rem', { lineHeight: '1.4rem' }],   /* 15px (from 14px) */
+            'base': ['1.0625rem', { lineHeight: '1.65rem' }], /* 17px (from 16px) */
+            'lg': ['1.1875rem', { lineHeight: '1.75rem' }],  /* 19px (from 18px) */
+            'xl': ['1.375rem', { lineHeight: '1.875rem' }],  /* 22px (from 20px) */
+            '2xl': ['1.625rem', { lineHeight: '2.1rem' }],   /* 26px (from 24px) */
+          },
           colors: {
             brand: {
               sky: '#0284c7',
@@ -38,6 +46,7 @@
       background-color: #f8fafc;
       color: #0f172a;
       overflow-x: hidden;
+      font-size: 15px;
     }
 
     .font-mono-code {
@@ -58,14 +67,16 @@
     .child-step-box {
       width: 100%;
       min-width: 180px;
-      height: 92px;
+      min-height: 98px;
+      height: auto;
       background: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: 0.75rem;
-      padding: 0.65rem 0.75rem;
+      padding: 0.75rem 0.85rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      gap: 0.35rem;
       box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
@@ -163,53 +174,53 @@
       
       <!-- Brand & Pipeline Info -->
       <div class="flex items-center gap-3">
-        <div class="w-9 h-9 rounded-xl bg-sky-600 text-white flex items-center justify-center font-bold text-base shadow-sm">
+        <div class="w-10 h-10 rounded-xl bg-sky-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
           <i class="fa-solid fa-diagram-project"></i>
         </div>
         <div>
-          <h1 class="text-sm font-extrabold text-slate-900 leading-tight">BDD10K Active Learning Lab - End-to-End Pipeline</h1>
-          <p class="text-xs text-slate-500 font-medium">Bố Cục Tỷ Lệ 1/3 - 2/3 (Dynamic SVG Loopback Arrow Active)</p>
+          <h1 class="text-base sm:text-lg font-extrabold text-slate-900 leading-tight">BDD10K Active Learning Lab - End-to-End Pipeline</h1>
+          <p class="text-xs sm:text-sm text-slate-500 font-medium">Bố Cục Tỷ Lệ 1/3 - 2/3 (Dynamic SVG Loopback Arrow Active)</p>
         </div>
       </div>
 
       <!-- Execution Controls -->
       <div class="flex flex-wrap items-center gap-2">
         <!-- Prev Step -->
-        <button onclick="prevStep()" class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition active:scale-95" title="Bước Trước">
+        <button onclick="prevStep()" class="p-2 sm:px-3 sm:py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-bold transition active:scale-95" title="Bước Trước">
           <i class="fa-solid fa-backward-step"></i>
         </button>
 
         <!-- Play / Pause Auto Tour -->
-        <button id="btn-play" onclick="toggleAutoTour()" class="px-3.5 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs shadow-sm flex items-center gap-1.5 transition active:scale-95 cursor-pointer">
+        <button id="btn-play" onclick="toggleAutoTour()" class="px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm shadow-sm flex items-center gap-1.5 transition active:scale-95 cursor-pointer">
           <i id="icon-play" class="fa-solid fa-play"></i>
           <span id="text-play">Auto Tour</span>
         </button>
 
         <!-- Next Step -->
-        <button onclick="nextStep()" class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition active:scale-95" title="Bước Tiếp">
+        <button onclick="nextStep()" class="p-2 sm:px-3 sm:py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-bold transition active:scale-95" title="Bước Tiếp">
           <i class="fa-solid fa-forward-step"></i>
         </button>
 
         <!-- Reset Button -->
-        <button onclick="resetPipeline()" class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-bold transition active:scale-95" title="Đặt Lại Ban Đầu">
+        <button onclick="resetPipeline()" class="p-2 sm:px-3 sm:py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 text-sm font-bold transition active:scale-95" title="Đặt Lại Ban Đầu">
           <i class="fa-solid fa-rotate-left"></i>
         </button>
 
         <!-- Audio Sound Toggle -->
-        <button id="btn-audio" onclick="toggleAudio()" class="px-2.5 py-1.5 rounded-lg bg-amber-50 text-amber-700 border border-amber-300 text-xs font-bold flex items-center gap-1 transition">
+        <button id="btn-audio" onclick="toggleAudio()" class="px-3 py-2 rounded-lg bg-amber-50 text-amber-700 border border-amber-300 text-xs sm:text-sm font-bold flex items-center gap-1 transition">
           <i id="icon-audio" class="fa-solid fa-volume-high"></i>
           <span>Âm Thanh: BẬT</span>
         </button>
 
         <!-- Speed Selector -->
-        <div class="flex items-center bg-slate-100 rounded-lg p-0.5 text-xs font-mono font-bold border border-slate-200 ml-1">
-          <button onclick="setSpeed(0.5)" id="speed-05" class="px-1.5 py-0.5 rounded text-slate-500 transition">0.5x</button>
-          <button onclick="setSpeed(1.0)" id="speed-10" class="px-1.5 py-0.5 rounded bg-sky-600 text-white transition">1x</button>
-          <button onclick="setSpeed(2.0)" id="speed-20" class="px-1.5 py-0.5 rounded text-slate-500 transition">2x</button>
+        <div class="flex items-center bg-slate-100 rounded-lg p-0.5 text-xs sm:text-sm font-mono font-bold border border-slate-200 ml-1">
+          <button onclick="setSpeed(0.5)" id="speed-05" class="px-2 py-1 rounded text-slate-500 transition">0.5x</button>
+          <button onclick="setSpeed(1.0)" id="speed-10" class="px-2 py-1 rounded bg-sky-600 text-white transition">1x</button>
+          <button onclick="setSpeed(2.0)" id="speed-20" class="px-2 py-1 rounded text-slate-500 transition">2x</button>
         </div>
 
         <!-- Auto Scroll Toggle (Mặc định TẮT không tự kéo scroll) -->
-        <button id="btn-autoscroll" onclick="toggleAutoScroll()" class="px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-500 border border-slate-200 text-xs font-bold flex items-center gap-1 transition">
+        <button id="btn-autoscroll" onclick="toggleAutoScroll()" class="px-3 py-2 rounded-lg bg-slate-100 text-slate-500 border border-slate-200 text-xs sm:text-sm font-bold flex items-center gap-1 transition">
           <i class="fa-solid fa-arrows-up-to-line"></i>
           <span>Auto-Scroll: TẮT</span>
         </button>
@@ -219,17 +230,17 @@
   </header>
 
   <!-- LIVE EXECUTION TELEMETRY SUB-BAR -->
-  <div class="bg-slate-100/90 border-b border-slate-200 py-1.5 px-4 sticky top-[61px] z-40 backdrop-blur-sm">
-    <div class="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between text-xs font-mono">
+  <div class="bg-slate-100/90 border-b border-slate-200 py-2 px-4 sticky top-[65px] z-40 backdrop-blur-sm">
+    <div class="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between text-xs sm:text-sm font-mono">
       <div class="flex items-center gap-2">
         <span class="text-slate-500 font-medium">Bước Hiện Tại:</span>
         <span id="active-step-title" class="font-bold text-sky-700">Chưa Khởi Chạy</span>
       </div>
       <div class="flex items-center gap-4">
-        <span class="text-slate-500">Chu Kỳ: <strong id="iter-badge" class="text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">V0 Baseline</strong></span>
-        <div class="flex items-center gap-1.5">
+        <span class="text-slate-500">Chu Kỳ: <strong id="iter-badge" class="text-amber-600 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200 font-bold">V0 Baseline</strong></span>
+        <div class="flex items-center gap-2">
           <span class="text-slate-400">Tiến Độ:</span>
-          <div class="w-28 bg-slate-200 h-2 rounded-full overflow-hidden">
+          <div class="w-32 bg-slate-200 h-2.5 rounded-full overflow-hidden">
             <div id="tour-progress-bar" class="bg-sky-600 h-full transition-all duration-300" style="width: 0%;"></div>
           </div>
         </div>
@@ -252,13 +263,13 @@
           <!-- Parent Header -->
           <div class="flex items-center justify-between pb-3 mb-4 border-b border-sky-100">
             <div class="flex items-center gap-2.5">
-              <span class="px-2 py-0.5 rounded-md bg-sky-600 text-white font-mono font-bold text-xs shadow-sm">TẦNG 1</span>
+              <span class="px-2.5 py-1 rounded-md bg-sky-600 text-white font-mono font-bold text-xs sm:text-sm shadow-sm">TẦNG 1</span>
               <div>
-                <h2 class="text-xs font-extrabold text-sky-950 uppercase tracking-wide">Tiền Xử Lý Dữ Liệu</h2>
-                <p class="text-xs text-slate-500">FastDeduplication & 5D Profiling</p>
+                <h2 class="text-sm sm:text-base font-extrabold text-sky-950 uppercase tracking-wide">Tiền Xử Lý Dữ Liệu</h2>
+                <p class="text-xs sm:text-sm text-slate-500">FastDeduplication & 5D Profiling</p>
               </div>
             </div>
-            <span class="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-sky-100 text-sky-700 border border-sky-200">PHASES 01-03</span>
+            <span class="text-xs sm:text-sm font-mono font-bold px-2 py-0.5 rounded bg-sky-100 text-sky-700 border border-sky-200">PHASES 01-03</span>
           </div>
 
           <!-- Child Steps Stack (Top-to-Bottom Flow) -->
@@ -270,11 +281,11 @@
                 <span class="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">INPUT</span>
                 <span class="status-badge text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
               </div>
-              <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+              <div class="flex items-center gap-2 text-sm font-bold text-slate-800">
                 <i class="fa-solid fa-film text-sky-600"></i>
                 <span class="truncate">Video Thô BDD10K</span>
               </div>
-              <div class="text-xs text-slate-400 font-mono">7.000 Frames (1Hz)</div>
+              <div class="text-xs sm:text-[13px] text-slate-500 font-mono">7.000 Frames (1Hz)</div>
             </div>
 
             <!-- Connector Down -->
@@ -289,11 +300,11 @@
                 <span class="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-sky-100 text-sky-700">PHASE 01</span>
                 <span class="status-badge text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
               </div>
-              <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+              <div class="flex items-center gap-2 text-sm font-bold text-slate-800">
                 <i class="fa-solid fa-copy text-amber-500"></i>
                 <span class="truncate">Fast Deduplication</span>
               </div>
-              <div class="text-xs text-slate-400 font-mono">pHash DCT & KMV Policy</div>
+              <div class="text-xs sm:text-[13px] text-slate-500 font-mono">pHash DCT & KMV Policy</div>
             </div>
 
             <!-- Connector Down -->
@@ -308,11 +319,11 @@
                 <span class="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800">POOL</span>
                 <span class="status-badge text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
               </div>
-              <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+              <div class="flex items-center gap-2 text-sm font-bold text-slate-800">
                 <i class="fa-solid fa-images text-emerald-600"></i>
                 <span class="truncate">Kho Ảnh Sạch Unique</span>
               </div>
-              <div class="text-xs text-slate-400 font-mono">6.994 Ảnh (0 KB Symlinks)</div>
+              <div class="text-xs sm:text-[13px] text-slate-500 font-mono">6.994 Ảnh (0 KB Symlinks)</div>
             </div>
 
             <!-- Connector Down -->
@@ -327,11 +338,11 @@
                 <span class="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-sky-100 text-sky-700">PHASE 02</span>
                 <span class="status-badge text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
               </div>
-              <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+              <div class="flex items-center gap-2 text-sm font-bold text-slate-800">
                 <i class="fa-solid fa-chart-pie text-purple-600"></i>
                 <span class="truncate">Lập Hồ Sơ 5D Profiling</span>
               </div>
-              <div class="text-xs text-slate-400 font-mono">11 Đặc Trưng Vật Lý</div>
+              <div class="text-xs sm:text-[13px] text-slate-500 font-mono">11 Đặc Trưng Vật Lý</div>
             </div>
 
             <!-- Connector Down -->
@@ -346,11 +357,11 @@
                 <span class="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-purple-100 text-purple-800">MANIFEST</span>
                 <span class="status-badge text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
               </div>
-              <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+              <div class="flex items-center gap-2 text-sm font-bold text-slate-800">
                 <i class="fa-solid fa-file-code text-indigo-600"></i>
                 <span class="truncate">Profile Manifest JSON</span>
               </div>
-              <div class="text-xs text-slate-400 font-mono">5 Lát Cắt Khó (Hard Slices)</div>
+              <div class="text-xs sm:text-[13px] text-slate-500 font-mono">5 Lát Cắt Khó (Hard Slices)</div>
             </div>
 
             <!-- Connector Down -->
@@ -365,11 +376,11 @@
                 <span class="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-sky-100 text-sky-700">PHASE 03</span>
                 <span class="status-badge text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
               </div>
-              <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+              <div class="flex items-center gap-2 text-sm font-bold text-slate-800">
                 <i class="fa-solid fa-scissors text-rose-500"></i>
                 <span class="truncate">Phân Chia Hybrid 80/20</span>
               </div>
-              <div class="text-xs text-slate-400 font-mono">Group-Aware Video ID</div>
+              <div class="text-xs sm:text-[13px] text-slate-500 font-mono">Group-Aware Video ID</div>
             </div>
 
           </div>
@@ -392,22 +403,22 @@
           <!-- Slot 1 Header -->
           <div class="flex flex-wrap items-center justify-between pb-3 border-b border-slate-200 gap-2">
             <div class="flex items-center gap-2.5">
-              <div id="slot1-icon-box" class="w-8 h-8 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center text-sm shadow-sm">
+              <div id="slot1-icon-box" class="w-9 h-9 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center text-base shadow-sm">
                 <i id="slot1-icon" class="fa-solid fa-copy"></i>
               </div>
               <div>
                 <div class="flex items-center gap-2">
-                  <span id="slot1-phase-badge" class="px-1.5 py-0.5 rounded bg-sky-100 text-sky-800 text-xs font-mono font-bold">PHASE 01</span>
-                  <span id="slot1-title" class="text-xs font-bold text-slate-900 tracking-wide uppercase">Lọc Trùng Tri Giác pHash & KMV</span>
+                  <span id="slot1-phase-badge" class="px-2 py-0.5 rounded bg-sky-100 text-sky-800 text-xs sm:text-sm font-mono font-bold">PHASE 01</span>
+                  <span id="slot1-title" class="text-sm sm:text-base font-bold text-slate-900 tracking-wide uppercase">Lọc Trùng Tri Giác pHash & KMV</span>
                 </div>
-                <div id="slot1-champion" class="text-xs text-sky-700 font-mono font-bold mt-0.5">🏆 Quán Quân: FastDedup pHash 2D-DCT + Keep-Most-Vehicles</div>
+                <div id="slot1-champion" class="text-xs sm:text-sm text-sky-700 font-mono font-bold mt-0.5">🏆 Quán Quân: FastDedup pHash 2D-DCT + Keep-Most-Vehicles</div>
               </div>
             </div>
             <div class="flex items-center gap-2">
-              <span id="slot1-status-badge" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300">
+              <span id="slot1-status-badge" class="text-xs sm:text-sm font-mono font-bold px-2.5 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300">
                 ✓ 100% AUDITED
               </span>
-              <span id="slot1-node-badge" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-300">
+              <span id="slot1-node-badge" class="text-xs sm:text-sm font-mono font-bold px-2.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-300">
                 BƯỚC 02 / 16
               </span>
             </div>
@@ -421,51 +432,51 @@
               
               <!-- 1.1 INPUT BOX -->
               <div class="p-2.5 bg-white rounded-lg border border-slate-200 space-y-1">
-                <div class="flex items-center justify-between text-xs font-bold text-slate-800">
+                <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-slate-800">
                   <span class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-sky-500"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span>
                     <span>📥 INPUT (Dữ Liệu Đầu Vào)</span>
                   </span>
-                  <span id="slot1-input-source" class="text-xs font-mono px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-bold">7.000 Frames</span>
+                  <span id="slot1-input-source" class="text-xs sm:text-sm font-mono px-2.5 py-0.5 rounded bg-slate-100 text-slate-600 font-bold">7.000 Frames</span>
                 </div>
-                <p id="slot1-input-specs" class="text-xs text-slate-600 leading-snug font-sans">
+                <p id="slot1-input-specs" class="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
                   Khung hình RGB 1280x720 trích xuất 1Hz từ 598 video BDD10K.
                 </p>
-                <div id="slot1-input-precond" class="text-xs text-slate-400 font-mono">
+                <div id="slot1-input-precond" class="text-xs sm:text-[13px] text-slate-500 font-mono">
                   Phân theo sequence ID, cần loại bỏ các khung hình trùng lặp.
                 </div>
               </div>
 
               <!-- 1.2 HANDLE BOX (QUÁN QUÂN ĐÃ CHỌN) -->
               <div class="p-2.5 bg-sky-50/60 rounded-lg border border-sky-200 space-y-1">
-                <div class="flex items-center justify-between text-xs font-bold text-sky-900">
+                <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-sky-900">
                   <span class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
                     <span>⚙️ HANDLE (Quán Quân Đã Chọn)</span>
                   </span>
-                  <span id="slot1-handle-speed" class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">360.3 FPS</span>
+                  <span id="slot1-handle-speed" class="text-xs sm:text-sm font-mono px-2.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">360.3 FPS</span>
                 </div>
-                <p id="slot1-handle-algo" class="text-xs text-slate-700 leading-snug font-sans">
+                <p id="slot1-handle-algo" class="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
                   pHash 2D-DCT 64-bit fingerprint + chính sách Keep-Most-Vehicles (KMV) ưu tiên giữ khung hình giàu thông tin nhất.
                 </p>
-                <div id="slot1-handle-params" class="text-xs text-sky-700 font-mono">
+                <div id="slot1-handle-params" class="text-xs sm:text-[13px] text-sky-700 font-mono">
                   Ngưỡng Hamming D_H ≤ 5 bits | 0 KB nhân bản ổ đĩa.
                 </div>
               </div>
 
               <!-- 1.3 OUTPUT & ARTIFACT BOX -->
               <div class="p-2.5 bg-emerald-50/60 rounded-lg border border-emerald-200 space-y-1">
-                <div class="flex items-center justify-between text-xs font-bold text-emerald-900">
+                <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-emerald-900">
                   <span class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
                     <span>📤 OUTPUT & ARTIFACT (Sản Phẩm Đầu Ra)</span>
                   </span>
-                  <span id="slot1-output-vol" class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">7.950 Ảnh</span>
+                  <span id="slot1-output-vol" class="text-xs sm:text-sm font-mono px-2.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">7.950 Ảnh</span>
                 </div>
-                <p id="slot1-output-art" class="text-xs text-slate-700 leading-snug font-sans">
+                <p id="slot1-output-art" class="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
                   Kho ảnh sạch Unique Pool không trùng lặp, bảo toàn 100% các biến thể giao thông độc bản.
                 </p>
-                <div id="slot1-output-handover" class="text-xs text-emerald-700 font-mono">
+                <div id="slot1-output-handover" class="text-xs sm:text-[13px] text-emerald-700 font-mono">
                   Bàn giao danh sách ID sang Phase 02 để lập hồ sơ 5D.
                 </div>
               </div>
@@ -482,7 +493,7 @@
                      class="w-full h-36 object-contain p-1 transition-all duration-300" 
                      loading="lazy" />
                 <div class="absolute inset-0 bg-slate-900/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
-                  <span id="slot1-img-caption" class="px-2 py-1 rounded bg-black/75 text-white text-xs font-mono font-bold text-center">
+                  <span id="slot1-img-caption" class="px-2 py-1 rounded bg-black/75 text-white text-xs sm:text-sm font-mono font-bold text-center">
                     Cặp ảnh lọc trùng KMV
                   </span>
                 </div>
@@ -490,25 +501,25 @@
 
               <!-- 4 Thẻ Metrics Đo Lường Vĩ Mô Của Node -->
               <div class="md:col-span-6 grid grid-cols-2 gap-2 text-center font-mono">
-                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
-                  <div id="slot1-m1-lbl" class="text-xs text-slate-500 uppercase">Thông Lượng</div>
-                  <div id="slot1-m1-val" class="text-sm font-extrabold text-emerald-700 mt-0.5">360.3 FPS</div>
-                  <div id="slot1-m1-sub" class="text-xs text-slate-400">CPU đơn nhân</div>
+                <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
+                  <div id="slot1-m1-lbl" class="text-xs sm:text-sm text-slate-500 uppercase font-semibold">Thông Lượng</div>
+                  <div id="slot1-m1-val" class="text-base sm:text-lg font-extrabold text-emerald-700 mt-0.5">360.3 FPS</div>
+                  <div id="slot1-m1-sub" class="text-xs sm:text-[13px] text-slate-400">CPU đơn nhân</div>
                 </div>
-                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
-                  <div id="slot1-m2-lbl" class="text-xs text-slate-500 uppercase">Hamming Dist</div>
-                  <div id="slot1-m2-val" class="text-sm font-extrabold text-sky-700 mt-0.5">D_H ≤ 5</div>
-                  <div id="slot1-m2-sub" class="text-xs text-slate-400">64-bit DCT</div>
+                <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
+                  <div id="slot1-m2-lbl" class="text-xs sm:text-sm text-slate-500 uppercase font-semibold">Hamming Dist</div>
+                  <div id="slot1-m2-val" class="text-base sm:text-lg font-extrabold text-sky-700 mt-0.5">D_H ≤ 5</div>
+                  <div id="slot1-m2-sub" class="text-xs sm:text-[13px] text-slate-400">64-bit DCT</div>
                 </div>
-                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
-                  <div id="slot1-m3-lbl" class="text-xs text-slate-500 uppercase">Loại Trùng</div>
-                  <div id="slot1-m3-val" class="text-sm font-extrabold text-rose-600 mt-0.5">50 Ảnh</div>
-                  <div id="slot1-m3-sub" class="text-xs text-slate-400">Trùng sequence</div>
+                <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
+                  <div id="slot1-m3-lbl" class="text-xs sm:text-sm text-slate-500 uppercase font-semibold">Loại Trùng</div>
+                  <div id="slot1-m3-val" class="text-base sm:text-lg font-extrabold text-rose-600 mt-0.5">50 Ảnh</div>
+                  <div id="slot1-m3-sub" class="text-xs sm:text-[13px] text-slate-400">Trùng sequence</div>
                 </div>
-                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
-                  <div id="slot1-m4-lbl" class="text-xs text-slate-500 uppercase">Unique Pool</div>
-                  <div id="slot1-m4-val" class="text-sm font-extrabold text-sky-800 mt-0.5">7.950 Ảnh</div>
-                  <div id="slot1-m4-sub" class="text-xs text-slate-400">0 KB Symlinks</div>
+                <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
+                  <div id="slot1-m4-lbl" class="text-xs sm:text-sm text-slate-500 uppercase font-semibold">Unique Pool</div>
+                  <div id="slot1-m4-val" class="text-base sm:text-lg font-extrabold text-sky-800 mt-0.5">7.950 Ảnh</div>
+                  <div id="slot1-m4-sub" class="text-xs sm:text-[13px] text-slate-400">0 KB Symlinks</div>
                 </div>
               </div>
 
@@ -517,11 +528,13 @@
           </div>
 
           <!-- Slot 1 Footer -->
-          <div class="pt-2.5 border-t border-slate-200 flex flex-wrap items-center justify-between text-xs font-mono text-slate-500 gap-1">
+          <div class="pt-2.5 border-t border-slate-200 flex flex-wrap items-center justify-between text-xs sm:text-sm font-mono text-slate-500 gap-1">
             <span class="flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
               <span id="slot1-footer-audit">Kiểm toán toàn diện: Zero Data Leakage • POSIX Standard</span>
             </span>
+            <span id="slot1-footer-tag" class="text-sky-700 font-bold">Dữ Liệu Thực Nghiệm Niêm Phong Phase 01 - 03</span>
+          </div>
             <span id="slot1-footer-tag" class="text-sky-700 font-bold">Dữ Liệu Thực Nghiệm Niêm Phong Phase 01 - 03</span>
           </div>
 
@@ -547,54 +560,54 @@
         <!-- Parent Header -->
         <div class="flex items-center justify-between pb-3 mb-4 border-b border-emerald-100">
           <div class="flex items-center gap-3">
-            <span class="px-2.5 py-0.5 rounded-md bg-emerald-600 text-white font-mono font-bold text-xs shadow-sm">TẦNG 2</span>
+            <span class="px-2.5 py-1 rounded-md bg-emerald-600 text-white font-mono font-bold text-xs sm:text-sm shadow-sm">TẦNG 2</span>
             <div>
-              <h2 class="text-xs font-extrabold text-emerald-950 uppercase tracking-wide">Bài Thi Đóng Băng & Phân Tách Kho Dữ Liệu</h2>
-              <p class="text-xs text-slate-500">Cách Ly Tuyệt Đối 0% Rò Rỉ Dữ Liệu (pHash Audit Hamming Distance &ge; 5 bits)</p>
+              <h2 class="text-sm sm:text-base font-extrabold text-emerald-950 uppercase tracking-wide">Bài Thi Đóng Băng & Phân Tách Kho Dữ Liệu</h2>
+              <p class="text-xs sm:text-sm text-slate-500">Cách Ly Tuyệt Đối 0% Rò Rỉ Dữ Liệu (pHash Audit Hamming Distance &ge; 5 bits)</p>
             </div>
           </div>
-          <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-200">4 KHO DỮ LIỆU</span>
+          <span class="text-xs sm:text-sm font-mono font-bold px-2.5 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-200">4 KHO DỮ LIỆU</span>
         </div>
 
         <!-- Step 7: 4 Warehouses Grid Container -->
-        <div id="step-7" onclick="jumpToStep(7)" class="p-3 bg-white border border-slate-200 rounded-xl space-y-3 cursor-pointer hover:border-emerald-400 transition">
+        <div id="step-7" onclick="jumpToStep(7)" class="p-3.5 bg-white border border-slate-200 rounded-xl space-y-3 cursor-pointer hover:border-emerald-400 transition">
           
           <div class="flex items-center justify-between border-b border-slate-100 pb-2">
             <div class="flex items-center gap-2">
-              <i class="fa-solid fa-boxes-stacked text-emerald-600 text-xs"></i>
-              <span class="text-xs font-bold text-slate-800">4 Kho Dữ Liệu Đã Phân Tách (4 Data Warehouses)</span>
+              <i class="fa-solid fa-boxes-stacked text-emerald-600 text-sm"></i>
+              <span class="text-sm font-bold text-slate-800">4 Kho Dữ Liệu Đã Phân Tách (4 Data Warehouses)</span>
             </div>
-            <span class="status-badge text-xs font-mono font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+            <span class="status-badge text-xs sm:text-sm font-mono font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
           </div>
 
           <!-- 4 Small Warehouses Grid -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs font-mono">
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs sm:text-sm font-mono">
             
             <!-- Test Set -->
-            <div class="p-2 bg-rose-50 border border-rose-200 rounded-lg text-rose-900">
-              <div class="text-xs font-bold text-rose-600">FIXED TEST</div>
-              <div class="font-bold text-xs mt-0.5">1.400 Ảnh</div>
+            <div class="p-2.5 bg-rose-50 border border-rose-200 rounded-lg text-rose-900">
+              <div class="text-xs sm:text-sm font-bold text-rose-600">FIXED TEST</div>
+              <div class="font-bold text-sm sm:text-base mt-0.5">1.400 Ảnh</div>
               <div class="text-xs text-rose-500">Đóng băng 20%</div>
             </div>
 
             <!-- Val Set -->
-            <div class="p-2 bg-sky-50 border border-sky-200 rounded-lg text-sky-900">
-              <div class="text-xs font-bold text-sky-600">FIXED VAL</div>
-              <div class="font-bold text-xs mt-0.5">700 Ảnh</div>
+            <div class="p-2.5 bg-sky-50 border border-sky-200 rounded-lg text-sky-900">
+              <div class="text-xs sm:text-sm font-bold text-sky-600">FIXED VAL</div>
+              <div class="font-bold text-sm sm:text-base mt-0.5">700 Ảnh</div>
               <div class="text-xs text-sky-500">Early Stopping 10%</div>
             </div>
 
             <!-- Seed V0 -->
-            <div class="p-2 bg-indigo-50 border border-indigo-200 rounded-lg text-indigo-900">
-              <div class="text-xs font-bold text-indigo-600">SEED V0</div>
-              <div class="font-bold text-xs mt-0.5">979 Ảnh</div>
+            <div class="p-2.5 bg-indigo-50 border border-indigo-200 rounded-lg text-indigo-900">
+              <div class="text-xs sm:text-sm font-bold text-indigo-600">SEED V0</div>
+              <div class="font-bold text-sm sm:text-base mt-0.5">979 Ảnh</div>
               <div class="text-xs text-indigo-500">Tập mầm xuất phát (20%)</div>
             </div>
 
             <!-- Unlabeled Pool -->
-            <div class="p-2 bg-amber-50 border border-amber-200 rounded-lg text-amber-900">
-              <div class="text-xs font-bold text-amber-600">UNLABELED POOL</div>
-              <div id="pool-count-text" class="font-bold text-xs mt-0.5">3.915 Ảnh</div>
+            <div class="p-2.5 bg-amber-50 border border-amber-200 rounded-lg text-amber-900">
+              <div class="text-xs sm:text-sm font-bold text-amber-600">UNLABELED POOL</div>
+              <div id="pool-count-text" class="font-bold text-sm sm:text-base mt-0.5">3.915 Ảnh</div>
               <div class="text-xs text-amber-500">Kho mỏ khai phá (80%)</div>
             </div>
 
@@ -632,27 +645,27 @@
           <!-- Slot 2 Header: Tương Tác Vòng Lặp V0 -> V5 Pills Selector -->
           <div class="flex flex-wrap items-center justify-between pb-3 border-b border-slate-200 gap-2">
             <div class="flex items-center gap-2.5">
-              <div id="slot2-icon-box" class="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center text-sm shadow-sm">
+              <div id="slot2-icon-box" class="w-9 h-9 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center text-base shadow-sm">
                 <i id="slot2-icon" class="fa-solid fa-chart-line"></i>
               </div>
               <div>
                 <div class="flex items-center gap-2">
-                  <span id="slot2-phase-badge" class="px-1.5 py-0.5 rounded bg-purple-100 text-purple-900 text-xs font-mono font-bold">PHASE 05</span>
-                  <span id="slot2-title" class="text-xs font-bold text-slate-900 tracking-wide uppercase">Active Mining C6 & Vòng Lặp Đa Chu Kỳ</span>
+                  <span id="slot2-phase-badge" class="px-2 py-0.5 rounded bg-purple-100 text-purple-900 text-xs sm:text-sm font-mono font-bold">PHASE 05</span>
+                  <span id="slot2-title" class="text-sm sm:text-base font-bold text-slate-900 tracking-wide uppercase">Active Mining C6 & Vòng Lặp Đa Chu Kỳ</span>
                 </div>
-                <div id="slot2-champion" class="text-xs text-purple-700 font-mono font-bold mt-0.5">🏆 Quán Quân: C6 Super-Fusion (Margin x Cw Deficit x PCA 32D)</div>
+                <div id="slot2-champion" class="text-xs sm:text-sm text-purple-700 font-mono font-bold mt-0.5">🏆 Quán Quân: C6 Super-Fusion (Margin x Cw Deficit x PCA 32D)</div>
               </div>
             </div>
 
             <!-- Iteration Pills Selector (V0 -> V5) -->
-            <div class="flex items-center bg-slate-100/90 rounded-xl p-1 border border-slate-200 shadow-2xs font-mono text-xs gap-1">
-              <span class="text-xs text-slate-400 font-bold px-1 hidden sm:inline">CHỌN VÒNG:</span>
-              <button onclick="selectIteration(0)" id="btn-iter-0" class="px-2 py-0.5 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V0</button>
-              <button onclick="selectIteration(1)" id="btn-iter-1" class="px-2 py-0.5 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V1</button>
-              <button onclick="selectIteration(2)" id="btn-iter-2" class="px-2 py-0.5 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V2</button>
-              <button onclick="selectIteration(3)" id="btn-iter-3" class="px-2 py-0.5 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V3</button>
-              <button onclick="selectIteration(4)" id="btn-iter-4" class="px-2 py-0.5 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V4</button>
-              <button onclick="selectIteration(5)" id="btn-iter-5" class="px-2.5 py-0.5 rounded-lg font-bold transition-all bg-emerald-600 text-white shadow-sm">V5 🏆</button>
+            <div class="flex items-center bg-slate-100/90 rounded-xl p-1 border border-slate-200 shadow-2xs font-mono text-xs sm:text-sm gap-1.5">
+              <span class="text-xs sm:text-sm text-slate-400 font-bold px-1 hidden sm:inline">CHỌN VÒNG:</span>
+              <button onclick="selectIteration(0)" id="btn-iter-0" class="px-2.5 py-1 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V0</button>
+              <button onclick="selectIteration(1)" id="btn-iter-1" class="px-2.5 py-1 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V1</button>
+              <button onclick="selectIteration(2)" id="btn-iter-2" class="px-2.5 py-1 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V2</button>
+              <button onclick="selectIteration(3)" id="btn-iter-3" class="px-2.5 py-1 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V3</button>
+              <button onclick="selectIteration(4)" id="btn-iter-4" class="px-2.5 py-1 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V4</button>
+              <button onclick="selectIteration(5)" id="btn-iter-5" class="px-3 py-1 rounded-lg font-bold transition-all bg-emerald-600 text-white shadow-sm">V5 🏆</button>
             </div>
           </div>
 
@@ -664,51 +677,51 @@
               
               <!-- 1.1 INPUT BOX -->
               <div class="p-2.5 bg-white rounded-lg border border-slate-200 space-y-1">
-                <div class="flex items-center justify-between text-xs font-bold text-slate-800">
+                <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-slate-800">
                   <span class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
                     <span>📥 INPUT (Dữ Liệu Vòng Hiện Tại)</span>
                   </span>
-                  <span id="slot2-input-source" class="text-xs font-mono px-2 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">Unlabeled Pool: 1.691</span>
+                  <span id="slot2-input-source" class="text-xs sm:text-sm font-mono px-2.5 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">Unlabeled Pool: 1.691</span>
                 </div>
-                <p id="slot2-input-specs" class="text-xs text-slate-600 leading-snug font-sans">
+                <p id="slot2-input-specs" class="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
                   Model V4 (mAP 27.20%) làm nền tảng khai phá trên kho mỏ chưa gán nhãn còn lại.
                 </p>
-                <div id="slot2-input-precond" class="text-xs text-slate-400 font-mono">
+                <div id="slot2-input-precond" class="text-xs sm:text-[13px] text-slate-500 font-mono">
                   Giao thức xác nhận chiến thắng (Confirmation Round Guard).
                 </div>
               </div>
 
               <!-- 1.2 HANDLE BOX (QUÁN QUÂN TẠI VÒNG HIỆN TẠI) -->
               <div class="p-2.5 bg-purple-50/60 rounded-lg border border-purple-200 space-y-1">
-                <div class="flex items-center justify-between text-xs font-bold text-purple-950">
+                <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-purple-950">
                   <span class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
                     <span>⚙️ HANDLE (Thuật Toán Vòng Lặp)</span>
                   </span>
-                  <span id="slot2-handle-speed" class="text-xs font-mono px-2 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">Cw(4) Steering</span>
+                  <span id="slot2-handle-speed" class="text-xs sm:text-sm font-mono px-2.5 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">Cw(4) Steering</span>
                 </div>
-                <p id="slot2-handle-algo" class="text-xs text-slate-700 leading-snug font-sans">
+                <p id="slot2-handle-algo" class="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
                   Áp dụng C6 Super-Fusion với vector trọng số thích ứng Cw(4): train 19.88x, rider 20.88x, motor 19.64x.
                 </p>
-                <div id="slot2-handle-params" class="text-xs text-purple-700 font-mono">
+                <div id="slot2-handle-params" class="text-xs sm:text-[13px] text-purple-700 font-mono">
                   Đa dạng cụm PCA 32D | Submodular Facility Location | Khóa car 0.20x.
                 </div>
               </div>
 
               <!-- 1.3 OUTPUT & ARTIFACT BOX -->
               <div class="p-2.5 bg-emerald-50/60 rounded-lg border border-emerald-200 space-y-1">
-                <div class="flex items-center justify-between text-xs font-bold text-emerald-900">
+                <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-emerald-900">
                   <span class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
                     <span>📤 OUTPUT & ARTIFACT (Kết Quả Vòng Lặp)</span>
                   </span>
-                  <span id="slot2-output-vol" class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">mAP@50: 27.85%</span>
+                  <span id="slot2-output-vol" class="text-xs sm:text-sm font-mono px-2.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">mAP@50: 27.85%</span>
                 </div>
-                <p id="slot2-output-art" class="text-xs text-slate-700 leading-snug font-sans">
+                <p id="slot2-output-art" class="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
                   Mô hình V5 đạt 27.85% mAP@50 (Vượt trần +1.00% so với 100% Target 26.85%), tiết kiệm 40.1% ngân sách.
                 </p>
-                <div id="slot2-output-handover" class="text-xs text-emerald-700 font-mono">
+                <div id="slot2-output-handover" class="text-xs sm:text-[13px] text-emerald-700 font-mono">
                   Artifact: `active_loop_v5_best.pt` | Niêm phong `VICTORY_CONFIRMED`.
                 </div>
               </div>
@@ -725,7 +738,7 @@
                      class="w-full h-40 object-contain p-1 transition-all duration-300" 
                      loading="lazy" />
                 <div class="absolute inset-0 bg-slate-900/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
-                  <span id="slot2-img-caption" class="px-2 py-1 rounded bg-black/75 text-white text-xs font-mono font-bold text-center">
+                  <span id="slot2-img-caption" class="px-2 py-1 rounded bg-black/75 text-white text-xs sm:text-sm font-mono font-bold text-center">
                     Figure 07a: 4-Panel Active Curve vs 100% Target
                   </span>
                 </div>
@@ -736,35 +749,35 @@
                 
                 <!-- 4 Thẻ Metrics Đo Lường Vĩ Mô Vòng Lặp -->
                 <div class="grid grid-cols-2 gap-2 text-center font-mono">
-                  <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
-                    <div id="slot2-m1-lbl" class="text-xs text-slate-500 uppercase">mAP@50 Đỉnh</div>
-                    <div id="slot2-m1-val" class="text-sm font-extrabold text-emerald-700 mt-0.5">27.85%</div>
-                    <div id="slot2-m1-sub" class="text-xs text-sky-700 font-bold">+1.00% vs Target</div>
+                  <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
+                    <div id="slot2-m1-lbl" class="text-xs sm:text-sm text-slate-500 uppercase font-semibold">mAP@50 Đỉnh</div>
+                    <div id="slot2-m1-val" class="text-base sm:text-lg font-extrabold text-emerald-700 mt-0.5">27.85%</div>
+                    <div id="slot2-m1-sub" class="text-xs sm:text-[13px] text-sky-700 font-bold">+1.00% vs Target</div>
                   </div>
-                  <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
-                    <div id="slot2-m2-lbl" class="text-xs text-slate-500 uppercase">mAP@50:95</div>
-                    <div id="slot2-m2-val" class="text-sm font-extrabold text-purple-700 mt-0.5">16.15%</div>
-                    <div id="slot2-m2-sub" class="text-xs text-sky-700 font-bold">+0.75% vs Target</div>
+                  <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
+                    <div id="slot2-m2-lbl" class="text-xs sm:text-sm text-slate-500 uppercase font-semibold">mAP@50:95</div>
+                    <div id="slot2-m2-val" class="text-base sm:text-lg font-extrabold text-purple-700 mt-0.5">16.15%</div>
+                    <div id="slot2-m2-sub" class="text-xs sm:text-[13px] text-sky-700 font-bold">+0.75% vs Target</div>
                   </div>
-                  <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
-                    <div id="slot2-m3-lbl" class="text-xs text-slate-500 uppercase">Recall</div>
-                    <div id="slot2-m3-val" class="text-sm font-extrabold text-emerald-700 mt-0.5">30.64%</div>
-                    <div id="slot2-m3-sub" class="text-xs text-sky-700 font-bold">+1.14% vs Target</div>
+                  <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
+                    <div id="slot2-m3-lbl" class="text-xs sm:text-sm text-slate-500 uppercase font-semibold">Recall</div>
+                    <div id="slot2-m3-val" class="text-base sm:text-lg font-extrabold text-emerald-700 mt-0.5">30.64%</div>
+                    <div id="slot2-m3-sub" class="text-xs sm:text-[13px] text-sky-700 font-bold">+1.14% vs Target</div>
                   </div>
-                  <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
-                    <div id="slot2-m4-lbl" class="text-xs text-slate-500 uppercase">CF-Score</div>
-                    <div id="slot2-m4-val" class="text-sm font-extrabold text-purple-800 mt-0.5">25.18</div>
-                    <div id="slot2-m4-sub" class="text-xs text-sky-700 font-bold">+0.97 vs Target</div>
+                  <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
+                    <div id="slot2-m4-lbl" class="text-xs sm:text-sm text-slate-500 uppercase font-semibold">CF-Score</div>
+                    <div id="slot2-m4-val" class="text-base sm:text-lg font-extrabold text-purple-800 mt-0.5">25.18</div>
+                    <div id="slot2-m4-sub" class="text-xs sm:text-[13px] text-sky-700 font-bold">+0.97 vs Target</div>
                   </div>
                 </div>
 
                 <!-- Bảng Giải Cứu Lớp Yếu Thế (Thay Đổi Theo Vòng) -->
-                <div class="p-2 bg-white rounded-lg border border-slate-200 space-y-1 font-mono text-xs">
-                  <div class="text-xs font-bold text-slate-700 flex items-center justify-between border-b border-slate-100 pb-1">
+                <div class="p-2.5 bg-white rounded-lg border border-slate-200 space-y-1.5 font-mono text-xs sm:text-sm">
+                  <div class="text-xs sm:text-sm font-bold text-slate-700 flex items-center justify-between border-b border-slate-100 pb-1">
                     <span>Tiến Hóa Lớp Yếu Thế</span>
-                    <span id="slot2-class-round-lbl" class="text-xs text-purple-700 font-bold">VÒNG 5</span>
+                    <span id="slot2-class-round-lbl" class="text-xs sm:text-sm text-purple-700 font-bold">VÒNG 5</span>
                   </div>
-                  <div class="grid grid-cols-2 gap-x-2 gap-y-0.5">
+                  <div class="grid grid-cols-2 gap-x-2 gap-y-1">
                     <div class="flex justify-between items-center">
                       <span class="text-slate-500">🏍️ rider:</span>
                       <span id="slot2-cls-rider" class="font-bold text-emerald-700">10.1% (+7.9%)</span>
@@ -791,9 +804,9 @@
           </div>
 
           <!-- Slot 2 Footer -->
-          <div class="pt-2.5 border-t border-slate-200 flex flex-wrap items-center justify-between text-xs font-mono text-slate-500 gap-1">
+          <div class="pt-2.5 border-t border-slate-200 flex flex-wrap items-center justify-between text-xs sm:text-sm font-mono text-slate-500 gap-1">
             <span class="flex items-center gap-1.5">
-              <span id="slot2-stop-dot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span id="slot2-stop-dot" class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
               <span id="slot2-stop-decision-text" class="text-emerald-800 font-bold">PHÁN QUYẾT: VICTORY_CONFIRMED (Tiết kiệm 40.1% nhãn)</span>
             </span>
             <span id="slot2-footer-tag" class="text-purple-700 font-bold">Niêm Phong Bởi AutonomousLoopOrchestrator</span>
@@ -825,7 +838,7 @@
             <path id="loop-curve-path" d="M 0 0 C 0 0, 0 0, 0 0" fill="none" stroke="url(#loopGradient)" stroke-width="3" class="loopback-dash" marker-end="url(#loop-arrowhead)" />
 
             <!-- Dynamic Label along Loop Curve -->
-            <text id="loop-text-label" x="0" y="0" fill="#d97706" font-size="9" font-family="JetBrains Mono" font-weight="700" letter-spacing="0.5">
+            <text id="loop-text-label" x="0" y="0" fill="#d97706" font-size="11" font-family="JetBrains Mono" font-weight="700" letter-spacing="0.5">
               Vòng lặp V1 &rarr; V5 (Re-mine &amp; Retrain)
             </text>
           </svg>
@@ -833,13 +846,13 @@
           <!-- Parent Header -->
           <div class="flex items-center justify-between pb-3 mb-4 border-b border-purple-100">
             <div class="flex items-center gap-2.5">
-              <span class="px-2 py-0.5 rounded-md bg-purple-600 text-white font-mono font-bold text-xs shadow-sm">TẦNG 3</span>
+              <span class="px-2.5 py-1 rounded-md bg-purple-600 text-white font-mono font-bold text-xs sm:text-sm shadow-sm">TẦNG 3</span>
               <div>
-                <h2 class="text-xs font-extrabold text-purple-950 uppercase tracking-wide">Vòng Lặp Active ($V_0 \to V_5$)</h2>
-                <p class="text-xs text-slate-500">C6 Mining, Consensus, Retraining</p>
+                <h2 class="text-sm sm:text-base font-extrabold text-purple-950 uppercase tracking-wide">Vòng Lặp Active ($V_0 \to V_5$)</h2>
+                <p class="text-xs sm:text-sm text-slate-500">C6 Mining, Consensus, Retraining</p>
               </div>
             </div>
-            <span id="active-loop-iter-tag" class="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-purple-100 text-purple-800 border border-purple-200">V0 BASELINE</span>
+            <span id="active-loop-iter-tag" class="text-xs sm:text-sm font-mono font-bold px-2 py-0.5 rounded bg-purple-100 text-purple-800 border border-purple-200">V0 BASELINE</span>
           </div>
 
           <!-- Child Steps Stack (Top-to-Bottom Flow) -->
@@ -851,11 +864,11 @@
                 <span class="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-800">PHASE 04</span>
                 <span class="status-badge text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
               </div>
-              <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+              <div class="flex items-center gap-2 text-sm font-bold text-slate-800">
                 <i class="fa-solid fa-graduation-cap text-indigo-600"></i>
                 <span class="truncate">Huấn Luyện Seed V0</span>
               </div>
-              <div class="text-xs text-slate-400 font-mono">Công Thức Cfg-3 (AdamW)</div>
+              <div class="text-xs sm:text-[13px] text-slate-500 font-mono">Công Thức Cfg-3 (AdamW)</div>
             </div>
 
             <!-- Connector Down -->
@@ -870,11 +883,11 @@
                 <span class="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700">MODEL V0</span>
                 <span class="status-badge text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
               </div>
-              <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+              <div class="flex items-center gap-2 text-sm font-bold text-slate-800">
                 <i class="fa-solid fa-microchip text-sky-600"></i>
                 <span class="truncate">Model V0 Baseline</span>
               </div>
-              <div class="text-xs text-slate-500 font-mono font-bold">20.23% mAP@50 (Test Set)</div>
+              <div class="text-xs sm:text-[13px] text-slate-500 font-mono font-bold">20.23% mAP@50 (Test Set)</div>
             </div>
 
             <!-- Connector Down -->
@@ -886,12 +899,12 @@
             <!-- ACTIVE RECURRENT LOOP BOUNDARY BOX (STEPS 10 -> 15) -->
             <div class="w-full p-3 rounded-xl border-2 border-dashed border-purple-300 bg-purple-100/30 space-y-2.5 flex flex-col items-center relative">
               
-              <div class="w-full flex items-center justify-between text-xs font-mono font-bold text-purple-800">
+              <div class="w-full flex items-center justify-between text-xs sm:text-sm font-mono font-bold text-purple-800">
                 <span class="flex items-center gap-1.5">
                   <i class="fa-solid fa-arrows-spin text-purple-600 animate-spin"></i>
                   KHU VỰC VÒNG LẶP ACTIVE (05 &rarr; 07)
                 </span>
-                <span id="active-batch-size-tag" class="px-1.5 py-0.5 rounded bg-purple-200 text-purple-900">+556 Ảnh / Vòng</span>
+                <span id="active-batch-size-tag" class="px-2 py-0.5 rounded bg-purple-200 text-purple-900 font-bold text-xs sm:text-sm">+556 Ảnh / Vòng</span>
               </div>
 
               <!-- Step 10: Phase 05 Active Mining C6 Super-Fusion -->
@@ -900,11 +913,11 @@
                   <span class="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800">PHASE 05</span>
                   <span class="status-badge text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
                 </div>
-                <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                <div class="flex items-center gap-2 text-sm font-bold text-slate-800">
                   <i class="fa-solid fa-filter-circle-dollar text-amber-600"></i>
                   <span class="truncate">Khai Phá C6 Super-Fusion</span>
                 </div>
-                <div class="text-xs text-slate-400 font-mono">Bất Định x PCA 32D</div>
+                <div class="text-xs sm:text-[13px] text-slate-500 font-mono">Bất Định x PCA 32D</div>
               </div>
 
               <!-- Connector Down -->
@@ -919,11 +932,11 @@
                   <span class="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-purple-100 text-purple-800">HITL</span>
                   <span class="status-badge text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
                 </div>
-                <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                <div class="flex items-center gap-2 text-sm font-bold text-slate-800">
                   <i class="fa-solid fa-user-check text-purple-600"></i>
                   <span class="truncate">Consensus & Oracle HITL</span>
                 </div>
-                <div class="text-xs text-slate-400 font-mono">Tier 1 Gated Pre-label</div>
+                <div class="text-xs sm:text-[13px] text-slate-500 font-mono">Tier 1 Gated Pre-label</div>
               </div>
 
               <!-- Connector Down -->
@@ -938,7 +951,7 @@
                   <span class="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800">MERGE</span>
                   <span class="status-badge text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
                 </div>
-                <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                <div class="flex items-center gap-2 text-sm font-bold text-slate-800">
                   <i class="fa-solid fa-layer-group text-emerald-600"></i>
                   <span class="truncate">Gộp Lũy Kế Dữ Liệu</span>
                 </div>
@@ -957,11 +970,11 @@
                   <span class="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-sky-100 text-sky-700">PHASE 06</span>
                   <span class="status-badge text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
                 </div>
-                <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                <div class="flex items-center gap-2 text-sm font-bold text-slate-800">
                   <i class="fa-solid fa-rotate text-sky-600"></i>
                   <span class="truncate">Tái Huấn Luyện Warm-Start</span>
                 </div>
-                <div class="text-xs text-slate-400 font-mono">C_w Equalizer (8 Epochs)</div>
+                <div class="text-xs sm:text-[13px] text-slate-500 font-mono">C_w Equalizer (8 Epochs)</div>
               </div>
 
               <!-- Connector Down -->
@@ -976,11 +989,11 @@
                   <span class="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-sky-100 text-sky-700">PHASE 07</span>
                   <span class="status-badge text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
                 </div>
-                <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                <div class="flex items-center gap-2 text-sm font-bold text-slate-800">
                   <i class="fa-solid fa-chart-line text-indigo-600"></i>
                   <span class="truncate">Đánh Giá Trên Test Set</span>
                 </div>
-                <div id="current-map-text" class="text-xs text-indigo-600 font-mono font-bold">mAP@50: --%</div>
+                <div id="current-map-text" class="text-xs sm:text-[13px] text-indigo-600 font-mono font-bold">mAP@50: --%</div>
               </div>
 
               <!-- Connector Down -->
@@ -995,11 +1008,11 @@
                   <span class="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-rose-100 text-rose-800">GATES</span>
                   <span class="status-badge text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
                 </div>
-                <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                <div class="flex items-center gap-2 text-sm font-bold text-slate-800">
                   <i class="fa-solid fa-shield-halved text-rose-600"></i>
                   <span class="truncate">Bộ Rào Chắn Dừng 5 Tầng</span>
                 </div>
-                <div class="text-xs text-slate-400 font-mono">Target Threshold: 26.85%</div>
+                <div class="text-xs sm:text-[13px] text-slate-500 font-mono">Target Threshold: 26.85%</div>
               </div>
 
             </div> <!-- END ACTIVE RECURRENT LOOP BOUNDARY BOX -->
@@ -1016,11 +1029,11 @@
                 <span class="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800">DEPLOY</span>
                 <span class="status-badge text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
               </div>
-              <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+              <div class="flex items-center gap-2 text-sm font-bold text-slate-800">
                 <i class="fa-solid fa-rocket text-emerald-600"></i>
                 <span class="truncate">Xuất Bản INT8 Engine</span>
               </div>
-              <div class="text-xs text-slate-400 font-mono">SHA-256 Sealed Checkpoint</div>
+              <div class="text-xs sm:text-[13px] text-slate-500 font-mono">SHA-256 Sealed Checkpoint</div>
             </div>
 
           </div>
@@ -1143,12 +1156,12 @@
       const btn = document.getElementById('btn-audio');
       const icon = document.getElementById('icon-audio');
       if (isAudioEnabled) {
-        btn.className = "px-2.5 py-1.5 rounded-lg bg-amber-50 text-amber-700 border border-amber-300 text-xs font-bold flex items-center gap-1 transition";
+        btn.className = "px-3 py-2 rounded-lg bg-amber-50 text-amber-700 border border-amber-300 text-xs sm:text-sm font-bold flex items-center gap-1 transition";
         icon.className = "fa-solid fa-volume-high";
         btn.querySelector('span').innerText = "Âm Thanh: BẬT";
         playStepSound();
       } else {
-        btn.className = "px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-500 border border-slate-200 text-xs font-bold flex items-center gap-1 transition";
+        btn.className = "px-3 py-2 rounded-lg bg-slate-100 text-slate-500 border border-slate-200 text-xs sm:text-sm font-bold flex items-center gap-1 transition";
         icon.className = "fa-solid fa-volume-xmark";
         btn.querySelector('span').innerText = "Âm Thanh: TẮT";
       }
@@ -1415,19 +1428,19 @@
       isAutoScrollEnabled = !isAutoScrollEnabled;
       const btn = document.getElementById('btn-autoscroll');
       if (isAutoScrollEnabled) {
-        btn.className = "px-2.5 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-300 text-xs font-bold flex items-center gap-1 transition";
+        btn.className = "px-3 py-2 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-300 text-xs sm:text-sm font-bold flex items-center gap-1 transition";
         btn.innerHTML = `<i class="fa-solid fa-arrows-up-to-line"></i><span>Auto-Scroll</span>`;
       } else {
-        btn.className = "px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-500 border border-slate-200 text-xs font-bold flex items-center gap-1 transition";
+        btn.className = "px-3 py-2 rounded-lg bg-slate-100 text-slate-500 border border-slate-200 text-xs sm:text-sm font-bold flex items-center gap-1 transition";
         btn.innerHTML = `<i class="fa-solid fa-arrows-up-to-line"></i><span>Auto-Scroll: OFF</span>`;
       }
     }
 
     function setSpeed(speed) {
       tourSpeedMultiplier = speed;
-      document.getElementById('speed-05').className = speed === 0.5 ? "px-1.5 py-0.5 rounded bg-sky-600 text-white transition" : "px-1.5 py-0.5 rounded text-slate-500 transition";
-      document.getElementById('speed-10').className = speed === 1.0 ? "px-1.5 py-0.5 rounded bg-sky-600 text-white transition" : "px-1.5 py-0.5 rounded text-slate-500 transition";
-      document.getElementById('speed-20').className = speed === 2.0 ? "px-1.5 py-0.5 rounded bg-sky-600 text-white transition" : "px-1.5 py-0.5 rounded text-slate-500 transition";
+      document.getElementById('speed-05').className = speed === 0.5 ? "px-2 py-1 rounded bg-sky-600 text-white transition" : "px-2 py-1 rounded text-slate-500 transition";
+      document.getElementById('speed-10').className = speed === 1.0 ? "px-2 py-1 rounded bg-sky-600 text-white transition" : "px-2 py-1 rounded text-slate-500 transition";
+      document.getElementById('speed-20').className = speed === 2.0 ? "px-2 py-1 rounded bg-sky-600 text-white transition" : "px-2 py-1 rounded text-slate-500 transition";
 
       if (isAutoTourRunning) restartTourTimer();
     }
