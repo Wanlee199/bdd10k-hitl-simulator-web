@@ -100,6 +100,21 @@
       font-size: 11.5px !important;
     }
 
+    /* Base Typography Boost Cho Toàn Bộ Text Thuần (16px - 18px) */
+    p:not(.caption-small):not(.badge-text) {
+      font-size: 1.0625rem !important; /* 17px */
+      line-height: 1.75 !important;
+    }
+    .verdict-box {
+      font-size: 1.0625rem !important; /* 17px */
+      line-height: 1.75 !important;
+    }
+    @media (max-width: 640px) {
+      p:not(.caption-small):not(.badge-text), .verdict-box {
+        font-size: 1rem !important; /* 16px */
+        line-height: 1.65 !important;
+      }
+    }
   </style>
 </head>
 <body class="bg-[#F9FAFB] text-[#1F2627] font-sans antialiased selection:bg-[#DCEBE0]">
@@ -772,7 +787,7 @@
             </div>
 
             <!-- Phán quyết Vòng 0 -->
-            <div class="py-2.5 px-3 text-sm text-[#475254] italic leading-relaxed border-t border-b border-[#E5E3DC]">
+            <div class="verdict-box py-3 px-3 text-base lg:text-[17px] text-[#475254] italic leading-relaxed border-t border-b border-[#E5E3DC]">
               <strong>Phán Quyết Nghiên Cứu:</strong> Khởi động mô hình mầm YOLO11n trên 556 ảnh phân tầng Hybrid Mix 80/20. Lớp phổ biến (car) đạt 60.4% mAP50, nhưng các lớp hiếm bị điểm liệt nghiêm trọng do thiếu mẫu (train: 0.0%, motor: 2.1%, rider: 2.2%). Đây là mốc quy chiếu để đo lường hiệu quả cứu trợ của Active Learning.
             </div>
 
@@ -918,7 +933,7 @@
             </div>
 
             <!-- Phán quyết Vòng 1 -->
-            <div class="p-3 rounded-xl bg-[#E8F0EA]/40 border border-[#CDE0D1] text-sm text-[#2D5A34] italic leading-relaxed">
+            <div class="verdict-box p-3.5 rounded-xl bg-[#E8F0EA]/40 border border-[#CDE0D1] text-base lg:text-[17px] text-[#2D5A34] italic leading-relaxed">
               <strong>Phán Quyết Nghiên Cứu:</strong> Active V1 bứt phá mAP@50 vĩ mô lên 22.80%, vượt trội +1.85% so với Random Floor (20.95%). Đặc biệt, lớp tàu hỏa (train) được giải cứu từ điểm liệt 0% lên 3.5% (trong khi Random chỉ đạt 0.5%), lớp xe máy (motor) tăng vọt từ 2.1% lên 4.5% (gấp đôi Random). Độ chuẩn xác Precision tăng +3.55%.
             </div>
 
@@ -1010,7 +1025,7 @@
             </div>
 
             <!-- Phán quyết Vòng 2 -->
-            <div class="p-3 rounded-xl bg-[#FFF3E0]/40 border border-[#FFE0B2] text-sm text-[#B26A00] italic leading-relaxed">
+            <div class="verdict-box p-3.5 rounded-xl bg-[#FFF3E0]/40 border border-[#FFE0B2] text-base lg:text-[17px] text-[#B26A00] italic leading-relaxed">
               <strong>Phán Quyết Nghiên Cứu:</strong> KÍCH HOẠT VÒNG XÁC NHẬN! Active V2 thiết lập cách biệt kỷ lục +3.05% mAP@50 so với Random (24.65% vs 21.60%). Các lớp hiếm bứt tốc vượt bậc: train đạt 7.8% (gấp 6.5 lần Random 1.2%), motor đạt 7.2% (gấp 2.5 lần Random 2.8%), rider đạt 5.4% (gấp đôi Random 2.7%). Độ chuẩn xác Precision tăng vọt +5.20%.
             </div>
 
@@ -1102,7 +1117,7 @@
             </div>
 
             <!-- Phán quyết Vòng 3 -->
-            <div class="p-3 rounded-xl bg-[#E8EAF6]/40 border border-[#C5CAE9] text-sm text-[#1A237E] italic leading-relaxed">
+            <div class="verdict-box p-3.5 rounded-xl bg-[#E8EAF6]/40 border border-[#C5CAE9] text-base lg:text-[17px] text-[#1A237E] italic leading-relaxed">
               <strong>Phán Quyết Nghiên Cứu:</strong> Vòng xác nhận động khẳng định đà tăng trưởng bền vững: Active V3 đạt 26.15% mAP@50, chỉ còn kém trần 100% Target đúng 0.70 điểm phần trăm dù mới chỉ sử dụng 40% dữ liệu. Lớp tàu hỏa đạt 11.5% (gấp 6.4 lần Random 1.8%), lớp xe máy đạt 9.8% (gấp 3 lần Random 3.2%).
             </div>
 
