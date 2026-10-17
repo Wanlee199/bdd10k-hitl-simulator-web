@@ -417,8 +417,8 @@ function showToast(message) {
 // =============================================================================
 window.autoResizePipelineIframe = function (iframe) {
   if (!iframe) return;
-  // Khóa cứng chiều cao tối ưu 2750px để ôm trọn 2738px nội dung thực tế, triệt tiêu hoàn toàn layout shift và hiện tượng trôi cuộn
-  iframe.style.height = "2750px";
+  // Chiều cao tiêu chuẩn 3300px ôm trọn toàn bộ 3 tầng quy trình và 16 bước, không bị cắt cụt
+  iframe.style.height = "3300px";
 };
 
 // Lắng nghe postMessage báo kích thước động từ iframe (chống feedback loop)
@@ -426,8 +426,8 @@ window.addEventListener("message", function (e) {
   if (e.data && e.data.type === "PIPELINE_RESIZE" && e.data.height) {
     const iframe = document.getElementById("pipelineVisualizerIframe");
     if (iframe) {
-      const targetH = Math.min(Math.max(e.data.height, 2750), 2850);
-      if (Math.abs(iframe.offsetHeight - targetH) > 40) {
+      const targetH = Math.max(parseInt(e.data.height, 10) || 0, 3300);
+      if (Math.abs(iframe.offsetHeight - targetH) > 20) {
         iframe.style.height = targetH + "px";
       }
     }
@@ -445,10 +445,10 @@ function initIndexLab() {
     window.switchIndexRound("v5");
   }
 
-  // Khóa chiều cao cố định cho iframe visualizer
+  // Khóa chiều cao cố định tối thiểu cho iframe visualizer
   const pipeIframe = document.getElementById("pipelineVisualizerIframe");
   if (pipeIframe) {
-    pipeIframe.style.height = "2750px";
+    pipeIframe.style.height = "3300px";
   }
 
   // Kích hoạt render KaTeX nếu có
