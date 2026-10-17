@@ -50,130 +50,141 @@
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="if(window.triggerKaTeXAutoRender) window.triggerKaTeXAutoRender();"></script>
   <script defer src="js/math-render.js"></script>
+  <!-- Script & Style Chống Giật Layout Cho Sidebar Collapsed (Zero FOUC) -->
+  <script>
+    if (localStorage.getItem('al_sidebar_collapsed') === 'true') {
+      document.documentElement.classList.add('sidebar-is-collapsed');
+    }
+  </script>
+  <style>
+    html.sidebar-is-collapsed #app-sidebar { width: 5rem !important; }
+    html.sidebar-is-collapsed #main-wrapper { padding-left: 5rem !important; }
+    html.sidebar-is-collapsed .sidebar-text-expand { display: none !important; }
+    html.sidebar-is-collapsed .sidebar-item-link { justify-content: center !important; padding-left: 0.5rem !important; padding-right: 0.5rem !important; }
+  </style>
 </head>
 <body class="bg-[#F8F7F2] text-[#1F2627] font-sans antialiased selection:bg-[#DCEBE0]">
 
   <!-- ========================================================================= -->
   <!-- LEFT FIXED ADMIN SIDEBAR (GreenSM Nordic Editorial Style) -->
   <!-- ========================================================================= -->
-  <aside class="fixed inset-y-0 left-0 w-72 bg-white border-r border-[#E5E3DC] flex flex-col z-50 shadow-soft">
-    <!-- Zone 1: Sidebar Brand Header -->
-    <div class="h-16 border-b border-[#E5E3DC] px-5 flex items-center justify-between shrink-0">
-      <a href="index.html" class="flex items-center gap-2.5 group">
-        <div class="w-9 h-9 rounded-xl bg-[#2D5A34] text-white flex items-center justify-center shadow-soft">
-          <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+  <aside id="app-sidebar" class="fixed inset-y-0 left-0 w-72 bg-white border-r border-[#E5E3DC] flex flex-col z-50 shadow-soft transition-all duration-300 ease-in-out">
+        <!-- Zone 1: Sidebar Brand Header -->
+    <div class="h-16 border-b border-[#E5E3DC] px-4 flex items-center justify-between shrink-0">
+      <a href="index.html" class="flex items-center gap-2.5 overflow-hidden group">
+        <div class="w-9 h-9 rounded-xl bg-[#2D5A34] text-white flex items-center justify-center shadow-soft shrink-0">
+          <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
         </div>
-        <div>
-          <div class="font-editorial font-bold text-sm text-[#1F2627] leading-none group-hover:text-[#2D5A34] transition-colors">
+        <div class="sidebar-text-expand">
+          <div class="font-editorial font-bold text-sm text-[#1F2627] leading-none group-hover:text-[#2D5A34] transition-colors truncate">
             BDD10K ActiveLab
           </div>
-          <div class="text-[9px] font-mono text-[#6B7677] uppercase tracking-wider mt-0.5">
-            POINT 5 MINING CONSOLE
+          <div class="text-[9px] font-mono text-[#6B7677] uppercase tracking-wider mt-0.5 truncate">
+            POINT 5 ACTIVE MINING CONSOLE
           </div>
         </div>
       </a>
+      <button id="sidebar-toggle-btn" onclick="toggleSidebar()" class="p-1.5 rounded-lg text-[#6B7677] hover:text-[#2D5A34] hover:bg-[#E8F0EA] transition-colors shrink-0" title="Thu nhỏ / Phóng to Sidebar">
+        <svg id="sidebar-toggle-icon" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="18" height="18" x="3" y="3" rx="2"/>
+          <path d="M9 3v18"/>
+          <path d="m14 9-3 3 3 3"/>
+        </svg>
+      </button>
     </div>
 
     <!-- Zone 2: Scrollable Navigation -->
     <div class="flex-1 overflow-y-auto px-4 py-4 space-y-6 no-scrollbar">
       
-      <!-- Nav Group 1: 5 Phases Pipeline Rail -->
+            <!-- Nav Group 1: 5 Phases Pipeline Rail -->
       <div class="space-y-2">
-        <div class="flex items-center justify-between text-[10px] font-mono font-bold text-[#6B7677] uppercase tracking-wider px-1">
+        <div class="flex items-center justify-between text-[10px] font-mono font-bold text-[#6B7677] uppercase tracking-wider px-1 sidebar-text-expand">
           <span>TIẾN TRÌNH 6 PHASES</span>
           <span class="text-[9px] text-[#2D5A34] font-semibold">ActiveLab</span>
         </div>
         <div class="space-y-1.5">
           <!-- Phase 01 -->
-          <a href="fastdedup-point1.html" class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F8F7F2] transition-all group">
-            <div class="flex items-center gap-2">
-              <span class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-[10px] flex items-center justify-center">01</span>
-              <div>
+          <a href="fastdedup-point1.html" class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F8F7F2] transition-all group sidebar-item-link" title="Phase 01: FastDedup (397 FPS)">
+            <div class="flex items-center gap-2 overflow-hidden">
+              <span class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-[10px] flex items-center justify-center shrink-0">01</span>
+              <div class="sidebar-text-expand truncate">
                 <div class="text-xs font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">FastDedup</div>
                 <div class="text-[9px] font-mono text-[#6B7677]">397 FPS • Lọc Trùng</div>
               </div>
             </div>
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#F8F7F2] text-[#6B7677]">→</span>
+            <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded-md bg-[#F8F7F2] text-[#6B7677] border border-[#E5E3DC] shrink-0 sidebar-text-expand">→</span>
           </a>
-
           <!-- Phase 02 -->
-          <a href="profiling-point2.html" class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F8F7F2] transition-all group">
-            <div class="flex items-center gap-2">
-              <span class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-[10px] flex items-center justify-center">02</span>
-              <div>
+          <a href="profiling-point2.html" class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F8F7F2] transition-all group sidebar-item-link" title="Phase 02: Profiling 5D (F1 97.1%)">
+            <div class="flex items-center gap-2 overflow-hidden">
+              <span class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-[10px] flex items-center justify-center shrink-0">02</span>
+              <div class="sidebar-text-expand truncate">
                 <div class="text-xs font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Profiling 5D</div>
                 <div class="text-[9px] font-mono text-[#6B7677]">F1 97.1% • Manifest</div>
               </div>
             </div>
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#F8F7F2] text-[#6B7677]">→</span>
+            <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded-md bg-[#F8F7F2] text-[#6B7677] border border-[#E5E3DC] shrink-0 sidebar-text-expand">→</span>
           </a>
-
           <!-- Phase 03 -->
-          <a href="splits-point3.html" class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F8F7F2] transition-all group">
-            <div class="flex items-center gap-2">
-              <span class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-[10px] flex items-center justify-center">03</span>
-              <div>
+          <a href="splits-point3.html" class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F8F7F2] transition-all group sidebar-item-link" title="Phase 03: Splits Seed V0 (0% Leak)">
+            <div class="flex items-center gap-2 overflow-hidden">
+              <span class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-[10px] flex items-center justify-center shrink-0">03</span>
+              <div class="sidebar-text-expand truncate">
                 <div class="text-xs font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Splits Seed V0</div>
                 <div class="text-[9px] font-mono text-[#6B7677]">Hybrid Mix 80/20</div>
               </div>
             </div>
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#F8F7F2] text-[#6B7677]">→</span>
+            <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded-md bg-[#F8F7F2] text-[#6B7677] border border-[#E5E3DC] shrink-0 sidebar-text-expand">→</span>
           </a>
-
           <!-- Phase 04 -->
-          <a href="training-point4.html" class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F8F7F2] transition-all group">
-            <div class="flex items-center gap-2">
-              <span class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-[10px] flex items-center justify-center">04</span>
-              <div>
+          <a href="training-point4.html" class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F8F7F2] transition-all group sidebar-item-link" title="Phase 04: Training Model V0 (mAP 20.2%)">
+            <div class="flex items-center gap-2 overflow-hidden">
+              <span class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-[10px] flex items-center justify-center shrink-0">04</span>
+              <div class="sidebar-text-expand truncate">
                 <div class="text-xs font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Training Model V0</div>
                 <div class="text-[9px] font-mono text-[#6B7677]">YOLO11n 20.2%</div>
               </div>
             </div>
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#F8F7F2] text-[#6B7677]">→</span>
+            <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded-md bg-[#F8F7F2] text-[#6B7677] border border-[#E5E3DC] shrink-0 sidebar-text-expand">→</span>
           </a>
-
           <!-- Phase 05: Active -->
-          <a href="active-mining-point5.html" class="flex items-center justify-between p-2 rounded-xl bg-[#E8F0EA] border border-[#2D5A34] shadow-soft-sm transition-all">
-            <div class="flex items-center gap-2">
-              <span class="w-6 h-6 rounded-lg bg-[#2D5A34] text-white font-mono font-bold text-[10px] flex items-center justify-center">05</span>
-              <div>
+          <a href="active-mining-point5.html" class="flex items-center justify-between p-2 rounded-xl bg-[#E8F0EA] border border-[#2D5A34] shadow-soft-sm transition-all sidebar-item-link" title="Phase 05: Active Mining (K=250 • Đang xem)">
+            <div class="flex items-center gap-2 overflow-hidden">
+              <span class="w-6 h-6 rounded-lg bg-[#2D5A34] text-white font-mono font-bold text-[10px] flex items-center justify-center shrink-0">05</span>
+              <div class="sidebar-text-expand truncate">
                 <div class="text-xs font-bold text-[#2D5A34]">Active Mining</div>
                 <div class="text-[9px] font-mono text-[#2D5A34]">Facility Location • K=250</div>
               </div>
             </div>
-            <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-white text-[#2D5A34] border border-[#CDE0D1]">ĐANG XEM</span>
+            <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded-md bg-white text-[#2D5A34] border border-[#CDE0D1] shrink-0 sidebar-text-expand">ĐANG XEM</span>
           </a>
-
           <!-- Phase 06 -->
-          <a href="retraining-point6.html" class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F8F7F2] transition-all group">
-            <div class="flex items-center gap-2">
-              <span class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-[10px] flex items-center justify-center">06</span>
-              <div>
+          <a href="retraining-point6.html" class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F8F7F2] transition-all group sidebar-item-link" title="Phase 06: Retraining & Eval (Prec +6.3%)">
+            <div class="flex items-center gap-2 overflow-hidden">
+              <span class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-[10px] flex items-center justify-center shrink-0">06</span>
+              <div class="sidebar-text-expand truncate">
                 <div class="text-xs font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Retraining & Eval</div>
                 <div class="text-[9px] font-mono text-[#6B7677]">A/B/C • 750 ảnh</div>
               </div>
             </div>
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#F8F7F2] text-[#6B7677]">→</span>
+            <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded-md bg-[#F8F7F2] text-[#6B7677] border border-[#E5E3DC] shrink-0 sidebar-text-expand">→</span>
           </a>
-
-          <!-- Phase 07 (Trang Gốc Toàn Trình) -->
-          <a href="index.html" class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F8F7F2] transition-all group">
-            <div class="flex items-center gap-2">
-              <span class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-[10px] flex items-center justify-center">07</span>
-              <div>
+          <!-- Phase 07 -->
+          <a href="index.html" class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F8F7F2] transition-all group sidebar-item-link" title="Phase 07: Autonomous Loop (Trang Gốc)">
+            <div class="flex items-center gap-2 overflow-hidden">
+              <span class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-[10px] flex items-center justify-center shrink-0">07</span>
+              <div class="sidebar-text-expand truncate">
                 <div class="text-xs font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Autonomous Loop</div>
-                <div class="text-[9px] font-mono text-[#2D5A34] font-semibold">Trang Gốc • 6 Metrics</div>
+                <div class="text-[9px] font-mono text-[#6B7677]">Trang Gốc • 6 Metrics</div>
               </div>
             </div>
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#F8F7F2] text-[#6B7677]">→</span>
+            <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded-md bg-[#F8F7F2] text-[#6B7677] border border-[#E5E3DC] shrink-0 sidebar-text-expand">→</span>
           </a>
-
-
         </div>
       </div>
 
       <!-- Nav Group 2: Trọng Tâm Point 5 (Mining Special) -->
-      <div class="space-y-2">
+      <div class="space-y-2 sidebar-text-expand">
         <div class="flex items-center justify-between text-[10px] font-mono font-bold text-[#2D5A34] uppercase tracking-wider px-1">
           <span>TRỌNG TÂM KỸ THUẬT POINT 5</span>
           <span class="text-[9px] px-1.5 py-0.2 rounded bg-[#E8F0EA] text-[#2D5A34]">Mining</span>
@@ -199,7 +210,7 @@
       </div>
 
       <!-- Nav Group 3: Modules Điều Hướng Nhanh -->
-      <div class="space-y-2">
+      <div class="space-y-2 sidebar-text-expand">
         <div class="text-[10px] font-mono font-bold text-[#6B7677] uppercase tracking-wider px-1">
           KHÔNG GIAN KIỂM ĐỊNH
         </div>
@@ -234,7 +245,7 @@
     </div>
 
     <!-- Zone 3: Live Mini Telemetry Dock (Đáy Sidebar) -->
-    <div class="p-3.5 border-t border-[#E5E3DC] bg-[#F8F7F2] shrink-0 space-y-2">
+    <div class="p-3.5 border-t border-[#E5E3DC] bg-[#F8F7F2] shrink-0 space-y-2 sidebar-text-expand">
       <div class="flex items-center justify-between text-[10px] font-mono">
         <span class="text-[#2D5A34] font-bold uppercase tracking-wider">
           LIVE TELEMETRY
@@ -263,10 +274,16 @@
   </aside>
 
   <!-- ========================================================================= -->
+  <!-- MAIN WRAPPER CONTAINER (pl-72 cho Sidebar layout, co giãn theo toggle) -->
+  <!-- ========================================================================= -->
+  <div id="main-wrapper" class="pl-72 flex flex-col min-h-screen transition-all duration-300 ease-in-out">
+
+  <!-- ========================================================================= -->
   <!-- TOP ADMIN HEADER (Ghim cố định, liền mạch bên phải Sidebar ml-72) -->
   <!-- ========================================================================= -->
-  <header class="sticky top-0 z-40 bg-[#F8F7F2]/95 backdrop-blur-md border-b border-[#E5E3DC] h-16 ml-72">
-    <div class="h-full px-8 flex items-center justify-between gap-4">
+  <header class="sticky top-0 z-40 bg-[#F8F7F2]/95 backdrop-blur-md border-b border-[#E5E3DC] h-16 w-full">
+    <div class="h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+    <div class="h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
       
       <!-- Zone 1: Breadcrumb & Title -->
       <div class="flex items-center gap-2 text-xs font-mono text-[#6B7677]">
@@ -295,8 +312,18 @@
         </div>
       </div>
 
-      <!-- Zone 3: Quick Action Buttons -->
-      <div class="flex items-center gap-2.5">
+              <!-- Zone 3: Quick Action Buttons -->
+        <div class="flex items-center gap-2">
+          <!-- Nút Xem Notebook Minh Chứng GitHub -->
+          <a 
+            href="https://github.com/nguyenhuynhdt37/autonomous-driving-active-learning-lab/blob/main/notebooks/05_active_mining_tournament_and_hitl.ipynb" 
+            target="_blank"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono font-medium border border-[#E5E3DC] bg-white hover:border-[#B7CDBB] hover:text-[#2D5A34] shadow-soft-sm transition-all"
+            title="Xem Notebook Minh Chứng Trên GitHub"
+          >
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            <span class="hidden sm:inline">Notebook 05</span>
+          </a>
         <button 
           onclick="togglePlaySimulation()"
           class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#2D5A34] text-white hover:bg-[#234729] shadow-soft-sm transition-all cursor-pointer"
@@ -318,7 +345,7 @@
   <!-- ========================================================================= -->
   <!-- MAIN WORKSPACE CONTENT (Lệch sang phải ml-72, không gian rộng mở) -->
   <!-- ========================================================================= -->
-  <main class="ml-72 min-h-screen px-8 py-8 space-y-12 max-w-[1440px]">
+  <main class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
 
     <!-- ========================================================================= -->
     <!-- PHẦN 1: HERO SECTION & BẢN CHẤT KỸ THUẬT POINT 5 -->
@@ -484,6 +511,9 @@
 
               <button id="ctrlVolumeBtn" class="text-white hover:text-[#B7CDBB] transition-colors ml-1">
                 <svg id="volumeSvg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+              </button>
+              <button onclick="toggleVideoFullscreen('miningVideo')" class="text-white hover:text-[#B7CDBB] transition-colors ml-1 p-1 rounded" title="Phóng to toàn màn hình">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
               </button>
             </div>
           </div>
@@ -942,14 +972,25 @@ handoff_target: "Phase 06 — YOLO11n V1 Model Training"</pre>
   </main>
 
   <!-- Editorial Footer -->
-  <footer class="ml-72 border-t border-[#E5E3DC] bg-[#F8F7F2] py-8 px-8 text-center text-xs font-mono text-[#6B7677]">
-    <div class="max-w-[1340px] mx-auto space-y-2">
-      <div>BDD10K Autonomous Driving Active Learning Lab — Research by T018</div>
-      <div class="text-[10px] text-[#6B7677]/70">Thiết kế chuẩn mực GreenSM Nordic Editorial • Zero AI Emoji • Zero Data Leakage</div>
+    <!-- Footer Editorial Style (Cân đối w-full bên trong wrapper) -->
+  <footer class="border-t border-[#E5E3DC] bg-[#F8F7F2] py-8 px-4 text-center text-xs text-[#6B7677] space-y-2 w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-2">
+      <div class="font-editorial text-sm font-bold text-[#1F2627]">BDD10K Active Learning Lab — Research Publication Series</div>
+      <div>Tác giả: <strong>T018</strong> | Thiết kế kế thừa chuẩn <strong>GreenSM Editorial Canvas</strong></div>
+      <div class="text-[11px] font-mono text-[#8A9697]">
+        Mã nguồn & Bằng chứng thực nghiệm: 
+        <a href="https://github.com/nguyenhuynhdt37/autonomous-driving-active-learning-lab" target="_blank" class="text-[#2D5A34] underline font-bold">
+          nguyenhuynhdt37/autonomous-driving-active-learning-lab
+        </a>
+      </div>
     </div>
   </footer>
 
+  </div><!-- Đóng #main-wrapper -->
+
   <!-- Controller Script -->
   <script src="js/active-mining-point5.js"></script>
+  <script src="js/sidebar-toggle.js"></script>
+  <script src="js/media-viewer.js"></script>
 </body>
 </html>

@@ -2,6 +2,7 @@
 
 > **Dự án**: Autonomous Driving Human-in-the-Loop Vision Engine Dashboard  
 > **Tác giả**: T018  
+> **Repo Nghiên Cứu Chính Thức**: [nguyenhuynhdt37/autonomous-driving-active-learning-lab](https://github.com/nguyenhuynhdt37/autonomous-driving-active-learning-lab)  
 > **Kiến trúc**: Vanilla JavaScript (ES6+ Modules) + Modern CSS Design System + HTML5 Canvas  
 > **Mục đích**: Giả lập trải nghiệm 9 chặng toàn trình HITL, trực quan hóa đấu trường benchmark mAP@50 và mini-studio thẩm định gán nhãn AI.
 

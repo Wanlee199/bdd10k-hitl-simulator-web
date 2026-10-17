@@ -1911,14 +1911,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Thử autoplay nếu trình duyệt cho phép
-    vid.play().then(() => {
-      if (overlay) overlay.style.display = 'none';
-      updatePlayButtonUI();
-    }).catch(() => {
-      if (overlay) overlay.style.display = 'flex';
-      updatePlayButtonUI();
-    });
+    // Mặc định dừng video, hiển thị Play Overlay chờ người dùng tương tác
+    vid.pause();
+    if (overlay) overlay.style.display = 'flex';
+    updatePlayButtonUI();
   }
 
   // Khởi tạo Canvas vẽ frame đầu tiên sẵn sàng
