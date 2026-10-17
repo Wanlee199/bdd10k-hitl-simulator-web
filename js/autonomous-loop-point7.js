@@ -327,7 +327,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const badgeElem = document.getElementById("roundBadge");
     badgeElem.innerText = data.status_badge;
-    badgeElem.className = `text-[10px] font-mono px-2 py-0.5 rounded font-bold ${data.badge_class}`;
+    badgeElem.className = `text-xs font-mono px-2 py-0.5 rounded font-bold ${data.badge_class}`;
 
     // Cập nhật 6 metrics
     document.getElementById("r_act_map50").innerText = data.active_map50;
@@ -354,7 +354,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <td class="py-2 px-3 font-mono font-bold text-xs text-[#1F2627]">${item.name}</td>
         <td class="py-2 px-3 font-mono text-xs text-[#2D5A34] font-bold text-right">${item.active}</td>
         <td class="py-2 px-3 font-mono text-xs text-[#6B7677] text-right">${item.random}</td>
-        <td class="py-2 px-3 font-mono text-[11px] text-[#0284c7] text-right">${item.weight}</td>
+        <td class="py-2 px-3 font-mono text-xs text-[#0284c7] text-right">${item.weight}</td>
       `;
       tbody.appendChild(tr);
     });

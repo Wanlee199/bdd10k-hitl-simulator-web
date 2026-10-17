@@ -126,7 +126,7 @@ prop_rec   = eval_proposed.box.mr * 100     # 23.54%`
       <div class="flex justify-between"><span>Hồi sinh lớp Rider:</span> <span class="font-bold text-[#2D5A34]">6.37% mAP50 (+1.95% vs Rnd | F1: 10.30%)</span></div>
       <div class="flex justify-between"><span>Hồi sinh lớp Truck:</span> <span class="font-bold text-[#2D5A34]">18.49% mAP50 (+0.45% vs Rnd | F1: 28.05%)</span></div>
       <div class="flex justify-between"><span>Bảo toàn lớp Car:</span> <span class="font-bold text-[#2D5A34]">56.65% mAP50 (F1: 54.84% - Zero Forgetting)</span></div>
-      <div class="flex justify-between"><span>Niêm phong Lineage:</span> <span class="font-mono text-[10px] text-[#2D5A34]">SHA-256: 218418b822a11904...</span></div>
+      <div class="flex justify-between"><span>Niêm phong Lineage:</span> <span class="font-mono text-xs text-[#2D5A34]">SHA-256: 218418b822a11904...</span></div>
     `,
     code: `# Chặng 4: Niêm phong dòng dõi mô hình vào models_lineage.json
 lineage_record = {

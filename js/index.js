@@ -225,25 +225,32 @@ document.addEventListener("DOMContentLoaded", function () {
   let simAutoPlayTimer = null;
 
   window.goToSimStep = function (stepNum) {
-    if (stepNum < 1 || stepNum > simStepsData.length) return;
+    const badgeElem = document.getElementById("simCurrentStepBadge");
+    if (!badgeElem || stepNum < 1 || stepNum > simStepsData.length) return;
     currentSimStep = stepNum;
     const data = simStepsData[stepNum - 1];
 
     // Cập nhật text hiển thị
-    document.getElementById("simCurrentStepBadge").innerText = data.badge;
-    document.getElementById("simStepTag").innerText = data.tag;
-    document.getElementById("simInputVal").innerText = data.input;
-    document.getElementById("simMethodVal").innerText = data.method;
-    document.getElementById("simOutputVal").innerText = data.output;
-    document.getElementById("simDecisionVal").innerText = data.decision;
-    document.getElementById("simArtifactVal").innerText = data.artifact;
+    badgeElem.innerText = data.badge;
+    const tagElem = document.getElementById("simStepTag");
+    if (tagElem) tagElem.innerText = data.tag;
+    const inElem = document.getElementById("simInputVal");
+    if (inElem) inElem.innerText = data.input;
+    const methElem = document.getElementById("simMethodVal");
+    if (methElem) methElem.innerText = data.method;
+    const outElem = document.getElementById("simOutputVal");
+    if (outElem) outElem.innerText = data.output;
+    const decElem = document.getElementById("simDecisionVal");
+    if (decElem) decElem.innerText = data.decision;
+    const artElem = document.getElementById("simArtifactVal");
+    if (artElem) artElem.innerText = data.artifact;
 
     // Cập nhật button visual
     document.querySelectorAll(".sim-step-btn").forEach((btn, idx) => {
       if (idx + 1 === stepNum) {
-        btn.className = "sim-step-btn px-2 py-1.5 rounded-lg bg-[#E8F0EA] border border-[#CDE0D1] text-[#2D5A34] font-mono text-[11px] font-bold text-center";
+        btn.className = "sim-step-btn px-2 py-1.5 rounded-lg bg-[#E8F0EA] border border-[#CDE0D1] text-[#2D5A34] font-mono text-xs font-bold text-center";
       } else {
-        btn.className = "sim-step-btn px-2 py-1.5 rounded-lg bg-white border border-[#E5E3DC] text-[#475254] font-mono text-[11px] text-center hover:bg-[#F8F7F2]";
+        btn.className = "sim-step-btn px-2 py-1.5 rounded-lg bg-white border border-[#E5E3DC] text-[#475254] font-mono text-xs text-center hover:bg-[#F8F7F2]";
       }
     });
 
@@ -264,8 +271,10 @@ document.addEventListener("DOMContentLoaded", function () {
     if (simAutoPlayTimer) {
       clearInterval(simAutoPlayTimer);
       simAutoPlayTimer = null;
-      document.getElementById("simPlayText").innerText = "Chạy Tự Động";
-      document.getElementById("simPlayIcon").innerText = "▶";
+      const playText = document.getElementById("simPlayText");
+      if (playText) playText.innerText = "Chạy Tự Động";
+      const playIcon = document.getElementById("simPlayIcon");
+      if (playIcon) playIcon.innerText = "▶";
     }
     window.goToSimStep(1);
     const vid = document.getElementById("masterVideo");
@@ -276,16 +285,20 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   window.toggleSimAutoPlay = function () {
+    const playText = document.getElementById("simPlayText");
+    const playIcon = document.getElementById("simPlayIcon");
+    if (!playText || !playIcon) return;
+
     if (simAutoPlayTimer) {
       clearInterval(simAutoPlayTimer);
       simAutoPlayTimer = null;
-      document.getElementById("simPlayText").innerText = "Chạy Tự Động";
-      document.getElementById("simPlayIcon").innerText = "▶";
+      playText.innerText = "Chạy Tự Động";
+      playIcon.innerText = "▶";
       const vid = document.getElementById("masterVideo");
       if (vid) vid.pause();
     } else {
-      document.getElementById("simPlayText").innerText = "Tạm Dừng";
-      document.getElementById("simPlayIcon").innerText = "⏸";
+      playText.innerText = "Tạm Dừng";
+      playIcon.innerText = "⏸";
       const vid = document.getElementById("masterVideo");
       if (vid) vid.play();
       simAutoPlayTimer = setInterval(function () {
@@ -485,8 +498,10 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("roundVerdict").innerText = data.verdict;
 
     const badgeElem = document.getElementById("roundBadge");
-    badgeElem.innerText = data.status_badge;
-    badgeElem.className = `text-[10px] font-mono px-2 py-0.5 rounded font-bold ${data.badge_class}`;
+    if (badgeElem) {
+      badgeElem.innerText = data.status_badge;
+      badgeElem.className = `text-xs font-mono px-2 py-0.5 rounded font-bold ${data.badge_class}`;
+    }
 
     // Cập nhật 6 metrics
     document.getElementById("r_act_map50").innerText = data.active_map50;
@@ -531,20 +546,23 @@ document.addEventListener("DOMContentLoaded", function () {
         let deltaFullBadge = '<span class="text-[#8C9B9D] font-mono text-xs">—</span>';
         if (diffFull !== null) {
           if (diffFull >= 0) {
-            deltaFullBadge = `<span class="px-1.5 py-0.5 rounded bg-[#EFF6FF] text-[#1E40AF] font-bold font-mono text-[10px]">+${diffFull.toFixed(1)}%</span>`;
+            deltaFullBadge = `<span class="px-1.5 py-0.5 rounded bg-[#EFF6FF] text-[#1E40AF] font-bold font-mono text-xs">+${diffFull.toFixed(1)}%</span>`;
           } else {
-            deltaFullBadge = `<span class="px-1.5 py-0.5 rounded bg-[#F8F7F2] text-[#6B7677] font-mono text-[10px]">${diffFull.toFixed(1)}%</span>`;
+            deltaFullBadge = `<span class="px-1.5 py-0.5 rounded bg-[#F8F7F2] text-[#6B7677] font-mono text-xs">${diffFull.toFixed(1)}%</span>`;
           }
         }
 
         tr.innerHTML = `
-          <td class="py-2 px-3 font-mono font-bold text-xs text-[#1F2627]">${item.name}</td>
-          <td class="py-2 px-3 font-mono text-xs text-[#2D5A34] font-bold text-right">${item.active}</td>
-          <td class="py-2 px-3 font-mono text-xs text-[#1E40AF] font-bold text-right bg-[#EFF6FF]/60">${fullVal}</td>
-          <td class="py-2 px-3 text-right">${deltaFullBadge}</td>
-          <td class="py-2 px-3 font-mono text-xs text-[#8C9B9D] text-right">${item.random}</td>
-          <td class="py-2 px-3 font-mono text-[11px] text-[#0284c7] text-right">${item.weight}</td>
+          <td class="py-2.5 px-3 font-mono font-bold text-xs text-[#1F2627]">${item.name}</td>
+          <td class="py-2.5 px-3 font-mono text-xs text-[#2D5A34] font-bold text-right">${item.active}</td>
+          <td class="py-2.5 px-3 font-mono text-xs text-[#1E40AF] font-bold text-right bg-[#EFF6FF]/60">${fullVal}</td>
+          <td class="py-2.5 px-3 text-right">${deltaFullBadge}</td>
+          <td class="py-2.5 px-3 font-mono text-xs text-[#475254] text-right">${item.random}</td>
+          <td class="py-2.5 px-3 font-mono text-xs text-[#0284c7] font-bold text-right">${item.weight}</td>
         `;
+        tbody.appendChild(tr);
+      });
+    }
         tbody.appendChild(tr);
       });
     }

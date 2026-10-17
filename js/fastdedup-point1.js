@@ -1022,14 +1022,14 @@ const PIPELINE_SIMULATOR = {
             <div class="font-editorial text-lg font-bold text-[#1F2627]">Sàng Lọc Ma Trận Tần Số 64-bit</div>
             <div class="grid grid-cols-2 gap-3 max-w-sm w-full my-2">
               <div class="p-3 bg-white rounded-xl border border-[#E5E3DC] text-left">
-                <div class="text-[10px] text-[#6B7677]">Khung hình i</div>
+                <div class="text-xs text-[#6B7677]">Khung hình i</div>
                 <div class="font-mono text-xs font-bold text-[#1F2627]">06ac7da9-81a...</div>
-                <div class="text-[10px] text-[#2D5A34] font-mono mt-1">Hash: e8f4...91c</div>
+                <div class="text-xs text-[#2D5A34] font-mono mt-1">Hash: e8f4...91c</div>
               </div>
               <div class="p-3 bg-white rounded-xl border border-[#E5E3DC] text-left">
-                <div class="text-[10px] text-[#6B7677]">Khung hình j (cách 1s)</div>
+                <div class="text-xs text-[#6B7677]">Khung hình j (cách 1s)</div>
                 <div class="font-mono text-xs font-bold text-[#1F2627]">06ac7da9-b4b...</div>
-                <div class="text-[10px] text-[#2D5A34] font-mono mt-1">Hash: e8f4...91c</div>
+                <div class="text-xs text-[#2D5A34] font-mono mt-1">Hash: e8f4...91c</div>
               </div>
             </div>
             <div class="text-xs text-[#991B1B] font-mono font-bold">Hamming Distance = 0 → PHÁT HIỆN TRÙNG LẶP!</div>
@@ -1046,14 +1046,14 @@ const PIPELINE_SIMULATOR = {
               <div class="p-3 bg-[#E8F0EA] border-2 border-[#2D5A34] rounded-xl text-left relative">
                 <span class="absolute -top-2.5 right-2 bg-[#2D5A34] text-white text-[9px] px-2 py-0.5 rounded-full font-bold">GIỮ LẠI (KEPT)</span>
                 <div class="text-xs font-bold text-[#1F2627]">Khung hình A</div>
-                <div class="text-[11px] text-[#2D5A34] font-semibold mt-1">16 Đối Tượng (2 Người Đi Bộ)</div>
-                <div class="text-[10px] text-[#475254] mt-0.5">Bảo toàn người đi bộ quý hiếm</div>
+                <div class="text-xs text-[#2D5A34] font-semibold mt-1">16 Đối Tượng (2 Người Đi Bộ)</div>
+                <div class="text-xs text-[#475254] mt-0.5">Bảo toàn người đi bộ quý hiếm</div>
               </div>
               <div class="p-3 bg-[#F8F7F2] border border-[#E5E3DC] rounded-xl text-left opacity-60 relative">
                 <span class="absolute -top-2.5 right-2 bg-[#6B7677] text-white text-[9px] px-2 py-0.5 rounded-full font-bold">LOẠI BỎ (DROPPED)</span>
                 <div class="text-xs font-bold text-[#1F2627]">Khung hình B</div>
-                <div class="text-[11px] text-[#6B7677] font-semibold mt-1">15 Đối Tượng (1 Người)</div>
-                <div class="text-[10px] text-[#6B7677] mt-0.5">Tránh học vẹt cảnh lặp</div>
+                <div class="text-xs text-[#6B7677] font-semibold mt-1">15 Đối Tượng (1 Người)</div>
+                <div class="text-xs text-[#6B7677] mt-0.5">Tránh học vẹt cảnh lặp</div>
               </div>
             </div>
             <div class="text-xs text-[#2D5A34] font-semibold">Tự động cứu sống 4 vật thể nhỏ & người đi bộ so với Keep-First!</div>
@@ -1068,12 +1068,12 @@ const PIPELINE_SIMULATOR = {
               <div class="p-3 bg-white border border-[#E5E3DC] rounded-xl text-left">
                 <div class="text-xs font-bold text-[#2D5A34]">data/processed/unique_pool/</div>
                 <div class="text-lg font-mono font-bold text-[#1F2627]">6.994 ảnh</div>
-                <div class="text-[10px] text-[#6B7677]">Symlinks sạch 0 KB overhead</div>
+                <div class="text-xs text-[#6B7677]">Symlinks sạch 0 KB overhead</div>
               </div>
               <div class="p-3 bg-white border border-[#E5E3DC] rounded-xl text-left">
                 <div class="text-xs font-bold text-[#991B1B]">data/processed/dropped_duplicates/</div>
                 <div class="text-lg font-mono font-bold text-[#1F2627]">6 ảnh</div>
-                <div class="text-[10px] text-[#6B7677]">Khung hình tĩnh bị loại bỏ</div>
+                <div class="text-xs text-[#6B7677]">Khung hình tĩnh bị loại bỏ</div>
               </div>
             </div>
             <div class="text-xs font-mono text-[#2D5A34]">Sẵn sàng 100% cho Active Learning Phase 02!</div>
@@ -1098,7 +1098,7 @@ function renderLeaderboard() {
           <span>${row['Phương Pháp']}</span>
         </td>
         <td class="p-3.5 text-xs text-[#475254]">
-          <span class="px-2 py-0.5 rounded text-[10px] font-mono ${row['Yêu Cầu Phần Cứng'].includes('GPU') ? 'bg-[#FEE2E2] text-[#991B1B]' : 'bg-[#F0EEE6] text-[#475254]'}">
+          <span class="px-2 py-0.5 rounded text-xs font-mono ${row['Yêu Cầu Phần Cứng'].includes('GPU') ? 'bg-[#FEE2E2] text-[#991B1B]' : 'bg-[#F0EEE6] text-[#475254]'}">
             ${row['Yêu Cầu Phần Cứng']}
           </span>
         </td>
@@ -1108,7 +1108,7 @@ function renderLeaderboard() {
         <td class="p-3.5 text-xs font-mono font-bold ${row['Human Recall (%)'] === 100 ? 'text-[#2D5A34]' : 'text-[#92400E]'}">${row['Human Recall (%)']}%</td>
         <td class="p-3.5 text-xs font-mono font-bold ${row['Human F1 (%)'] === 100 ? 'text-[#2D5A34]' : 'text-[#475254]'}">${row['Human F1 (%)']}%</td>
         <td class="p-3.5 text-xs text-[#475254]">
-          <span class="px-2 py-0.5 rounded text-[10px] ${isChampion ? 'bg-[#DCEBE0] text-[#2D5A34] font-bold' : 'bg-[#F0EEE6] text-[#6B7677]'}">
+          <span class="px-2 py-0.5 rounded text-xs ${isChampion ? 'bg-[#DCEBE0] text-[#2D5A34] font-bold' : 'bg-[#F0EEE6] text-[#6B7677]'}">
             ${row['Bảo Toàn BBox']}
           </span>
         </td>
@@ -1173,9 +1173,9 @@ function renderAuditGallery(filterType = 'all') {
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
             <span class="font-mono text-xs font-bold text-[#1F2627]">Cặp #${String(pid).padStart(2, '0')}</span>
-            <span class="text-[10px] font-mono text-[#6B7677]">Video: ${c.video_id}</span>
+            <span class="text-xs font-mono text-[#6B7677]">Video: ${c.video_id}</span>
           </div>
-          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold ${badgeClass}">
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold ${badgeClass}">
             ${labelText}
           </span>
         </div>
@@ -1190,23 +1190,23 @@ function renderAuditGallery(filterType = 'all') {
         <div class="grid grid-cols-4 gap-1 text-center py-1 bg-[#F8F7F2] rounded-lg border border-[#E5E3DC]">
           <div>
             <div class="text-[9px] text-[#6B7677]">pHash</div>
-            <div class="font-mono text-[11px] font-bold ${dists.pHash < 5 ? 'text-[#2D5A34]' : 'text-[#475254]'}">${dists.pHash}</div>
+            <div class="font-mono text-xs font-bold ${dists.pHash < 5 ? 'text-[#2D5A34]' : 'text-[#475254]'}">${dists.pHash}</div>
           </div>
           <div>
             <div class="text-[9px] text-[#6B7677]">aHash</div>
-            <div class="font-mono text-[11px] font-bold ${dists.aHash < 5 ? 'text-[#92400E]' : 'text-[#475254]'}">${dists.aHash}</div>
+            <div class="font-mono text-xs font-bold ${dists.aHash < 5 ? 'text-[#92400E]' : 'text-[#475254]'}">${dists.aHash}</div>
           </div>
           <div>
             <div class="text-[9px] text-[#6B7677]">dHash</div>
-            <div class="font-mono text-[11px] font-bold">${dists.dHash}</div>
+            <div class="font-mono text-xs font-bold">${dists.dHash}</div>
           </div>
           <div>
             <div class="text-[9px] text-[#6B7677]">ResNet</div>
-            <div class="font-mono text-[11px] font-bold">${dists.ResNet50}</div>
+            <div class="font-mono text-xs font-bold">${dists.ResNet50}</div>
           </div>
         </div>
 
-        <p class="text-[11px] text-[#475254] line-clamp-2 leading-relaxed">
+        <p class="text-xs text-[#475254] line-clamp-2 leading-relaxed">
           <span class="font-semibold text-[#1F2627]">Nhận định con người:</span> ${c.notes}
         </p>
       </div>
@@ -1244,24 +1244,24 @@ function openPairModal(pairId) {
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
         <div class="p-3 bg-[#F8F7F2] rounded-xl border border-[#E5E3DC]">
-          <div class="text-[10px] text-[#6B7677]">Standard pHash</div>
+          <div class="text-xs text-[#6B7677]">Standard pHash</div>
           <div class="text-lg font-mono font-bold text-[#2D5A34]">HD = ${dists.pHash}</div>
-          <div class="text-[10px] text-[#475254] mt-1">${dists.pHash < 5 ? '<svg class="w-3.5 h-3.5 text-emerald-600 inline-block -mt-0.5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Đánh dấu trùng lặp' : '<svg class="w-3.5 h-3.5 text-red-500 inline-block -mt-0.5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Bỏ qua'}</div>
+          <div class="text-xs text-[#475254] mt-1">${dists.pHash < 5 ? '<svg class="w-3.5 h-3.5 text-emerald-600 inline-block -mt-0.5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Đánh dấu trùng lặp' : '<svg class="w-3.5 h-3.5 text-red-500 inline-block -mt-0.5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Bỏ qua'}</div>
         </div>
         <div class="p-3 bg-[#F8F7F2] rounded-xl border border-[#E5E3DC]">
-          <div class="text-[10px] text-[#6B7677]">Average Hash (aHash)</div>
+          <div class="text-xs text-[#6B7677]">Average Hash (aHash)</div>
           <div class="text-lg font-mono font-bold text-[#92400E]">HD = ${dists.aHash}</div>
-          <div class="text-[10px] text-[#475254] mt-1">${dists.aHash < 5 ? '<svg class="w-3.5 h-3.5 text-amber-500 inline-block -mt-0.5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Gắn cờ trùng' : '<svg class="w-3.5 h-3.5 text-red-500 inline-block -mt-0.5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Bỏ qua'}</div>
+          <div class="text-xs text-[#475254] mt-1">${dists.aHash < 5 ? '<svg class="w-3.5 h-3.5 text-amber-500 inline-block -mt-0.5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Gắn cờ trùng' : '<svg class="w-3.5 h-3.5 text-red-500 inline-block -mt-0.5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Bỏ qua'}</div>
         </div>
         <div class="p-3 bg-[#F8F7F2] rounded-xl border border-[#E5E3DC]">
-          <div class="text-[10px] text-[#6B7677]">Difference Hash (dHash)</div>
+          <div class="text-xs text-[#6B7677]">Difference Hash (dHash)</div>
           <div class="text-lg font-mono font-bold text-[#1F2627]">HD = ${dists.dHash}</div>
-          <div class="text-[10px] text-[#475254] mt-1">${dists.dHash < 5 ? '<svg class="w-3.5 h-3.5 text-emerald-600 inline-block -mt-0.5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Gắn cờ' : '<svg class="w-3.5 h-3.5 text-red-500 inline-block -mt-0.5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Bỏ sót'}</div>
+          <div class="text-xs text-[#475254] mt-1">${dists.dHash < 5 ? '<svg class="w-3.5 h-3.5 text-emerald-600 inline-block -mt-0.5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Gắn cờ' : '<svg class="w-3.5 h-3.5 text-red-500 inline-block -mt-0.5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Bỏ sót'}</div>
         </div>
         <div class="p-3 bg-[#F8F7F2] rounded-xl border border-[#E5E3DC]">
-          <div class="text-[10px] text-[#6B7677]">ResNet50 Embedding</div>
+          <div class="text-xs text-[#6B7677]">ResNet50 Embedding</div>
           <div class="text-lg font-mono font-bold text-[#1F2627]">Cos = ${dists.ResNet50}</div>
-          <div class="text-[10px] text-[#475254] mt-1">${dists.ResNet50 < 0.05 ? '<svg class="w-3.5 h-3.5 text-amber-500 inline-block -mt-0.5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Gắn cờ ngữ nghĩa' : '<svg class="w-3.5 h-3.5 text-red-500 inline-block -mt-0.5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Bỏ qua'}</div>
+          <div class="text-xs text-[#475254] mt-1">${dists.ResNet50 < 0.05 ? '<svg class="w-3.5 h-3.5 text-amber-500 inline-block -mt-0.5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Gắn cờ ngữ nghĩa' : '<svg class="w-3.5 h-3.5 text-red-500 inline-block -mt-0.5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Bỏ qua'}</div>
         </div>
       </div>
 
@@ -1270,7 +1270,7 @@ function openPairModal(pairId) {
         <p class="text-xs text-[#1F2627] leading-relaxed">${pair.notes}</p>
       </div>
 
-      <div class="flex items-center justify-between text-[11px] text-[#6B7677] pt-2">
+      <div class="flex items-center justify-between text-xs text-[#6B7677] pt-2">
         <span>Gợi ý ban đầu bởi: <strong class="text-[#1F2627]">${pair.flagged_by.join(', ')}</strong></span>
         <span>Kiểm toán bởi: <strong class="text-[#2D5A34]">${pair.verified_by || 'Human Expert'}</strong></span>
       </div>

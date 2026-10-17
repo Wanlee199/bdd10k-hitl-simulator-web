@@ -144,28 +144,20 @@
             <span class="font-mono font-bold text-xs w-4 text-[#5A6768] group-hover:text-[#2D5A34] text-center shrink-0">B</span>
             <span class="font-medium sidebar-text-expand">Hạn chế cách tiếp cận cũ</span>
           </a>
-          <a href="#sec_pipeline" class="flex items-center gap-2 p-2 rounded-lg text-[#475254] hover:bg-[#F9FAFB] hover:text-[#2D5A34] transition-colors group sidebar-nav-letter" title="Pipeline & Lý do thiết kế">
-            <span class="font-mono font-bold text-xs w-4 text-[#5A6768] group-hover:text-[#2D5A34] text-center shrink-0">C</span>
-            <span class="font-medium sidebar-text-expand">Pipeline & Lý do thiết kế</span>
-          </a>
-          <a href="#sec_simulation" class="flex items-center gap-2 p-2 rounded-lg text-[#475254] hover:bg-[#F9FAFB] hover:text-[#2D5A34] transition-colors group sidebar-nav-letter" title="Mô phỏng toàn trình">
-            <span class="font-mono font-bold text-xs w-4 text-[#5A6768] group-hover:text-[#2D5A34] text-center shrink-0">D</span>
-            <span class="font-medium sidebar-text-expand">Mô phỏng toàn trình</span>
-          </a>
           <a href="#sec_benchmarks" class="flex items-center gap-2 p-2 rounded-lg text-[#475254] hover:bg-[#F9FAFB] hover:text-[#2D5A34] transition-colors group sidebar-nav-letter" title="Thực nghiệm & Đối chuẩn">
-            <span class="font-mono font-bold text-xs w-4 text-[#5A6768] group-hover:text-[#2D5A34] text-center shrink-0">E</span>
+            <span class="font-mono font-bold text-xs w-4 text-[#5A6768] group-hover:text-[#2D5A34] text-center shrink-0">C</span>
             <span class="font-medium sidebar-text-expand">Thực nghiệm & Đối chuẩn</span>
           </a>
           <a href="#sec_findings" class="flex items-center gap-2 p-2 rounded-lg text-[#475254] hover:bg-[#F9FAFB] hover:text-[#2D5A34] transition-colors group sidebar-nav-letter" title="Kết quả & Đánh đổi">
-            <span class="font-mono font-bold text-xs w-4 text-[#5A6768] group-hover:text-[#2D5A34] text-center shrink-0">F</span>
+            <span class="font-mono font-bold text-xs w-4 text-[#5A6768] group-hover:text-[#2D5A34] text-center shrink-0">D</span>
             <span class="font-medium sidebar-text-expand">Kết quả & Đánh đổi</span>
           </a>
           <a href="#sec_limitations" class="flex items-center gap-2 p-2 rounded-lg text-[#475254] hover:bg-[#F9FAFB] hover:text-[#2D5A34] transition-colors group sidebar-nav-letter" title="Giới hạn nghiên cứu">
-            <span class="font-mono font-bold text-xs w-4 text-[#5A6768] group-hover:text-[#2D5A34] text-center shrink-0">G</span>
+            <span class="font-mono font-bold text-xs w-4 text-[#5A6768] group-hover:text-[#2D5A34] text-center shrink-0">E</span>
             <span class="font-medium sidebar-text-expand">Giới hạn nghiên cứu</span>
           </a>
           <a href="#sec_deepdive" class="flex items-center gap-2 p-2 rounded-lg text-[#475254] hover:bg-[#F9FAFB] hover:text-[#2D5A34] transition-colors group sidebar-nav-letter" title="Điều hướng chuyên đề">
-            <span class="font-mono font-bold text-xs w-4 text-[#5A6768] group-hover:text-[#2D5A34] text-center shrink-0">H</span>
+            <span class="font-mono font-bold text-xs w-4 text-[#5A6768] group-hover:text-[#2D5A34] text-center shrink-0">F</span>
             <span class="font-medium sidebar-text-expand">Điều hướng chuyên đề</span>
           </a>
         </nav>
@@ -458,243 +450,14 @@
         </div>
       </section>
 
-      </div>
-
       <!-- ===================================================================== -->
-      <!-- PHẦN C. ĐỀ XUẤT PIPELINE & LÝ DO THIẾT KẾ (PROPOSED PIPELINE - FULL WIDTH) -->
-      <!-- ===================================================================== -->
-      <div class="w-full px-4 sm:px-6 lg:px-8">
-        <section id="sec_pipeline" class="bg-white rounded-2xl border border-[#E5E3DC] p-6 md:p-8 space-y-6 shadow-soft w-full">
-          <!-- Header Phần C -->
-          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-[#E5E3DC] pb-4">
-            <div class="w-full space-y-2">
-              <div class="flex items-center gap-2 flex-wrap">
-                <span class="px-2.5 py-0.5 rounded-full bg-[#E8F0EA] text-[#2D5A34] text-xs font-mono font-bold border border-[#CDE0D1]">
-                  Phần C • Kiến Trúc Toàn Trình & Lý Do Thiết Kế
-                </span>
-                <span class="text-xs font-mono text-[#475254]">Sơ Đồ Phối Hợp Tuyến Tính 8 Công Đoạn Chuẩn Phase 07</span>
-              </div>
-              <h2 class="text-2xl lg:text-3xl font-bold font-editorial text-[#1F2627]">
-                Kiến Trúc Pipeline Đề Xuất & Cơ Chế Chuyển Giao Dữ Liệu Dây Chuyền
-              </h2>
-              <p class="text-xs sm:text-sm text-[#475254] leading-relaxed max-w-3xl">
-                Hệ thống được thiết kế như một cỗ máy khép kín theo chuẩn <code>AutonomousLoopOrchestrator</code>: đầu ra của công đoạn trước là hợp đồng dữ liệu (data contract) tiên quyết cho công đoạn sau. Người xem có thể điều khiển trực tiếp dòng chảy dữ liệu, xem telemetry và công thức toán học ngay bên dưới hoặc mở toàn màn hình.
-              </p>
-            </div>
-
-            <!-- Nút Mở Toàn Màn Hình Trong Tab Mới -->
-            <div class="flex items-center gap-2 shrink-0">
-              <a href="pipeline_visualizer.html" target="_blank" class="px-4 py-2.5 rounded-xl bg-[#E8F0EA] hover:bg-[#2D5A34] hover:text-white border border-[#CDE0D1] text-xs font-mono text-[#2D5A34] transition-all flex items-center gap-2 shadow-sm font-bold">
-                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                <span>Mở Trình Trực Quan Hóa Độc Lập</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Khung Nhúng Trực Tiếp Master Pipeline Visualizer (Full Width & Dynamic Fit Height) -->
-          <div class="relative w-full rounded-2xl border border-[#E5E3DC] overflow-hidden shadow-soft bg-[#F9FAFB]">
-            <iframe 
-              id="pipelineVisualizerIframe"
-              src="pipeline_visualizer.html" 
-              class="w-full border-0 transition-all duration-300" 
-              style="width: 100%; border: none; overflow: hidden; min-height: 1600px;"
-              scrolling="no"
-              loading="lazy" 
-              allow="autoplay"
-              onload="autoResizePipelineIframe(this)"
-              title="Master Pipeline Architecture Visualizer — BDD10K ActiveLab">
-            </iframe>
-          </div>
-
-          <!-- Bảng Căn Cứ Toán Học Thiết Kế Tuyến Tính Chuẩn Phase 07 (Flat Layout - No Nested Cards) -->
-          <div class="border-t border-[#E5E3DC] pt-5 space-y-4">
-            <div class="flex items-center justify-between border-b border-[#E5E3DC] pb-2">
-              <div class="text-xs font-mono font-bold text-[#1F2627]">
-                Bản Chất Toán Học Đằng Sau Quyết Định Thiết Kế Từng Công Đoạn (Phase 07 Standard)
-              </div>
-              <span class="text-xs font-mono text-[#2D5A34] font-bold">KaTeX Certified</span>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-xs text-[#475254]">
-              <!-- Formula 1 -->
-              <div class="space-y-2">
-                <div class="font-bold text-[#2D5A34] text-xs font-mono">1. Lọc trùng tri giác pHash 2D-DCT:</div>
-                <div class="py-2 text-center overflow-x-auto text-sm text-[#1F2627]">
-                  $$D_H(\text{hash}_A, \text{hash}_B) = \sum_{i=1}^{64} (\text{hash}_A[i] \oplus \text{hash}_B[i]) < 5$$
-                </div>
-                <p class="text-xs text-[#475254] leading-relaxed">Phân tích tần số thấp kết hợp Keep-Most-Vehicles giữ lại 6.994 ảnh sạch (360.3 FPS).</p>
-              </div>
-
-              <!-- Formula 2 -->
-              <div class="space-y-2">
-                <div class="font-bold text-[#2D5A34] text-xs font-mono">2. Phân chia Submodular Facility:</div>
-                <div class="py-2 text-center overflow-x-auto text-sm text-[#1F2627]">
-                  $$f(S) = \sum_{i \in V} \max_{j \in S} \text{Sim}(x_i, x_j), \quad \text{Sim} = e^{-\frac{\|u - v\|^2}{2\sigma^2}}$$
-                </div>
-                <p class="text-xs text-[#475254] leading-relaxed">Dàn đều không gian ngữ nghĩa kết hợp Group-Aware Video Isolation Zero Leakage.</p>
-              </div>
-
-              <!-- Formula 3 -->
-              <div class="space-y-2">
-                <div class="font-bold text-[#2D5A34] text-xs font-mono">3. Động cơ tuyển chọn C4 Super-Fusion:</div>
-                <div class="py-2 text-center overflow-x-auto text-sm text-[#1F2627]">
-                  $$S(x_i) = U_i \cdot \left(\sum_{o} W_i(\text{class}_o) \cdot G_w(o)\right) \cdot E_i \cdot B_i$$
-                </div>
-                <p class="text-xs text-[#475254] leading-relaxed">Tích hợp độ phân vân U_i, vector phạt thích ứng W_i và dàn đều PCA 32D.</p>
-              </div>
-
-              <!-- Formula 4 -->
-              <div class="space-y-2">
-                <div class="font-bold text-[#2D5A34] text-xs font-mono">4. Rào chắn dừng Plateau Saturation:</div>
-                <div class="py-2 text-center overflow-x-auto text-sm text-[#1F2627]">
-                  $$\Delta_{\text{target}} \ge 0 \implies \text{Confirm} \to \text{Victory (mAP 27.85%)}$$
-                </div>
-                <p class="text-xs text-[#475254] leading-relaxed">Vượt trần 100% Target Pool (+1.00%), dừng tối ưu sớm, tiết kiệm 40.1% ngân sách nhãn.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <!-- BLOCK 2: PHẦN D ĐẾN HẾT (Full-Width w-full) -->
-      <div class="w-full px-4 sm:px-6 lg:px-8 space-y-12">
-
-      <!-- ===================================================================== -->
-      <!-- PHẦN D. MÔ PHỎNG TOÀN TRÌNH TỪ ĐẦU VÀO ĐẾN ĐẦU RA (SIMULATION) -->
-      <!-- ===================================================================== -->
-      <section id="sec_simulation" class="bg-white rounded-2xl border border-[#E5E3DC] p-6 md:p-8 space-y-6 shadow-soft w-full">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E5E3DC] pb-4">
-          <div class="space-y-1">
-            <div class="flex items-center gap-2">
-              <span class="px-2.5 py-0.5 rounded-full bg-[#E8F0EA] text-[#2D5A34] text-xs font-mono font-bold border border-[#CDE0D1]">
-                Phần D • Mô Phỏng Quy Trình Toàn Trình
-              </span>
-              <span class="text-xs font-mono text-[#475254]">Interactive Step Simulator & Live Telemetry</span>
-            </div>
-            <h2 class="text-2xl font-bold font-editorial text-[#1F2627]">
-              Mô Phỏng Dòng Chảy Dữ Liệu Qua Các Công Đoạn
-            </h2>
-          </div>
-          <!-- Ghi nhãn minh bạch -->
-          <span class="text-xs font-mono px-3 py-1.5 rounded-lg bg-[#F9FAFB] border border-[#E5E3DC] text-[#475254]">
-            ⚡ Tái hiện logic vận hành từ dữ liệu thực nghiệm đã lưu trữ
-          </span>
-        </div>
-
-        <!-- Thanh Điều Khiển Tương Tác Bước (Flat Bar - No Nested Card) -->
-        <div class="border-t border-[#E5E3DC] pt-4 space-y-3">
-          <div class="flex flex-wrap items-center justify-between gap-3">
-            <div class="flex items-center gap-2">
-              <button id="simBtnPlay" onclick="toggleSimAutoPlay()" class="px-3.5 py-1.5 rounded-lg bg-[#2D5A34] hover:bg-[#234729] text-white text-xs font-mono font-bold transition-all flex items-center gap-1.5 shadow-sm">
-                <span id="simPlayIcon">▶</span>
-                <span id="simPlayText">Chạy Tự Động</span>
-              </button>
-              <button onclick="stepSimNext()" class="px-3 py-1.5 rounded-lg bg-white border border-[#E5E3DC] hover:border-[#2D5A34] text-[#1F2627] text-xs font-mono font-medium transition-all">
-                Bước Tiếp Theo →
-              </button>
-              <button onclick="resetSim()" class="px-3 py-1.5 rounded-lg bg-white border border-[#E5E3DC] hover:text-[#991B1B] text-[#475254] text-xs font-mono transition-all">
-                Phát Lại Từ Đầu
-              </button>
-            </div>
-            <div class="text-xs font-mono text-[#475254] flex items-center gap-2">
-              <span>Công đoạn đang xem:</span>
-              <span id="simCurrentStepBadge" class="px-2 py-0.5 rounded bg-[#E8F0EA] text-[#2D5A34] font-bold">1 / 7: FastDedup</span>
-            </div>
-          </div>
-
-          <!-- Step Buttons Selector -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-1.5 pt-2 border-t border-[#E5E3DC]">
-            <button onclick="goToSimStep(1)" id="simStepBtn_1" class="sim-step-btn px-2 py-1.5 rounded-lg bg-[#E8F0EA] border border-[#CDE0D1] text-[#2D5A34] font-mono text-xs font-bold text-center">1. Dedup</button>
-            <button onclick="goToSimStep(2)" id="simStepBtn_2" class="sim-step-btn px-2 py-1.5 rounded-lg bg-white border border-[#E5E3DC] text-[#475254] font-mono text-xs text-center">2. Profiling</button>
-            <button onclick="goToSimStep(3)" id="simStepBtn_3" class="sim-step-btn px-2 py-1.5 rounded-lg bg-white border border-[#E5E3DC] text-[#475254] font-mono text-xs text-center">3. Splits</button>
-            <button onclick="goToSimStep(4)" id="simStepBtn_4" class="sim-step-btn px-2 py-1.5 rounded-lg bg-white border border-[#E5E3DC] text-[#475254] font-mono text-xs text-center">4. Seed V0</button>
-            <button onclick="goToSimStep(5)" id="simStepBtn_5" class="sim-step-btn px-2 py-1.5 rounded-lg bg-white border border-[#E5E3DC] text-[#475254] font-mono text-xs text-center">5. Active Mining</button>
-            <button onclick="goToSimStep(6)" id="simStepBtn_6" class="sim-step-btn px-2 py-1.5 rounded-lg bg-white border border-[#E5E3DC] text-[#475254] font-mono text-xs text-center">6. Retrain V1</button>
-            <button onclick="goToSimStep(7)" id="simStepBtn_7" class="sim-step-btn px-2 py-1.5 rounded-lg bg-white border border-[#E5E3DC] text-[#475254] font-mono text-xs text-center">7. Active Loop</button>
-          </div>
-        </div>
-
-        <!-- Khung Nhìn Trước / Sau Xử Lý (Before vs After Telemetry) -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-2">
-          <!-- Video Simulation Player -->
-          <div class="lg:col-span-2 space-y-3">
-            <div class="rounded-xl overflow-hidden bg-black aspect-video border border-[#E5E3DC] flex items-center justify-center">
-              <video id="masterVideo" controls playsinline preload="metadata" class="w-full h-full object-contain text-white">
-                <source src="assets/model_v1_retraining_pipeline_simulation.mp4" type="video/mp4">
-                <span class="text-white text-xs">Trình duyệt của bạn không hỗ trợ thẻ video HTML5.</span>
-              </video>
-            </div>
-
-            <!-- Video Timeline Stage Pills -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              <button onclick="seekVideoToStage(0)" id="stagePill_1" class="p-2 rounded-lg bg-[#E8F0EA] border border-[#CDE0D1] text-[#2D5A34] text-left transition-all">
-                <div class="text-xs font-mono font-bold">CHẶNG 1 (0–21s)</div>
-                <div class="text-xs font-bold truncate">Dữ Liệu & Cách Ly</div>
-              </button>
-              <button onclick="seekVideoToStage(21.0)" id="stagePill_2" class="p-2 rounded-lg bg-white border border-[#E5E3DC] text-[#1F2627] text-left transition-all">
-                <div class="text-xs font-mono font-bold">CHẶNG 2 (21–42s)</div>
-                <div class="text-xs font-bold truncate">Khai Phá C6 & Oracle</div>
-              </button>
-              <button onclick="seekVideoToStage(41.5)" id="stagePill_3" class="p-2 rounded-lg bg-white border border-[#E5E3DC] text-[#1F2627] text-left transition-all">
-                <div class="text-xs font-mono font-bold">CHẶNG 3 (42–63s)</div>
-                <div class="text-xs font-bold truncate">Đấu Trường Song Mã</div>
-              </button>
-              <button onclick="seekVideoToStage(63.0)" id="stagePill_4" class="p-2 rounded-lg bg-white border border-[#E5E3DC] text-[#1F2627] text-left transition-all">
-                <div class="text-xs font-mono font-bold">CHẶNG 4 (63–92s)</div>
-                <div class="text-xs font-bold truncate">Dừng Bão Hòa</div>
-              </button>
-            </div>
-          </div>
-
-          <!-- Bảng Telemetry Trạng Thái Dữ Liệu Từng Công Đoạn (Flat Divider - No Nested Card) -->
-          <div class="border-t lg:border-t-0 lg:border-l border-[#E5E3DC] lg:pl-6 flex flex-col justify-between space-y-4">
-            <div class="space-y-3">
-              <div class="flex items-center justify-between border-b border-[#E5E3DC] pb-2">
-                <span class="text-xs font-mono font-bold text-[#1F2627]">Chỉ Số Dòng Chảy</span>
-                <span id="simStepTag" class="text-xs font-mono px-2 py-0.5 rounded bg-[#E8F0EA] text-[#2D5A34] font-bold">Giai đoạn 1</span>
-              </div>
-
-              <div>
-                <div class="text-xs font-mono text-[#475254] font-semibold">Đầu Vào Trước Xử Lý</div>
-                <div id="simInputVal" class="text-xs font-mono font-bold text-[#1F2627] mt-0.5">10.000 khung hình thô BDD10K</div>
-              </div>
-
-              <div>
-                <div class="text-xs font-mono text-[#475254] font-semibold">Phương Pháp / Bộ Lọc Áp Dụng</div>
-                <div id="simMethodVal" class="text-xs font-bold text-[#2D5A34] mt-0.5">pHash 2D-DCT (HD < 5) + Keep-Most-Vehicles</div>
-              </div>
-
-              <div>
-                <div class="text-xs font-mono text-[#475254] font-semibold">Kết Quả Đầu Ra (Sau Xử Lý)</div>
-                <div id="simOutputVal" class="text-xs font-mono font-bold text-[#1E40AF] mt-0.5">6.994 ảnh sạch (Loại bỏ 3.006 ảnh trùng)</div>
-              </div>
-
-              <div>
-                <div class="text-xs font-mono text-[#475254] font-semibold">Lý Do Giữ Lại / Loại Bỏ</div>
-                <div id="simDecisionVal" class="text-xs text-[#475254] mt-0.5 leading-relaxed">
-                  Hai khung hình cùng video dừng đèn đỏ cách nhau 1s bị trùng nền; thuật toán giữ lại khung hình có nhiều bounding box hơn để bảo toàn xe nhỏ.
-                </div>
-              </div>
-            </div>
-
-            <div class="pt-3 border-t border-[#E5E3DC]">
-              <div class="text-xs font-mono text-[#475254] font-semibold">Chứng Cứ Lưu Trữ Vật Lý:</div>
-              <div id="simArtifactVal" class="text-xs font-mono text-[#2D5A34] truncate mt-0.5 font-bold">
-                data/processed/unique_pool/ (Symlinks 0 KB)
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ===================================================================== -->
-      <!-- PHẦN E. THỰC NGHIỆM & PHƯƠNG PHÁP ĐỐI CHỨNG (BENCHMARKS) -->
+      <!-- PHẦN C. KẾT QUẢ THỰC NGHIỆM ĐỐI CHUẨN (BENCHMARKS) -->
       <!-- ===================================================================== -->
       <section id="sec_benchmarks" class="bg-white rounded-2xl border border-[#E5E3DC] p-6 md:p-8 space-y-6 shadow-soft w-full">
         <div class="w-full space-y-3">
           <div class="flex items-center gap-2">
             <span class="px-2.5 py-0.5 rounded-full bg-[#E8F0EA] text-[#2D5A34] text-xs font-mono font-bold border border-[#CDE0D1]">
-              Phần E • Kết Quả Thực Nghiệm Đối Chuẩn
+              Phần C • Kết Quả Thực Nghiệm Đối Chuẩn
             </span>
             <span class="text-xs font-mono text-[#475254]">Điều Kiện So Sánh Khách Quan, Cùng Tập Test Đóng Băng</span>
           </div>
@@ -1448,7 +1211,7 @@
         <div class="w-full space-y-3">
           <div class="flex items-center gap-2">
             <span class="px-2.5 py-0.5 rounded-full bg-[#E8F0EA] text-[#2D5A34] text-xs font-mono font-bold border border-[#CDE0D1]">
-              Phần F • Đóng Góp Khoa Học & Đánh Đổi Kỹ Thuật
+              Phần D • Đóng Góp Khoa Học & Đánh Đổi Kỹ Thuật
             </span>
             <span class="text-xs font-mono text-[#475254]">Phân Tích Cân Bằng Chi Phí & Hiệu Năng</span>
           </div>
@@ -1534,13 +1297,13 @@
       </section>
 
       <!-- ===================================================================== -->
-      <!-- PHẦN G. HẠN CHẾ & PHẠM VI ÁP DỤNG (LIMITATIONS & SCOPE) -->
+      <!-- PHẦN E. HẠN CHẾ & PHẠM VI ÁP DỤNG (LIMITATIONS & SCOPE) -->
       <!-- ===================================================================== -->
       <section id="sec_limitations" class="bg-white rounded-2xl border border-[#E5E3DC] p-6 md:p-8 space-y-6 shadow-soft w-full">
         <div class="w-full space-y-3">
           <div class="flex items-center gap-2">
             <span class="px-2.5 py-0.5 rounded-full bg-[#FEE2E2] text-[#991B1B] text-xs font-mono font-bold border border-[#FCA5A5]">
-              Phần G • Giới Hạn Nghiên Cứu & Ranh Giới Hiệu Lực
+              Phần E • Giới Hạn Nghiên Cứu & Ranh Giới Hiệu Lực
             </span>
             <span class="text-xs font-mono text-[#475254]">Tính Minh Bạch & Liêm Chính Khoa Học</span>
           </div>
@@ -1600,13 +1363,13 @@
       </section>
 
       <!-- ===================================================================== -->
-      <!-- PHẦN H. ĐIỀU HƯỚNG TỚI CÁC TRANG CHUYÊN ĐỀ (DEEP-DIVE) -->
+      <!-- PHẦN F. ĐIỀU HƯỚNG TỚI CÁC TRANG CHUYÊN ĐỀ (DEEP-DIVE) -->
       <!-- ===================================================================== -->
       <section id="sec_deepdive" class="bg-white rounded-2xl border border-[#E5E3DC] p-6 md:p-8 space-y-6 shadow-soft w-full">
         <div class="w-full space-y-3">
           <div class="flex items-center gap-2">
             <span class="px-2.5 py-0.5 rounded-full bg-[#E8F0EA] text-[#2D5A34] text-xs font-mono font-bold border border-[#CDE0D1]">
-              Phần H • Điều Hướng Chuyên Sâu Từng Công Đoạn
+              Phần F • Điều Hướng Chuyên Sâu Từng Công Đoạn
             </span>
             <span class="text-xs font-mono text-[#475254]">Khám Phá Chi Tiết Thuật Toán & Mã Nguồn</span>
           </div>

@@ -1891,21 +1891,21 @@ function selectCrossVerifySample(index) {
     matchBox.innerHTML = `
       <div class="space-y-2.5 text-xs">
         <div class="flex items-center gap-2">
-          <span class="px-2.5 py-1 rounded font-mono font-bold text-[11px] ${nightMatch ? 'bg-[#E8F0EA] text-[#2D5A34] border border-[#CDE0D1]' : 'bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A]'}">
+          <span class="px-2.5 py-1 rounded font-mono font-bold text-xs ${nightMatch ? 'bg-[#E8F0EA] text-[#2D5A34] border border-[#CDE0D1]' : 'bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A]'}">
             ${nightMatch ? 'XÁC THỰC KHỚP BAN ĐÊM (YCbCr P50)' : 'Lệch Phân Định'}
           </span>
         </div>
         <div class="flex items-center gap-2">
-          <span class="px-2.5 py-1 rounded font-mono font-bold text-[11px] bg-[#E8F0EA] text-[#2D5A34] border border-[#CDE0D1]">
+          <span class="px-2.5 py-1 rounded font-mono font-bold text-xs bg-[#E8F0EA] text-[#2D5A34] border border-[#CDE0D1]">
             XÁC THỰC CHE KHUẤT DIRECTED DAG (+36.05% F1)
           </span>
         </div>
         <div class="flex items-center gap-2">
-          <span class="px-2.5 py-1 rounded font-mono font-bold text-[11px] bg-[#E8F0EA] text-[#2D5A34] border border-[#CDE0D1]">
+          <span class="px-2.5 py-1 rounded font-mono font-bold text-xs bg-[#E8F0EA] text-[#2D5A34] border border-[#CDE0D1]">
             CLEAR DAY GUARD: TRIỆT TIÊU BÁO GIẢ SƯƠNG MÙ
           </span>
         </div>
-        <div class="pt-2 text-[11px] text-[#475254] leading-relaxed border-t border-[#E5E3DC]">
+        <div class="pt-2 text-xs text-[#475254] leading-relaxed border-t border-[#E5E3DC]">
           <strong class="text-[#2D5A34]">Chuẩn Căn Cứ Phase 03:</strong> Hồ sơ metadata ảnh đã được đối chuẩn Ground-Truth thành công, sẵn sàng cung cấp căn cứ phân bổ cho tập mầm Seed V0.
         </div>
       </div>
@@ -1974,7 +1974,7 @@ function renderAuditGallery(filter = 'all') {
       <div class="editorial-card p-4 space-y-3 cursor-pointer hover:border-[#2D5A34] transition-all group" onclick="openCandidateModal(${c.id})">
         <div class="flex items-center justify-between text-xs">
           <span class="font-mono font-bold text-[#1F2627]">ID ${c.id}</span>
-          <span class="px-2 py-0.5 rounded-md font-mono text-[10px] font-bold border ${badgeColor}">${badgeText}</span>
+          <span class="px-2 py-0.5 rounded-md font-mono text-xs font-bold border ${badgeColor}">${badgeText}</span>
         </div>
 
         <div class="aspect-video w-full rounded-lg overflow-hidden bg-[#ECEAE2] relative">
@@ -1984,7 +1984,7 @@ function renderAuditGallery(filter = 'all') {
           </div>
         </div>
 
-        <div class="grid grid-cols-3 gap-2 text-center text-[10px] font-mono bg-[#F8F7F2] p-2 rounded-lg border border-[#E5E3DC]">
+        <div class="grid grid-cols-3 gap-2 text-center text-xs font-mono bg-[#F8F7F2] p-2 rounded-lg border border-[#E5E3DC]">
           <div>
             <div class="text-[#6B7677]">Laplacian</div>
             <div class="font-bold text-[#1F2627]">${c.lap.toFixed(1)}</div>
@@ -1999,7 +1999,7 @@ function renderAuditGallery(filter = 'all') {
           </div>
         </div>
 
-        <div class="text-[11px] text-[#475254] line-clamp-2 leading-relaxed">
+        <div class="text-xs text-[#475254] line-clamp-2 leading-relaxed">
           <span class="font-semibold text-[#1F2627]">Thẩm định Huỳnh:</span> ${c.notes}
         </div>
       </div>
@@ -2021,7 +2021,7 @@ function openCandidateModal(candId) {
     <div class="space-y-4">
       <div class="flex items-center justify-between pb-3 border-b border-[#E5E3DC]">
         <div>
-          <span class="text-[10px] font-mono uppercase tracking-wider text-[#6B7677]">BDD10K UNIQUE POOL — CANDIDATE #${c.id}</span>
+          <span class="text-xs font-mono uppercase tracking-wider text-[#6B7677]">BDD10K UNIQUE POOL — CANDIDATE #${c.id}</span>
           <h3 class="text-lg font-bold font-editorial text-[#1F2627]">${c.name}</h3>
         </div>
         <span class="px-3 py-1 rounded-lg font-mono text-xs font-bold border ${badgeColor}">${badgeText}</span>
@@ -2035,17 +2035,17 @@ function openCandidateModal(candId) {
         <div class="p-3 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC] text-center">
           <div class="text-xs text-[#6B7677] font-mono">Laplacian Variance</div>
           <div class="text-xl font-bold font-editorial text-[#1F2627]">${c.lap.toFixed(2)}</div>
-          <div class="text-[10px] text-[#6B7677]">Ngưỡng: < 120.0</div>
+          <div class="text-xs text-[#6B7677]">Ngưỡng: < 120.0</div>
         </div>
         <div class="p-3 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC] text-center">
           <div class="text-xs text-[#6B7677] font-mono">Edge-Gated Tenengrad</div>
           <div class="text-xl font-bold font-editorial text-[#1F2627]">${Math.round(c.ten).toLocaleString()}</div>
-          <div class="text-[10px] text-[#6B7677]">Ngưỡng: < 15,000</div>
+          <div class="text-xs text-[#6B7677]">Ngưỡng: < 15,000</div>
         </div>
         <div class="p-3 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC] text-center">
           <div class="text-xs text-[#6B7677] font-mono">2D-FFT Energy Slope</div>
           <div class="text-xl font-bold font-editorial text-[#1F2627]">${c.fft.toFixed(4)}</div>
-          <div class="text-[10px] text-[#6B7677]">Ngưỡng: < 0.015</div>
+          <div class="text-xs text-[#6B7677]">Ngưỡng: < 0.015</div>
         </div>
       </div>
 
