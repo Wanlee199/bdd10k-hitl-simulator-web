@@ -5,12 +5,12 @@
  */
 
 :root {
-  --canvas: #F8F7F2;
+  --canvas: #F9FAFB;
   --surface: #FFFFFF;
   --ink: #303A3B;
   --ink-heading: #1F2627;
-  --ink-muted: #6B7677;
-  --ink-subtle: #8A9697;
+  --ink-muted: #475254;
+  --ink-subtle: #5A6768;
   --border-delicate: #E5E3DC;
   --border-subtle: #ECEAE2;
   --primary-sage: #B7CDBB;
@@ -32,6 +32,12 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Triệt tiêu shadow quá rộng và hairline border của custom-play-btn-menu */
+.custom-play-btn-menu {
+  border: 1px solid var(--border-delicate) !important;
+  box-shadow: 0 4px 14px rgba(48, 58, 59, 0.08) !important;
 }
 
 /* Typography Editorial */
