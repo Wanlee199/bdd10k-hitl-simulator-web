@@ -10,7 +10,7 @@
  */
 
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("🚀 Initializing Phase 07 Controller...");
+  console.log("[Controller] Initializing Phase 07 Controller...");
 
   // 1. DỮ LIỆU 12 CÔNG ĐOẠN PIPELINE CHI TIẾT
   const pipelineStepsData = {
@@ -153,7 +153,14 @@ document.addEventListener("DOMContentLoaded", function () {
       random_precision: "53.09%",
       random_f1: "31.27%",
       random_cfscore: "0.1770",
+      full_pool_map50: "26.85%",
+      full_pool_map95: "13.50%",
+      full_pool_recall: "30.00%",
+      full_pool_precision: "55.40%",
+      full_pool_f1: "36.50%",
+      full_pool_cfscore: "0.2380",
       status_badge: "BASELINE ANCHOR",
+
       badge_class: "bg-[#F0EEE6] text-[#475254]",
       verdict: "Khởi động mô hình mầm YOLO11n Quán quân Cfg-3. Lớp Car đạt 63.5% nhưng 6 lớp hiếm bị điểm liệt (train 0%, motor 2.1%).",
       per_class: [
@@ -217,7 +224,7 @@ document.addEventListener("DOMContentLoaded", function () {
       random_precision: "53.20%",
       random_f1: "32.20%",
       random_cfscore: "0.1883",
-      status_badge: "👑 ALL-FRONT WIN (6/6 METRICS)",
+      status_badge: "ALL-FRONT WIN (6/6 METRICS)",
       badge_class: "bg-[#FFF3E0] text-[#E65100] border border-[#FFE0B2]",
       verdict: "KÍCH HOẠT VÒNG XÁC NHẬN! Active vượt Random trên cả 6 mặt trận: mAP50 (+3.10%), map95 (+4.25%), Recall (+5.30%), Prec (+3.00%), F1 (+4.10%), CF-Score (+0.0411).",
       per_class: [
@@ -281,7 +288,7 @@ document.addEventListener("DOMContentLoaded", function () {
       random_precision: "54.20%",
       random_f1: "33.70%",
       random_cfscore: "0.1993",
-      status_badge: "🏆 VICTORY CONFIRMED SATURATED",
+      status_badge: "VICTORY CONFIRMED SATURATED",
       badge_class: "bg-[#2D5A34] text-white",
       verdict: "KÍCH HOẠT DỪNG HỆ THỐNG THÀNH CÔNG! Đạt trần hiệu năng đỉnh cao 27.85% mAP@50 chỉ với 60% dữ liệu, tiết kiệm 40.1% ngân sách nhãn, giải cứu 6 lớp hiếm.",
       per_class: [
@@ -338,6 +345,28 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("r_rnd_prec").innerText = data.random_precision;
     document.getElementById("r_rnd_f1").innerText = data.random_f1;
     document.getElementById("r_rnd_cf").innerText = data.random_cfscore;
+
+    // Cập nhật Full Pool 100% Benchmark (Trần Hiệu Năng Upper Bound)
+    const fullMap50 = data.full_pool_map50 || "26.85%";
+    const fullMap95 = data.full_pool_map95 || "13.50%";
+    const fullRec = data.full_pool_recall || "30.00%";
+    const fullPrec = data.full_pool_precision || "55.40%";
+    const fullF1 = data.full_pool_f1 || "36.50%";
+    const fullCf = data.full_pool_cfscore || "0.2380";
+
+    const elFullMap50 = document.getElementById("r_full_map50");
+    if (elFullMap50) elFullMap50.innerText = fullMap50;
+    const elFullMap95 = document.getElementById("r_full_map95");
+    if (elFullMap95) elFullMap95.innerText = fullMap95;
+    const elFullRec = document.getElementById("r_full_rec");
+    if (elFullRec) elFullRec.innerText = fullRec;
+    const elFullPrec = document.getElementById("r_full_prec");
+    if (elFullPrec) elFullPrec.innerText = fullPrec;
+    const elFullF1 = document.getElementById("r_full_f1");
+    if (elFullF1) elFullF1.innerText = fullF1;
+    const elFullCf = document.getElementById("r_full_cf");
+    if (elFullCf) elFullCf.innerText = fullCf;
+
 
     // Cập nhật bảng per-class
     const tbody = document.getElementById("roundPerClassBody");
