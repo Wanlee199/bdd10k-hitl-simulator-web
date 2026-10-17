@@ -1,7 +1,7 @@
 # Kiến Trúc Pipeline & Luồng Dữ Liệu Toàn Trình (Pipeline Architecture & Data Flow)
 
 > **Mã tài liệu**: `docs/02_pipeline_architecture.md`  
-> **Dự án**: BDD10K Active Learning Lab (Hệ Thống Tự Động Hóa Dữ Liệu Thị Giác Xe Tự Hành HITL)  
+> **Dự án**: BDD10K Active Learning Lab: Hệ Thống Tự Động Hóa Vòng Lặp Dữ Liệu Học Tập Chủ Động (Human-in-the-Loop)  
 > **Nguồn thực nghiệm gốc**: `/Users/huynh/orca/workspaces/BuildPhase/tang`  
 > **Đối tượng độc giả**: Kỹ sư Hệ thống, Kiến trúc sư Thị giác máy tính và Kỹ sư MLOps  
 > **Tác giả / Nhóm nghiên cứu**: T018  

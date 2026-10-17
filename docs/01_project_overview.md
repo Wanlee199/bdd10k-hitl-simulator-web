@@ -1,7 +1,7 @@
 # Tổng Quan Dự Án: BDD10K Active Learning Lab
 
 > **Mã tài liệu**: `docs/01_project_overview.md`  
-> **Dự án**: BDD10K Active Learning Lab (Hệ Thống Tự Động Hóa Dữ Liệu Thị Giác Xe Tự Hành HITL)  
+> **Dự án**: BDD10K Active Learning Lab: Hệ Thống Tự Động Hóa Vòng Lặp Dữ Liệu Học Tập Chủ Động (Human-in-the-Loop)  
 > **Nguồn thực nghiệm gốc**: `/Users/huynh/orca/workspaces/BuildPhase/tang`  
 > **Đối tượng độc giả**: Nhà nghiên cứu, Kỹ sư Thị giác máy tính (CV) và Kiến trúc sư MLOps  
 > **Tác giả / Nhóm nghiên cứu**: T018  
@@ -12,7 +12,7 @@
 ## 1. Tổng Quan Dự Án (Project Overview)
 
 ### 1.1 Tên Dự Án
-**BDD10K Active Learning Lab: Hệ thống Tự động hóa Vòng lặp Dữ liệu Học tập Chủ động (Human-in-the-Loop) cho Thị giác Xe Tự Hành**
+**BDD10K Active Learning Lab: Hệ Thống Tự Động Hóa Vòng Lặp Dữ Liệu Học Tập Chủ Động (Human-in-the-Loop)**
 
 ### 1.2 Tóm Tắt Định Hướng
 **BDD10K Active Learning Lab** là một khuôn khổ nghiên cứu và kỹ thuật thực nghiệm toàn trình nhằm giải quyết triệt để **nghịch lý dữ liệu lớn (Big Data Paradox)** trong ngành công nghiệp xe tự hành: Các đội xe thương mại trang bị camera hành trình (Dashcam) thu thập hàng triệu khung hình video mỗi ngày. Tuy nhiên, hơn **80% đến 85%** khối lượng khung hình này là cảnh tượng dư thừa, lặp lại (dừng đèn đỏ, kẹt xe, đường cao tốc tĩnh dưới trời nắng). Ngược lại, các tình huống nguy hiểm sống còn ở "đuôi dài" (Long-Tail Edge Cases)—như người đi bộ ban đêm, xe máy trong điểm mù, sương mù dày đặc và các trường hợp bị che khuất nghiêm trọng—chỉ chiếm chưa đầy **1% đến 3%** tổng dữ liệu.

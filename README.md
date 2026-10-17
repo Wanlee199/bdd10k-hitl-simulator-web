@@ -1,6 +1,6 @@
 # 🚗 BDD10K Active Learning Lab — Frontend Interactive Simulator & Research Hub
 
-> **Dự án**: Autonomous Driving Human-in-the-Loop Vision Engine Dashboard & Simulation Suite  
+> **Dự án**: BDD10K Active Learning Lab: Hệ Thống Tự Động Hóa Vòng Lặp Dữ Liệu Học Tập Chủ Động (Human-in-the-Loop)  
 > **Nhóm nghiên cứu / Tác giả**: T018  
 > **Kho lưu trữ nghiên cứu chính thức (Upstream)**: [nguyenhuynhdt37/autonomous-driving-active-learning-lab](https://github.com/nguyenhuynhdt37/autonomous-driving-active-learning-lab)  
 > **Kiến trúc công nghệ**: Pure Vanilla JavaScript (ES6+ Modules) + Modern Editorial CSS Design System + HTML5 Canvas API + Chart.js  
@@ -217,7 +217,7 @@ Website hoàn toàn tĩnh (Static HTML/JS/CSS) nên có thể host miễn phí 1
 ## 👥 9. Tác Giả & Trích Dẫn (Citation & Acknowledgements)
 
 > **Nhóm nghiên cứu**: T018  
-> **Dự án**: BDD10K Active Learning Lab (Autonomous Driving Human-in-the-Loop Vision Engine)  
+> **Dự án**: BDD10K Active Learning Lab: Hệ Thống Tự Động Hóa Vòng Lặp Dữ Liệu Học Tập Chủ Động (Human-in-the-Loop)  
 > **Dữ liệu chuẩn**: Berkeley DeepDrive (BDD10K Dataset — Yu et al., 2020)  
 > **Mã nguồn tham chiếu**: [nguyenhuynhdt37/autonomous-driving-active-learning-lab](https://github.com/nguyenhuynhdt37/autonomous-driving-active-learning-lab)  
 

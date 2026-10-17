@@ -1,7 +1,7 @@
 # Báo cáo thực nghiệm kỹ thuật: Vòng lặp Active Learning tự động toàn trình (Phase 07)
 
 > **Mã tài liệu**: `docs/experiments/07_end_to_end_loop.md`  
-> **Dự án**: BDD10K Active Learning Lab (Hệ thống thị giác máy tính Human-in-the-Loop cho xe tự hành)  
+> **Dự án**: BDD10K Active Learning Lab: Hệ Thống Tự Động Hóa Vòng Lặp Dữ Liệu Học Tập Chủ Động (Human-in-the-Loop)  
 > **Notebook thực nghiệm chính**: `notebooks/07_end_to_end_autonomous_active_loop.ipynb`  
 > **Bộ điều phối chính**: `scripts/run_phase_07_autonomous_loop.py`  
 > **Nguồn repository thượng nguồn**: `/Users/huynh/orca/workspaces/BuildPhase/tang`  

@@ -1,7 +1,7 @@
 # 04. Hướng Dẫn Tái Lập Thực Nghiệm & Tùy Biến (Reproduction Guide)
 
 > **Mã tài liệu**: `docs/04_reproduction_guide.md`  
-> **Dự án**: BDD10K Active Learning Lab (Động cơ thị giác xe tự hành Human-in-the-Loop)  
+> **Dự án**: BDD10K Active Learning Lab: Hệ Thống Tự Động Hóa Vòng Lặp Dữ Liệu Học Tập Chủ Động (Human-in-the-Loop)  
 > **Tác giả / Nhóm nghiên cứu**: T018  
 > **Notebook mục tiêu**: `notebooks/07_end_to_end_autonomous_active_loop.ipynb`  
 > **Repository chính thức**: `https://github.com/nguyenhuynhdt37/autonomous-driving-active-learning-lab.git`  

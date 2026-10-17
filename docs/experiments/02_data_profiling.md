@@ -1,7 +1,7 @@
 # Báo cáo thực nghiệm kỹ thuật: Phân tích đặc tính dữ liệu 5 chiều đa miền & Benchmark chất lượng (Phase 02)
 
 > **Mã tài liệu**: `docs/experiments/02_data_profiling.md`  
-> **Dự án**: BDD10K Active Learning Lab (Hệ thống thị giác máy tính Human-in-the-Loop cho xe tự hành)  
+> **Dự án**: BDD10K Active Learning Lab: Hệ Thống Tự Động Hóa Vòng Lặp Dữ Liệu Học Tập Chủ Động (Human-in-the-Loop)  
 > **Notebook thực nghiệm chính**: `notebooks/02_automated_data_profiling_benchmark.ipynb`  
 > **Nguồn repository thượng nguồn**: `/Users/huynh/orca/workspaces/BuildPhase/tang`  
 > **Tác giả / Nhóm nghiên cứu**: T018  
