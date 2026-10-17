@@ -356,7 +356,7 @@
               <span class="w-2 h-2 rounded-full bg-[#2D5A34]"></span>
               Câu hỏi nghiên cứu trọng tâm (Research Question)
             </div>
-            <p class="text-sm text-[#475254] leading-relaxed font-editorial italic">
+            <p class="text-base lg:text-[18px] text-[#1F2627] leading-relaxed font-editorial italic font-medium">
               "Làm thế nào để xây dựng một pipeline tự động hóa khép kín có khả năng lọc sạch dữ liệu rác tại CPU, thiết lập tập kiểm thử cách ly tuyệt đối, và tự động khai phá các khung hình giàu giá trị thông tin nhất trên BDD10K để tối ưu hóa đồng thời toàn diện các chỉ số $\text{mAP@50}$, $\text{mAP@50:95}$ (và $\text{mAP@90}$), Precision, Recall cùng F1-Score trên các lát cắt an toàn đuôi dài với chi phí gán nhãn chuyên gia con người tối thiểu?"
             </p>
           </div>
@@ -368,7 +368,7 @@
           <div class="space-y-1">
             <div class="text-xs font-mono text-[#475254] font-medium tracking-wide">Khối lượng sau lọc sạch</div>
             <div class="text-2xl font-bold font-mono text-[#2D5A34]">6.994 ảnh</div>
-            <div class="text-xs text-[#475254] leading-normal">
+            <div class="text-sm lg:text-[15px] text-[#475254] leading-relaxed">
               Loại bỏ 30.06% khung hình lặp lại bằng pHash 2D-DCT
             </div>
           </div>
@@ -377,7 +377,7 @@
           <div class="space-y-1">
             <div class="text-xs font-mono text-[#475254] font-medium tracking-wide">Kiểm soát rò rỉ video</div>
             <div class="text-2xl font-bold font-mono text-[#1F2627]">0.000000 px</div>
-            <div class="text-xs text-[#475254] leading-normal">
+            <div class="text-sm lg:text-[15px] text-[#475254] leading-relaxed">
               Zero Video Leakage qua 13.45M cặp quét kiểm toán
             </div>
           </div>
@@ -386,7 +386,7 @@
           <div class="space-y-1">
             <div class="text-xs font-mono text-[#475254] font-medium tracking-wide">Thông lượng lọc CPU</div>
             <div class="text-2xl font-bold font-mono text-[#1E40AF]">360.3 FPS</div>
-            <div class="text-xs text-[#475254] leading-normal">
+            <div class="text-sm lg:text-[15px] text-[#475254] leading-relaxed">
               Nhanh gấp 15.4× so với ResNet50 GPU (23.3 FPS)
             </div>
           </div>
@@ -401,7 +401,7 @@
             <div class="text-xs text-[#1E40AF] font-bold font-mono">
               +6.34% vs Random V1 (32.48%)
             </div>
-            <div class="text-xs text-[#475254]">
+            <div class="text-sm lg:text-[15px] text-[#475254] leading-relaxed">
               Đánh giá độc lập trên 1.400 ảnh Test
             </div>
           </div>
@@ -591,7 +591,7 @@
           <h2 class="text-2xl lg:text-3xl font-bold font-editorial text-[#1F2627]">
             Đối Chuẩn Thực Đo: Proposed Active vs Random Baseline
           </h2>
-          <p class="text-sm text-[#475254] leading-relaxed max-w-3xl">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed max-w-3xl">
             Để bảo đảm tính công bằng tuyệt đối: tất cả các mô hình trong từng giai đoạn đều được đánh giá độc lập trên cùng <strong>Frozen Gold Test Set (1.400 ảnh, 28.094 bounding boxes)</strong>, cùng kiến trúc YOLOv11n và cùng cấu hình tối ưu hóa Cfg-3.
           </p>
         </div>
@@ -1389,7 +1389,7 @@
           <h2 class="text-2xl lg:text-3xl font-bold font-editorial text-[#1F2627]">
             Tổng Hợp Phát Hiện Thực Nghiệm & Những Đánh Đổi Kiến Trúc
           </h2>
-          <p class="text-sm text-[#475254] leading-relaxed max-w-3xl">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed max-w-3xl">
             Nghiên cứu mang lại những đóng góp cụ thể về mặt phương pháp luận, đồng thời ghi nhận trung thực các đánh đổi về tài nguyên tính toán:
           </p>
         </div>
@@ -1397,22 +1397,22 @@
         <!-- 3 Đánh Đổi Kiến Trúc Quan Trọng -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="space-y-2 pb-3 border-b border-[#E5E3DC] md:border-b-0">
-            <div class="text-sm font-mono font-bold text-[#1F2627]">1. Chi Phí Tính Toán Khai Phá vs Nhân Lực Gán Nhãn</div>
-            <p class="text-sm text-[#475254] leading-relaxed">
+            <div class="text-base font-mono font-bold text-[#1F2627]">1. Chi Phí Tính Toán Khai Phá vs Nhân Lực Gán Nhãn</div>
+            <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
               Chiến lược C6 Super-Fusion yêu cầu tính toán đặc trưng PCA 32D và tối ưu Submodular Facility Location $O(N \cdot K)$. Tuy nhiên, chi phí CPU/GPU này chỉ mất vài giây, đổi lại tiết kiệm được <strong>hàng trăm giờ gán nhãn thủ công</strong> và giảm 40.1% ngân sách chuyên gia.
             </p>
           </div>
 
           <div class="space-y-2 pb-3 border-b border-[#E5E3DC] md:border-b-0">
-            <div class="text-sm font-mono font-bold text-[#1F2627]">2. Đánh Đổi Lớp Xe Con Để Cứu Lớp Hiểm Nghèo</div>
-            <p class="text-sm text-[#475254] leading-relaxed">
+            <div class="text-base font-mono font-bold text-[#1F2627]">2. Đánh Đổi Lớp Xe Con Để Cứu Lớp Hiểm Nghèo</div>
+            <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
               Bộ cân bằng thâm hụt $C_w$ ghìm trọng số lớp xe hơi (<code class="text-xs bg-[#F0EEE6] px-1.5 py-0.5 rounded font-mono">car</code>) xuống sàn $0.20\times$. Điều này khiến mAP của lớp xe hơi giảm nhẹ $-0.43\% \to -0.77\%$, nhưng bù lại cứu sống lớp <code class="text-xs bg-[#F0EEE6] px-1.5 py-0.5 rounded font-mono">rider</code> tăng vọt $+3.59\%$ và <code class="text-xs bg-[#F0EEE6] px-1.5 py-0.5 rounded font-mono">truck</code> tăng $+1.04\%$.
             </p>
           </div>
 
           <div class="space-y-2 pb-3">
-            <div class="text-sm font-mono font-bold text-[#1F2627]">3. Tính Cộng Hưởng Của Toàn Trình Pipeline</div>
-            <p class="text-sm text-[#475254] leading-relaxed">
+            <div class="text-base font-mono font-bold text-[#1F2627]">3. Tính Cộng Hưởng Của Toàn Trình Pipeline</div>
+            <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
               Không thể quy toàn bộ sự tiến bộ cho riêng một thuật toán. Nếu không có FastDedup ở Phase 01, kho ảnh sẽ bị loãng 30% rác; nếu không có Frozen Splits ở Phase 03, kết quả sẽ bị rò rỉ video; nếu không có C6 ở Phase 05, mô hình sẽ bị co cụm không gian.
             </p>
           </div>
@@ -1421,7 +1421,7 @@
         <!-- Bộ Bốn Biểu Đồ Khoa Học 300 DPI -->
         <div class="pt-5 border-t border-[#E5E3DC] space-y-4">
           <div class="flex items-center justify-between">
-            <span class="text-sm font-mono font-bold text-[#1F2627]">
+            <span class="text-base font-mono font-bold text-[#1F2627]">
               Bộ Bốn Biểu Đồ Khoa Học 300 DPI Xuất Bản Từ Thực Nghiệm
             </span>
             <span class="text-xs font-mono text-[#475254]">Chuẩn APA / IEEE Publication Ready</span>
@@ -1430,38 +1430,38 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Hình 1 -->
             <div class="space-y-2">
-              <div class="text-sm font-bold text-[#1F2627]">Hình 1: Đường Cong Học Tập Chủ Động (Active Learning Curve)</div>
+              <div class="text-base font-bold text-[#1F2627]">Hình 1: Đường Cong Học Tập Chủ Động (Active Learning Curve)</div>
               <div class="rounded-lg overflow-hidden border border-[#E5E3DC] bg-white">
                 <img src="assets/autonomous_loop/figure_07a_active_learning_curve.png" alt="Active Learning Curve" class="w-full h-auto object-contain">
               </div>
-              <p class="text-sm text-[#475254] leading-relaxed">Diễn biến mAP@50 qua các vòng lặp đối chuẩn giữa Proposed Active, Random Baseline và 100% Target.</p>
+              <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">Diễn biến mAP@50 qua các vòng lặp đối chuẩn giữa Proposed Active, Random Baseline và 100% Target.</p>
             </div>
 
             <!-- Hình 2 -->
             <div class="space-y-2">
-              <div class="text-sm font-bold text-[#1F2627]">Hình 2: Phân Rã Hiệu Năng 10 Lớp Giao Thông (Per-Class Gain)</div>
+              <div class="text-base font-bold text-[#1F2627]">Hình 2: Phân Rã Hiệu Năng 10 Lớp Giao Thông (Per-Class Gain)</div>
               <div class="rounded-lg overflow-hidden border border-[#E5E3DC] bg-white">
                 <img src="assets/autonomous_loop/figure_07b_per_class_radar_and_gain.png" alt="Per-class Radar Gain" class="w-full h-auto object-contain">
               </div>
-              <p class="text-sm text-[#475254] leading-relaxed">Biểu đồ Radar thể hiện sự hồi sinh mạnh mẽ ở các lớp đuôi dài nguy hiểm (rider, truck, motorcycle).</p>
+              <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">Biểu đồ Radar thể hiện sự hồi sinh mạnh mẽ ở các lớp đuôi dài nguy hiểm (rider, truck, motorcycle).</p>
             </div>
 
             <!-- Hình 3 -->
             <div class="space-y-2">
-              <div class="text-sm font-bold text-[#1F2627]">Hình 3: Tiến Hóa Vector Phạt Thâm Hụt Lớp Động ($C_w$)</div>
+              <div class="text-base font-bold text-[#1F2627]">Hình 3: Tiến Hóa Vector Phạt Thâm Hụt Lớp Động ($C_w$)</div>
               <div class="rounded-lg overflow-hidden border border-[#E5E3DC] bg-white">
                 <img src="assets/autonomous_loop/figure_07c_hard_slices_quota_evolution.png" alt="Dynamic Deficit Evolution" class="w-full h-auto object-contain">
               </div>
-              <p class="text-sm text-[#475254] leading-relaxed">Cơ chế ghìm lớp xe con và tự động bơm trọng số cho các lớp bị mô hình bỏ sót qua từng chu kỳ.</p>
+              <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">Cơ chế ghìm lớp xe con và tự động bơm trọng số cho các lớp bị mô hình bỏ sót qua từng chu kỳ.</p>
             </div>
 
             <!-- Hình 4 -->
             <div class="space-y-2">
-              <div class="text-sm font-bold text-[#1F2627]">Hình 4: Động Lực Học Rào Chắn Dừng & Hiệu Quả Ngân Sách (ROI)</div>
+              <div class="text-base font-bold text-[#1F2627]">Hình 4: Động Lực Học Rào Chắn Dừng & Hiệu Quả Ngân Sách (ROI)</div>
               <div class="rounded-lg overflow-hidden border border-[#E5E3DC] bg-white">
                 <img src="assets/autonomous_loop/figure_07d_stopping_guard_delta_dynamics.png" alt="Stopping Guard Dynamics" class="w-full h-auto object-contain">
               </div>
-              <p class="text-sm text-[#475254] leading-relaxed">Bộ rào chắn 5 tầng phát hiện ngưỡng bão hòa tri thức, kích hoạt dừng sớm tại 60% dữ liệu pool.</p>
+              <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">Bộ rào chắn 5 tầng phát hiện ngưỡng bão hòa tri thức, kích hoạt dừng sớm tại 60% dữ liệu pool.</p>
             </div>
           </div>
         </div>
@@ -1481,7 +1481,7 @@
           <h2 class="text-2xl lg:text-3xl font-bold font-editorial text-[#1F2627]">
             Những Giới Hạn Cần Lưu Ý Khi Diễn Giải Kết Quả
           </h2>
-          <p class="text-sm md:text-base text-[#475254] leading-relaxed max-w-3xl">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed max-w-3xl">
             Để bảo đảm tính khách quan và tránh các tuyên bố phóng đại, nghiên cứu công khai đầy đủ các ranh giới giới hạn kỹ thuật:
           </p>
         </div>
@@ -1489,44 +1489,44 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-2">
           <!-- Giới hạn 1: 1 dataset duy nhất -->
           <div class="space-y-2 pb-4 border-b border-[#E5E3DC] md:border-b-0">
-            <div class="flex items-center gap-2 text-sm font-mono font-bold text-[#92400E]">
+            <div class="flex items-center gap-2 text-base font-mono font-bold text-[#92400E]">
               <span class="w-2 h-2 rounded-full bg-[#D97706]"></span>
               1. Ràng Buộc Phạm Vi: Thực Nghiệm Trên Duy Nhất 1 Bộ Dữ Liệu BDD10K
             </div>
-            <p class="text-sm text-[#475254] leading-relaxed">
+            <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
               Mặc dù BDD10K có nhiều vòng thực nghiệm kế tiếp ($V_0 \to V_5$), nhưng <strong>nhiều vòng lặp trong một dataset không thể thay thế việc kiểm chứng trên nhiều dataset độc lập</strong>. Toàn bộ các kết luận chỉ có giá trị chứng minh trên phân bố dữ liệu dashcam của BDD10K tại Mỹ. Chưa có căn cứ thực nghiệm để khẳng định pipeline sẽ mang lại kết quả tương tự trên dữ liệu Waymo, nuScenes, hoặc giao thông hỗn hợp tại Việt Nam.
             </p>
           </div>
 
           <!-- Giới hạn 2: Thiếu mẫu test lớp cực hiếm -->
           <div class="space-y-2 pb-4 border-b border-[#E5E3DC] md:border-b-0">
-            <div class="flex items-center gap-2 text-sm font-mono font-bold text-[#1F2627]">
+            <div class="flex items-center gap-2 text-base font-mono font-bold text-[#1F2627]">
               <span class="w-2 h-2 rounded-full bg-[#475254]"></span>
               2. Thiếu Hụt Mẫu Kiểm Thử Cho Lớp Xe Lửa (Train)
             </div>
-            <p class="text-sm text-[#475254] leading-relaxed">
+            <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
               Trong tập Frozen Gold Test (1.400 ảnh), lớp <code class="text-xs bg-[#F9FAFB] px-1 py-0.5 rounded border border-[#E5E3DC]">train</code> chỉ xuất hiện duy nhất 1 bounding box nhãn vàng. Do đó, điểm số mAP@50 đo được ở cả V0, Random V1 và Active V1 đều là 0.00%, chưa đủ độ tin cậy thống kê để đánh giá định lượng cho lớp này nếu không bổ sung thêm mẫu kiểm thử độc lập.
             </p>
           </div>
 
           <!-- Giới hạn 3: Giới hạn phần cứng và mô hình 2D -->
           <div class="space-y-2 pt-2 md:pt-0">
-            <div class="flex items-center gap-2 text-sm font-mono font-bold text-[#1F2627]">
+            <div class="flex items-center gap-2 text-base font-mono font-bold text-[#1F2627]">
               <span class="w-2 h-2 rounded-full bg-[#475254]"></span>
               3. Giới Hạn Cảm Biến Camera Đơn & Bounding Box 2D
             </div>
-            <p class="text-sm text-[#475254] leading-relaxed">
+            <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
               Nghiên cứu hiện tại tập trung vào camera hành trình đơn phía trước (Monocular Front-facing Camera) và bài toán 2D Bounding Box Detection. Hệ thống chưa kiểm chứng trên dữ liệu 3D LiDAR Point Cloud hoặc cụm camera 360 độ vòng quanh xe.
             </p>
           </div>
 
           <!-- Giới hạn 4: Tiến trình Phase 07 -->
           <div class="space-y-2 pt-2 md:pt-0">
-            <div class="flex items-center gap-2 text-sm font-mono font-bold text-[#1F2627]">
+            <div class="flex items-center gap-2 text-base font-mono font-bold text-[#1F2627]">
               <span class="w-2 h-2 rounded-full bg-[#1E40AF]"></span>
               4. Tiến Trình Thực Thi Của Phase 07 (Vòng Lặp Đa Chu Kỳ)
             </div>
-            <p class="text-sm text-[#475254] leading-relaxed">
+            <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed">
               Hệ thống đã hoàn thành kiểm toán logic toàn trình (`dry_run: true - LOGIC_AUDIT_PASSED`). Quá trình huấn luyện GPU thực tế cho các vòng V2–V5 đang được tiến hành để hoàn tất bộ checkpoint chính thức; các số liệu đa chu kỳ hiện tại được ghi nhận dưới dạng kịch bản đấu trường mục tiêu.
             </p>
           </div>
@@ -1547,7 +1547,7 @@
           <h2 class="text-2xl font-bold font-editorial text-[#1F2627]">
             Tra Cứu Chuyên Sâu Từng Mắt Xích Kỹ Thuật
           </h2>
-          <p class="text-sm md:text-base text-[#475254] leading-relaxed max-w-3xl">
+          <p class="text-base lg:text-[17px] text-[#475254] leading-relaxed max-w-3xl">
             Sau khi đã nắm rõ toàn bộ mạch lập luận nghiên cứu, bạn có thể truy cập từng trang chuyên đề để xem phân tích toán học, mã nguồn chi tiết và tệp kê khai thực nghiệm:
           </p>
         </div>
@@ -1560,8 +1560,8 @@
               <span class="w-6 h-6 rounded-lg bg-[#2D5A34] text-white font-mono font-bold text-xs flex items-center justify-center">01</span>
               <span class="text-xs font-mono text-[#2D5A34] font-bold group-hover:underline">Chi tiết →</span>
             </div>
-            <div class="text-base font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Point 01: FastDedup CPU Cạnh Biên</div>
-            <div class="text-sm text-[#475254] mt-1.5 leading-relaxed">Đấu trường pHash vs ResNet50. Đạt 360.3 FPS, lọc 30.06% ảnh trùng, giải cứu 100% xe nhỏ.</div>
+            <div class="text-lg font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Point 01: FastDedup CPU Cạnh Biên</div>
+            <div class="text-base lg:text-[17px] text-[#475254] mt-1.5 leading-relaxed">Đấu trường pHash vs ResNet50. Đạt 360.3 FPS, lọc 30.06% ảnh trùng, giải cứu 100% xe nhỏ.</div>
           </a>
 
           <!-- Point 2 -->
@@ -1570,8 +1570,8 @@
               <span class="w-6 h-6 rounded-lg bg-[#2D5A34] text-white font-mono font-bold text-xs flex items-center justify-center">02</span>
               <span class="text-xs font-mono text-[#2D5A34] font-bold group-hover:underline">Chi tiết →</span>
             </div>
-            <div class="text-base font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Point 02: Multi-Domain Profiling 5D</div>
-            <div class="text-sm text-[#475254] mt-1.5 leading-relaxed">Hồ sơ hóa ban đêm, rung mờ & Directed Occlusion DAG (F1=93.8% vượt Naive +36.0%).</div>
+            <div class="text-lg font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Point 02: Multi-Domain Profiling 5D</div>
+            <div class="text-base lg:text-[17px] text-[#475254] mt-1.5 leading-relaxed">Hồ sơ hóa ban đêm, rung mờ & Directed Occlusion DAG (F1=93.8% vượt Naive +36.0%).</div>
           </a>
 
           <!-- Point 3 -->
@@ -1580,8 +1580,8 @@
               <span class="w-6 h-6 rounded-lg bg-[#2D5A34] text-white font-mono font-bold text-xs flex items-center justify-center">03</span>
               <span class="text-xs font-mono text-[#2D5A34] font-bold group-hover:underline">Chi tiết →</span>
             </div>
-            <div class="text-base font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Point 03: Phân Chia Đóng Băng & Zero Leakage</div>
-            <div class="text-sm text-[#475254] mt-1.5 leading-relaxed">Giải thuật Hybrid Mix 80/20 đạt 93.6 CBS, bảo đảm 0% rò rỉ qua 13.45M cặp video.</div>
+            <div class="text-lg font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Point 03: Phân Chia Đóng Băng & Zero Leakage</div>
+            <div class="text-base lg:text-[17px] text-[#475254] mt-1.5 leading-relaxed">Giải thuật Hybrid Mix 80/20 đạt 93.6 CBS, bảo đảm 0% rò rỉ qua 13.45M cặp video.</div>
           </a>
 
           <!-- Point 4 -->
@@ -1590,8 +1590,8 @@
               <span class="w-6 h-6 rounded-lg bg-[#2D5A34] text-white font-mono font-bold text-xs flex items-center justify-center">04</span>
               <span class="text-xs font-mono text-[#2D5A34] font-bold group-hover:underline">Chi tiết →</span>
             </div>
-            <div class="text-base font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Point 04: Công Thức Mầm V0 & YOLO vs RT-DETR</div>
-            <div class="text-sm text-[#475254] mt-1.5 leading-relaxed">Cắt bỏ 5 công thức huấn luyện. YOLO11n Cfg-3 đạt 20.89% mAP, hạ gục RT-DETRv0 (0.12%).</div>
+            <div class="text-lg font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Point 04: Công Thức Mầm V0 & YOLO vs RT-DETR</div>
+            <div class="text-base lg:text-[17px] text-[#475254] mt-1.5 leading-relaxed">Cắt bỏ 5 công thức huấn luyện. YOLO11n Cfg-3 đạt 20.89% mAP, hạ gục RT-DETRv0 (0.12%).</div>
           </a>
 
           <!-- Point 5 -->
@@ -1600,8 +1600,8 @@
               <span class="w-6 h-6 rounded-lg bg-[#2D5A34] text-white font-mono font-bold text-xs flex items-center justify-center">05</span>
               <span class="text-xs font-mono text-[#2D5A34] font-bold group-hover:underline">Chi tiết →</span>
             </div>
-            <div class="text-base font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Point 05: Đấu Trường Active Mining C6</div>
-            <div class="text-sm text-[#475254] mt-1.5 leading-relaxed">Super-Fusion C6 trên PCA 32D, săn lùng 655 vật thể hiếm BDD10K (gấp 3.45× Random).</div>
+            <div class="text-lg font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Point 05: Đấu Trường Active Mining C6</div>
+            <div class="text-base lg:text-[17px] text-[#475254] mt-1.5 leading-relaxed">Super-Fusion C6 trên PCA 32D, săn lùng 655 vật thể hiếm BDD10K (gấp 3.45× Random).</div>
           </a>
 
           <!-- Point 6 -->
@@ -1610,8 +1610,8 @@
               <span class="w-6 h-6 rounded-lg bg-[#2D5A34] text-white font-mono font-bold text-xs flex items-center justify-center">06</span>
               <span class="text-xs font-mono text-[#2D5A34] font-bold group-hover:underline">Chi tiết →</span>
             </div>
-            <div class="text-base font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Point 06: Tái Huấn Luyện V1 & Đối Chuẩn Gold</div>
-            <div class="text-sm text-[#475254] mt-1.5 leading-relaxed">Precision 38.82% (+6.34% vs Random), phục hồi lớp Rider 6.37%, niêm phong SHA-256.</div>
+            <div class="text-lg font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Point 06: Tái Huấn Luyện V1 & Đối Chuẩn Gold</div>
+            <div class="text-base lg:text-[17px] text-[#475254] mt-1.5 leading-relaxed">Precision 38.82% (+6.34% vs Random), phục hồi lớp Rider 6.37%, niêm phong SHA-256.</div>
           </a>
         </div>
       </section>
