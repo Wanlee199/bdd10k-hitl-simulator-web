@@ -368,16 +368,45 @@ document.addEventListener("DOMContentLoaded", function () {
     if (elFullCf) elFullCf.innerText = fullCf;
 
 
-    // Cập nhật bảng per-class
+    // Cập nhật bảng per-class (TẬP TRUNG ĐỐI CHIẾU VỚI RANDOM 100% TOÀN BỘ POOL)
+    const targetFullMap = {
+      person: "41.2%",
+      rider: "8.5%",
+      car: "64.5%",
+      truck: "27.8%",
+      bus: "24.6%",
+      train: "14.2%",
+      motor: "13.5%",
+      bike: "10.4%",
+      "traffic light": "31.8%",
+      "traffic sign": "34.9%",
+    };
+
     const tbody = document.getElementById("roundPerClassBody");
     tbody.innerHTML = "";
     data.per_class.forEach((item) => {
       const tr = document.createElement("tr");
       tr.className = "border-b border-[#E5E3DC] hover:bg-[#F8F7F2]";
+      
+      const fullVal = targetFullMap[item.name] || "—";
+      const actNum = parseFloat(item.active);
+      const fullNum = parseFloat(fullVal);
+      const diffFull = (!isNaN(actNum) && !isNaN(fullNum)) ? (actNum - fullNum) : null;
+      let deltaFullBadge = '<span class="text-[#8C9B9D] font-mono text-xs">—</span>';
+      if (diffFull !== null) {
+        if (diffFull >= 0) {
+          deltaFullBadge = `<span class="px-1.5 py-0.5 rounded bg-[#EFF6FF] text-[#1E40AF] font-bold font-mono text-[10px]">+${diffFull.toFixed(1)}%</span>`;
+        } else {
+          deltaFullBadge = `<span class="px-1.5 py-0.5 rounded bg-[#F8F7F2] text-[#6B7677] font-mono text-[10px]">${diffFull.toFixed(1)}%</span>`;
+        }
+      }
+
       tr.innerHTML = `
         <td class="py-2 px-3 font-mono font-bold text-xs text-[#1F2627]">${item.name}</td>
         <td class="py-2 px-3 font-mono text-xs text-[#2D5A34] font-bold text-right">${item.active}</td>
-        <td class="py-2 px-3 font-mono text-xs text-[#6B7677] text-right">${item.random}</td>
+        <td class="py-2 px-3 font-mono text-xs text-[#1E40AF] font-bold text-right bg-[#EFF6FF]/60">${fullVal}</td>
+        <td class="py-2 px-3 text-right">${deltaFullBadge}</td>
+        <td class="py-2 px-3 font-mono text-xs text-[#8C9B9D] text-right">${item.random}</td>
         <td class="py-2 px-3 font-mono text-[11px] text-[#0284c7] text-right">${item.weight}</td>
       `;
       tbody.appendChild(tr);
