@@ -142,3 +142,12 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #A8A599;
 }
+
+/* Ẩn scrollbar cho Stepper Ribbon cuộn ngang */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

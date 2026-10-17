@@ -56,62 +56,253 @@
 </head>
 <body class="bg-[#F8F7F2] text-[#1F2627] font-sans antialiased selection:bg-[#DCEBE0]">
 
-  <!-- Top AppHeader (GreenSM 3-Zone Style) -->
-  <header class="sticky top-0 z-40 bg-[#F8F7F2]/90 backdrop-blur-md border-b border-[#E5E3DC]">
-    <div class="max-w-[1340px] mx-auto px-6 h-16 flex items-center justify-between">
-      <!-- Zone 1: Brand -->
-      <div class="flex items-center gap-3">
-        <a href="index.html" class="flex items-center gap-2.5 group">
-          <div class="w-9 h-9 rounded-xl bg-[#2D5A34] text-white flex items-center justify-center shadow-soft">
-            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+  <!-- ========================================================================= -->
+  <!-- LEFT FIXED ADMIN SIDEBAR (GreenSM Nordic Editorial Style) -->
+  <!-- ========================================================================= -->
+  <aside class="fixed inset-y-0 left-0 w-72 bg-white border-r border-[#E5E3DC] flex flex-col z-50 shadow-soft">
+    <!-- Zone 1: Sidebar Brand Header -->
+    <div class="h-16 border-b border-[#E5E3DC] px-5 flex items-center justify-between shrink-0">
+      <a href="index.html" class="flex items-center gap-2.5 group">
+        <div class="w-9 h-9 rounded-xl bg-[#2D5A34] text-white flex items-center justify-center shadow-soft">
+          <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+        </div>
+        <div>
+          <div class="font-editorial font-bold text-sm text-[#1F2627] leading-none group-hover:text-[#2D5A34] transition-colors">
+            BDD10K ActiveLab
           </div>
-          <div>
-            <div class="font-editorial font-bold text-base text-[#1F2627] leading-none group-hover:text-[#2D5A34] transition-colors">
-              BDD10K ActiveLab
-            </div>
-            <div class="text-[10px] font-mono text-[#6B7677] uppercase tracking-wider mt-0.5">
-              POINT 3 RESEARCH EVIDENCE
-            </div>
+          <div class="text-[9px] font-mono text-[#6B7677] uppercase tracking-wider mt-0.5">
+            POINT 3 SPLITS CONSOLE
           </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Zone 2: Scrollable Navigation -->
+    <div class="flex-1 overflow-y-auto px-4 py-4 space-y-6 no-scrollbar">
+      
+      <!-- Nav Group 1: 5 Phases Pipeline Rail -->
+      <div class="space-y-2">
+        <div class="flex items-center justify-between text-[10px] font-mono font-bold text-[#6B7677] uppercase tracking-wider px-1">
+          <span>TIẾN TRÌNH 5 PHASES</span>
+          <span class="text-[9px] text-[#2D5A34] font-semibold">ActiveLab</span>
+        </div>
+        <div class="space-y-1.5">
+          <!-- Phase 01 -->
+          <a href="fastdedup-point1.html" class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F8F7F2] transition-all group">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-[10px] flex items-center justify-center">01</span>
+              <div>
+                <div class="text-xs font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">FastDedup</div>
+                <div class="text-[9px] font-mono text-[#6B7677]">397 FPS • Lọc Trùng</div>
+              </div>
+            </div>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#F8F7F2] text-[#6B7677]">→</span>
+          </a>
+
+          <!-- Phase 02 -->
+          <a href="profiling-point2.html" class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F8F7F2] transition-all group">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-[10px] flex items-center justify-center">02</span>
+              <div>
+                <div class="text-xs font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Profiling 5D</div>
+                <div class="text-[9px] font-mono text-[#6B7677]">F1 97.1% • Manifest</div>
+              </div>
+            </div>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#F8F7F2] text-[#6B7677]">→</span>
+          </a>
+
+          <!-- Phase 03: Active -->
+          <a href="splits-point3.html" class="flex items-center justify-between p-2 rounded-xl bg-[#E8F0EA] border border-[#2D5A34] shadow-soft-sm transition-all">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-lg bg-[#2D5A34] text-white font-mono font-bold text-[10px] flex items-center justify-center">03</span>
+              <div>
+                <div class="text-xs font-bold text-[#2D5A34]">Splits Seed V0</div>
+                <div class="text-[9px] font-mono text-[#2D5A34]">Hybrid Mix 80/20</div>
+              </div>
+            </div>
+            <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-white text-[#2D5A34] border border-[#CDE0D1]">ĐANG XEM</span>
+          </a>
+
+          <!-- Phase 04 -->
+          <a href="training-point4.html" class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F8F7F2] transition-all group">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-[10px] flex items-center justify-center">04</span>
+              <div>
+                <div class="text-xs font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Training Model V0</div>
+                <div class="text-[9px] font-mono text-[#6B7677]">YOLO11n 20.2%</div>
+              </div>
+            </div>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#F8F7F2] text-[#6B7677]">→</span>
+          </a>
+
+          <!-- Phase 05 -->
+          <a href="active-mining-point5.html" class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#CBDFF5] hover:bg-[#F8FAFC] transition-all group">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#1E40AF] group-hover:text-white transition-colors font-mono font-bold text-[10px] flex items-center justify-center">05</span>
+              <div>
+                <div class="text-xs font-bold text-[#1F2627] group-hover:text-[#1E40AF] transition-colors">Active Mining</div>
+                <div class="text-[9px] font-mono text-[#6B7677]">Facility Location • K=250</div>
+              </div>
+            </div>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#F8F7F2] text-[#6B7677]">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Nav Group 2: Trọng Tâm Point 3 (Splits Special) -->
+      <div class="space-y-2">
+        <div class="flex items-center justify-between text-[10px] font-mono font-bold text-[#2D5A34] uppercase tracking-wider px-1">
+          <span>TRỌNG TÂM KỸ THUẬT POINT 3</span>
+          <span class="text-[9px] px-1.5 py-0.2 rounded bg-[#E8F0EA] text-[#2D5A34]">Splits</span>
+        </div>
+        <div class="space-y-1.5 text-xs font-mono">
+          <a href="#leaderboard" class="w-full text-left flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] text-[#475254] hover:bg-[#F8F7F2] hover:border-[#B7CDBB] font-medium transition-all">
+            <span class="truncate">Đấu Trường 6 Thuật Toán</span>
+            <span class="text-[9px] px-1.5 py-0.5 rounded bg-[#E8F0EA] text-[#2D5A34] shrink-0 font-bold">Hybrid Mix</span>
+          </a>
+          <a href="#radar" class="w-full text-left flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] text-[#475254] hover:bg-[#F8F7F2] hover:border-[#B7CDBB] font-medium transition-all">
+            <span class="truncate">Radar & PCA Đa Chiều</span>
+            <span class="text-[9px] px-1.5 py-0.5 rounded bg-[#F8F7F2] text-[#6B7677] shrink-0 font-bold">5D Metric</span>
+          </a>
+          <a href="#perclass" class="w-full text-left flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] text-[#475254] hover:bg-[#F8F7F2] hover:border-[#B7CDBB] font-medium transition-all">
+            <span class="truncate">10 Lớp Giao Thông BDD</span>
+            <span class="text-[9px] px-1.5 py-0.5 rounded bg-[#F8F7F2] text-[#6B7677] shrink-0 font-bold">Macro Avg</span>
+          </a>
+          <a href="#leakage" class="w-full text-left flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] text-[#475254] hover:bg-[#F8F7F2] hover:border-[#B7CDBB] font-medium transition-all">
+            <span class="truncate">Video Isolation Rò Rỉ</span>
+            <span class="text-[9px] px-1.5 py-0.5 rounded bg-[#E8F0EA] text-[#2D5A34] shrink-0 font-bold">Overlap = 0</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Nav Group 3: Modules Điều Hướng Nhanh -->
+      <div class="space-y-2">
+        <div class="text-[10px] font-mono font-bold text-[#6B7677] uppercase tracking-wider px-1">
+          KHÔNG GIAN KIỂM ĐỊNH
+        </div>
+        <div class="space-y-1 text-xs font-semibold text-[#475254]">
+          <a href="#thesis" class="flex items-center gap-2 p-2 rounded-lg hover:bg-[#F8F7F2] hover:text-[#2D5A34] transition-colors">
+            <svg class="w-3.5 h-3.5 text-[#6B7677]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+            <span>Luận Điểm Kỹ Thuật</span>
+          </a>
+          <a href="#simulator" class="flex items-center gap-2 p-2 rounded-lg hover:bg-[#F8F7F2] hover:text-[#2D5A34] transition-colors">
+            <svg class="w-3.5 h-3.5 text-[#6B7677]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect width="15" height="14" x="1" y="5" rx="2" ry="2"/></svg>
+            <span>Video Mô Phỏng</span>
+          </a>
+          <a href="#leaderboard" class="flex items-center gap-2 p-2 rounded-lg hover:bg-[#F8F7F2] hover:text-[#2D5A34] transition-colors">
+            <svg class="w-3.5 h-3.5 text-[#6B7677]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+            <span>Đấu Trường 6 Thuật Toán</span>
+          </a>
+          <a href="#leakage" class="flex items-center gap-2 p-2 rounded-lg hover:bg-[#F8F7F2] hover:text-[#2D5A34] transition-colors">
+            <svg class="w-3.5 h-3.5 text-[#6B7677]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+            <span>Kiểm Toán Rò Rỉ Video</span>
+          </a>
+          <a href="#gallery" class="flex items-center gap-2 p-2 rounded-lg hover:bg-[#F8F7F2] hover:text-[#2D5A34] transition-colors">
+            <svg class="w-3.5 h-3.5 text-[#6B7677]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            <span>16 Ảnh Thực Tế</span>
+          </a>
+          <a href="#handover" class="flex items-center gap-2 p-2 rounded-lg hover:bg-[#F8F7F2] hover:text-[#2D5A34] transition-colors">
+            <svg class="w-3.5 h-3.5 text-[#6B7677]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <span>Bàn Giao Cho Phase 04</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Zone 3: Live Mini Telemetry Dock (Đáy Sidebar) -->
+    <div class="p-3.5 border-t border-[#E5E3DC] bg-[#F8F7F2] shrink-0 space-y-2">
+      <div class="flex items-center justify-between text-[10px] font-mono">
+        <span class="text-[#2D5A34] font-bold uppercase tracking-wider">
+          LIVE TELEMETRY
+        </span>
+        <span class="text-[#6B7677]">Engine V0</span>
+      </div>
+      <div class="grid grid-cols-2 gap-1.5 text-[10px] font-mono">
+        <div class="p-1.5 rounded-lg bg-white border border-[#E5E3DC]">
+          <div class="text-[#6B7677]">Frozen Test</div>
+          <div class="font-bold text-[#1F2627]">1.400 ảnh (20%)</div>
+        </div>
+        <div class="p-1.5 rounded-lg bg-white border border-[#E5E3DC]">
+          <div class="text-[#6B7677]">Fixed Val</div>
+          <div class="font-bold text-[#1F2627]">700 ảnh (10%)</div>
+        </div>
+        <div class="p-1.5 rounded-lg bg-white border border-[#E5E3DC]">
+          <div class="text-[#6B7677]">Seed V0</div>
+          <div class="font-bold text-[#2D5A34]">500 ảnh (Rule 8)</div>
+        </div>
+        <div class="p-1.5 rounded-lg bg-white border border-[#E5E3DC]">
+          <div class="text-[#6B7677]">Video Overlap</div>
+          <div class="font-bold text-[#2D5A34]">0.00% (Isolated)</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ========================================================================= -->
+  <!-- TOP ADMIN HEADER (Ghim cố định, liền mạch bên phải Sidebar ml-72) -->
+  <!-- ========================================================================= -->
+  <header class="sticky top-0 z-40 bg-[#F8F7F2]/95 backdrop-blur-md border-b border-[#E5E3DC] h-16 ml-72">
+    <div class="h-full px-8 flex items-center justify-between gap-4">
+      
+      <!-- Zone 1: Breadcrumb & Title -->
+      <div class="flex items-center gap-2 text-xs font-mono text-[#6B7677]">
+        <a href="index.html" class="hover:text-[#2D5A34] transition-colors flex items-center gap-1">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>ActiveLab</span>
+        </a>
+        <span>/</span>
+        <span class="text-[#475254] font-semibold">Phase 03: Splits</span>
+        <span>/</span>
+        <span class="text-[#2D5A34] font-bold bg-[#E8F0EA] px-2 py-0.5 rounded-md border border-[#CDE0D1]">
+          Hybrid Mix 80/20 & Zero Leakage
+        </span>
+      </div>
+
+      <!-- Zone 2: Real-time Status Chips (KHÔNG CÓ DẤU CHẤM!) -->
+      <div class="hidden lg:flex items-center gap-2 text-[11px] font-mono">
+        <div class="inline-flex items-center px-2.5 py-1 rounded-lg bg-white border border-[#E5E3DC] text-[#475254]">
+          <span>Test/Val: <strong class="text-[#2D5A34]">2.100 Ảnh Đóng Băng</strong></span>
+        </div>
+        <div class="inline-flex items-center px-2.5 py-1 rounded-lg bg-white border border-[#E5E3DC] text-[#475254]">
+          <span>Seed V0: <strong class="text-[#1F2627]">500 Ảnh (35% Đêm)</strong></span>
+        </div>
+        <div class="inline-flex items-center px-2.5 py-1 rounded-lg bg-white border border-[#E5E3DC] text-[#475254]">
+          <span>Video Overlap: <strong class="text-[#2D5A34]">0.00% Triệt Tiêu</strong></span>
+        </div>
+      </div>
+
+      <!-- Zone 3: Quick Action Buttons -->
+      <div class="flex items-center gap-2.5">
+        <button 
+          onclick="togglePlaySimulation()"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#2D5A34] text-white hover:bg-[#234729] shadow-soft-sm transition-all cursor-pointer"
+        >
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <span class="hidden sm:inline">Phát Video</span>
+        </button>
+        <a 
+          href="training-point4.html" 
+          class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#E8F0EA] text-[#2D5A34] hover:bg-[#DCEBE0] transition-all border border-[#CDE0D1] shadow-soft-sm"
+        >
+          <span>Point 4 →</span>
         </a>
       </div>
 
-      <!-- Zone 2: Navigation Links -->
-      <nav class="hidden md:flex items-center gap-5 text-xs font-semibold text-[#475254]">
-        <a href="#thesis" class="hover:text-[#2D5A34] transition-colors">Luận Điểm Kỹ Thuật</a>
-        <a href="#simulator" class="hover:text-[#2D5A34] transition-colors">Video Mô Phỏng</a>
-        <a href="#leaderboard" class="hover:text-[#2D5A34] transition-colors">Đấu Trường 6 Thuật Toán</a>
-        <a href="#radar" class="hover:text-[#2D5A34] transition-colors">Radar & PCA</a>
-        <a href="#perclass" class="hover:text-[#2D5A34] transition-colors">10 Lớp BDD10K</a>
-        <a href="#leakage" class="hover:text-[#2D5A34] transition-colors">Kiểm Toán Rò Rỉ</a>
-        <a href="#gallery" class="hover:text-[#2D5A34] transition-colors">16 Ảnh Thực Tế</a>
-        <a href="#handover" class="hover:text-[#2D5A34] transition-colors">Bàn Giao Phase 04</a>
-      </nav>
-
-      <!-- Zone 3: Actions -->
-      <div class="flex items-center gap-2">
-        <a href="fastdedup-point1.html" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-white border border-[#E5E3DC] text-[#475254] hover:bg-[#F8F7F2] transition-all">
-          <span>Point 1</span>
-        </a>
-        <a href="profiling-point2.html" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-white border border-[#E5E3DC] text-[#475254] hover:bg-[#F8F7F2] transition-all">
-          <span>Point 2</span>
-        </a>
-        <a href="index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#E8F0EA] border border-[#CDE0D1] text-[#2D5A34] hover:bg-[#DCEBE0] transition-all shadow-soft-sm">
-          <span>Trang Chủ</span>
-        </a>
-      </div>
     </div>
   </header>
 
-  <main class="max-w-[1340px] mx-auto px-6 py-10 space-y-16">
+  <!-- ========================================================================= -->
+  <!-- MAIN WORKSPACE CONTENT (Lệch sang phải ml-72, không gian rộng mở) -->
+  <!-- ========================================================================= -->
+  <main class="ml-72 min-h-screen px-8 py-8 space-y-12 max-w-[1440px]">
 
     <!-- ========================================================================= -->
     <!-- PHẦN 1: HERO SECTION & BẢN CHẤT KỸ THUẬT POINT 3 -->
     <!-- ========================================================================= -->
     <section id="thesis" class="space-y-6 pt-2">
       <!-- Tag / Breadcrumb -->
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E8F0EA] border border-[#CDE0D1] text-[#2D5A34] text-xs font-mono font-semibold">
-        <span class="w-2 h-2 rounded-full bg-[#2D5A34] animate-pulse"></span>
+      <div class="inline-flex items-center px-3 py-1 rounded-full bg-[#E8F0EA] border border-[#CDE0D1] text-[#2D5A34] text-xs font-mono font-semibold">
         <span>POINT 3 DEEP DIVE: SHARED PRE-BRANCHING FROZEN TEST & VAL SPLITS (TOURNAMENT BENCHMARK)</span>
       </div>
 
@@ -171,32 +362,44 @@
         </div>
       </div>
 
-      <!-- Công Thức Toán Học Hàm Mục Tiêu CBS -->
-      <div class="p-5 md:p-6 rounded-2xl bg-white border border-[#E5E3DC] shadow-soft space-y-3">
+      <!-- CƠ SỞ TOÁN HỌC & CÔNG THỨC HÀM MỤC TIÊU HYBRID MIX 80/20 -->
+      <div class="p-5 md:p-6 rounded-2xl bg-white border border-[#E5E3DC] shadow-soft space-y-4">
         <div class="flex items-center justify-between border-b border-[#E5E3DC] pb-3">
-          <span class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">HÀM MỤC TIÊU XẾP HẠNG (COMPOSITE BENCHMARK SCORE — CBS)</span>
-          <span class="text-[11px] font-mono text-[#6B7677]">Thang điểm chuẩn hóa: 0 — 100</span>
+          <span class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">CƠ SỞ TOÁN HỌC & CÔNG THỨC PHÂN CHIA (COMPOSITE BENCHMARK SCORE & HYBRID MIX)</span>
+          <span class="text-[11px] font-mono text-[#6B7677]">Thang điểm chuẩn hóa: 0 — 100 CBS</span>
         </div>
-        <div class="text-center py-2 text-base md:text-lg text-[#1F2627] overflow-x-auto">
-          $$\text{CBS} = 0.35 \cdot S_{\text{quota}} + 0.25 \cdot S_{\text{class}} + 0.20 \cdot S_{R_{\text{cov}}} + 0.20 \cdot S_{F_{\text{loc}}} - \text{Penalty}_{\text{leak}}$$
-        </div>
-        <p class="text-xs text-[#475254] text-center leading-relaxed max-w-4xl mx-auto">
-          Trong đó: $S_{\text{quota}}$ đo sai số 4 lát cắt khó, $S_{\text{class}}$ đo độ cosine bảo tồn 10 lớp, $S_{R_{\text{cov}}}$ đo bán kính phủ cực đại, và $S_{F_{\text{loc}}}$ đo điểm dàn đều tựa mô-đun.
-        </p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 border-t border-[#F0EEE6] text-xs">
-          <div class="p-3 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC]">
-            <div class="text-[11px] font-mono font-bold text-[#2D5A34] mb-1">Submodular Facility Location (80% trọng số):</div>
-            <div class="text-center py-1 overflow-x-auto text-sm text-[#1F2627]">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <!-- Cột 1: CBS -->
+          <div class="p-4 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC] space-y-2">
+            <div class="text-[11px] font-mono font-bold text-[#2D5A34]">1. Hàm Xếp Hạng Tuyến Tính (CBS):</div>
+            <div class="text-center py-2 text-sm text-[#1F2627] overflow-x-auto">
+              $$\text{CBS} = 0.35 S_{\text{quota}} + 0.25 S_{\text{class}} + 0.20 S_{R_{\text{cov}}} + 0.20 S_{F_{\text{loc}}} - P_{\text{leak}}$$
+            </div>
+            <div class="text-[11px] text-[#6B7677] leading-relaxed">
+              Thang điểm tổng hòa 4 trục tiêu chí: sai số hạn ngạch, độ cosine 10 lớp, bán kính phủ và phạt nặng rò rỉ video.
+            </div>
+          </div>
+
+          <!-- Cột 2: Facility Location -->
+          <div class="p-4 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC] space-y-2">
+            <div class="text-[11px] font-mono font-bold text-[#2D5A34]">2. Submodular Facility Location (80%):</div>
+            <div class="text-center py-2 text-sm text-[#1F2627] overflow-x-auto">
               $$F_{\text{loc}}(S) = \frac{1}{|V|} \sum_{i \in V} \max_{j \in S} \text{sim}(\mathbf{x}_i, \mathbf{x}_j)$$
             </div>
-            <div class="text-[10px] text-[#6B7677] text-center">Tối đa hóa mức độ đại diện tâm cụm, đạt $F_{\text{score}} = 0.971$</div>
+            <div class="text-[11px] text-[#6B7677] leading-relaxed">
+              Tối đa hóa mức độ đại diện mật độ tự nhiên, đạt $F_{\text{score}} = 0.971$ trên toàn bộ không gian đặc trưng.
+            </div>
           </div>
-          <div class="p-3 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC]">
-            <div class="text-[11px] font-mono font-bold text-[#2D5A34] mb-1">Gonzalez Minimax k-Center (20% trọng số):</div>
-            <div class="text-center py-1 overflow-x-auto text-sm text-[#1F2627]">
+
+          <!-- Cột 3: Gonzalez k-Center -->
+          <div class="p-4 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC] space-y-2">
+            <div class="text-[11px] font-mono font-bold text-[#2D5A34]">3. Gonzalez Minimax k-Center (20%):</div>
+            <div class="text-center py-2 text-sm text-[#1F2627] overflow-x-auto">
               $$R_{\text{cov}}(S) = \max_{i \in V} \min_{j \in S} \|\mathbf{x}_i - \mathbf{x}_j\|_2$$
             </div>
-            <div class="text-[10px] text-[#6B7677] text-center">Thu hẹp bán kính bao phủ xa nhất, đạt $R_{\text{cov}} = 3.35$ (tối ưu nhất)</div>
+            <div class="text-[11px] text-[#6B7677] leading-relaxed">
+              Thu hẹp bán kính bao phủ xa nhất, kéo $R_{\text{cov}}$ xuống 3.35 để bắt trọn các ca biên cực khó.
+            </div>
           </div>
         </div>
       </div>
@@ -283,7 +486,6 @@
         <div class="lg:col-span-5 bg-white rounded-2xl p-5 border border-[#E5E3DC] shadow-soft space-y-4">
           <div class="flex items-center justify-between pb-3 border-b border-[#E5E3DC]">
             <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-[#10B981] animate-ping"></span>
               <span class="text-xs font-mono font-bold text-[#1F2627] uppercase tracking-wider">LIVE TELEMETRY STREAM</span>
             </div>
             <span id="telemetryStageTag" class="text-xs font-mono px-2 py-0.5 rounded-full bg-[#E8F0EA] text-[#2D5A34] font-semibold border border-[#CDE0D1]">
@@ -808,7 +1010,7 @@ assert len(video_records) == 4277  # 100% video sequences</code></pre>
   </main>
 
   <!-- Footer Editorial Style -->
-  <footer class="border-t border-[#E5E3DC] bg-[#F8F7F2] py-8 text-center text-xs text-[#6B7677] space-y-2">
+  <footer class="ml-72 border-t border-[#E5E3DC] bg-[#F8F7F2] py-8 px-8 text-center text-xs text-[#6B7677] space-y-2">
     <div class="font-editorial text-sm font-bold text-[#1F2627]">BDD10K Active Learning Lab — Research Publication Series</div>
     <div>Tác giả: <strong>Nguyễn Xuân Huỳnh</strong> | Thiết kế kế thừa chuẩn <strong>GreenSM Editorial Canvas</strong></div>
     <div class="text-[11px] font-mono text-[#8A9697]">Mã nguồn & Bằng chứng thực nghiệm: Phase 03 Shared Frozen Test & Val Splits Benchmark</div>

@@ -1,0 +1,58 @@
+{
+  "title": "Hard Slice Resilience and Active Learning Steering Vector Wi",
+  "dataset": "fixed_test (1,400 images)",
+  "evaluated_model": "yolo11n_v0_best.pt",
+  "evaluation_date": "2026-10-12T09:43:01Z",
+  "slices": {
+    "night": {
+      "name": "Night",
+      "description": "Ban đêm, thiếu sáng, lóa đèn pha đối diện",
+      "count": 468,
+      "precision": 26.95,
+      "recall": 21.85,
+      "map50": 20.39,
+      "map50_95": 9.82,
+      "error_gap": 78.15,
+      "steering_weight_w": 0.2493
+    },
+    "small": {
+      "name": "Small Object",
+      "description": "Vật thể nhỏ (< 32^2 pixels)",
+      "count": 1353,
+      "precision": 28.94,
+      "recall": 21.33,
+      "map50": 19.26,
+      "map50_95": 9.61,
+      "error_gap": 78.67,
+      "steering_weight_w": 0.2509
+    },
+    "occlusion": {
+      "name": "Occlusion",
+      "description": "Bị che khuất một phần (> 30% diện tích)",
+      "count": 1349,
+      "precision": 29.24,
+      "recall": 21.51,
+      "map50": 19.41,
+      "map50_95": 9.74,
+      "error_gap": 78.49,
+      "steering_weight_w": 0.2504
+    },
+    "day": {
+      "name": "Day (Baseline)",
+      "description": "Ban ngày, ánh sáng lý tưởng (Lát cắt đối chứng)",
+      "count": 814,
+      "precision": 29.65,
+      "recall": 21.79,
+      "map50": 19.53,
+      "map50_95": 9.97,
+      "error_gap": 78.21,
+      "steering_weight_w": 0.2494
+    }
+  },
+  "vector_w_summary": {
+    "W_night": 0.2493,
+    "W_small": 0.2509,
+    "W_occlusion": 0.2504,
+    "W_day": 0.2494
+  }
+}

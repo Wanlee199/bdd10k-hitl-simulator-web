@@ -1913,12 +1913,15 @@ function selectCrossVerifySample(index) {
   }
 }
 
-// 7. TOURNAMENT TABS
+// 7. TOURNAMENT TABS & SUB-POINT NAVIGATION
 function switchTournamentTab(pointId) {
   const tabs = ['2.1', '2.2', '2.3', '2.4', '2.5', 'bootstrap_ci'];
   tabs.forEach(t => {
-    const btn = document.getElementById(`tabBtn_${t.replace('.', '_')}`);
-    const content = document.getElementById(`tabContent_${t.replace('.', '_')}`);
+    const key = t.replace('.', '_');
+    const btn = document.getElementById(`tabBtn_${key}`);
+    const content = document.getElementById(`tabContent_${key}`);
+    const sideBtn = document.getElementById(`sideSubPoint_${key}`);
+
     if (btn && content) {
       if (t === pointId) {
         btn.className = 'px-4 py-2.5 rounded-xl border border-[#2D5A34] bg-[#E8F0EA] text-[#2D5A34] font-bold text-xs font-mono transition-all';
@@ -1928,7 +1931,25 @@ function switchTournamentTab(pointId) {
         content.classList.add('hidden');
       }
     }
+
+    if (sideBtn) {
+      if (t === pointId) {
+        sideBtn.className = 'subpoint-nav-item w-full text-left flex items-center justify-between p-2 rounded-xl bg-[#E8F0EA] border border-[#2D5A34] text-[#2D5A34] font-bold transition-all cursor-pointer';
+      } else {
+        sideBtn.className = 'subpoint-nav-item w-full text-left flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] text-[#475254] hover:bg-[#F8F7F2] hover:border-[#B7CDBB] font-medium transition-all cursor-pointer';
+      }
+    }
   });
+}
+
+function navigateToSubPoint(pointId) {
+  switchTournamentTab(pointId);
+  const target = document.getElementById('tournament');
+  if (target) {
+    const yOffset = -80;
+    const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
 }
 
 // 8. HUMAN AUDIT GALLERY

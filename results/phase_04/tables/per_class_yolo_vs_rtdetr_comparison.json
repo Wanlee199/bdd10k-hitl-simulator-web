@@ -1,0 +1,189 @@
+{
+  "evaluation_target": "fixed_val (700 images, 13,508 ground-truth instances)",
+  "yolo11n_v0": {
+    "model_name": "yolo11n_v0_best.pt",
+    "recipe": "cfg_3_adamw_cosine",
+    "macro_all": {
+      "precision": 28.3,
+      "recall": 21.3,
+      "map50": 20.23,
+      "map50_95": 10.4,
+      "map90": 2.28
+    },
+    "per_class": {
+      "person": {
+        "instances": 996,
+        "precision": 49.9,
+        "recall": 38.2,
+        "map50": 37.0,
+        "map50_95": 15.9,
+        "map90": 0.63
+      },
+      "rider": {
+        "instances": 59,
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 2.2,
+        "map50_95": 1.09,
+        "map90": 0.04
+      },
+      "car": {
+        "instances": 7401,
+        "precision": 60.3,
+        "recall": 58.9,
+        "map50": 60.4,
+        "map50_95": 34.9,
+        "map90": 10.21
+      },
+      "truck": {
+        "instances": 314,
+        "precision": 39.8,
+        "recall": 26.7,
+        "map50": 21.5,
+        "map50_95": 14.1,
+        "map90": 4.54
+      },
+      "bus": {
+        "instances": 122,
+        "precision": 28.8,
+        "recall": 26.2,
+        "map50": 16.5,
+        "map50_95": 11.7,
+        "map90": 5.47
+      },
+      "train": {
+        "instances": 2,
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map50_95": 0.0,
+        "map90": 0.0
+      },
+      "motor": {
+        "instances": 31,
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 2.13,
+        "map50_95": 0.82,
+        "map90": 0.08
+      },
+      "bike": {
+        "instances": 74,
+        "precision": 8.14,
+        "recall": 1.35,
+        "map50": 3.18,
+        "map50_95": 1.44,
+        "map90": 0.75
+      },
+      "traffic light": {
+        "instances": 1941,
+        "precision": 47.3,
+        "recall": 31.7,
+        "map50": 28.2,
+        "map50_95": 8.73,
+        "map90": 0.08
+      },
+      "traffic sign": {
+        "instances": 2568,
+        "precision": 49.3,
+        "recall": 30.2,
+        "map50": 31.2,
+        "map50_95": 14.9,
+        "map90": 1.05
+      }
+    }
+  },
+  "rtdetr_v0": {
+    "model_name": "rtdetr_v0_best.pt",
+    "recipe": "rtdetr_seed_v0_adamw_cosinelr_e10",
+    "macro_all": {
+      "precision": 20.4,
+      "recall": 1.08,
+      "map50": 0.12,
+      "map50_95": 0.02,
+      "map90": 0.0
+    },
+    "per_class": {
+      "person": {
+        "instances": 996,
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map50_95": 0.0,
+        "map90": 0.0
+      },
+      "rider": {
+        "instances": 59,
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map50_95": 0.0,
+        "map90": 0.0
+      },
+      "car": {
+        "instances": 7401,
+        "precision": 4.29,
+        "recall": 10.8,
+        "map50": 1.17,
+        "map50_95": 0.208,
+        "map90": 0.0
+      },
+      "truck": {
+        "instances": 314,
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map50_95": 0.0,
+        "map90": 0.0
+      },
+      "bus": {
+        "instances": 122,
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map50_95": 0.0,
+        "map90": 0.0
+      },
+      "train": {
+        "instances": 2,
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map50_95": 0.0,
+        "map90": 0.0
+      },
+      "motor": {
+        "instances": 31,
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map50_95": 0.0,
+        "map90": 0.0
+      },
+      "bike": {
+        "instances": 74,
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map50_95": 0.0,
+        "map90": 0.0
+      },
+      "traffic light": {
+        "instances": 1941,
+        "precision": 100.0,
+        "recall": 0.0,
+        "map50": 0.00113,
+        "map50_95": 0.000286,
+        "map90": 0.0
+      },
+      "traffic sign": {
+        "instances": 2568,
+        "precision": 100.0,
+        "recall": 0.0,
+        "map50": 0.00454,
+        "map50_95": 0.000809,
+        "map90": 0.0
+      }
+    }
+  }
+}

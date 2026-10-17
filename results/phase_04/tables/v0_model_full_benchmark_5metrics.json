@@ -1,0 +1,114 @@
+{
+  "title": "Full Benchmark 10 L\u1edbp Model V0 (5 Ch\u1ec9 S\u1ed1)",
+  "dataset": "fixed_val (700 images, 13,508 instances)",
+  "per_class": [
+    {
+      "stt": 1,
+      "class_name": "person",
+      "support": 996,
+      "map50": 37.0,
+      "map50_95": 15.9,
+      "precision": 49.9,
+      "recall": 38.2,
+      "f1_score": 43.27
+    },
+    {
+      "stt": 2,
+      "class_name": "rider",
+      "support": 59,
+      "map50": 2.2,
+      "map50_95": 1.09,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1_score": 0.0
+    },
+    {
+      "stt": 3,
+      "class_name": "car",
+      "support": 7401,
+      "map50": 60.4,
+      "map50_95": 34.9,
+      "precision": 60.3,
+      "recall": 58.9,
+      "f1_score": 59.59
+    },
+    {
+      "stt": 4,
+      "class_name": "truck",
+      "support": 314,
+      "map50": 21.5,
+      "map50_95": 14.1,
+      "precision": 39.8,
+      "recall": 26.7,
+      "f1_score": 31.96
+    },
+    {
+      "stt": 5,
+      "class_name": "bus",
+      "support": 122,
+      "map50": 16.5,
+      "map50_95": 11.7,
+      "precision": 28.8,
+      "recall": 26.2,
+      "f1_score": 27.44
+    },
+    {
+      "stt": 6,
+      "class_name": "train",
+      "support": 2,
+      "map50": 0.0,
+      "map50_95": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1_score": 0.0
+    },
+    {
+      "stt": 7,
+      "class_name": "motor",
+      "support": 31,
+      "map50": 2.13,
+      "map50_95": 0.82,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1_score": 0.0
+    },
+    {
+      "stt": 8,
+      "class_name": "bike",
+      "support": 74,
+      "map50": 3.18,
+      "map50_95": 1.44,
+      "precision": 8.14,
+      "recall": 1.35,
+      "f1_score": 2.32
+    },
+    {
+      "stt": 9,
+      "class_name": "traffic light",
+      "support": 1941,
+      "map50": 28.2,
+      "map50_95": 8.73,
+      "precision": 47.3,
+      "recall": 31.7,
+      "f1_score": 37.96
+    },
+    {
+      "stt": 10,
+      "class_name": "traffic sign",
+      "support": 2568,
+      "map50": 31.2,
+      "map50_95": 14.9,
+      "precision": 49.3,
+      "recall": 30.2,
+      "f1_score": 37.46
+    }
+  ],
+  "macro_all": {
+    "support": 13508,
+    "map50": 20.23,
+    "map50_95": 10.4,
+    "precision": 28.3,
+    "recall": 21.3,
+    "f1_score": 24.31
+  }
+}
