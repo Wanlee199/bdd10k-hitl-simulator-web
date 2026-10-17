@@ -127,7 +127,7 @@ function initVideoSimulator() {
   video.addEventListener("pause", updatePlayIcons);
   video.addEventListener("ended", () => {
     updatePlayIcons();
-    videoProgressBar.style.width = "100%";
+    if (videoProgressBar) videoProgressBar.style.width = "100%";
   });
 
   // Tự động tải metadata

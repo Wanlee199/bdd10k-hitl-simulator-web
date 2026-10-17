@@ -555,10 +555,10 @@ document.addEventListener("DOMContentLoaded", function () {
   // ===========================================================================
   const video = document.getElementById("masterVideo");
   const stagePills = [
-    { id: "stagePill_1", start: 0, end: 22.5, name: "1. Dữ Liệu & Cách Ly Video", algo: "FastDedup + Group-Aware Video Isolation" },
-    { id: "stagePill_2", start: 22.5, end: 41.5, name: "2. Khai Thác C6 & Oracle GT", algo: "Margin + Facility Location PCA 32D + Oracle O(1)" },
-    { id: "stagePill_3", start: 41.5, end: 59.5, name: "3. Đấu Trường Song Mã All-Front Win", algo: "Fine-tune YOLO11n 8 epochs trên MPS" },
-    { id: "stagePill_4", start: 59.5, end: 79.0, name: "4. Vòng Xác Nhận & Dừng Bão Hòa", algo: "Dynamic Plateau Saturation Stopping Guard" },
+    { id: "stagePill_1", start: 0, end: 21.0, name: "1. Dữ Liệu & Cách Ly Video", algo: "FastDedup + Group-Aware Video Isolation" },
+    { id: "stagePill_2", start: 21.0, end: 41.5, name: "2. Khai Thác C6 & Oracle GT", algo: "Margin + Facility Location PCA 32D + Oracle O(1)" },
+    { id: "stagePill_3", start: 41.5, end: 63.0, name: "3. Đấu Trường Song Mã All-Front Win", algo: "Fine-tune YOLO11n 8 epochs trên MPS" },
+    { id: "stagePill_4", start: 63.0, end: 92.0, name: "4. Vòng Xác Nhận & Dừng Bão Hòa", algo: "Dynamic Plateau Saturation Stopping Guard" },
   ];
 
   if (video) {
@@ -586,7 +586,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       const telTime = document.getElementById("telTime");
-      if (telTime) telTime.innerText = `${cur.toFixed(1)}s / 79.0s`;
+      if (telTime) telTime.innerText = `${cur.toFixed(1)}s / 92.0s`;
     });
   }
 
@@ -860,16 +860,15 @@ document.addEventListener("DOMContentLoaded", function () {
     window.switchIndexRound("v5");
   }
 
-  // Tự động đồng bộ chiều cao Full Height cho iframe Pipeline Visualizer vừa khít nội dung
+  // Tự động đồng bộ chiều cao cho iframe Pipeline Visualizer vừa khít nội dung (Full Height, No Scroll)
   window.autoResizePipelineIframe = function (iframe) {
     try {
       if (iframe && iframe.contentWindow && iframe.contentWindow.document.body) {
-        const scrollH = Math.max(
-          iframe.contentWindow.document.body.scrollHeight,
-          iframe.contentWindow.document.documentElement.scrollHeight
-        );
-        if (scrollH > 500) {
-          iframe.style.height = (scrollH + 10) + "px";
+        const mainEl = iframe.contentWindow.document.querySelector('main');
+        const contentH = mainEl ? mainEl.offsetHeight + 100 : 1650;
+        const safeH = Math.min(Math.max(contentH, 1300), 3800);
+        if (Math.abs(iframe.offsetHeight - safeH) > 20) {
+          iframe.style.height = safeH + "px";
         }
       }
     } catch (e) {
@@ -877,12 +876,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
-  // Lắng nghe postMessage báo kích thước động từ iframe
+  // Lắng nghe postMessage báo kích thước động từ iframe (chống vòng lặp vô hạn, không để scroll)
   window.addEventListener("message", function (e) {
     if (e.data && e.data.type === "PIPELINE_RESIZE" && e.data.height) {
       const iframe = document.getElementById("pipelineVisualizerIframe");
-      if (iframe && e.data.height > 500) {
-        iframe.style.height = (e.data.height + 10) + "px";
+      if (iframe) {
+        const safeH = Math.min(Math.max(e.data.height + 30, 1300), 3800);
+        if (Math.abs(iframe.offsetHeight - safeH) > 15) {
+          iframe.style.height = safeH + "px";
+        }
       }
     }
   });

@@ -151,7 +151,7 @@ function initVideoSimulator() {
   // Lắng nghe cập nhật timeline video
   video.addEventListener("timeupdate", () => {
     const curTime = video.currentTime;
-    const dur = video.duration || 71.28;
+    const dur = video.duration || 92.0;
 
     // Cập nhật progress bar
     if (videoProgressBar) {
@@ -170,11 +170,11 @@ function initVideoSimulator() {
 
     // Xác định chặng hiện tại theo mốc thời gian
     let newStage = 1;
-    if (curTime < 16.68) {
+    if (curTime < 21.0) {
       newStage = 1;
-    } else if (curTime < 32.44) {
+    } else if (curTime < 41.5) {
       newStage = 2;
-    } else if (curTime < 48.87) {
+    } else if (curTime < 63.0) {
       newStage = 3;
     } else {
       newStage = 4;
@@ -190,7 +190,6 @@ function initVideoSimulator() {
   if (playOverlayBtn) {
     playOverlayBtn.addEventListener("click", togglePlay);
   }
-  video.addEventListener("click", togglePlay);
 
   video.addEventListener("play", () => {
     if (playOverlayBtn) playOverlayBtn.classList.add("opacity-0", "pointer-events-none");

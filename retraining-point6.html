@@ -60,7 +60,29 @@
     html.sidebar-is-collapsed #app-sidebar { width: 5rem !important; }
     html.sidebar-is-collapsed #main-wrapper { padding-left: 5rem !important; }
     html.sidebar-is-collapsed .sidebar-text-expand { display: none !important; }
+    html.sidebar-is-collapsed #sidebar-brand-header {
+      height: auto !important;
+      min-height: 4.5rem !important;
+      padding: 0.75rem 0.5rem !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 0.5rem !important;
+    }
+    html.sidebar-is-collapsed #sidebar-brand-header a {
+      margin: 0 auto !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+    html.sidebar-is-collapsed #sidebar-toggle-btn {
+      margin: 0 auto !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
     html.sidebar-is-collapsed .sidebar-item-link { justify-content: center !important; padding-left: 0.5rem !important; padding-right: 0.5rem !important; }
+    html.sidebar-is-collapsed .sidebar-nav-letter { justify-content: center !important; padding-left: 0.5rem !important; padding-right: 0.5rem !important; }
   </style>
 </head>
 <body class="bg-[#F8F7F2] text-[#1F2627] font-sans antialiased selection:bg-[#DCEBE0]">
@@ -70,7 +92,7 @@
   <!-- ========================================================================= -->
   <aside id="app-sidebar" class="fixed inset-y-0 left-0 w-72 bg-white border-r border-[#E5E3DC] flex flex-col z-50 shadow-soft transition-all duration-300 ease-in-out">
         <!-- Zone 1: Sidebar Brand Header -->
-    <div class="h-16 border-b border-[#E5E3DC] px-4 flex items-center justify-between shrink-0">
+    <div id="sidebar-brand-header" class="h-16 border-b border-[#E5E3DC] px-4 flex items-center justify-between shrink-0">
       <a href="index.html" class="flex items-center gap-2.5 overflow-hidden group">
         <div class="w-9 h-9 rounded-xl bg-[#2D5A34] text-white flex items-center justify-center shadow-soft shrink-0">
           <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
@@ -282,10 +304,6 @@
           <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
           <span>Notebook 06</span>
         </a>
-        <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E8F0EA] border border-[#CDE0D1] text-[11px] font-mono text-[#2D5A34] font-bold">
-          <span class="w-2 h-2 rounded-full bg-[#2D5A34] animate-pulse"></span>
-          <span>MPS TOURNAMENT VERIFIED</span>
-        </div>
       </div>
 
     </div>
@@ -433,7 +451,7 @@
             Trình Mô Phỏng Quy Trình Đối Chuẩn Thời Gian Thực (Master Video Simulator)
           </h2>
           <p class="text-xs text-[#6B7677] font-mono mt-0.5">
-            Full Pipeline Split View: Video Master MP4 1280x720 @ 30 FPS • Telemetry Live Đồng Bộ
+            Full Pipeline Split View: Video Master Full HD 1080p @ 30 FPS • Telemetry Live Đồng Bộ
           </p>
         </div>
         <!-- 4 Stage Navigation Pills -->
@@ -441,13 +459,13 @@
           <button class="stage-pill px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all bg-[#2D5A34] text-white border border-[#2D5A34]" data-stage="1" data-time="0">
             Chặng 1: Ngân Sách
           </button>
-          <button class="stage-pill px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB]" data-stage="2" data-time="16.7">
+          <button class="stage-pill px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB]" data-stage="2" data-time="21.0">
             Chặng 2: Huấn Luyện
           </button>
-          <button class="stage-pill px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB]" data-stage="3" data-time="32.5">
+          <button class="stage-pill px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB]" data-stage="3" data-time="41.5">
             Chặng 3: Gold Test
           </button>
-          <button class="stage-pill px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB]" data-stage="4" data-time="48.9">
+          <button class="stage-pill px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB]" data-stage="4" data-time="63.0">
             Chặng 4: Phán Quyết
           </button>
         </div>
@@ -458,40 +476,24 @@
         
         <!-- Cột Trái (7 cols): Video Player -->
         <div class="lg:col-span-7 bg-white rounded-2xl border border-[#E5E3DC] p-3 shadow-soft flex flex-col justify-between">
-          <div class="relative rounded-xl overflow-hidden bg-black aspect-video flex items-center justify-center group">
-            <video id="point6Video" class="w-full h-full object-cover cursor-pointer" preload="metadata" playsinline>
+          <div class="rounded-xl overflow-hidden bg-black aspect-video flex items-center justify-center">
+            <video id="point6Video" controls class="w-full h-full object-contain" preload="metadata" playsinline>
               <source src="assets/model_v1_retraining_pipeline_simulation.mp4" type="video/mp4">
               Trình duyệt của bạn không hỗ trợ thẻ video HTML5.
             </video>
-
-            <!-- Play Overlay Button -->
-            <button id="videoPlayOverlayBtn" class="absolute inset-0 m-auto w-16 h-16 rounded-full bg-[#2D5A34]/90 text-white flex items-center justify-center shadow-lg transition-transform transform group-hover:scale-110">
-              <svg id="playIconSvg" class="w-8 h-8 translate-x-0.5" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-              <svg id="pauseIconSvg" class="w-8 h-8 hidden" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-            </button>
-
-            <!-- Video Progress Bar -->
-            <div class="absolute bottom-0 left-0 right-0 h-1.5 bg-black/40">
-              <div id="videoProgressBar" class="h-full bg-[#2D5A34] transition-all duration-100" style="width: 0%;"></div>
-            </div>
           </div>
 
           <!-- Video Controls Strip -->
           <div class="flex items-center justify-between pt-3 px-2 text-xs font-mono text-[#6B7677]">
             <div class="flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-[#2D5A34] animate-ping"></span>
-              <span class="text-[#1F2627] font-bold">Master MP4 (1280x720 @ 30 FPS)</span>
+              <span class="text-[#1F2627] font-bold">Master MP4 (Full HD 1080p @ 30 FPS)</span>
               <span>•</span>
-              <span>Edge TTS vi-VN-HoaiMyNeural</span>
+              <span>Edge TTS vi-VN-HoaiMyNeural (-4% Speed)</span>
             </div>
             <div class="flex items-center gap-3">
               <div id="timeDisplay" class="font-bold text-[#1F2627]">
-                00:00 / 01:11
+                00:00 / 01:32
               </div>
-              <button onclick="toggleVideoFullscreen('point6Video')" class="p-1 rounded hover:bg-[#F0EEE6] text-[#475254] hover:text-[#2D5A34] transition-colors flex items-center gap-1 text-[11px]" title="Phóng to toàn màn hình">
-                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
-                <span>Toàn màn hình</span>
-              </button>
             </div>
           </div>
         </div>

@@ -377,7 +377,8 @@
       </div>
 
       <!-- SLOT DEMO BENCHMARK 1 (RIGHT COLUMN - 8 COLUMNS = 2/3 WIDTH) -->
-      <div class="lg:col-span-8 h-full flex flex-col relative">
+      <!-- SLOT DEMO BENCHMARK 1 (RIGHT COLUMN - 8 COLUMNS = 2/3 WIDTH) -->
+      <div id="slot-1-container" class="lg:col-span-8 h-full flex flex-col relative transition-all duration-300">
         <!-- Connecting Arrow from Tier 1 to Benchmark 1 -->
         <div class="hidden lg:block absolute -left-4 top-1/2 -translate-y-1/2 z-20">
           <svg class="w-8 h-8 text-sky-400" overflow="visible">
@@ -386,37 +387,143 @@
           </svg>
         </div>
 
-        <div class="bg-white border-2 border-dashed border-sky-300 rounded-2xl p-6 h-full flex flex-col justify-between shadow-sm relative overflow-hidden bg-sky-50/10">
-          <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+        <div id="slot-1-card" class="bg-white border-2 border-sky-300 rounded-2xl p-5 h-full flex flex-col justify-between shadow-soft relative overflow-hidden bg-sky-50/15 transition-all duration-300">
+          
+          <!-- Slot 1 Header -->
+          <div class="flex flex-wrap items-center justify-between pb-3 border-b border-slate-200 gap-2">
+            <div class="flex items-center gap-2.5">
+              <div id="slot1-icon-box" class="w-8 h-8 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center text-sm shadow-sm">
+                <i id="slot1-icon" class="fa-solid fa-copy"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span id="slot1-phase-badge" class="px-1.5 py-0.5 rounded bg-sky-100 text-sky-800 text-[10px] font-mono font-bold">PHASE 01</span>
+                  <span id="slot1-title" class="text-xs font-bold text-slate-900 tracking-wide uppercase">Lọc Trùng Tri Giác pHash & KMV</span>
+                </div>
+                <div id="slot1-champion" class="text-[10px] text-sky-700 font-mono font-bold mt-0.5">🏆 Quán Quân: FastDedup pHash 2D-DCT + Keep-Most-Vehicles</div>
+              </div>
+            </div>
             <div class="flex items-center gap-2">
-              <i class="fa-solid fa-chart-column text-sky-600 text-base"></i>
-              <span class="text-xs font-bold text-slate-800 tracking-wide uppercase">[SLOT DEMO BENCHMARK 1: Biểu Đồ Lọc Trùng pHash & Hồ Sơ Dữ Liệu 5D]</span>
-            </div>
-            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-sky-100 text-sky-700">2/3 WIDTH DEMO SLOT</span>
-          </div>
-
-          <!-- Empty Demo Content Placeholder -->
-          <div class="my-auto py-12 flex flex-col items-center justify-center text-center space-y-4">
-            <div class="w-16 h-16 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center text-3xl shadow-inner">
-              <i class="fa-solid fa-sliders"></i>
-            </div>
-            <div>
-              <h3 class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Thống Kê Deduplication & Profiling 5D</h3>
-              <p class="text-[11px] text-slate-400 mt-1 max-w-md leading-relaxed">
-                Khung giữ chỗ dành cho việc tích hợp giao diện trực quan hóa: Biểu Đồ Tỷ Lệ Lọc Trùng pHash (360.3 FPS), Phân Bố Đêm/Mờ/Thời Tiết và Đồ Thị Che Khuất DAG.
-              </p>
-            </div>
-            <div class="pt-2 flex flex-wrap justify-center gap-2 font-mono text-[10px]">
-              <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 border border-slate-200">360.3 FPS (CPU)</span>
-              <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 border border-slate-200">5 Hard Slices</span>
-              <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 border border-slate-200">6.994 Unique Pool</span>
+              <span id="slot1-status-badge" class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300">
+                ✓ 100% AUDITED
+              </span>
+              <span id="slot1-node-badge" class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-300">
+                BƯỚC 02 / 16
+              </span>
             </div>
           </div>
 
-          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] font-mono text-slate-400">
-            <span>&leftarrow; Nối trực tiếp từ Phase 01 - Phase 03 (Tầng 1)</span>
-            <span>Module Developer Slot (2/3 Ratio)</span>
+          <!-- Slot 1 Body: 2 Cột Đối Chuẩn -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-4 my-auto py-3">
+            
+            <!-- Cột Trái (7 cols): Bộ Ba Nguyên Tử Dữ Liệu (INPUT -> HANDLE -> OUTPUT) -->
+            <div class="md:col-span-7 flex flex-col justify-between space-y-2.5 p-3.5 bg-slate-50/90 rounded-xl border border-slate-200">
+              
+              <!-- 1. INPUT BOX -->
+              <div class="p-2.5 bg-white rounded-lg border border-slate-200 space-y-1">
+                <div class="flex items-center justify-between text-[11px] font-bold text-slate-800">
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-sky-500"></span>
+                    <span>📥 INPUT (Dữ Liệu Đầu Vào)</span>
+                  </span>
+                  <span id="slot1-input-source" class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 font-bold">10.000 Frames</span>
+                </div>
+                <p id="slot1-input-specs" class="text-[11px] text-slate-600 leading-snug font-sans">
+                  Khung hình RGB 1280x720 trích xuất 1Hz từ 1.000 video BDD10K.
+                </p>
+                <div id="slot1-input-precond" class="text-[10px] text-slate-400 font-mono">
+                  Phân theo sequence ID, cần loại bỏ các khung hình trùng lặp.
+                </div>
+              </div>
+
+              <!-- 2. HANDLE BOX (QUÁN QUÂN ĐÃ CHỌN) -->
+              <div class="p-2.5 bg-sky-50/60 rounded-lg border border-sky-200 space-y-1">
+                <div class="flex items-center justify-between text-[11px] font-bold text-sky-900">
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                    <span>⚙️ HANDLE (Quán Quân Đã Chọn)</span>
+                  </span>
+                  <span id="slot1-handle-speed" class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">360.3 FPS</span>
+                </div>
+                <p id="slot1-handle-algo" class="text-[11px] text-slate-700 leading-snug font-sans">
+                  pHash 2D-DCT 64-bit fingerprint + chính sách Keep-Most-Vehicles (KMV) ưu tiên giữ khung hình giàu thông tin nhất.
+                </p>
+                <div id="slot1-handle-params" class="text-[10px] text-sky-700 font-mono">
+                  Ngưỡng Hamming D_H ≤ 5 bits | 0 KB nhân bản ổ đĩa.
+                </div>
+              </div>
+
+              <!-- 3. OUTPUT & ARTIFACT BOX -->
+              <div class="p-2.5 bg-emerald-50/60 rounded-lg border border-emerald-200 space-y-1">
+                <div class="flex items-center justify-between text-[11px] font-bold text-emerald-900">
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                    <span>📤 OUTPUT & ARTIFACT (Sản Phẩm Đầu Ra)</span>
+                  </span>
+                  <span id="slot1-output-vol" class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">7.950 Ảnh</span>
+                </div>
+                <p id="slot1-output-art" class="text-[11px] text-slate-700 leading-snug font-sans">
+                  Kho ảnh sạch Unique Pool không trùng lặp, bảo toàn 100% các biến thể giao thông độc bản.
+                </p>
+                <div id="slot1-output-handover" class="text-[10px] text-emerald-700 font-mono">
+                  Bàn giao danh sách ID sang Phase 02 để lập hồ sơ 5D.
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Cột Phải (5 cols): Visual Telemetry & 4 Metrics -->
+            <div class="md:col-span-5 flex flex-col justify-between space-y-2.5 p-3.5 bg-slate-50/90 rounded-xl border border-slate-200">
+              
+              <!-- Nhúng Hình Ảnh / Biểu Đồ Minh Họa -->
+              <div class="relative rounded-xl overflow-hidden border border-slate-200 bg-white shadow-2xs group flex items-center justify-center min-h-[140px]">
+                <img id="slot1-img" src="assets/review_pairs/pair_02.jpg" 
+                     alt="Minh họa công đoạn" 
+                     class="w-full h-36 object-contain p-1 transition-all duration-300" 
+                     loading="lazy" />
+                <div class="absolute inset-0 bg-slate-900/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                  <span id="slot1-img-caption" class="px-2 py-1 rounded bg-black/75 text-white text-[10px] font-mono font-bold text-center">
+                    Cặp ảnh lọc trùng KMV
+                  </span>
+                </div>
+              </div>
+
+              <!-- 4 Thẻ Metrics Đo Lường Vĩ Mô Của Node -->
+              <div class="grid grid-cols-2 gap-2 text-center font-mono">
+                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs">
+                  <div id="slot1-m1-lbl" class="text-[9px] text-slate-500 uppercase">Thông Lượng</div>
+                  <div id="slot1-m1-val" class="text-sm font-extrabold text-emerald-700 mt-0.5">360.3 FPS</div>
+                  <div id="slot1-m1-sub" class="text-[8px] text-slate-400">CPU đơn nhân</div>
+                </div>
+                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs">
+                  <div id="slot1-m2-lbl" class="text-[9px] text-slate-500 uppercase">Hamming Dist</div>
+                  <div id="slot1-m2-val" class="text-sm font-extrabold text-sky-700 mt-0.5">D_H ≤ 5</div>
+                  <div id="slot1-m2-sub" class="text-[8px] text-slate-400">64-bit DCT</div>
+                </div>
+                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs">
+                  <div id="slot1-m3-lbl" class="text-[9px] text-slate-500 uppercase">Loại Trùng</div>
+                  <div id="slot1-m3-val" class="text-sm font-extrabold text-rose-600 mt-0.5">50 Ảnh</div>
+                  <div id="slot1-m3-sub" class="text-[8px] text-slate-400">Trùng sequence</div>
+                </div>
+                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs">
+                  <div id="slot1-m4-lbl" class="text-[9px] text-slate-500 uppercase">Unique Pool</div>
+                  <div id="slot1-m4-val" class="text-sm font-extrabold text-sky-800 mt-0.5">7.950 Ảnh</div>
+                  <div id="slot1-m4-sub" class="text-[8px] text-slate-400">0 KB Symlinks</div>
+                </div>
+              </div>
+
+            </div>
           </div>
+
+          <!-- Slot 1 Footer -->
+          <div class="pt-2.5 border-t border-slate-200 flex flex-wrap items-center justify-between text-[10px] font-mono text-slate-500 gap-1">
+            <span class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span id="slot1-footer-audit">Kiểm toán toàn diện: Zero Data Leakage • POSIX Standard</span>
+            </span>
+            <span id="slot1-footer-tag" class="text-sky-700 font-bold">Dữ Liệu Thực Nghiệm Niêm Phong Phase 01 - 03</span>
+          </div>
+
         </div>
       </div>
 
@@ -479,15 +586,15 @@
             <!-- Seed V0 -->
             <div class="p-2 bg-indigo-50 border border-indigo-200 rounded-lg text-indigo-900">
               <div class="text-[10px] font-bold text-indigo-600">SEED V0</div>
-              <div class="font-bold text-xs mt-0.5">500 Ảnh</div>
-              <div class="text-[9px] text-indigo-500">Tập mầm xuất phát</div>
+              <div class="font-bold text-xs mt-0.5">979 Ảnh</div>
+              <div class="text-[9px] text-indigo-500">Tập mầm xuất phát (20%)</div>
             </div>
 
             <!-- Unlabeled Pool -->
             <div class="p-2 bg-amber-50 border border-amber-200 rounded-lg text-amber-900">
               <div class="text-[10px] font-bold text-amber-600">UNLABELED POOL</div>
-              <div id="pool-count-text" class="font-bold text-xs mt-0.5">4.394 Ảnh</div>
-              <div class="text-[9px] text-amber-500">Kho mỏ khai phá</div>
+              <div id="pool-count-text" class="font-bold text-xs mt-0.5">3.915 Ảnh</div>
+              <div class="text-[9px] text-amber-500">Kho mỏ khai phá (80%)</div>
             </div>
 
           </div>
@@ -510,7 +617,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch relative">
       
       <!-- SLOT DEMO BENCHMARK 2 (LEFT COLUMN - 8 COLUMNS = 2/3 WIDTH) -->
-      <div class="lg:col-span-8 h-full flex flex-col order-2 lg:order-1 relative">
+      <div id="slot-2-container" class="lg:col-span-8 h-full flex flex-col order-2 lg:order-1 relative transition-all duration-300">
         <!-- Connecting Arrow from Benchmark 2 to Tier 3 -->
         <div class="hidden lg:block absolute -right-4 top-1/2 -translate-y-1/2 z-20">
           <svg class="w-8 h-8 text-purple-400" overflow="visible">
@@ -519,37 +626,172 @@
           </svg>
         </div>
 
-        <div class="bg-white border-2 border-dashed border-purple-300 rounded-2xl p-6 h-full flex flex-col justify-between shadow-sm relative overflow-hidden bg-purple-50/10">
-          <div class="flex items-center justify-between pb-3 border-b border-slate-200">
-            <div class="flex items-center gap-2">
-              <i class="fa-solid fa-chart-line text-purple-600 text-base"></i>
-              <span class="text-xs font-bold text-slate-800 tracking-wide uppercase">[SLOT DEMO BENCHMARK 2: Telemetry Khai Phá Active C6 & Đường Cong mAP@50]</span>
+        <div id="slot-2-card" class="bg-white border-2 border-purple-300 rounded-2xl p-5 h-full flex flex-col justify-between shadow-soft relative overflow-hidden bg-purple-50/15 transition-all duration-300">
+          
+          <!-- Slot 2 Header: Tương Tác Vòng Lặp V0 -> V5 Pills Selector -->
+          <div class="flex flex-wrap items-center justify-between pb-3 border-b border-slate-200 gap-2">
+            <div class="flex items-center gap-2.5">
+              <div id="slot2-icon-box" class="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center text-sm shadow-sm">
+                <i id="slot2-icon" class="fa-solid fa-chart-line"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span id="slot2-phase-badge" class="px-1.5 py-0.5 rounded bg-purple-100 text-purple-900 text-[10px] font-mono font-bold">PHASE 05</span>
+                  <span id="slot2-title" class="text-xs font-bold text-slate-900 tracking-wide uppercase">Active Mining C6 & Vòng Lặp Đa Chu Kỳ</span>
+                </div>
+                <div id="slot2-champion" class="text-[10px] text-purple-700 font-mono font-bold mt-0.5">🏆 Quán Quân: C6 Super-Fusion (Margin x Cw Deficit x PCA 32D)</div>
+              </div>
             </div>
-            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-purple-100 text-purple-800">2/3 WIDTH DEMO SLOT</span>
+
+            <!-- Iteration Pills Selector (V0 -> V5) -->
+            <div class="flex items-center bg-slate-100/90 rounded-xl p-1 border border-slate-200 shadow-2xs font-mono text-[11px] gap-1">
+              <span class="text-[9px] text-slate-400 font-bold px-1 hidden sm:inline">CHỌN VÒNG:</span>
+              <button onclick="selectIteration(0)" id="btn-iter-0" class="px-2 py-0.5 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V0</button>
+              <button onclick="selectIteration(1)" id="btn-iter-1" class="px-2 py-0.5 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V1</button>
+              <button onclick="selectIteration(2)" id="btn-iter-2" class="px-2 py-0.5 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V2</button>
+              <button onclick="selectIteration(3)" id="btn-iter-3" class="px-2 py-0.5 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V3</button>
+              <button onclick="selectIteration(4)" id="btn-iter-4" class="px-2 py-0.5 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V4</button>
+              <button onclick="selectIteration(5)" id="btn-iter-5" class="px-2.5 py-0.5 rounded-lg font-bold transition-all bg-emerald-600 text-white shadow-sm">V5 🏆</button>
+            </div>
           </div>
 
-          <!-- Empty Demo Content Placeholder -->
-          <div class="my-auto py-16 flex flex-col items-center justify-center text-center space-y-4">
-            <div class="w-16 h-16 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-3xl shadow-inner">
-              <i class="fa-solid fa-square-poll-vertical"></i>
+          <!-- Slot 2 Body: Chia làm 2 Cột Đối Chuẩn -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-4 my-auto py-3">
+            
+            <!-- Cột Trái (7 cols): Bộ Ba Nguyên Tử Dữ Liệu Biến Đổi Theo Vòng (INPUT -> HANDLE -> OUTPUT) -->
+            <div class="md:col-span-7 flex flex-col justify-between space-y-2.5 p-3.5 bg-slate-50/90 rounded-xl border border-slate-200">
+              
+              <!-- 1. INPUT BOX -->
+              <div class="p-2.5 bg-white rounded-lg border border-slate-200 space-y-1">
+                <div class="flex items-center justify-between text-[11px] font-bold text-slate-800">
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+                    <span>📥 INPUT (Dữ Liệu Vòng Hiện Tại)</span>
+                  </span>
+                  <span id="slot2-input-source" class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">Unlabeled Pool: 1.691</span>
+                </div>
+                <p id="slot2-input-specs" class="text-[11px] text-slate-600 leading-snug font-sans">
+                  Model V4 (mAP 27.20%) làm nền tảng khai phá trên kho mỏ chưa gán nhãn còn lại.
+                </p>
+                <div id="slot2-input-precond" class="text-[10px] text-slate-400 font-mono">
+                  Giao thức xác nhận chiến thắng (Confirmation Round Guard).
+                </div>
+              </div>
+
+              <!-- 2. HANDLE BOX (QUÁN QUÂN TẠI VÒNG HIỆN TẠI) -->
+              <div class="p-2.5 bg-purple-50/60 rounded-lg border border-purple-200 space-y-1">
+                <div class="flex items-center justify-between text-[11px] font-bold text-purple-950">
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                    <span>⚙️ HANDLE (Thuật Toán Vòng Lặp)</span>
+                  </span>
+                  <span id="slot2-handle-speed" class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">Cw(4) Steering</span>
+                </div>
+                <p id="slot2-handle-algo" class="text-[11px] text-slate-700 leading-snug font-sans">
+                  Áp dụng C6 Super-Fusion với vector trọng số thích ứng Cw(4): train 19.88x, rider 20.88x, motor 19.64x.
+                </p>
+                <div id="slot2-handle-params" class="text-[10px] text-purple-700 font-mono">
+                  Đa dạng cụm PCA 32D | Submodular Facility Location | Khóa car 0.20x.
+                </div>
+              </div>
+
+              <!-- 3. OUTPUT & ARTIFACT BOX -->
+              <div class="p-2.5 bg-emerald-50/60 rounded-lg border border-emerald-200 space-y-1">
+                <div class="flex items-center justify-between text-[11px] font-bold text-emerald-900">
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                    <span>📤 OUTPUT & ARTIFACT (Kết Quả Vòng Lặp)</span>
+                  </span>
+                  <span id="slot2-output-vol" class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">mAP@50: 27.85%</span>
+                </div>
+                <p id="slot2-output-art" class="text-[11px] text-slate-700 leading-snug font-sans">
+                  Mô hình V5 đạt 27.85% mAP@50 (Vượt trần +1.00% so với 100% Target 26.85%), tiết kiệm 40.1% ngân sách.
+                </p>
+                <div id="slot2-output-handover" class="text-[10px] text-emerald-700 font-mono">
+                  Artifact: `active_loop_v5_best.pt` | Niêm phong `VICTORY_CONFIRMED`.
+                </div>
+              </div>
+
             </div>
-            <div>
-              <h3 class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Telemetry Active Mining C6 & mAP@50</h3>
-              <p class="text-[11px] text-slate-400 mt-1 max-w-md leading-relaxed">
-                Khung giữ chỗ dành cho việc tích hợp giao diện trực quan hóa: Biểu Đồ Tiến Trình mAP@50 qua 5 Chu Kỳ (V0 &rarr; V5), Ma Trận Thâm Hụt Lớp C_w và Bảng Tiết Kiệm Ngân Sách Gán Nhãn.
-              </p>
-            </div>
-            <div class="pt-2 flex flex-wrap justify-center gap-2 font-mono text-[10px]">
-              <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 border border-slate-200">27.85% Target mAP</span>
-              <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 border border-slate-200">-40.1% Labeling Budget</span>
-              <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 border border-slate-200">5 Active Loops</span>
+
+            <!-- Cột Phải (5 cols): Biểu Đồ Thực Nghiệm, 4 Metrics & Bảng Lớp Hiếm -->
+            <div class="md:col-span-5 flex flex-col justify-between space-y-2.5 p-3.5 bg-slate-50/90 rounded-xl border border-slate-200">
+              
+              <!-- Nhúng Biểu Đồ Thực Nghiệm Chuẩn 300 DPI -->
+              <div class="relative rounded-xl overflow-hidden border border-slate-200 bg-white shadow-2xs group flex items-center justify-center min-h-[140px]">
+                <img id="slot2-img" src="assets/autonomous_loop/figure_07a_active_learning_curve.png" 
+                     alt="Biểu đồ vòng lặp thực nghiệm" 
+                     class="w-full h-36 object-contain p-1 transition-all duration-300" 
+                     loading="lazy" />
+                <div class="absolute inset-0 bg-slate-900/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                  <span id="slot2-img-caption" class="px-2 py-1 rounded bg-black/75 text-white text-[10px] font-mono font-bold text-center">
+                    Figure 07a: 4-Panel Active Curve vs 100% Target
+                  </span>
+                </div>
+              </div>
+
+              <!-- 4 Thẻ Metrics Đo Lường Vĩ Mô Vòng Lặp -->
+              <div class="grid grid-cols-2 gap-2 text-center font-mono">
+                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs">
+                  <div id="slot2-m1-lbl" class="text-[9px] text-slate-500 uppercase">mAP@50 Đỉnh</div>
+                  <div id="slot2-m1-val" class="text-sm font-extrabold text-emerald-700 mt-0.5">27.85%</div>
+                  <div id="slot2-m1-sub" class="text-[8px] text-sky-700 font-bold">+1.00% vs Target</div>
+                </div>
+                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs">
+                  <div id="slot2-m2-lbl" class="text-[9px] text-slate-500 uppercase">mAP@50:95</div>
+                  <div id="slot2-m2-val" class="text-sm font-extrabold text-purple-700 mt-0.5">16.15%</div>
+                  <div id="slot2-m2-sub" class="text-[8px] text-sky-700 font-bold">+0.75% vs Target</div>
+                </div>
+                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs">
+                  <div id="slot2-m3-lbl" class="text-[9px] text-slate-500 uppercase">Recall</div>
+                  <div id="slot2-m3-val" class="text-sm font-extrabold text-emerald-700 mt-0.5">30.64%</div>
+                  <div id="slot2-m3-sub" class="text-[8px] text-sky-700 font-bold">+1.14% vs Target</div>
+                </div>
+                <div class="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs">
+                  <div id="slot2-m4-lbl" class="text-[9px] text-slate-500 uppercase">CF-Score</div>
+                  <div id="slot2-m4-val" class="text-sm font-extrabold text-purple-800 mt-0.5">25.18</div>
+                  <div id="slot2-m4-sub" class="text-[8px] text-sky-700 font-bold">+0.97 vs Target</div>
+                </div>
+              </div>
+
+              <!-- Bảng Giải Cứu Lớp Yếu Thế (Thay Đổi Theo Vòng) -->
+              <div class="p-2 bg-white rounded-lg border border-slate-200 space-y-1 font-mono text-[10px]">
+                <div class="text-[9px] font-bold text-slate-700 flex items-center justify-between border-b border-slate-100 pb-1">
+                  <span>Tiến Hóa Lớp Yếu Thế</span>
+                  <span id="slot2-class-round-lbl" class="text-[8px] text-purple-700 font-bold">VÒNG 5</span>
+                </div>
+                <div class="grid grid-cols-2 gap-x-2 gap-y-0.5">
+                  <div class="flex justify-between items-center">
+                    <span class="text-slate-500">🏍️ rider:</span>
+                    <span id="slot2-cls-rider" class="font-bold text-emerald-700">10.1% (+7.9%)</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-slate-500">🚂 train:</span>
+                    <span id="slot2-cls-train" class="font-bold text-emerald-700">16.2% (+16.2%)</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-slate-500">🛵 motor:</span>
+                    <span id="slot2-cls-motor" class="font-bold text-emerald-700">14.8% (+12.7%)</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-slate-500">🚗 car:</span>
+                    <span id="slot2-cls-car" class="font-bold text-slate-700">64.9% (Chuẩn)</span>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
 
-          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] font-mono text-slate-400">
-            <span>Module Developer Slot (2/3 Ratio)</span>
-            <span>Nối trực tiếp từ Step 10 & Step 14 (Tầng 3) &rightarrow;</span>
+          <!-- Slot 2 Footer -->
+          <div class="pt-2.5 border-t border-slate-200 flex flex-wrap items-center justify-between text-[10px] font-mono text-slate-500 gap-1">
+            <span class="flex items-center gap-1.5">
+              <span id="slot2-stop-dot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span id="slot2-stop-decision-text" class="text-emerald-800 font-bold">PHÁN QUYẾT: VICTORY_CONFIRMED (Tiết kiệm 40.1% nhãn)</span>
+            </span>
+            <span id="slot2-footer-tag" class="text-purple-700 font-bold">Niêm Phong Bởi AutonomousLoopOrchestrator</span>
           </div>
+
         </div>
       </div>
 
@@ -782,6 +1024,9 @@
 
   </main>
 
+  <!-- PIPELINE CONTRACTS ENGINE -->
+  <script src="js/pipeline-contracts.js"></script>
+
   <!-- JAVASCRIPT ENGINE & SYNTHESIZED AUDIO & FIREWORKS -->
   <script>
     // State Variables
@@ -793,10 +1038,10 @@
     let currentIteration = 0; // Iteration V0 to V5
     let tourTimer = null;
 
-    // Simulated mAP Progression over iterations V0 -> V5
-    const mapScores = [20.23, 22.45, 24.10, 25.80, 26.90, 27.85];
-    let unlabeledPoolCount = 4394;
-    let labeledTrainCount = 500;
+    // Ground-Truth mAP Progression over iterations V0 -> V5 (Phase 07 Audit Certified)
+    const mapScores = [20.23, 22.80, 24.65, 26.15, 27.20, 27.85];
+    let unlabeledPoolCount = 3915;
+    let labeledTrainCount = 979;
 
     // Step Configuration Mapping
     const stepConfigs = [
@@ -1212,6 +1457,210 @@
       }, intervalMs);
     }
 
+    // =========================================================================
+    // DYNAMIC DATA CONTRACT CONSOLE RENDERERS (SLOT 1 & SLOT 2)
+    // =========================================================================
+
+    function renderSlot1(stepIdx) {
+      if (!window.PIPELINE_DATA_CONTRACTS) return;
+      const effectiveStep = (stepIdx >= 1 && stepIdx <= 7) ? stepIdx : 2;
+      const contract = window.PIPELINE_DATA_CONTRACTS[effectiveStep];
+      if (!contract) return;
+
+      // Header Elements
+      const badgePhase = document.getElementById('slot1-phase-badge');
+      const title = document.getElementById('slot1-title');
+      const champ = document.getElementById('slot1-champion');
+      const statusBadge = document.getElementById('slot1-status-badge');
+      const nodeBadge = document.getElementById('slot1-node-badge');
+
+      if (badgePhase) badgePhase.innerText = contract.phaseBadge;
+      if (title) title.innerText = contract.title;
+      if (champ) champ.innerText = `🏆 Quán Quân: ${contract.champion}`;
+      if (statusBadge) statusBadge.innerText = contract.auditStatus;
+      if (nodeBadge) nodeBadge.innerText = `BƯỚC 0${effectiveStep} / 16`;
+
+      // 1. Input Box
+      const inSrc = document.getElementById('slot1-input-source');
+      const inSpecs = document.getElementById('slot1-input-specs');
+      const inPre = document.getElementById('slot1-input-precond');
+      if (inSrc) inSrc.innerText = contract.input.source.split('(')[0].trim();
+      if (inSpecs) inSpecs.innerText = contract.input.specs;
+      if (inPre) inPre.innerText = contract.input.precondition;
+
+      // 2. Handle Box (Quán Quân)
+      const hSpeed = document.getElementById('slot1-handle-speed');
+      const hAlgo = document.getElementById('slot1-handle-algo');
+      const hParams = document.getElementById('slot1-handle-params');
+      if (hSpeed) hSpeed.innerText = contract.handle.hardware ? contract.handle.hardware.split(':')[0] : "QUÁN QUÂN";
+      if (hAlgo) hAlgo.innerText = contract.handle.algorithm;
+      if (hParams) hParams.innerText = contract.handle.parameters;
+
+      // 3. Output Box
+      const outVol = document.getElementById('slot1-output-vol');
+      const outArt = document.getElementById('slot1-output-art');
+      const outHand = document.getElementById('slot1-output-handover');
+      if (outVol) outVol.innerText = contract.output.volume ? contract.output.volume.split('(')[0].trim() : "Output";
+      if (outArt) outArt.innerText = contract.output.artifact;
+      if (outHand) outHand.innerText = contract.output.handover;
+
+      // Visual Telemetry
+      const img = document.getElementById('slot1-img');
+      const caption = document.getElementById('slot1-img-caption');
+      if (img && contract.image) img.src = contract.image;
+      if (caption && contract.imageCaption) caption.innerText = contract.imageCaption;
+
+      // 4 Metrics
+      if (contract.metrics && contract.metrics.length >= 4) {
+        for (let i = 0; i < 4; i++) {
+          const m = contract.metrics[i];
+          const lbl = document.getElementById(`slot1-m${i+1}-lbl`);
+          const val = document.getElementById(`slot1-m${i+1}-val`);
+          const sub = document.getElementById(`slot1-m${i+1}-sub`);
+          if (lbl) lbl.innerText = m.label;
+          if (val) val.innerText = m.val;
+          if (sub) sub.innerText = m.sub;
+        }
+      }
+    }
+
+    function renderSlot2(stepIdx, iter) {
+      if (!window.PIPELINE_DATA_CONTRACTS) return;
+      const effectiveStep = (stepIdx >= 8 && stepIdx <= 16) ? stepIdx : 10;
+      const contract = window.PIPELINE_DATA_CONTRACTS[effectiveStep];
+      if (!contract) return;
+
+      const iterKey = 'v' + Math.min(Math.max(iter, 0), 5);
+      const isLoopStep = (effectiveStep >= 10 && effectiveStep <= 15) && contract.iterations;
+      const iterData = isLoopStep ? (contract.iterations[iterKey] || contract.iterations['v0']) : null;
+
+      // Header Elements
+      const badgePhase = document.getElementById('slot2-phase-badge');
+      const title = document.getElementById('slot2-title');
+      const champ = document.getElementById('slot2-champion');
+
+      if (badgePhase) badgePhase.innerText = (iterData && iterData.roundBadge) ? `${contract.phaseBadge} • ${iterData.roundBadge}` : contract.phaseBadge;
+      if (title) title.innerText = contract.title;
+      if (champ) champ.innerText = `🏆 Quán Quân: ${contract.champion}`;
+
+      // Update Iteration Pills Selector Visuals (btn-iter-0..5)
+      for (let v = 0; v <= 5; v++) {
+        const btn = document.getElementById(`btn-iter-${v}`);
+        if (btn) {
+          if (v === iter) {
+            btn.className = v === 5 
+              ? "px-2.5 py-0.5 rounded-lg font-bold transition-all bg-emerald-600 text-white shadow-sm ring-2 ring-emerald-300"
+              : "px-2.5 py-0.5 rounded-lg font-bold transition-all bg-purple-600 text-white shadow-sm ring-2 ring-purple-300";
+          } else {
+            btn.className = "px-2 py-0.5 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900";
+          }
+        }
+      }
+
+      // Input, Handle, Output Boxes
+      const inputSrc = iterData ? iterData.input : contract.input;
+      const handleSrc = iterData ? iterData.handle : contract.handle;
+      const outputSrc = iterData ? iterData.output : contract.output;
+
+      // 1. Input Box
+      const inSrc = document.getElementById('slot2-input-source');
+      const inSpecs = document.getElementById('slot2-input-specs');
+      const inPre = document.getElementById('slot2-input-precond');
+      if (inSrc) inSrc.innerText = inputSrc.source.split('(')[0].trim();
+      if (inSpecs) inSpecs.innerText = inputSrc.specs;
+      if (inPre) inPre.innerText = inputSrc.precondition;
+
+      // 2. Handle Box
+      const hSpeed = document.getElementById('slot2-handle-speed');
+      const hAlgo = document.getElementById('slot2-handle-algo');
+      const hParams = document.getElementById('slot2-handle-params');
+      if (hSpeed) hSpeed.innerText = handleSrc.hardware ? handleSrc.hardware.split(':')[0] : "QUÁN QUÂN VÒNG";
+      if (hAlgo) hAlgo.innerText = handleSrc.algorithm;
+      if (hParams) hParams.innerText = handleSrc.parameters;
+
+      // 3. Output Box
+      const outVol = document.getElementById('slot2-output-vol');
+      const outArt = document.getElementById('slot2-output-art');
+      const outHand = document.getElementById('slot2-output-handover');
+      if (outVol) outVol.innerText = outputSrc.volume ? outputSrc.volume.split('(')[0].trim() : "Output";
+      if (outArt) outArt.innerText = outputSrc.artifact;
+      if (outHand) outHand.innerText = outputSrc.handover;
+
+      // Visual Telemetry
+      const img = document.getElementById('slot2-img');
+      const caption = document.getElementById('slot2-img-caption');
+      const imgSrc = (iterData && iterData.image) ? iterData.image : contract.image;
+      const captionSrc = (iterData && iterData.imageCaption) ? iterData.imageCaption : contract.imageCaption;
+      if (img && imgSrc) img.src = imgSrc;
+      if (caption && captionSrc) caption.innerText = captionSrc;
+
+      // Metrics (4 Ô)
+      const metricsList = (iterData && iterData.metrics) ? iterData.metrics : contract.metrics;
+      if (metricsList && metricsList.length >= 4) {
+        for (let i = 0; i < 4; i++) {
+          const m = metricsList[i];
+          const lbl = document.getElementById(`slot2-m${i+1}-lbl`);
+          const val = document.getElementById(`slot2-m${i+1}-val`);
+          const sub = document.getElementById(`slot2-m${i+1}-sub`);
+          if (lbl) lbl.innerText = m.label;
+          if (val) val.innerText = m.val;
+          if (sub) sub.innerText = m.sub;
+        }
+      }
+
+      // Per-Class Progress Table (4 lớp: rider, train, motor, car)
+      const classHistory = [
+        { round: "V0", rider: "2.2%", train: "0.0%", motor: "2.1%", car: "60.4%" },
+        { round: "V1", rider: "3.8% (+1.6%)", train: "3.5% (+3.5%)", motor: "4.5% (+2.4%)", car: "61.2% (+0.8%)" },
+        { round: "V2", rider: "5.4% (+3.2%)", train: "7.8% (+7.8%)", motor: "7.2% (+5.1%)", car: "62.1% (+1.7%)" },
+        { round: "V3", rider: "6.8% (+4.6%)", train: "11.5% (+11.5%)", motor: "9.8% (+7.7%)", car: "63.2% (+2.8%)" },
+        { round: "V4", rider: "8.9% (+6.7%)", train: "14.8% (+14.8%)", motor: "13.2% (+11.1%)", car: "64.2% (+3.8%)" },
+        { round: "V5", rider: "10.1% (+7.9%)", train: "16.2% (+16.2%)", motor: "14.8% (+12.7%)", car: "64.9% (+4.5%)" }
+      ];
+      const clsData = classHistory[iter] || classHistory[0];
+      const roundLbl = document.getElementById('slot2-class-round-lbl');
+      const clsRider = document.getElementById('slot2-cls-rider');
+      const clsTrain = document.getElementById('slot2-cls-train');
+      const clsMotor = document.getElementById('slot2-cls-motor');
+      const clsCar = document.getElementById('slot2-cls-car');
+
+      if (roundLbl) roundLbl.innerText = `TIẾN TRÌNH VÒNG ${iter}`;
+      if (clsRider) clsRider.innerText = clsData.rider;
+      if (clsTrain) clsTrain.innerText = clsData.train;
+      if (clsMotor) clsMotor.innerText = clsData.motor;
+      if (clsCar) clsCar.innerText = clsData.car;
+
+      // Stopping Decision Text
+      const decisionText = document.getElementById('slot2-stop-decision-text');
+      const decisionDot = document.getElementById('slot2-stop-dot');
+      if (decisionText) {
+        if (iter === 5) {
+          decisionText.innerText = "PHÁN QUYẾT: VICTORY_CONFIRMED (Tiết kiệm 40.1% nhãn)";
+          decisionText.className = "text-emerald-800 font-bold";
+          if (decisionDot) decisionDot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
+        } else if (iter === 4) {
+          decisionText.innerText = "PHÁN QUYẾT: CONFIRMATION_ROUND_TRIGGERED (27.20% >= 26.85%)";
+          decisionText.className = "text-purple-800 font-bold";
+          if (decisionDot) decisionDot.className = "w-2 h-2 rounded-full bg-purple-500 animate-ping";
+        } else {
+          decisionText.innerText = `PHÁN QUYẾT: CONTINUE_LOOP (Đang lặp vòng ${iter}/5)`;
+          decisionText.className = "text-amber-800 font-bold";
+          if (decisionDot) decisionDot.className = "w-2 h-2 rounded-full bg-amber-500";
+        }
+      }
+    }
+
+    function selectIteration(iter) {
+      currentIteration = iter;
+      updateDataCounts();
+      document.getElementById('iter-badge').innerText = iter === 0 ? "V0 Baseline" : `Vòng Lặp V${iter}`;
+      document.getElementById('active-loop-iter-tag').innerText = iter === 0 ? "V0 BASELINE" : `VÒNG LẶP V${iter}`;
+      renderSlot2(currentStepIndex >= 8 ? currentStepIndex : 10, iter);
+      setTimeout(updateLoopArrow, 20);
+      setTimeout(notifyParentOfResize, 50);
+      playStepSound();
+    }
+
     function nextStep() {
       const prevTier = stepConfigs[currentStepIndex - 1].tier;
 
@@ -1225,6 +1674,7 @@
           updateDataCounts();
           currentStepIndex = 10; // Active Mining
           playLoopChime();
+          renderSlot2(10, currentIteration);
         } else {
           // Victory confirmed -> Proceed to Deploy (Step 16)
           currentStepIndex = 16;
@@ -1261,13 +1711,14 @@
       if (isAutoTourRunning) toggleAutoTour();
       currentStepIndex = 1;
       currentIteration = 0;
-      unlabeledPoolCount = 4394;
-      labeledTrainCount = 500;
+      unlabeledPoolCount = 3915;
+      labeledTrainCount = 979;
       
-      document.getElementById('pool-count-text').innerText = '4.394 Ảnh';
+      document.getElementById('pool-count-text').innerText = '3.915 Ảnh';
       document.getElementById('train-count-text').innerText = 'D_train(k) = D_prev ∪ Batch';
-      document.getElementById('current-map-text').innerText = 'mAP@50: --%';
+      document.getElementById('current-map-text').innerText = 'mAP@50: 20.23%';
       
+      selectIteration(0);
       activateStep(1);
     }
 
@@ -1285,6 +1736,32 @@
 
       // Update Dynamic Loop Arrow Calculation
       setTimeout(updateLoopArrow, 20);
+
+      // Visual Container Highlight & Slot Dynamic Rendering
+      const slot1Card = document.getElementById('slot-1-card');
+      const slot2Card = document.getElementById('slot-2-card');
+
+      if (stepIdx <= 7) {
+        renderSlot1(stepIdx);
+        if (slot1Card) {
+          slot1Card.classList.add('ring-2', 'ring-sky-400', 'border-sky-500');
+          slot1Card.classList.remove('opacity-75');
+        }
+        if (slot2Card) {
+          slot2Card.classList.remove('ring-2', 'ring-purple-400', 'border-purple-500');
+          slot2Card.classList.add('opacity-85');
+        }
+      } else {
+        renderSlot2(stepIdx, currentIteration);
+        if (slot2Card) {
+          slot2Card.classList.add('ring-2', 'ring-purple-400', 'border-purple-500');
+          slot2Card.classList.remove('opacity-85');
+        }
+        if (slot1Card) {
+          slot1Card.classList.remove('ring-2', 'ring-sky-400', 'border-sky-500');
+          slot1Card.classList.add('opacity-85');
+        }
+      }
 
       // Update Step Box Classes & Status Badges
       stepConfigs.forEach((cfg, idx) => {
@@ -1335,7 +1812,7 @@
         document.getElementById('current-map-text').innerText = `mAP@50: ${mapVal}%`;
       }
 
-      // Smooth Viewport Scrolling (chỉ cuộn khi người dùng chủ động BẬT và không làm giật cửa sổ cha)
+      // Smooth Viewport Scrolling (chỉ cuộn khi người dùng chủ động BẬT)
       if (isAutoScrollEnabled) {
         const activeEl = document.getElementById(config.id);
         if (activeEl) {
@@ -1347,35 +1824,46 @@
           });
         }
       }
+
+      setTimeout(notifyParentOfResize, 60);
     }
 
     function updateDataCounts() {
-      if (currentIteration > 0 && currentIteration <= 5) {
-        unlabeledPoolCount = Math.max(1614, 4394 - (currentIteration * 556));
-        labeledTrainCount = 500 + (currentIteration * 556);
+      if (currentIteration >= 0 && currentIteration <= 5) {
+        unlabeledPoolCount = Math.max(1135, 3915 - (currentIteration * 556));
+        labeledTrainCount = 979 + (currentIteration * 556);
 
         document.getElementById('pool-count-text').innerText = `${unlabeledPoolCount.toLocaleString()} Ảnh`;
         document.getElementById('train-count-text').innerText = `${labeledTrainCount.toLocaleString()} Ảnh (V${currentIteration})`;
       }
     }
 
+    let lastSentHeight = 0;
     function notifyParentOfResize() {
       if (window.parent && window.parent !== window) {
+        const mainEl = document.querySelector('main');
+        // Lấy chiều cao thực tế của khối main cộng khoảng đệm an toàn 100px
         const h = Math.max(
-          document.body.scrollHeight,
-          document.documentElement.scrollHeight
+          mainEl ? mainEl.offsetHeight + 100 : 1650,
+          document.body.offsetHeight + 40
         );
-        window.parent.postMessage({ type: 'PIPELINE_RESIZE', height: h }, '*');
+        if (Math.abs(h - lastSentHeight) > 10) {
+          lastSentHeight = h;
+          window.parent.postMessage({ type: 'PIPELINE_RESIZE', height: h }, '*');
+        }
       }
     }
 
     // Window Initialization
     window.onload = function() {
+      renderSlot1(1);
+      renderSlot2(10, 0);
       activateStep(1);
       setTimeout(updateLoopArrow, 100);
-      setTimeout(notifyParentOfResize, 200);
+      setTimeout(notifyParentOfResize, 300);
+      setTimeout(notifyParentOfResize, 1200); // Đảm bảo sau khi hình ảnh tải xong
     };
-    window.addEventListener('resize', notifyParentOfResize);
+    // KHÔNG addEventListener('resize', notifyParentOfResize) để chống vòng lặp vô hạn!
   </script>
 </body>
 </html>
