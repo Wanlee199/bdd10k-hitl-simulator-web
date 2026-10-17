@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="vi" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BDD10K Active Learning Lab - End-to-End Pipeline Visualizer</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              sky: '#0284c7',
+              emerald: '#059669',
+              amber: '#d97706',
+              purple: '#7c3aed',
+              rose: '#e11d48',
+              indigo: '#4f46e5'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+      overflow-x: hidden;
+    }
+
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Parent Phase Container */
+    .parent-phase-container {
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
+      border-radius: 1rem;
+      box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.05);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    /* Child Step Box (~200px Tile) */
+    .child-step-box {
+      width: 100%;
+      min-width: 180px;
+      height: 92px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.75rem;
+      padding: 0.65rem 0.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      position: relative;
+    }
+    
+    .child-step-box:hover {
+      border-color: #94a3b8;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      transform: translateY(-1px);
+    }
+
+    /* Running State Styling */
+    .step-running {
+      border-color: #0284c7 !important;
+      background: #f0f9ff !important;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.25), 0 8px 20px rgba(2, 132, 199, 0.15) !important;
+      transform: scale(1.02) !important;
+      z-index: 20;
+    }
+
+    /* Completed State Styling */
+    .step-completed {
+      border-color: #10b981 !important;
+      background: #f0fdf4 !important;
+    }
+
+    /* Dynamic SVG Flowing Line Animation */
+    .glowing-dash {
+      stroke-dasharray: 6 6;
+      animation: strokeDash 0.7s linear infinite;
+    }
+
+    @keyframes strokeDash {
+      to { stroke-dashoffset: -12; }
+    }
+
+    /* Extended Loopback Reverse Stroke Animation */
+    .loopback-dash {
+      stroke-dasharray: 8 8;
+      animation: strokeDashReverse 0.6s linear infinite;
+    }
+
+    @keyframes strokeDashReverse {
+      to { stroke-dashoffset: -16; }
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+    /* Canvas Fireworks Overlay */
+    #fireworks-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 pb-6">
+
+  <!-- FIREWORKS CANVAS -->
+  <canvas id="fireworks-canvas"></canvas>
+
+  <!-- VICTORY BANNER MODAL -->
+  <div id="victory-modal" class="fixed inset-0 z-[110] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-500">
+    <div class="bg-white rounded-2xl p-8 max-w-md text-center shadow-2xl border-2 border-emerald-400 relative overflow-hidden transform scale-90 transition-transform duration-500" id="victory-card">
+      <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-3xl mb-4 shadow-inner">
+        <i class="fa-solid fa-trophy"></i>
+      </div>
+      <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-mono font-bold">VICTORY_CONFIRMED</span>
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-3">Hoàn Thành Pipeline!</h2>
+      <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+        Model Active V5 đã đạt trần chính xác <strong class="text-emerald-600 font-bold">27.85% mAP@50</strong>, vượt ngưỡng mục tiêu 26.85%. Đã xuất bản INT8 Engine thành công!
+      </p>
+      <div class="mt-6 flex gap-3 justify-center">
+        <button onclick="closeVictoryModal()" class="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-md transition active:scale-95">
+          Đóng & Xem Giao Diện
+        </button>
+        <button onclick="closeVictoryModal(); resetPipeline();" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md transition active:scale-95">
+          Chạy Lại Từ Đầu
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP CONTROL TOOLBAR -->
+  <header class="sticky top-0 z-50 px-4 py-3 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <div class="w-full px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-3">
+      
+      <!-- Brand & Pipeline Info -->
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-sky-600 text-white flex items-center justify-center font-bold text-base shadow-sm">
+          <i class="fa-solid fa-diagram-project"></i>
+        </div>
+        <div>
+          <h1 class="text-sm font-extrabold text-slate-900 leading-tight">BDD10K Active Learning Lab - End-to-End Pipeline</h1>
+          <p class="text-[11px] text-slate-500 font-medium">Bố Cục Tỷ Lệ 1/3 - 2/3 (Dynamic SVG Loopback Arrow Active)</p>
+        </div>
+      </div>
+
+      <!-- Execution Controls -->
+      <div class="flex flex-wrap items-center gap-2">
+        <!-- Prev Step -->
+        <button onclick="prevStep()" class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition active:scale-95" title="Bước Trước">
+          <i class="fa-solid fa-backward-step"></i>
+        </button>
+
+        <!-- Play / Pause Auto Tour -->
+        <button id="btn-play" onclick="toggleAutoTour()" class="px-3.5 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs shadow-sm flex items-center gap-1.5 transition active:scale-95">
+          <i id="icon-play" class="fa-solid fa-play"></i>
+          <span id="text-play">Auto Tour</span>
+        </button>
+
+        <!-- Next Step -->
+        <button onclick="nextStep()" class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition active:scale-95" title="Bước Tiếp">
+          <i class="fa-solid fa-forward-step"></i>
+        </button>
+
+        <!-- Reset Button -->
+        <button onclick="resetPipeline()" class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-bold transition active:scale-95" title="Đặt Lại Ban Đầu">
+          <i class="fa-solid fa-rotate-left"></i>
+        </button>
+
+        <!-- Audio Sound Toggle -->
+        <button id="btn-audio" onclick="toggleAudio()" class="px-2.5 py-1.5 rounded-lg bg-amber-50 text-amber-700 border border-amber-300 text-[11px] font-bold flex items-center gap-1 transition">
+          <i id="icon-audio" class="fa-solid fa-volume-high"></i>
+          <span>Âm Thanh: BẬT</span>
+        </button>
+
+        <!-- Speed Selector -->
+        <div class="flex items-center bg-slate-100 rounded-lg p-0.5 text-[11px] font-mono font-bold border border-slate-200 ml-1">
+          <button onclick="setSpeed(0.5)" id="speed-05" class="px-1.5 py-0.5 rounded text-slate-500 transition">0.5x</button>
+          <button onclick="setSpeed(1.0)" id="speed-10" class="px-1.5 py-0.5 rounded bg-sky-600 text-white transition">1x</button>
+          <button onclick="setSpeed(2.0)" id="speed-20" class="px-1.5 py-0.5 rounded text-slate-500 transition">2x</button>
+        </div>
+
+        <!-- Auto Scroll Toggle (Mặc định TẮT không tự kéo scroll) -->
+        <button id="btn-autoscroll" onclick="toggleAutoScroll()" class="px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-500 border border-slate-200 text-[11px] font-bold flex items-center gap-1 transition">
+          <i class="fa-solid fa-arrows-up-to-line"></i>
+          <span>Auto-Scroll: TẮT</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- LIVE EXECUTION TELEMETRY SUB-BAR -->
+  <div class="bg-slate-100/90 border-b border-slate-200 py-1.5 px-4 sticky top-[61px] z-40 backdrop-blur-sm">
+    <div class="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between text-xs font-mono">
+      <div class="flex items-center gap-2">
+        <span class="text-slate-500 font-medium">Bước Hiện Tại:</span>
+        <span id="active-step-title" class="font-bold text-sky-700">Chưa Khởi Chạy</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span class="text-slate-500">Chu Kỳ: <strong id="iter-badge" class="text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">V0 Baseline</strong></span>
+        <div class="flex items-center gap-1.5">
+          <span class="text-slate-400">Tiến Độ:</span>
+          <div class="w-28 bg-slate-200 h-2 rounded-full overflow-hidden">
+            <div id="tour-progress-bar" class="bg-sky-600 h-full transition-all duration-300" style="width: 0%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN PIPELINE CONTAINER (FULL WIDTH WORKFLOW LAYOUT) -->
+  <main class="w-full px-4 sm:px-6 lg:px-8 pt-8 space-y-12 relative">
+
+    <!-- ================================================================================= -->
+    <!-- ROW 1: TẦNG 1 (1/3 WIDTH - LEFT) + SLOT DEMO BENCHMARK 1 (2/3 WIDTH - RIGHT)     -->
+    <!-- ================================================================================= -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch relative">
+      
+      <!-- TẦNG 1: TIỀN XỬ LÝ (LEFT COLUMN - 4 COLUMNS = 1/3 WIDTH) -->
+      <div class="lg:col-span-4 flex flex-col justify-between">
+        <section class="parent-phase-container p-5 border-sky-200 bg-sky-50/20 h-full flex flex-col justify-between">
+          
+          <!-- Parent Header -->
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-sky-100">
+            <div class="flex items-center gap-2.5">
+              <span class="px-2 py-0.5 rounded-md bg-sky-600 text-white font-mono font-bold text-xs shadow-sm">TẦNG 1</span>
+              <div>
+                <h2 class="text-xs font-extrabold text-sky-950 uppercase tracking-wide">Tiền Xử Lý Dữ Liệu</h2>
+                <p class="text-[10px] text-slate-500">FastDeduplication & 5D Profiling</p>
+              </div>
+            </div>
+            <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-sky-100 text-sky-700 border border-sky-200">PHASES 01-03</span>
+          </div>
+
+          <!-- Child Steps Stack (Top-to-Bottom Flow) -->
+          <div class="flex flex-col items-center space-y-2.5 my-auto">
+            
+            <!-- Step 1: Raw Ingestion -->
+            <div id="step-1" onclick="jumpToStep(1)" class="child-step-box">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">INPUT</span>
+                <span class="status-badge text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+              </div>
+              <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                <i class="fa-solid fa-film text-sky-600"></i>
+                <span class="truncate">Video Thô BDD10K</span>
+              </div>
+              <div class="text-[10px] text-slate-400 font-mono">10.000 Frames (1Hz)</div>
+            </div>
+
+            <!-- Connector Down -->
+            <svg class="w-4 h-3 text-slate-300" overflow="visible">
+              <line x1="8" y1="0" x2="8" y2="12" stroke="currentColor" stroke-width="2" />
+              <line x1="8" y1="0" x2="8" y2="12" stroke="#0284c7" stroke-width="2" class="glowing-dash hidden connector" id="conn-1" />
+            </svg>
+
+            <!-- Step 2: Phase 01 FastDeduplication -->
+            <div id="step-2" onclick="jumpToStep(2)" class="child-step-box">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-sky-100 text-sky-700">PHASE 01</span>
+                <span class="status-badge text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+              </div>
+              <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                <i class="fa-solid fa-copy text-amber-500"></i>
+                <span class="truncate">Fast Deduplication</span>
+              </div>
+              <div class="text-[10px] text-slate-400 font-mono">pHash DCT & KMV Policy</div>
+            </div>
+
+            <!-- Connector Down -->
+            <svg class="w-4 h-3 text-slate-300" overflow="visible">
+              <line x1="8" y1="0" x2="8" y2="12" stroke="currentColor" stroke-width="2" />
+              <line x1="8" y1="0" x2="8" y2="12" stroke="#0284c7" stroke-width="2" class="glowing-dash hidden connector" id="conn-2" />
+            </svg>
+
+            <!-- Step 3: Unique Pool -->
+            <div id="step-3" onclick="jumpToStep(3)" class="child-step-box">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800">POOL</span>
+                <span class="status-badge text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+              </div>
+              <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                <i class="fa-solid fa-images text-emerald-600"></i>
+                <span class="truncate">Kho Ảnh Sạch Unique</span>
+              </div>
+              <div class="text-[10px] text-slate-400 font-mono">6.994 Ảnh (0 KB Symlinks)</div>
+            </div>
+
+            <!-- Connector Down -->
+            <svg class="w-4 h-3 text-slate-300" overflow="visible">
+              <line x1="8" y1="0" x2="8" y2="12" stroke="currentColor" stroke-width="2" />
+              <line x1="8" y1="0" x2="8" y2="12" stroke="#0284c7" stroke-width="2" class="glowing-dash hidden connector" id="conn-3" />
+            </svg>
+
+            <!-- Step 4: Phase 02 5D Profiling -->
+            <div id="step-4" onclick="jumpToStep(4)" class="child-step-box">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-sky-100 text-sky-700">PHASE 02</span>
+                <span class="status-badge text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+              </div>
+              <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                <i class="fa-solid fa-chart-pie text-purple-600"></i>
+                <span class="truncate">Lập Hồ Sơ 5D Profiling</span>
+              </div>
+              <div class="text-[10px] text-slate-400 font-mono">11 Đặc Trưng Vật Lý</div>
+            </div>
+
+            <!-- Connector Down -->
+            <svg class="w-4 h-3 text-slate-300" overflow="visible">
+              <line x1="8" y1="0" x2="8" y2="12" stroke="currentColor" stroke-width="2" />
+              <line x1="8" y1="0" x2="8" y2="12" stroke="#0284c7" stroke-width="2" class="glowing-dash hidden connector" id="conn-4" />
+            </svg>
+
+            <!-- Step 5: Profiling Manifest -->
+            <div id="step-5" onclick="jumpToStep(5)" class="child-step-box">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-purple-100 text-purple-800">MANIFEST</span>
+                <span class="status-badge text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+              </div>
+              <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                <i class="fa-solid fa-file-code text-indigo-600"></i>
+                <span class="truncate">Profile Manifest JSON</span>
+              </div>
+              <div class="text-[10px] text-slate-400 font-mono">5 Lát Cắt Khó (Hard Slices)</div>
+            </div>
+
+            <!-- Connector Down -->
+            <svg class="w-4 h-3 text-slate-300" overflow="visible">
+              <line x1="8" y1="0" x2="8" y2="12" stroke="currentColor" stroke-width="2" />
+              <line x1="8" y1="0" x2="8" y2="12" stroke="#0284c7" stroke-width="2" class="glowing-dash hidden connector" id="conn-5" />
+            </svg>
+
+            <!-- Step 6: Phase 03 Hybrid Split -->
+            <div id="step-6" onclick="jumpToStep(6)" class="child-step-box">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-sky-100 text-sky-700">PHASE 03</span>
+                <span class="status-badge text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+              </div>
+              <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                <i class="fa-solid fa-scissors text-rose-500"></i>
+                <span class="truncate">Phân Chia Hybrid 80/20</span>
+              </div>
+              <div class="text-[10px] text-slate-400 font-mono">Group-Aware Video ID</div>
+            </div>
+
+          </div>
+        </section>
+      </div>
+
+      <!-- SLOT DEMO BENCHMARK 1 (RIGHT COLUMN - 8 COLUMNS = 2/3 WIDTH) -->
+      <div class="lg:col-span-8 h-full flex flex-col relative">
+        <!-- Connecting Arrow from Tier 1 to Benchmark 1 -->
+        <div class="hidden lg:block absolute -left-4 top-1/2 -translate-y-1/2 z-20">
+          <svg class="w-8 h-8 text-sky-400" overflow="visible">
+            <line x1="0" y1="16" x2="20" y2="16" stroke="#0284c7" stroke-width="2.5" stroke-dasharray="4 4" />
+            <polygon points="20,16 12,11 12,21" fill="#0284c7" />
+          </svg>
+        </div>
+
+        <div class="bg-white border-2 border-dashed border-sky-300 rounded-2xl p-6 h-full flex flex-col justify-between shadow-sm relative overflow-hidden bg-sky-50/10">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-chart-column text-sky-600 text-base"></i>
+              <span class="text-xs font-bold text-slate-800 tracking-wide uppercase">[SLOT DEMO BENCHMARK 1: Biểu Đồ Lọc Trùng pHash & Hồ Sơ Dữ Liệu 5D]</span>
+            </div>
+            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-sky-100 text-sky-700">2/3 WIDTH DEMO SLOT</span>
+          </div>
+
+          <!-- Empty Demo Content Placeholder -->
+          <div class="my-auto py-12 flex flex-col items-center justify-center text-center space-y-4">
+            <div class="w-16 h-16 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center text-3xl shadow-inner">
+              <i class="fa-solid fa-sliders"></i>
+            </div>
+            <div>
+              <h3 class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Thống Kê Deduplication & Profiling 5D</h3>
+              <p class="text-[11px] text-slate-400 mt-1 max-w-md leading-relaxed">
+                Khung giữ chỗ dành cho việc tích hợp giao diện trực quan hóa: Biểu Đồ Tỷ Lệ Lọc Trùng pHash (360.3 FPS), Phân Bố Đêm/Mờ/Thời Tiết và Đồ Thị Che Khuất DAG.
+              </p>
+            </div>
+            <div class="pt-2 flex flex-wrap justify-center gap-2 font-mono text-[10px]">
+              <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 border border-slate-200">360.3 FPS (CPU)</span>
+              <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 border border-slate-200">5 Hard Slices</span>
+              <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 border border-slate-200">6.994 Unique Pool</span>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] font-mono text-slate-400">
+            <span>&leftarrow; Nối trực tiếp từ Phase 01 - Phase 03 (Tầng 1)</span>
+            <span>Module Developer Slot (2/3 Ratio)</span>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- END ROW 1 -->
+
+    <!-- CONNECTOR BETWEEN ROW 1 & ROW 2 -->
+    <div class="flex justify-center -my-4">
+      <svg class="w-6 h-10" overflow="visible">
+        <line x1="12" y1="0" x2="12" y2="40" stroke="#cbd5e1" stroke-width="3" />
+        <line x1="12" y1="0" x2="12" y2="40" stroke="#0284c7" stroke-width="3" class="glowing-dash hidden connector" id="conn-6" />
+      </svg>
+    </div>
+
+    <!-- ================================================================================= -->
+    <!-- ROW 2: TẦNG 2 - BÀI THI ĐÓNG BĂNG & 4 KHO DỮ LIỆU (NẰM Ở GIỮA)                    -->
+    <!-- ================================================================================= -->
+    <div class="flex justify-center">
+      <section class="parent-phase-container p-5 border-emerald-200 bg-emerald-50/20 w-full max-w-4xl">
+        
+        <!-- Parent Header -->
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-emerald-100">
+          <div class="flex items-center gap-3">
+            <span class="px-2.5 py-0.5 rounded-md bg-emerald-600 text-white font-mono font-bold text-xs shadow-sm">TẦNG 2</span>
+            <div>
+              <h2 class="text-xs font-extrabold text-emerald-950 uppercase tracking-wide">Bài Thi Đóng Băng & Phân Tách Kho Dữ Liệu</h2>
+              <p class="text-[10px] text-slate-500">Cách Ly Tuyệt Đối 0% Rò Rỉ Dữ Liệu (pHash Audit Hamming Distance &ge; 5 bits)</p>
+            </div>
+          </div>
+          <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-200">4 KHO DỮ LIỆU</span>
+        </div>
+
+        <!-- Step 7: 4 Warehouses Grid Container -->
+        <div id="step-7" onclick="jumpToStep(7)" class="p-3 bg-white border border-slate-200 rounded-xl space-y-3 cursor-pointer hover:border-emerald-400 transition">
+          
+          <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-boxes-stacked text-emerald-600 text-xs"></i>
+              <span class="text-xs font-bold text-slate-800">4 Kho Dữ Liệu Đã Phân Tách (4 Data Warehouses)</span>
+            </div>
+            <span class="status-badge text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+          </div>
+
+          <!-- 4 Small Warehouses Grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs font-mono">
+            
+            <!-- Test Set -->
+            <div class="p-2 bg-rose-50 border border-rose-200 rounded-lg text-rose-900">
+              <div class="text-[10px] font-bold text-rose-600">FIXED TEST</div>
+              <div class="font-bold text-xs mt-0.5">1.400 Ảnh</div>
+              <div class="text-[9px] text-rose-500">Đóng băng 20%</div>
+            </div>
+
+            <!-- Val Set -->
+            <div class="p-2 bg-sky-50 border border-sky-200 rounded-lg text-sky-900">
+              <div class="text-[10px] font-bold text-sky-600">FIXED VAL</div>
+              <div class="font-bold text-xs mt-0.5">700 Ảnh</div>
+              <div class="text-[9px] text-sky-500">Early Stopping 10%</div>
+            </div>
+
+            <!-- Seed V0 -->
+            <div class="p-2 bg-indigo-50 border border-indigo-200 rounded-lg text-indigo-900">
+              <div class="text-[10px] font-bold text-indigo-600">SEED V0</div>
+              <div class="font-bold text-xs mt-0.5">500 Ảnh</div>
+              <div class="text-[9px] text-indigo-500">Tập mầm xuất phát</div>
+            </div>
+
+            <!-- Unlabeled Pool -->
+            <div class="p-2 bg-amber-50 border border-amber-200 rounded-lg text-amber-900">
+              <div class="text-[10px] font-bold text-amber-600">UNLABELED POOL</div>
+              <div id="pool-count-text" class="font-bold text-xs mt-0.5">4.394 Ảnh</div>
+              <div class="text-[9px] text-amber-500">Kho mỏ khai phá</div>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+    </div> <!-- END ROW 2 -->
+
+    <!-- CONNECTOR BETWEEN ROW 2 & ROW 3 -->
+    <div class="flex justify-center -my-4">
+      <svg class="w-6 h-10" overflow="visible">
+        <line x1="12" y1="0" x2="12" y2="40" stroke="#cbd5e1" stroke-width="3" />
+        <line x1="12" y1="0" x2="12" y2="40" stroke="#059669" stroke-width="3" class="glowing-dash hidden connector" id="conn-7" />
+      </svg>
+    </div>
+
+    <!-- ================================================================================= -->
+    <!-- ROW 3: SLOT DEMO BENCHMARK 2 (2/3 WIDTH - LEFT) + TẦNG 3 (1/3 WIDTH - RIGHT)     -->
+    <!-- ================================================================================= -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch relative">
+      
+      <!-- SLOT DEMO BENCHMARK 2 (LEFT COLUMN - 8 COLUMNS = 2/3 WIDTH) -->
+      <div class="lg:col-span-8 h-full flex flex-col order-2 lg:order-1 relative">
+        <!-- Connecting Arrow from Benchmark 2 to Tier 3 -->
+        <div class="hidden lg:block absolute -right-4 top-1/2 -translate-y-1/2 z-20">
+          <svg class="w-8 h-8 text-purple-400" overflow="visible">
+            <line x1="0" y1="16" x2="20" y2="16" stroke="#7c3aed" stroke-width="2.5" stroke-dasharray="4 4" />
+            <polygon points="20,16 12,11 12,21" fill="#7c3aed" />
+          </svg>
+        </div>
+
+        <div class="bg-white border-2 border-dashed border-purple-300 rounded-2xl p-6 h-full flex flex-col justify-between shadow-sm relative overflow-hidden bg-purple-50/10">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-chart-line text-purple-600 text-base"></i>
+              <span class="text-xs font-bold text-slate-800 tracking-wide uppercase">[SLOT DEMO BENCHMARK 2: Telemetry Khai Phá Active C6 & Đường Cong mAP@50]</span>
+            </div>
+            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-purple-100 text-purple-800">2/3 WIDTH DEMO SLOT</span>
+          </div>
+
+          <!-- Empty Demo Content Placeholder -->
+          <div class="my-auto py-16 flex flex-col items-center justify-center text-center space-y-4">
+            <div class="w-16 h-16 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-3xl shadow-inner">
+              <i class="fa-solid fa-square-poll-vertical"></i>
+            </div>
+            <div>
+              <h3 class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Telemetry Active Mining C6 & mAP@50</h3>
+              <p class="text-[11px] text-slate-400 mt-1 max-w-md leading-relaxed">
+                Khung giữ chỗ dành cho việc tích hợp giao diện trực quan hóa: Biểu Đồ Tiến Trình mAP@50 qua 5 Chu Kỳ (V0 &rarr; V5), Ma Trận Thâm Hụt Lớp C_w và Bảng Tiết Kiệm Ngân Sách Gán Nhãn.
+              </p>
+            </div>
+            <div class="pt-2 flex flex-wrap justify-center gap-2 font-mono text-[10px]">
+              <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 border border-slate-200">27.85% Target mAP</span>
+              <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 border border-slate-200">-40.1% Labeling Budget</span>
+              <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 border border-slate-200">5 Active Loops</span>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] font-mono text-slate-400">
+            <span>Module Developer Slot (2/3 Ratio)</span>
+            <span>Nối trực tiếp từ Step 10 & Step 14 (Tầng 3) &rightarrow;</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TẦNG 3: VÒNG LẶP ACTIVE (RIGHT COLUMN - 4 COLUMNS = 1/3 WIDTH) -->
+      <div class="lg:col-span-4 order-1 lg:order-2 flex flex-col justify-between">
+        <section id="tier3-container" class="parent-phase-container p-5 border-purple-200 bg-purple-50/20 h-full flex flex-col justify-between relative overflow-visible">
+          
+          <!-- DYNAMIC SVG LOOPBACK ARROW OVERLAY -->
+          <svg id="dynamic-loop-svg" class="absolute inset-0 w-full h-full pointer-events-none z-30 overflow-visible opacity-0 transition-opacity duration-500">
+            <defs>
+              <linearGradient id="loopGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stop-color="#e11d48" />
+                <stop offset="50%" stop-color="#d97706" />
+                <stop offset="100%" stop-color="#059669" />
+              </linearGradient>
+
+              <!-- Sharp Arrowhead Marker pointing directly to the left into Step 10 -->
+              <marker id="loop-arrowhead" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#059669" />
+              </marker>
+            </defs>
+
+            <!-- Dynamic Curved Path -->
+            <path id="loop-curve-path" d="M 0 0 C 0 0, 0 0, 0 0" fill="none" stroke="url(#loopGradient)" stroke-width="3" class="loopback-dash" marker-end="url(#loop-arrowhead)" />
+
+            <!-- Dynamic Label along Loop Curve -->
+            <text id="loop-text-label" x="0" y="0" fill="#d97706" font-size="9" font-family="JetBrains Mono" font-weight="700" letter-spacing="0.5">
+              Vòng lặp V1 &rarr; V5 (Re-mine &amp; Retrain)
+            </text>
+          </svg>
+
+          <!-- Parent Header -->
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-purple-100">
+            <div class="flex items-center gap-2.5">
+              <span class="px-2 py-0.5 rounded-md bg-purple-600 text-white font-mono font-bold text-xs shadow-sm">TẦNG 3</span>
+              <div>
+                <h2 class="text-xs font-extrabold text-purple-950 uppercase tracking-wide">Vòng Lặp Active ($V_0 \to V_5$)</h2>
+                <p class="text-[10px] text-slate-500">C6 Mining, Consensus, Retraining</p>
+              </div>
+            </div>
+            <span id="active-loop-iter-tag" class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-purple-100 text-purple-800 border border-purple-200">V0 BASELINE</span>
+          </div>
+
+          <!-- Child Steps Stack (Top-to-Bottom Flow) -->
+          <div class="flex flex-col items-center space-y-2.5 my-auto">
+
+            <!-- Step 8: Phase 04 Seed Baseline Training -->
+            <div id="step-8" onclick="jumpToStep(8)" class="child-step-box">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-800">PHASE 04</span>
+                <span class="status-badge text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+              </div>
+              <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                <i class="fa-solid fa-graduation-cap text-indigo-600"></i>
+                <span class="truncate">Huấn Luyện Seed V0</span>
+              </div>
+              <div class="text-[10px] text-slate-400 font-mono">Công Thức Cfg-3 (AdamW)</div>
+            </div>
+
+            <!-- Connector Down -->
+            <svg class="w-4 h-3 text-slate-300" overflow="visible">
+              <line x1="8" y1="0" x2="8" y2="12" stroke="currentColor" stroke-width="2" />
+              <line x1="8" y1="0" x2="8" y2="12" stroke="#7c3aed" stroke-width="2" class="glowing-dash hidden connector" id="conn-8" />
+            </svg>
+
+            <!-- Step 9: Model V0 Baseline Evaluated -->
+            <div id="step-9" onclick="jumpToStep(9)" class="child-step-box">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700">MODEL V0</span>
+                <span class="status-badge text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+              </div>
+              <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                <i class="fa-solid fa-microchip text-sky-600"></i>
+                <span class="truncate">Model V0 Baseline</span>
+              </div>
+              <div class="text-[10px] text-slate-500 font-mono font-bold">20.23% mAP@50 (Test Set)</div>
+            </div>
+
+            <!-- Connector Down -->
+            <svg class="w-4 h-3 text-slate-300" overflow="visible">
+              <line x1="8" y1="0" x2="8" y2="12" stroke="currentColor" stroke-width="2" />
+              <line x1="8" y1="0" x2="8" y2="12" stroke="#7c3aed" stroke-width="2" class="glowing-dash hidden connector" id="conn-9" />
+            </svg>
+
+            <!-- ACTIVE RECURRENT LOOP BOUNDARY BOX (STEPS 10 -> 15) -->
+            <div class="w-full p-3 rounded-xl border-2 border-dashed border-purple-300 bg-purple-100/30 space-y-2.5 flex flex-col items-center relative">
+              
+              <div class="w-full flex items-center justify-between text-[10px] font-mono font-bold text-purple-800">
+                <span class="flex items-center gap-1.5">
+                  <i class="fa-solid fa-arrows-spin text-purple-600 animate-spin"></i>
+                  KHU VỰC VÒNG LẶP ACTIVE (05 &rarr; 07)
+                </span>
+                <span id="active-batch-size-tag" class="px-1.5 py-0.5 rounded bg-purple-200 text-purple-900">+556 Ảnh / Vòng</span>
+              </div>
+
+              <!-- Step 10: Phase 05 Active Mining C6 Super-Fusion -->
+              <div id="step-10" onclick="jumpToStep(10)" class="child-step-box">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800">PHASE 05</span>
+                  <span class="status-badge text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                  <i class="fa-solid fa-filter-circle-dollar text-amber-600"></i>
+                  <span class="truncate">Khai Phá C6 Super-Fusion</span>
+                </div>
+                <div class="text-[10px] text-slate-400 font-mono">Bất Định x PCA 32D</div>
+              </div>
+
+              <!-- Connector Down -->
+              <svg class="w-4 h-3 text-purple-300" overflow="visible">
+                <line x1="8" y1="0" x2="8" y2="12" stroke="currentColor" stroke-width="2" />
+                <line x1="8" y1="0" x2="8" y2="12" stroke="#7c3aed" stroke-width="2" class="glowing-dash hidden connector" id="conn-10" />
+              </svg>
+
+              <!-- Step 11: Consensus Router & Oracle Gold Labeling -->
+              <div id="step-11" onclick="jumpToStep(11)" class="child-step-box">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-purple-100 text-purple-800">HITL</span>
+                  <span class="status-badge text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                  <i class="fa-solid fa-user-check text-purple-600"></i>
+                  <span class="truncate">Consensus & Oracle HITL</span>
+                </div>
+                <div class="text-[10px] text-slate-400 font-mono">Tier 1 Gated Pre-label</div>
+              </div>
+
+              <!-- Connector Down -->
+              <svg class="w-4 h-3 text-purple-300" overflow="visible">
+                <line x1="8" y1="0" x2="8" y2="12" stroke="currentColor" stroke-width="2" />
+                <line x1="8" y1="0" x2="8" y2="12" stroke="#7c3aed" stroke-width="2" class="glowing-dash hidden connector" id="conn-11" />
+              </svg>
+
+              <!-- Step 12: Cumulative Data Merge -->
+              <div id="step-12" onclick="jumpToStep(12)" class="child-step-box">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800">MERGE</span>
+                  <span class="status-badge text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                  <i class="fa-solid fa-layer-group text-emerald-600"></i>
+                  <span class="truncate">Gộp Lũy Kế Dữ Liệu</span>
+                </div>
+                <div id="train-count-text" class="text-[10px] text-slate-400 font-mono">D_train(k) = D_prev ∪ Batch</div>
+              </div>
+
+              <!-- Connector Down -->
+              <svg class="w-4 h-3 text-purple-300" overflow="visible">
+                <line x1="8" y1="0" x2="8" y2="12" stroke="currentColor" stroke-width="2" />
+                <line x1="8" y1="0" x2="8" y2="12" stroke="#7c3aed" stroke-width="2" class="glowing-dash hidden connector" id="conn-12" />
+              </svg>
+
+              <!-- Step 13: Phase 06 Adaptive Retraining -->
+              <div id="step-13" onclick="jumpToStep(13)" class="child-step-box">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-sky-100 text-sky-700">PHASE 06</span>
+                  <span class="status-badge text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                  <i class="fa-solid fa-rotate text-sky-600"></i>
+                  <span class="truncate">Tái Huấn Luyện Warm-Start</span>
+                </div>
+                <div class="text-[10px] text-slate-400 font-mono">C_w Equalizer (8 Epochs)</div>
+              </div>
+
+              <!-- Connector Down -->
+              <svg class="w-4 h-3 text-purple-300" overflow="visible">
+                <line x1="8" y1="0" x2="8" y2="12" stroke="currentColor" stroke-width="2" />
+                <line x1="8" y1="0" x2="8" y2="12" stroke="#7c3aed" stroke-width="2" class="glowing-dash hidden connector" id="conn-13" />
+              </svg>
+
+              <!-- Step 14: Phase 07 Test Set Evaluation -->
+              <div id="step-14" onclick="jumpToStep(14)" class="child-step-box">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-sky-100 text-sky-700">PHASE 07</span>
+                  <span class="status-badge text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                  <i class="fa-solid fa-chart-line text-indigo-600"></i>
+                  <span class="truncate">Đánh Giá Trên Test Set</span>
+                </div>
+                <div id="current-map-text" class="text-[10px] text-indigo-600 font-mono font-bold">mAP@50: --%</div>
+              </div>
+
+              <!-- Connector Down -->
+              <svg class="w-4 h-3 text-purple-300" overflow="visible">
+                <line x1="8" y1="0" x2="8" y2="12" stroke="currentColor" stroke-width="2" />
+                <line x1="8" y1="0" x2="8" y2="12" stroke="#7c3aed" stroke-width="2" class="glowing-dash hidden connector" id="conn-14" />
+              </svg>
+
+              <!-- Step 15: 5-Tier Stopping Barrier Checkpoint -->
+              <div id="step-15" onclick="jumpToStep(15)" class="child-step-box border-rose-300">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-rose-100 text-rose-800">GATES</span>
+                  <span class="status-badge text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                  <i class="fa-solid fa-shield-halved text-rose-600"></i>
+                  <span class="truncate">Bộ Rào Chắn Dừng 5 Tầng</span>
+                </div>
+                <div class="text-[10px] text-slate-400 font-mono">Target Threshold: 26.85%</div>
+              </div>
+
+            </div> <!-- END ACTIVE RECURRENT LOOP BOUNDARY BOX -->
+
+            <!-- Connector Down -->
+            <svg class="w-4 h-3 text-slate-300" overflow="visible">
+              <line x1="8" y1="0" x2="8" y2="12" stroke="currentColor" stroke-width="2" />
+              <line x1="8" y1="0" x2="8" y2="12" stroke="#10b981" stroke-width="2" class="glowing-dash hidden connector" id="conn-15" />
+            </svg>
+
+            <!-- Step 16: Phase 08 Production Export & INT8 Engine -->
+            <div id="step-16" onclick="jumpToStep(16)" class="child-step-box border-emerald-300">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800">DEPLOY</span>
+                <span class="status-badge text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+              </div>
+              <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                <i class="fa-solid fa-rocket text-emerald-600"></i>
+                <span class="truncate">Xuất Bản INT8 Engine</span>
+              </div>
+              <div class="text-[10px] text-slate-400 font-mono">SHA-256 Sealed Checkpoint</div>
+            </div>
+
+          </div>
+        </section>
+      </div>
+
+    </div> <!-- END ROW 3 -->
+
+  </main>
+
+  <!-- JAVASCRIPT ENGINE & SYNTHESIZED AUDIO & FIREWORKS -->
+  <script>
+    // State Variables
+    let isAutoTourRunning = false;
+    let isAutoScrollEnabled = false;
+    let isAudioEnabled = true;
+    let tourSpeedMultiplier = 1.0;
+    let currentStepIndex = 1; // Step 1 through 16
+    let currentIteration = 0; // Iteration V0 to V5
+    let tourTimer = null;
+
+    // Simulated mAP Progression over iterations V0 -> V5
+    const mapScores = [20.23, 22.45, 24.10, 25.80, 26.90, 27.85];
+    let unlabeledPoolCount = 4394;
+    let labeledTrainCount = 500;
+
+    // Step Configuration Mapping
+    const stepConfigs = [
+      { id: "step-1",  title: "Raw Dataset Ingestion (10.000 Frames)", tier: 1 },
+      { id: "step-2",  title: "Phase 01: FastDeduplication pHash DCT", tier: 1 },
+      { id: "step-3",  title: "Kho Ảnh Sạch Unique Pool (6.994 Ảnh)", tier: 1 },
+      { id: "step-4",  title: "Phase 02: Automated 5D Data Profiling", tier: 1 },
+      { id: "step-5",  title: "Physical Data Profile Manifest JSON", tier: 1 },
+      { id: "step-6",  title: "Phase 03: Group-Aware Sequence Split", tier: 1 },
+      { id: "step-7",  title: "Phân Tách 4 Kho Dữ Liệu Độc Lập", tier: 2 },
+      { id: "step-8",  title: "Phase 04: Huấn Luyện Seed V0 Baseline", tier: 3 },
+      { id: "step-9",  title: "Model V0 Baseline Evaluation (20.23%)", tier: 3 },
+      { id: "step-10", title: "Phase 05: Active Mining C6 Super-Fusion", tier: 3 },
+      { id: "step-11", title: "Consensus Routing & Oracle Gold Labeling", tier: 3 },
+      { id: "step-12", title: "Gộp Lũy Kế Dữ Liệu Huấn Luyện D_train", tier: 3 },
+      { id: "step-13", title: "Phase 06: Tái Huấn Luyện Adaptive Warm-Start", tier: 3 },
+      { id: "step-14", title: "Phase 07: Test Set Evaluation & Metrics", tier: 3 },
+      { id: "step-15", title: "Kiểm Tra Bộ Rào Chắn Dừng 5 Tầng (Gates)", tier: 3 },
+      { id: "step-16", title: "Phase 08: Deploy Best Model INT8 Engine", tier: 3 }
+    ];
+
+    // =========================================================================
+    // DYNAMIC SVG LOOPBACK ARROW CALCULATION
+    // =========================================================================
+    function updateLoopArrow() {
+      const tier3 = document.getElementById('tier3-container');
+      const step10 = document.getElementById('step-10');
+      const step15 = document.getElementById('step-15');
+      const svg = document.getElementById('dynamic-loop-svg');
+      const path = document.getElementById('loop-curve-path');
+      const label = document.getElementById('loop-text-label');
+
+      if (!tier3 || !step10 || !step15 || !svg || !path) return;
+
+      const tRect = tier3.getBoundingClientRect();
+      const s10Rect = step10.getBoundingClientRect();
+      const s15Rect = step15.getBoundingClientRect();
+
+      // Start Point: Center-right of Step 15
+      const startX = (s15Rect.right - tRect.left);
+      const startY = (s15Rect.top - tRect.top) + (s15Rect.height / 2);
+
+      // End Point: Center-right of Step 10
+      const endX = (s10Rect.right - tRect.left);
+      const endY = (s10Rect.top - tRect.top) + (s10Rect.height / 2);
+
+      // Arc Control Offset (curves 55px to the right of the rightmost step)
+      const curveX = Math.max(startX, endX) + 55;
+
+      // Construct Smooth Cubic Bezier Path
+      const d = `M ${startX} ${startY} C ${curveX} ${startY}, ${curveX} ${endY}, ${endX + 6} ${endY}`;
+      path.setAttribute('d', d);
+
+      // Position Text Label along the vertical arc
+      if (label) {
+        const midY = (startY + endY) / 2;
+        label.setAttribute('x', (curveX + 8).toString());
+        label.setAttribute('y', midY.toString());
+        label.setAttribute('transform', `rotate(90, ${curveX + 8}, ${midY})`);
+      }
+
+      // Visibility Control during active iterations (V1 -> V5)
+      if (currentIteration >= 1 && currentStepIndex >= 10 && currentStepIndex <= 15) {
+        svg.style.opacity = '1';
+      } else {
+        svg.style.opacity = '0';
+      }
+    }
+
+    window.addEventListener('resize', updateLoopArrow);
+
+    // =========================================================================
+    // SYNTHESIZED ZERO-DEPENDENCY AUDIO ENGINE (VANILLA WEB AUDIO API)
+    // =========================================================================
+    let audioCtx = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioContextClass) {
+          audioCtx = new AudioContextClass();
+        }
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function toggleAudio() {
+      isAudioEnabled = !isAudioEnabled;
+      const btn = document.getElementById('btn-audio');
+      const icon = document.getElementById('icon-audio');
+      if (isAudioEnabled) {
+        btn.className = "px-2.5 py-1.5 rounded-lg bg-amber-50 text-amber-700 border border-amber-300 text-[11px] font-bold flex items-center gap-1 transition";
+        icon.className = "fa-solid fa-volume-high";
+        btn.querySelector('span').innerText = "Âm Thanh: BẬT";
+        playStepSound();
+      } else {
+        btn.className = "px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-500 border border-slate-200 text-[11px] font-bold flex items-center gap-1 transition";
+        icon.className = "fa-solid fa-volume-xmark";
+        btn.querySelector('span').innerText = "Âm Thanh: TẮT";
+      }
+    }
+
+    // Step Progress Sound (Soft Tick / Pop)
+    function playStepSound() {
+      if (!isAudioEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(440, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.08);
+
+        gain.gain.setValueAtTime(0.12, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start();
+        osc.stop(ctx.currentTime + 0.08);
+      } catch (e) {}
+    }
+
+    // Tier Transition Chime
+    function playTierSound() {
+      if (!isAudioEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+
+        [523.25, 659.25, 783.99].forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, ctx.currentTime + (idx * 0.06));
+
+          gain.gain.setValueAtTime(0.15, ctx.currentTime + (idx * 0.06));
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + (idx * 0.06) + 0.25);
+
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+
+          osc.start(ctx.currentTime + (idx * 0.06));
+          osc.stop(ctx.currentTime + (idx * 0.06) + 0.25);
+        });
+      } catch (e) {}
+    }
+
+    // Loop Iteration Chime
+    function playLoopChime() {
+      if (!isAudioEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+
+        [392.00, 587.33, 880.00].forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, ctx.currentTime + (idx * 0.08));
+
+          gain.gain.setValueAtTime(0.18, ctx.currentTime + (idx * 0.08));
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + (idx * 0.08) + 0.35);
+
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+
+          osc.start(ctx.currentTime + (idx * 0.08));
+          osc.stop(ctx.currentTime + (idx * 0.08) + 0.35);
+        });
+      } catch (e) {}
+    }
+
+    // Final Victory Fanfare Sound
+    function playVictoryFanfare() {
+      if (!isAudioEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+
+        const notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, ctx.currentTime + (idx * 0.12));
+
+          gain.gain.setValueAtTime(0.25, ctx.currentTime + (idx * 0.12));
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + (idx * 0.12) + 0.6);
+
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+
+          osc.start(ctx.currentTime + (idx * 0.12));
+          osc.stop(ctx.currentTime + (idx * 0.12) + 0.6);
+        });
+      } catch (e) {}
+    }
+
+    // =========================================================================
+    // CANVAS FIREWORKS CELEBRATION ENGINE
+    // =========================================================================
+    const canvas = document.getElementById('fireworks-canvas');
+    const ctxCanvas = canvas.getContext('2d');
+    let fireworks = [];
+    let particles = [];
+    let fireworksAnimId = null;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Firework {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height;
+        this.targetY = Math.random() * (canvas.height * 0.4) + (canvas.height * 0.1);
+        this.speed = Math.random() * 3 + 7;
+        this.angle = Math.PI / 2 + (Math.random() * 0.2 - 0.1);
+        this.vx = Math.cos(this.angle) * this.speed;
+        this.vy = -Math.sin(this.angle) * this.speed;
+        this.color = `hsl(${Math.random() * 360}, 100%, 60%)`;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.vy < 0 && this.y <= this.targetY) {
+          this.explode();
+          return false;
+        }
+        return true;
+      }
+
+      draw() {
+        ctxCanvas.beginPath();
+        ctxCanvas.arc(this.x, this.y, 3, 0, Math.PI * 2);
+        ctxCanvas.fillStyle = this.color;
+        ctxCanvas.fill();
+      }
+
+      explode() {
+        const particleCount = 45;
+        for (let i = 0; i < particleCount; i++) {
+          particles.push(new Particle(this.x, this.y, this.color));
+        }
+      }
+    }
+
+    class Particle {
+      constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.angle = Math.random() * Math.PI * 2;
+        this.speed = Math.random() * 5 + 1;
+        this.vx = Math.cos(this.angle) * this.speed;
+        this.vy = Math.sin(this.angle) * this.speed;
+        this.gravity = 0.08;
+        this.alpha = 1;
+        this.decay = Math.random() * 0.02 + 0.015;
+        this.color = color;
+      }
+
+      update() {
+        this.vx *= 0.98;
+        this.vy *= 0.98;
+        this.vy += this.gravity;
+        this.x += this.vx;
+        this.y += this.vy;
+        this.alpha -= this.decay;
+        return this.alpha > 0;
+      }
+
+      draw() {
+        ctxCanvas.save();
+        ctxCanvas.globalAlpha = this.alpha;
+        ctxCanvas.beginPath();
+        ctxCanvas.arc(this.x, this.y, 2.5, 0, Math.PI * 2);
+        ctxCanvas.fillStyle = this.color;
+        ctxCanvas.fill();
+        ctxCanvas.restore();
+      }
+    }
+
+    function animateFireworks() {
+      ctxCanvas.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (Math.random() < 0.15 && fireworks.length < 10) {
+        fireworks.push(new Firework());
+      }
+
+      fireworks = fireworks.filter(f => {
+        const alive = f.update();
+        if (alive) f.draw();
+        return alive;
+      });
+
+      particles = particles.filter(p => {
+        const alive = p.update();
+        if (alive) p.draw();
+        return alive;
+      });
+
+      fireworksAnimId = requestAnimationFrame(animateFireworks);
+    }
+
+    function startFireworks() {
+      if (!fireworksAnimId) {
+        animateFireworks();
+        setTimeout(() => {
+          stopFireworks();
+        }, 8000);
+      }
+    }
+
+    function stopFireworks() {
+      if (fireworksAnimId) {
+        cancelAnimationFrame(fireworksAnimId);
+        fireworksAnimId = null;
+        ctxCanvas.clearRect(0, 0, canvas.width, canvas.height);
+        fireworks = [];
+        particles = [];
+      }
+    }
+
+    function triggerVictoryCelebration() {
+      playVictoryFanfare();
+      startFireworks();
+
+      const modal = document.getElementById('victory-modal');
+      const card = document.getElementById('victory-card');
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+        card.classList.remove('scale-90');
+      }, 50);
+    }
+
+    function closeVictoryModal() {
+      const modal = document.getElementById('victory-modal');
+      const card = document.getElementById('victory-card');
+      modal.classList.add('opacity-0');
+      card.classList.add('scale-90');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        stopFireworks();
+      }, 500);
+    }
+
+    // =========================================================================
+    // PIPELINE EXECUTION ENGINE LOGIC
+    // =========================================================================
+
+    function toggleAutoScroll() {
+      isAutoScrollEnabled = !isAutoScrollEnabled;
+      const btn = document.getElementById('btn-autoscroll');
+      if (isAutoScrollEnabled) {
+        btn.className = "px-2.5 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-300 text-[11px] font-bold flex items-center gap-1 transition";
+        btn.innerHTML = `<i class="fa-solid fa-arrows-up-to-line"></i><span>Auto-Scroll</span>`;
+      } else {
+        btn.className = "px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-500 border border-slate-200 text-[11px] font-bold flex items-center gap-1 transition";
+        btn.innerHTML = `<i class="fa-solid fa-arrows-up-to-line"></i><span>Auto-Scroll: OFF</span>`;
+      }
+    }
+
+    function setSpeed(speed) {
+      tourSpeedMultiplier = speed;
+      document.getElementById('speed-05').className = speed === 0.5 ? "px-1.5 py-0.5 rounded bg-sky-600 text-white transition" : "px-1.5 py-0.5 rounded text-slate-500 transition";
+      document.getElementById('speed-10').className = speed === 1.0 ? "px-1.5 py-0.5 rounded bg-sky-600 text-white transition" : "px-1.5 py-0.5 rounded text-slate-500 transition";
+      document.getElementById('speed-20').className = speed === 2.0 ? "px-1.5 py-0.5 rounded bg-sky-600 text-white transition" : "px-1.5 py-0.5 rounded text-slate-500 transition";
+
+      if (isAutoTourRunning) restartTourTimer();
+    }
+
+    function toggleAutoTour() {
+      isAutoTourRunning = !isAutoTourRunning;
+      const btnPlay = document.getElementById('btn-play');
+      const iconPlay = document.getElementById('icon-play');
+      const textPlay = document.getElementById('text-play');
+
+      if (isAutoTourRunning) {
+        iconPlay.className = "fa-solid fa-pause";
+        textPlay.innerText = "Dừng";
+        btnPlay.className = btnPlay.className.replace('bg-sky-600 hover:bg-sky-500', 'bg-amber-600 hover:bg-amber-500');
+        activateStep(currentStepIndex);
+        restartTourTimer();
+      } else {
+        clearInterval(tourTimer);
+        iconPlay.className = "fa-solid fa-play";
+        textPlay.innerText = "Auto Tour";
+        btnPlay.className = btnPlay.className.replace('bg-amber-600 hover:bg-amber-500', 'bg-sky-600 hover:bg-sky-500');
+      }
+    }
+
+    function restartTourTimer() {
+      clearInterval(tourTimer);
+      const intervalMs = 1700 / tourSpeedMultiplier;
+      tourTimer = setInterval(() => {
+        nextStep();
+      }, intervalMs);
+    }
+
+    function nextStep() {
+      const prevTier = stepConfigs[currentStepIndex - 1].tier;
+
+      if (currentStepIndex < 15) {
+        currentStepIndex++;
+      } else if (currentStepIndex === 15) {
+        // Gates decision step
+        if (currentIteration < 5) {
+          // Loopback to Step 10
+          currentIteration++;
+          updateDataCounts();
+          currentStepIndex = 10; // Active Mining
+          playLoopChime();
+        } else {
+          // Victory confirmed -> Proceed to Deploy (Step 16)
+          currentStepIndex = 16;
+          if (isAutoTourRunning) toggleAutoTour();
+          triggerVictoryCelebration();
+        }
+      }
+
+      const nextTier = stepConfigs[currentStepIndex - 1].tier;
+      if (nextTier !== prevTier && currentStepIndex !== 10) {
+        playTierSound();
+      } else if (currentStepIndex !== 10) {
+        playStepSound();
+      }
+
+      activateStep(currentStepIndex);
+    }
+
+    function prevStep() {
+      if (currentStepIndex > 1) {
+        currentStepIndex--;
+        activateStep(currentStepIndex);
+        playStepSound();
+      }
+    }
+
+    function jumpToStep(idx) {
+      currentStepIndex = idx;
+      activateStep(idx);
+      playStepSound();
+    }
+
+    function resetPipeline() {
+      if (isAutoTourRunning) toggleAutoTour();
+      currentStepIndex = 1;
+      currentIteration = 0;
+      unlabeledPoolCount = 4394;
+      labeledTrainCount = 500;
+      
+      document.getElementById('pool-count-text').innerText = '4.394 Ảnh';
+      document.getElementById('train-count-text').innerText = 'D_train(k) = D_prev ∪ Batch';
+      document.getElementById('current-map-text').innerText = 'mAP@50: --%';
+      
+      activateStep(1);
+    }
+
+    function activateStep(stepIdx) {
+      currentStepIndex = stepIdx;
+      const config = stepConfigs[stepIdx - 1];
+
+      // Update Telemetry Bar
+      document.getElementById('active-step-title').innerText = config.title;
+      document.getElementById('iter-badge').innerText = currentIteration === 0 ? "V0 Baseline" : `Vòng Lặp V${currentIteration}`;
+      document.getElementById('active-loop-iter-tag').innerText = currentIteration === 0 ? "V0 BASELINE" : `VÒNG LẶP V${currentIteration}`;
+
+      const progressPct = Math.round((stepIdx / 16) * 100);
+      document.getElementById('tour-progress-bar').style.width = `${progressPct}%`;
+
+      // Update Dynamic Loop Arrow Calculation
+      setTimeout(updateLoopArrow, 20);
+
+      // Update Step Box Classes & Status Badges
+      stepConfigs.forEach((cfg, idx) => {
+        const box = document.getElementById(cfg.id);
+        if (!box) return;
+
+        const badge = box.querySelector('.status-badge');
+        box.classList.remove('step-running', 'step-completed');
+
+        if (idx + 1 < stepIdx) {
+          // Completed State
+          box.classList.add('step-completed');
+          if (badge) {
+            badge.innerText = "✓ XONG";
+            badge.className = "status-badge text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700 border border-emerald-300";
+          }
+        } else if (idx + 1 === stepIdx) {
+          // Running State
+          box.classList.add('step-running');
+          if (badge) {
+            badge.innerText = "ĐANG CHẠY";
+            badge.className = "status-badge text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-sky-100 text-sky-700 border border-sky-400 animate-pulse";
+          }
+        } else {
+          // Pending State
+          if (badge) {
+            badge.innerText = "CHỜ";
+            badge.className = "status-badge text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500";
+          }
+        }
+      });
+
+      // Update Dynamic Connectors
+      for (let c = 1; c <= 15; c++) {
+        const connLine = document.getElementById(`conn-${c}`);
+        if (connLine) {
+          if (c < stepIdx) {
+            connLine.classList.remove('hidden');
+          } else {
+            connLine.classList.add('hidden');
+          }
+        }
+      }
+
+      // Dynamic mAP Text Update when at Step 14
+      if (stepIdx === 14 || stepIdx === 15) {
+        const mapVal = mapScores[currentIteration];
+        document.getElementById('current-map-text').innerText = `mAP@50: ${mapVal}%`;
+      }
+
+      // Smooth Viewport Scrolling (chỉ cuộn khi người dùng chủ động BẬT và không làm giật cửa sổ cha)
+      if (isAutoScrollEnabled) {
+        const activeEl = document.getElementById(config.id);
+        if (activeEl) {
+          const rect = activeEl.getBoundingClientRect();
+          const targetY = window.pageYOffset + rect.top - 120;
+          window.scrollTo({
+            top: targetY,
+            behavior: 'smooth'
+          });
+        }
+      }
+    }
+
+    function updateDataCounts() {
+      if (currentIteration > 0 && currentIteration <= 5) {
+        unlabeledPoolCount = Math.max(1614, 4394 - (currentIteration * 556));
+        labeledTrainCount = 500 + (currentIteration * 556);
+
+        document.getElementById('pool-count-text').innerText = `${unlabeledPoolCount.toLocaleString()} Ảnh`;
+        document.getElementById('train-count-text').innerText = `${labeledTrainCount.toLocaleString()} Ảnh (V${currentIteration})`;
+      }
+    }
+
+    function notifyParentOfResize() {
+      if (window.parent && window.parent !== window) {
+        const h = Math.max(
+          document.body.scrollHeight,
+          document.documentElement.scrollHeight
+        );
+        window.parent.postMessage({ type: 'PIPELINE_RESIZE', height: h }, '*');
+      }
+    }
+
+    // Window Initialization
+    window.onload = function() {
+      activateStep(1);
+      setTimeout(updateLoopArrow, 100);
+      setTimeout(notifyParentOfResize, 200);
+    };
+    window.addEventListener('resize', notifyParentOfResize);
+  </script>
+</body>
+</html>

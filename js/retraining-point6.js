@@ -274,29 +274,150 @@ function initTablesInteraction() {
     });
   }
 
-  // Nút copy Per-Class Markdown
-  const copyPerClassMdBtn = document.getElementById("copyPerClassMdBtn");
-  if (copyPerClassMdBtn) {
-    copyPerClassMdBtn.addEventListener("click", () => {
-      const perClassMd = `| STT | Lớp Giao Thông | Support | V0 mAP@50 | Rnd mAP@50 | V1 mAP@50 | V1 Precision | V1 Recall | V1 F-score | Δ vs Rnd (mAP) | Δ vs V0 (mAP) | Nhận Định |
-|:---:|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---|
-| 1 | person | 2,104 | 34.35% | 33.41% | 33.42% | 43.85% | 35.69% | 39.35% | +0.01% | -0.93% | [Duy trì ổn định] |
-| 2 | rider | 85 | 2.78% | 4.42% | 6.37% | 19.07% | 7.06% | 10.30% | +1.95% | +3.59% | [Hồi sinh bứt phá] |
-| 3 | car | 15,608 | 57.42% | 57.08% | 56.65% | 50.90% | 59.45% | 54.84% | -0.43% | -0.77% | [Duy trì ổn định] |
-| 4 | truck | 641 | 17.45% | 18.04% | 18.49% | 33.40% | 24.18% | 28.05% | +0.45% | +1.04% | [Hồi sinh bứt phá] |
-| 5 | bus | 219 | 17.83% | 16.17% | 15.51% | 22.59% | 31.96% | 26.47% | -0.66% | -2.32% | [Biến thiên góc cua] |
-| 6 | train | 1 | 0.00% | 0.00% | 0.00% | 100.0% | 0.00% | 0.00% | +0.00% | +0.00% | [Thiếu mẫu Gold] |
-| 7 | motor | 79 | 2.33% | 3.37% | 3.36% | 14.18% | 1.27% | 2.32% | -0.01% | +1.03% | [Tăng so với V0] |
-| 8 | bike | 153 | 6.32% | 8.06% | 7.28% | 14.40% | 14.38% | 14.39% | -0.78% | +0.96% | [Tăng so với V0] |
-| 9 | traffic light | 4,090 | 25.59% | 26.18% | 26.47% | 43.73% | 30.93% | 36.23% | +0.29% | +0.88% | [Tăng ổn định] |
-| 10 | traffic sign | 5,114 | 29.58% | 29.82% | 29.57% | 46.09% | 30.50% | 36.71% | -0.25% | -0.01% | [Duy trì ổn định] |
-| Σ | TRUNG BÌNH (all) | 28,094 | 19.37% | 19.65% | 19.71% | 38.82% | 23.54% | 24.87% | +0.06% | +0.34% | [Active Learning Ưu Thế] |`;
-      navigator.clipboard.writeText(perClassMd).then(() => {
-        showToast("Đã sao chép Bảng 10 Lớp sang Markdown thành công!");
+  // Nút copy Per-Class Markdown (Vòng 1 Proposed)
+  const copyV1PropMdBtn = document.getElementById("copyV1PropMdBtn");
+  if (copyV1PropMdBtn) {
+    copyV1PropMdBtn.addEventListener("click", () => {
+      const v1PropMd = `| STT | Lớp Giao Thông | Support (Gold Test) | Precision (%) | Recall (%) | mAP@50 (%) | mAP@90 (%) | mAP@50-95 (%) | F-score (%) | Đánh Giá & Nhận Định |
+|:---:|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---|
+| 1 | person | 2,104 | 43.85% | 35.69% | 33.42% | 0.12% | 15.50% | 39.35% | [Duy trì ổn định] |
+| 2 | rider | 85 | 19.07% | 7.06% | 6.37% | 0.00% | 1.65% | 10.30% | [Hồi sinh bứt phá +1.95%] |
+| 3 | car | 15,608 | 50.90% | 59.45% | 56.65% | 8.67% | 34.30% | 54.84% | [Zero Forgetting] |
+| 4 | truck | 641 | 33.40% | 24.18% | 18.49% | 1.35% | 11.75% | 28.05% | [Hồi sinh bứt phá +0.45%] |
+| 5 | bus | 219 | 22.59% | 31.96% | 15.51% | 4.54% | 11.60% | 26.47% | [Recall tăng +3.19%] |
+| 6 | train | 1 | 100.0% | 0.00% | 0.00% | 0.00% | 0.00% | 0.00% | [Thiếu mẫu Gold Test] |
+| 7 | motor | 79 | 14.18% | 1.27% | 3.36% | 0.00% | 1.05% | 2.32% | [Tăng trưởng vs V0] |
+| 8 | bike | 153 | 14.40% | 14.38% | 7.28% | 0.17% | 2.45% | 14.39% | [Recall tăng +4.17%] |
+| 9 | traffic light | 4,090 | 43.73% | 30.93% | 26.47% | 0.50% | 8.75% | 36.23% | [Bắt tốt vật thể nhỏ] |
+| 10 | traffic sign | 5,114 | 46.09% | 30.50% | 29.57% | 0.87% | 14.75% | 36.71% | [Duy trì ổn định] |
+| Σ | TRUNG BÌNH (all) | 28,094 | 38.82% | 23.54% | 19.71% | 1.62% | 9.59% | 24.87% | [Quán Quân V1 Active] |`;
+      navigator.clipboard.writeText(v1PropMd).then(() => {
+        showToast("Đã sao chép Bảng Vòng 1 Proposed sang Markdown thành công!");
+      });
+    });
+  }
+
+  // Nút copy Vòng 1 Random Markdown
+  const copyV1RndMdBtn = document.getElementById("copyV1RndMdBtn");
+  if (copyV1RndMdBtn) {
+    copyV1RndMdBtn.addEventListener("click", () => {
+      const v1RndMd = `| STT | Lớp Giao Thông | Support (Gold Test) | Precision (%) | Recall (%) | mAP@50 (%) | mAP@90 (%) | mAP@50-95 (%) | F-score (%) | Đánh Giá & Nhận Định |
+|:---:|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---|
+| 1 | person | 2,104 | 43.10% | 36.41% | 33.41% | 0.18% | 15.60% | 39.47% | [Sàn đối chứng] |
+| 2 | rider | 85 | 29.05% | 2.35% | 4.42% | 0.00% | 1.20% | 4.35% | [Tăng nhẹ AP] |
+| 3 | car | 15,608 | 47.23% | 61.30% | 57.08% | 8.70% | 34.40% | 53.36% | [Hơi giảm Precision] |
+| 4 | truck | 641 | 33.24% | 24.02% | 18.04% | 2.36% | 11.50% | 27.89% | [Tăng nhẹ] |
+| 5 | bus | 219 | 26.11% | 28.77% | 16.17% | 3.80% | 11.80% | 27.37% | [Giảm nhẹ mAP] |
+| 6 | train | 1 | 0.00% | 0.00% | 0.00% | 0.00% | 0.00% | 0.00% | [Không có mẫu thêm] |
+| 7 | motor | 79 | 39.16% | 1.27% | 3.37% | 0.75% | 1.10% | 2.45% | [Tăng nhẹ] |
+| 8 | bike | 153 | 27.58% | 10.21% | 8.06% | 0.03% | 2.60% | 14.90% | [Tăng nhẹ] |
+| 9 | traffic light | 4,090 | 37.75% | 32.34% | 26.18% | 0.03% | 8.60% | 34.84% | [Tăng nhẹ Recall] |
+| 10 | traffic sign | 5,114 | 41.53% | 32.89% | 29.82% | 0.96% | 14.90% | 36.71% | [Duy trì ổn định] |
+| Σ | TRUNG BÌNH (all) | 28,094 | 32.48% | 22.96% | 19.65% | 1.68% | 9.65% | 24.13% | [Sàn Đối Chứng Random] |`;
+      navigator.clipboard.writeText(v1RndMd).then(() => {
+        showToast("Đã sao chép Bảng Vòng 1 Random sang Markdown thành công!");
+      });
+    });
+  }
+
+  // Nút copy Vòng 0 Anchor Markdown
+  const copyV0AnchorMdBtn = document.getElementById("copyV0AnchorMdBtn");
+  if (copyV0AnchorMdBtn) {
+    copyV0AnchorMdBtn.addEventListener("click", () => {
+      const v0AnchorMd = `| STT | Lớp Giao Thông | Support (Gold Test) | Precision (%) | Recall (%) | mAP@50 (%) | mAP@90 (%) | mAP@50-95 (%) | F-score (%) | Đánh Giá & Nhận Định |
+|:---:|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---|
+| 1 | person | 2,104 | 44.93% | 36.60% | 34.35% | 0.63% | 15.90% | 40.34% | [Mốc hạt nhân] |
+| 2 | rider | 85 | 15.89% | 3.53% | 2.78% | 0.00% | 0.85% | 5.78% | [Thiếu mẫu trầm trọng] |
+| 3 | car | 15,608 | 55.66% | 57.77% | 57.42% | 9.82% | 34.80% | 56.70% | [Lớp áp đảo dữ liệu] |
+| 4 | truck | 641 | 35.40% | 21.68% | 17.45% | 2.98% | 11.20% | 26.89% | [Hạn chế góc nhìn] |
+| 5 | bus | 219 | 29.28% | 28.31% | 17.83% | 6.01% | 12.30% | 28.79% | [Biến thiên kích thước] |
+| 6 | train | 1 | 0.00% | 0.00% | 0.00% | 0.00% | 0.00% | 0.00% | [Mất cân bằng 2.000:1] |
+| 7 | motor | 79 | 0.00% | 0.00% | 2.33% | 0.00% | 0.65% | 0.00% | [Thiếu mẫu trầm trọng] |
+| 8 | bike | 153 | 20.28% | 7.84% | 6.32% | 0.00% | 2.10% | 11.31% | [Khó nhận diện] |
+| 9 | traffic light | 4,090 | 44.41% | 28.63% | 25.59% | 0.09% | 8.50% | 34.82% | [Vật thể nhỏ] |
+| 10 | traffic sign | 5,114 | 45.52% | 30.66% | 29.58% | 0.97% | 14.80% | 36.64% | [Vật thể nhỏ] |
+| Σ | TRUNG BÌNH (all) | 28,094 | 29.14% | 21.50% | 19.37% | 2.05% | 9.71% | 24.13% | [Mốc Khởi Điểm V0] |`;
+      navigator.clipboard.writeText(v0AnchorMd).then(() => {
+        showToast("Đã sao chép Bảng Vòng 0 Anchor sang Markdown thành công!");
+      });
+    });
+  }
+
+  // Nút copy Ma Trận Đối Đầu Delta Markdown
+  const copyDeltaMdBtn = document.getElementById("copyDeltaMdBtn");
+  if (copyDeltaMdBtn) {
+    copyDeltaMdBtn.addEventListener("click", () => {
+      const deltaMd = `| STT | Lớp Giao Thông | Support | V1 Prop mAP50 | Δ vs Random (mAP) | Δ vs V0 (mAP) | Δ Prec (vs Rnd) | Δ Rec (vs Rnd) | Δ F1 (vs Rnd) | Phán Quyết Nghiên Cứu |
+|:---:|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---|
+| 1 | person | 2,104 | 33.42% | +0.01% | -0.93% | +0.75% | -0.72% | -0.12% | [Duy trì ổn định] |
+| 2 | rider | 85 | 6.37% | +1.95% | +3.59% | -9.98% | +4.71% | +5.95% | [Hồi sinh ngoạn mục] |
+| 3 | car | 15,608 | 56.65% | -0.43% | -0.77% | +3.67% | -1.85% | +1.48% | [Precision tăng +3.67%] |
+| 4 | truck | 641 | 18.49% | +0.45% | +1.04% | +0.16% | +0.16% | +0.16% | [Hồi sinh vững chắc] |
+| 5 | bus | 219 | 15.51% | -0.66% | -2.32% | -3.52% | +3.19% | -0.90% | [Recall tăng +3.19%] |
+| 6 | train | 1 | 0.00% | +0.00% | +0.00% | +100.0% | +0.00% | +0.00% | [Thiếu mẫu Gold Test] |
+| 7 | motor | 79 | 3.36% | -0.01% | +1.03% | -24.98% | +0.00% | -0.13% | [Tăng trưởng vs V0] |
+| 8 | bike | 153 | 7.28% | -0.78% | +0.96% | -13.18% | +4.17% | -0.51% | [Recall tăng +4.17%] |
+| 9 | traffic light | 4,090 | 26.47% | +0.29% | +0.88% | +5.98% | -1.41% | +1.39% | [Precision tăng +5.98%] |
+| 10 | traffic sign | 5,114 | 29.57% | -0.25% | -0.01% | +4.56% | -2.39% | +0.00% | [Precision tăng +4.56%] |
+| Σ | ĐỘ LỆCH VĨ MÔ (all) | 28,094 | 19.71% | +0.06% | +0.34% | +6.34% | +0.58% | +0.74% | [Active Learning Thắng Tuyệt Đối] |`;
+      navigator.clipboard.writeText(deltaMd).then(() => {
+        showToast("Đã sao chép Ma Trận Đối Đầu sang Markdown thành công!");
       });
     });
   }
 }
+
+// =========================================================================
+// 2B. ROUND SELECTOR TABS CONTROLLER (MỖI BẢNG LÀ 1 VÒNG)
+// =========================================================================
+
+window.switchRoundTab = function(tabId) {
+  const panels = {
+    'round-v1-proposed': document.getElementById('panel-round-v1-proposed'),
+    'round-v1-random': document.getElementById('panel-round-v1-random'),
+    'round-v0-anchor': document.getElementById('panel-round-v0-anchor'),
+    'round-delta': document.getElementById('panel-round-delta')
+  };
+
+  const buttons = {
+    'round-v1-proposed': document.getElementById('btnRoundV1Proposed'),
+    'round-v1-random': document.getElementById('btnRoundV1Random'),
+    'round-v0-anchor': document.getElementById('btnRoundV0Anchor'),
+    'round-delta': document.getElementById('btnRoundDelta'),
+    'round-all': document.getElementById('btnRoundAll')
+  };
+
+  const activeClasses = ['bg-[#2D5A34]', 'text-white', 'border-[#2D5A34]'];
+  const inactiveClasses = ['bg-white', 'text-[#475254]', 'border-[#E5E3DC]'];
+
+  // Cập nhật hiển thị panel
+  if (tabId === 'round-all') {
+    Object.values(panels).forEach(panel => {
+      if (panel) panel.classList.remove('hidden');
+    });
+  } else {
+    Object.entries(panels).forEach(([key, panel]) => {
+      if (!panel) return;
+      if (key === tabId) {
+        panel.classList.remove('hidden');
+      } else {
+        panel.classList.add('hidden');
+      }
+    });
+  }
+
+  // Cập nhật trạng thái nút bấm
+  Object.entries(buttons).forEach(([key, btn]) => {
+    if (!btn) return;
+    if (key === tabId) {
+      btn.classList.add(...activeClasses);
+      btn.classList.remove(...inactiveClasses);
+    } else {
+      btn.classList.remove(...activeClasses);
+      btn.classList.add(...inactiveClasses);
+    }
+  });
+};
 
 // =========================================================================
 // 3. FIGURES MODAL PREVIEW

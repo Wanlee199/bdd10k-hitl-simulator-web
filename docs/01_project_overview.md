@@ -4,6 +4,7 @@
 > **Dự án**: BDD10K Active Learning Lab (Hệ Thống Tự Động Hóa Dữ Liệu Thị Giác Xe Tự Hành HITL)  
 > **Nguồn thực nghiệm gốc**: `/Users/huynh/orca/workspaces/BuildPhase/tang`  
 > **Đối tượng độc giả**: Nhà nghiên cứu, Kỹ sư Thị giác máy tính (CV) và Kiến trúc sư MLOps  
+> **Tác giả / Nhóm nghiên cứu**: T018  
 > **Trạng thái**: Bản tài liệu hoàn chỉnh / Đồng bộ 100% với số liệu thực nghiệm  
 
 ---

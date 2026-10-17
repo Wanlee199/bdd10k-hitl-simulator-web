@@ -29,7 +29,7 @@ const CANDIDATES_DATA = [
     "human_label": "Near-duplicate",
     "verification_status": "verified_by_human",
     "notes": "Xe dừng bãi đỗ, có thêm 1 người đi bộ bước vào khung hình (Ảnh A có 16 obj, Ảnh B có 15 obj). Giữ ảnh có người.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 2,
@@ -51,7 +51,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Xe đang di chuyển, góc quay khác.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 3,
@@ -76,7 +76,7 @@ const CANDIDATES_DATA = [
     "human_label": "Duplicate",
     "verification_status": "verified_by_human",
     "notes": "Dừng đèn đỏ ban ngày, bất biến 100% từng pixel (HD=0).",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 4,
@@ -98,7 +98,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Hai khung hình khác biệt hoàn toàn.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 5,
@@ -120,7 +120,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Xe đang di chuyển.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 6,
@@ -142,7 +142,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Hai khung hình khác biệt.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 7,
@@ -164,7 +164,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Hai khung hình khác biệt.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 8,
@@ -189,7 +189,7 @@ const CANDIDATES_DATA = [
     "human_label": "Near-duplicate",
     "verification_status": "verified_by_human",
     "notes": "Xe dừng, xuất hiện thêm 1 người đi bộ thứ hai (từ 7 lên 8 obj). Giữ ảnh 8 obj.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 9,
@@ -212,7 +212,7 @@ const CANDIDATES_DATA = [
     "human_label": "Near-duplicate",
     "verification_status": "verified_by_human",
     "notes": "Xe dừng, xe phía trước nhích nhẹ 1 chút xíu.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 10,
@@ -234,7 +234,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Khác nhau hoàn toàn.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 11,
@@ -256,7 +256,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Khác nhau hoàn toàn.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 12,
@@ -278,7 +278,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Khác nhau hoàn toàn.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 13,
@@ -300,7 +300,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Khác nhau hoàn toàn.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 14,
@@ -322,7 +322,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Khác nhau hoàn toàn.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 15,
@@ -347,7 +347,7 @@ const CANDIDATES_DATA = [
     "human_label": "Duplicate",
     "verification_status": "verified_by_human",
     "notes": "Xe dừng trước vạch giao lộ ban ngày, trùng tuyệt đối HD=0.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 16,
@@ -369,7 +369,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Khác nhau hoàn toàn.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 17,
@@ -391,7 +391,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "ResNet50 báo nhầm: Tương đồng ngữ nghĩa nhưng xe đã chạy sang đoạn đường mới.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 18,
@@ -413,7 +413,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Khác nhau hoàn toàn.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 19,
@@ -435,7 +435,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "ResNet50 báo nhầm: Xe đã rẽ qua giao lộ khác.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 20,
@@ -457,7 +457,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Đường hầm tối, khung hình khác nhau.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 21,
@@ -479,7 +479,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Đường hầm tối, khung hình khác nhau.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 22,
@@ -501,7 +501,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Đường hầm tối, khung hình khác nhau.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 23,
@@ -523,7 +523,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Đường hầm tối, khung hình khác nhau.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 24,
@@ -545,7 +545,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Đường hầm tối, khung hình khác nhau.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 25,
@@ -569,7 +569,7 @@ const CANDIDATES_DATA = [
     "human_label": "Duplicate",
     "verification_status": "verified_by_human",
     "notes": "Xe dừng trong hầm, HD=2, góc nhìn gần như bất biến.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 26,
@@ -591,7 +591,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Đường hầm tối, khung hình khác nhau.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 27,
@@ -613,7 +613,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Đường hầm tối, khung hình khác nhau.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 28,
@@ -635,7 +635,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Đường hầm tối, khung hình khác nhau.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 29,
@@ -657,7 +657,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Đường hầm tối, khung hình khác nhau.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 30,
@@ -679,7 +679,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Đường hầm tối, khung hình khác nhau.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 31,
@@ -701,7 +701,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Đường hầm tối, khung hình khác nhau.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 32,
@@ -723,7 +723,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Đường hầm tối, khung hình khác nhau.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 33,
@@ -745,7 +745,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Đường hầm tối, khung hình khác nhau.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   },
   {
     "pair_id": 34,
@@ -767,7 +767,7 @@ const CANDIDATES_DATA = [
     "human_label": "Not duplicate",
     "verification_status": "verified_by_human",
     "notes": "aHash báo nhầm: Đường hầm tối, khung hình khác nhau.",
-    "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+    "verified_by": "Human Expert (T018)"
   }
 ];
 

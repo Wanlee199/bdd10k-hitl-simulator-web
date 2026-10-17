@@ -4,7 +4,7 @@
   "total_audited_samples": 100,
   "blur_sample_count": 50,
   "sharp_sample_count": 50,
-  "verified_by": "Human Expert (Nguyen Xuan Huynh)",
+  "verified_by": "Human Expert (T018)",
   "timestamp": "2026-10-16 23:01:38",
   "candidates": [
     {
@@ -18,7 +18,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 2,
@@ -31,7 +31,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 3,
@@ -44,7 +44,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 4,
@@ -57,7 +57,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 5,
@@ -70,7 +70,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 6,
@@ -83,7 +83,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 7,
@@ -96,7 +96,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 8,
@@ -109,7 +109,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 9,
@@ -122,7 +122,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 10,
@@ -135,7 +135,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 11,
@@ -148,7 +148,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Mờ nhòe rõ nét do rung lắc chuyển động xe di chuyển (motion smearing confirmed by Human Expert)",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 12,
@@ -161,7 +161,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Mờ nhòe rõ nét do rung lắc chuyển động xe di chuyển (motion smearing confirmed by Human Expert)",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 13,
@@ -174,7 +174,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 14,
@@ -187,7 +187,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 15,
@@ -200,7 +200,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 16,
@@ -213,7 +213,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 17,
@@ -226,7 +226,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 18,
@@ -239,7 +239,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 19,
@@ -252,7 +252,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 20,
@@ -265,7 +265,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 21,
@@ -278,7 +278,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 22,
@@ -291,7 +291,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 23,
@@ -304,7 +304,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 24,
@@ -317,7 +317,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 25,
@@ -330,7 +330,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 26,
@@ -343,7 +343,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 27,
@@ -356,7 +356,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 28,
@@ -369,7 +369,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 29,
@@ -382,7 +382,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 30,
@@ -395,7 +395,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 31,
@@ -408,7 +408,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 32,
@@ -421,7 +421,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 33,
@@ -434,7 +434,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 34,
@@ -447,7 +447,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 35,
@@ -460,7 +460,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 36,
@@ -473,7 +473,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 37,
@@ -486,7 +486,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 38,
@@ -499,7 +499,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 39,
@@ -512,7 +512,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 40,
@@ -525,7 +525,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 41,
@@ -538,7 +538,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 42,
@@ -551,7 +551,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 43,
@@ -564,7 +564,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 44,
@@ -577,7 +577,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 45,
@@ -590,7 +590,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 46,
@@ -603,7 +603,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 47,
@@ -616,7 +616,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 48,
@@ -629,7 +629,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 49,
@@ -642,7 +642,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 50,
@@ -655,7 +655,7 @@
       "is_blur_ground_truth": true,
       "verification_status": "verified_by_human",
       "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 51,
@@ -668,7 +668,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 52,
@@ -681,7 +681,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 53,
@@ -694,7 +694,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 54,
@@ -707,7 +707,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 55,
@@ -720,7 +720,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 56,
@@ -733,7 +733,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 57,
@@ -746,7 +746,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 58,
@@ -759,7 +759,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 59,
@@ -772,7 +772,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 60,
@@ -785,7 +785,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 61,
@@ -798,7 +798,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 62,
@@ -811,7 +811,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 63,
@@ -824,7 +824,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 64,
@@ -837,7 +837,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 65,
@@ -850,7 +850,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 66,
@@ -863,7 +863,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 67,
@@ -876,7 +876,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 68,
@@ -889,7 +889,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 69,
@@ -902,7 +902,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 70,
@@ -915,7 +915,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 71,
@@ -928,7 +928,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 72,
@@ -941,7 +941,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 73,
@@ -954,7 +954,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 74,
@@ -967,7 +967,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 75,
@@ -980,7 +980,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 76,
@@ -993,7 +993,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 77,
@@ -1006,7 +1006,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 78,
@@ -1019,7 +1019,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 79,
@@ -1032,7 +1032,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 80,
@@ -1045,7 +1045,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 81,
@@ -1058,7 +1058,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 82,
@@ -1071,7 +1071,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 83,
@@ -1084,7 +1084,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 84,
@@ -1097,7 +1097,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 85,
@@ -1110,7 +1110,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 86,
@@ -1123,7 +1123,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 87,
@@ -1136,7 +1136,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 88,
@@ -1149,7 +1149,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 89,
@@ -1162,7 +1162,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 90,
@@ -1175,7 +1175,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 91,
@@ -1188,7 +1188,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 92,
@@ -1201,7 +1201,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 93,
@@ -1214,7 +1214,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 94,
@@ -1227,7 +1227,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 95,
@@ -1240,7 +1240,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 96,
@@ -1253,7 +1253,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 97,
@@ -1266,7 +1266,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 98,
@@ -1279,7 +1279,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 99,
@@ -1292,7 +1292,7 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     },
     {
       "id": 100,
@@ -1305,10 +1305,10 @@
       "is_blur_ground_truth": false,
       "verification_status": "verified_by_human",
       "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
-      "verified_by": "Human Expert (Nguyen Xuan Huynh)"
+      "verified_by": "Human Expert (T018)"
     }
   ],
   "verification_status": "verified_by_human",
   "verification_timestamp": "2026-10-16 23:11:42",
-  "human_verification_notes": "Thẩm định trực quan 100% bởi chuyên gia Nguyễn Xuân Huỳnh. Xác nhận hai cơ chế mờ quang học chủ đạo: (1) Mất nét do thiếu sáng đêm tối (sensor noise / low contrast) và (2) Vệt nhòe rung lắc chuyển động thực tế xe chạy (motion smearing, điển hình tại ID 11, ID 12)."
+  "human_verification_notes": "Thẩm định trực quan 100% bởi chuyên gia T018. Xác nhận hai cơ chế mờ quang học chủ đạo: (1) Mất nét do thiếu sáng đêm tối (sensor noise / low contrast) và (2) Vệt nhòe rung lắc chuyển động thực tế xe chạy (motion smearing, điển hình tại ID 11, ID 12)."
 }

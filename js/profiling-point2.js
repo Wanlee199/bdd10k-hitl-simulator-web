@@ -2,7 +2,7 @@
  * profiling-point2.js
  * Controller & Dữ liệu thực nghiệm Point 2: Automated Data Profiling Benchmark
  * Chuẩn thiết kế: GreenSM Nordic Editorial (Canvas #F8F7F2, Ink #303A3B, Forest #2D5A34, Sage #B7CDBB)
- * Tác giả: Nguyễn Xuân Huỳnh
+ * Tác giả: T018
  */
 
 // 1. DỮ LIỆU 100 ẢNH KIỂM TOÁN MẮT NGƯỜI
@@ -15,7 +15,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0213,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_001.jpg"
   },
@@ -27,7 +27,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0163,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_002.jpg"
   },
@@ -39,7 +39,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0212,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_003.jpg"
   },
@@ -51,7 +51,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0616,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_004.jpg"
   },
@@ -63,7 +63,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0077,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_005.jpg"
   },
@@ -75,7 +75,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0718,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_006.jpg"
   },
@@ -87,7 +87,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.3715,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_007.jpg"
   },
@@ -99,7 +99,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0203,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_008.jpg"
   },
@@ -111,7 +111,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0309,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_009.jpg"
   },
@@ -123,7 +123,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.017,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_010.jpg"
   },
@@ -135,7 +135,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0534,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Mờ nhòe rõ nét do rung lắc chuyển động xe di chuyển (motion smearing confirmed by Human Expert)",
     "img": "assets/profiling_candidates/cand_011.jpg"
   },
@@ -147,7 +147,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0618,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Mờ nhòe rõ nét do rung lắc chuyển động xe di chuyển (motion smearing confirmed by Human Expert)",
     "img": "assets/profiling_candidates/cand_012.jpg"
   },
@@ -159,7 +159,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0482,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_013.jpg"
   },
@@ -171,7 +171,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0127,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_014.jpg"
   },
@@ -183,7 +183,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0213,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_015.jpg"
   },
@@ -195,7 +195,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0207,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_016.jpg"
   },
@@ -207,7 +207,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0176,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_017.jpg"
   },
@@ -219,7 +219,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0276,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_018.jpg"
   },
@@ -231,7 +231,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0391,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_019.jpg"
   },
@@ -243,7 +243,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0257,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_020.jpg"
   },
@@ -255,7 +255,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0088,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_021.jpg"
   },
@@ -267,7 +267,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0308,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_022.jpg"
   },
@@ -279,7 +279,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0262,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_023.jpg"
   },
@@ -291,7 +291,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0387,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_024.jpg"
   },
@@ -303,7 +303,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0355,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_025.jpg"
   },
@@ -315,7 +315,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0346,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_026.jpg"
   },
@@ -327,7 +327,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0438,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_027.jpg"
   },
@@ -339,7 +339,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0768,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_028.jpg"
   },
@@ -351,7 +351,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0146,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_029.jpg"
   },
@@ -363,7 +363,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.1219,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_030.jpg"
   },
@@ -375,7 +375,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0361,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_031.jpg"
   },
@@ -387,7 +387,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0345,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_032.jpg"
   },
@@ -399,7 +399,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0457,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_033.jpg"
   },
@@ -411,7 +411,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0272,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_034.jpg"
   },
@@ -423,7 +423,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0229,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_035.jpg"
   },
@@ -435,7 +435,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.04,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_036.jpg"
   },
@@ -447,7 +447,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0327,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_037.jpg"
   },
@@ -459,7 +459,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0294,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_038.jpg"
   },
@@ -471,7 +471,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0112,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_039.jpg"
   },
@@ -483,7 +483,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0299,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_040.jpg"
   },
@@ -495,7 +495,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0625,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_041.jpg"
   },
@@ -507,7 +507,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0404,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_042.jpg"
   },
@@ -519,7 +519,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0189,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_043.jpg"
   },
@@ -531,7 +531,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0037,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_044.jpg"
   },
@@ -543,7 +543,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0148,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_045.jpg"
   },
@@ -555,7 +555,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.1283,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_046.jpg"
   },
@@ -567,7 +567,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0446,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_047.jpg"
   },
@@ -579,7 +579,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0451,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_048.jpg"
   },
@@ -591,7 +591,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0399,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_049.jpg"
   },
@@ -603,7 +603,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0643,
     "label": "BLUR",
     "is_blur": true,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh mờ do xe rung xóc mạnh, nhòe viền chuyển động hoặc nhiễu tối bệt chi tiết.",
     "img": "assets/profiling_candidates/cand_050.jpg"
   },
@@ -615,7 +615,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0152,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_051.jpg"
   },
@@ -627,7 +627,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0115,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_052.jpg"
   },
@@ -639,7 +639,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0173,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_053.jpg"
   },
@@ -651,7 +651,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0242,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_054.jpg"
   },
@@ -663,7 +663,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.015,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_055.jpg"
   },
@@ -675,7 +675,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0184,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_056.jpg"
   },
@@ -687,7 +687,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0122,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_057.jpg"
   },
@@ -699,7 +699,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0167,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_058.jpg"
   },
@@ -711,7 +711,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0183,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_059.jpg"
   },
@@ -723,7 +723,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0182,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_060.jpg"
   },
@@ -735,7 +735,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0143,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_061.jpg"
   },
@@ -747,7 +747,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0189,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_062.jpg"
   },
@@ -759,7 +759,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0181,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_063.jpg"
   },
@@ -771,7 +771,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0165,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_064.jpg"
   },
@@ -783,7 +783,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0137,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_065.jpg"
   },
@@ -795,7 +795,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0303,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_066.jpg"
   },
@@ -807,7 +807,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0165,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_067.jpg"
   },
@@ -819,7 +819,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0267,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_068.jpg"
   },
@@ -831,7 +831,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0161,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_069.jpg"
   },
@@ -843,7 +843,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0179,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_070.jpg"
   },
@@ -855,7 +855,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0179,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_071.jpg"
   },
@@ -867,7 +867,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0176,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_072.jpg"
   },
@@ -879,7 +879,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0267,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_073.jpg"
   },
@@ -891,7 +891,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0201,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_074.jpg"
   },
@@ -903,7 +903,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0132,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_075.jpg"
   },
@@ -915,7 +915,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0172,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_076.jpg"
   },
@@ -927,7 +927,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0234,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_077.jpg"
   },
@@ -939,7 +939,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0216,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_078.jpg"
   },
@@ -951,7 +951,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0138,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_079.jpg"
   },
@@ -963,7 +963,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0194,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_080.jpg"
   },
@@ -975,7 +975,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0244,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_081.jpg"
   },
@@ -987,7 +987,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0157,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_082.jpg"
   },
@@ -999,7 +999,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0144,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_083.jpg"
   },
@@ -1011,7 +1011,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0153,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_084.jpg"
   },
@@ -1023,7 +1023,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0181,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_085.jpg"
   },
@@ -1035,7 +1035,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0143,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_086.jpg"
   },
@@ -1047,7 +1047,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0175,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_087.jpg"
   },
@@ -1059,7 +1059,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0141,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_088.jpg"
   },
@@ -1071,7 +1071,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0262,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_089.jpg"
   },
@@ -1083,7 +1083,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0227,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_090.jpg"
   },
@@ -1095,7 +1095,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0354,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_091.jpg"
   },
@@ -1107,7 +1107,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0142,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_092.jpg"
   },
@@ -1119,7 +1119,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0119,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_093.jpg"
   },
@@ -1131,7 +1131,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0126,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_094.jpg"
   },
@@ -1143,7 +1143,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0114,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_095.jpg"
   },
@@ -1155,7 +1155,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0404,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_096.jpg"
   },
@@ -1167,7 +1167,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0283,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_097.jpg"
   },
@@ -1179,7 +1179,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0194,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_098.jpg"
   },
@@ -1191,7 +1191,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0218,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_099.jpg"
   },
@@ -1203,7 +1203,7 @@ const AUDIT_CANDIDATES = [
     "fft": 0.0105,
     "label": "SHARP",
     "is_blur": false,
-    "verified_by": "Nguyễn Xuân Huỳnh",
+    "verified_by": "T018",
     "notes": "Ảnh rất sắc nét, rõ viền phương tiện, vạch kẻ đường và biển số xe rõ ràng.",
     "img": "assets/profiling_candidates/cand_100.jpg"
   }

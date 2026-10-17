@@ -4,6 +4,7 @@
 > **Dự án**: BDD10K Active Learning Lab (Hệ Thống Tự Động Hóa Dữ Liệu Thị Giác Xe Tự Hành HITL)  
 > **Nguồn thực nghiệm gốc**: `/Users/huynh/orca/workspaces/BuildPhase/tang`  
 > **Đối tượng độc giả**: Nhà nghiên cứu Thị giác máy tính, Kỹ sư MLOps và Hội đồng Đánh giá Kỹ thuật  
+> **Tác giả / Nhóm nghiên cứu**: T018  
 > **Trạng thái xác minh**: Báo cáo Độc lập Dựa trên Bằng chứng Thực nghiệm (Evidence-Based Benchmark Report)  
 > **Lưu ý tiến độ**: Các giai đoạn Phase 01 đến Phase 06 đã hoàn tất thực thi và xác minh 100% số liệu (`VERIFIED`). Giai đoạn Phase 07 (Vòng lặp End-to-End V0 &rarr; V5) đã hoàn thành kiểm toán logic (`dry_run: true - LOGIC_AUDIT_PASSED`) và đang trong quá trình huấn luyện xử lý thực tế (`NOT_VERIFIED - ĐANG CHẠY XỬ LÝ / CHỜ KẾT QUẢ CHÍNH THỨC`).
 

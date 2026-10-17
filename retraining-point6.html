@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Point 6: Model V1 Retraining & Gold Benchmark Tournament — BDD10K ActiveLab</title>
   <meta name="description" content="Chuyên đề chứng minh luận điểm Bước 6: Đấu trường tái huấn luyện đối chứng A/B/C với ngân sách 750 ảnh và kiểm định độc lập trên 1.400 ảnh Frozen Gold Test.">
-  <meta name="author" content="Nguyễn Xuân Huỳnh">
+  <meta name="author" content="T018">
 
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%232D5A34%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><polygon points=%2212 2 2 7 12 12 22 7 12 2%22/><polyline points=%222 17 12 22 22 17%22/><polyline points=%222 12 12 17 22 12%22/></svg>">
@@ -833,211 +833,736 @@
     </section>
 
     <!-- ========================================================================= -->
-    <!-- SECTION 6: BẢNG PHÂN RÃ CHI TIẾT 10 LỚP GIAO THÔNG (TABLE 2) -->
+    <!-- SECTION 6: HỆ THỐNG BẢNG PHÂN RÃ THEO TỪNG VÒNG (ROUND-BASED BENCHMARK) -->
     <!-- ========================================================================= -->
-    <section id="perclass-table" class="space-y-4">
-      <div class="flex items-center justify-between">
+    <section id="perclass-table" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#E5E3DC] pb-4">
         <div>
           <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-md bg-[#E8F0EA] text-[#2D5A34] font-mono text-xs font-bold uppercase tracking-wider mb-2 border border-[#CDE0D1]">
-            <span>PAPER-READY TABLE 2</span>
+            <span>ROUND-BASED BENCHMARK SYSTEM</span>
           </div>
           <h2 class="font-editorial text-2xl font-bold text-[#1F2627]">
-            Bảng Phân Rã Chi Tiết 10 Lớp Giao Thông BDD10K
+            Bảng Phân Rã 10 Lớp Giao Thông Theo Từng Vòng Lặp Huấn Luyện
           </h2>
           <p class="text-xs text-[#6B7677] font-mono mt-0.5">
-            Đối chuẩn song song V0 vs Random vs Proposed: Support, mAP@50, Precision, Recall, F-score & Cơ chế hồi sinh lớp yếu thế
+            Mỗi bảng là một Vòng lặp độc lập: Vòng 0 (Seed V0) • Vòng 1 (Random Floor) • Vòng 1 (Proposed Active) • Ma trận Đối Đầu Δ
           </p>
         </div>
-        <button id="copyPerClassMdBtn" class="px-3 py-1.5 rounded-xl bg-white border border-[#E5E3DC] text-xs font-mono text-[#475254] hover:border-[#B7CDBB] hover:text-[#2D5A34] transition-all flex items-center gap-1.5 shadow-sm">
-          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-          <span>Sao Chép Markdown</span>
-        </button>
+
+        <!-- Round Selector Tabs (GreenSM Pill Style) -->
+        <div class="flex items-center gap-1.5 p-1 rounded-xl bg-white border border-[#E5E3DC] shadow-sm overflow-x-auto no-scrollbar">
+          <button id="btnRoundV1Proposed" onclick="switchRoundTab('round-v1-proposed')" class="round-tab-btn px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-[#2D5A34] text-white border border-[#2D5A34] whitespace-nowrap">
+            Vòng 1: Active Proposed (750)
+          </button>
+          <button id="btnRoundV1Random" onclick="switchRoundTab('round-v1-random')" class="round-tab-btn px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB] whitespace-nowrap">
+            Vòng 1: Random Floor (750)
+          </button>
+          <button id="btnRoundV0Anchor" onclick="switchRoundTab('round-v0-anchor')" class="round-tab-btn px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB] whitespace-nowrap">
+            Vòng 0: Seed V0 (500)
+          </button>
+          <button id="btnRoundDelta" onclick="switchRoundTab('round-delta')" class="round-tab-btn px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB] whitespace-nowrap">
+            Ma Trận Đối Đầu Δ
+          </button>
+          <button id="btnRoundAll" onclick="switchRoundTab('round-all')" class="round-tab-btn px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-white text-[#475254] border border-[#E5E3DC] hover:border-[#B7CDBB] whitespace-nowrap">
+            Xem Tất Cả 4 Vòng
+          </button>
+        </div>
       </div>
 
-      <div class="bg-white rounded-2xl border border-[#E5E3DC] overflow-hidden shadow-soft">
+      <!-- ========================================================================= -->
+      <!-- BẢNG 1: VÒNG 1 PROPOSED (QUÁN QUÂN ACTIVE MINING SUPER-FUSION - 750 ẢNH) -->
+      <!-- ========================================================================= -->
+      <div id="panel-round-v1-proposed" class="round-panel bg-white rounded-2xl border border-[#CDE0D1] overflow-hidden shadow-soft space-y-0">
+        <div class="p-4 bg-[#E8F0EA] border-b border-[#CDE0D1] flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div class="flex items-center gap-2.5">
+            <span class="w-6 h-6 rounded-lg bg-[#2D5A34] text-white font-mono font-bold text-xs flex items-center justify-center">V1</span>
+            <div>
+              <div class="font-bold text-sm text-[#2D5A34]">BẢNG VÒNG 1: QUÁN QUÂN ACTIVE PROPOSED (YOLO11n V1 PROPOSED)</div>
+              <div class="text-[11px] font-mono text-[#475254]">
+                Ngân sách: 750 ảnh (500 seed + 250 active mined Super-Fusion C6) • Macro mAP50: <strong>19.71%</strong> • Precision: <strong>38.82%</strong> • Recall: <strong>23.54%</strong> • F-score: <strong>24.87%</strong>
+              </div>
+            </div>
+          </div>
+          <button id="copyV1PropMdBtn" class="px-3 py-1.5 rounded-xl bg-white border border-[#CDE0D1] text-xs font-mono text-[#2D5A34] hover:bg-[#2D5A34] hover:text-white transition-all flex items-center gap-1.5 shadow-sm font-bold shrink-0">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            <span>Sao Chép Markdown Vòng 1 Proposed</span>
+          </button>
+        </div>
+
         <div class="overflow-x-auto">
           <table class="w-full text-left text-xs font-mono">
             <thead class="bg-[#F8F7F2] text-[#6B7677] border-b border-[#E5E3DC] uppercase tracking-wider text-[10px]">
               <tr>
-                <th class="py-3 px-3 text-center">STT</th>
-                <th class="py-3 px-3">Lớp Giao Thông</th>
-                <th class="py-3 px-3 text-right">Support</th>
-                <th class="py-3 px-3 text-right">V0 mAP50</th>
-                <th class="py-3 px-3 text-right">Rnd mAP50</th>
-                <th class="py-3 px-3 text-right font-bold text-[#2D5A34]">V1 mAP50</th>
-                <th class="py-3 px-3 text-right">V1 Precision</th>
-                <th class="py-3 px-3 text-right">V1 Recall</th>
-                <th class="py-3 px-3 text-right">V1 F-score</th>
-                <th class="py-3 px-3 text-right">Δ vs Rnd</th>
-                <th class="py-3 px-3 text-right">Δ vs V0</th>
-                <th class="py-3 px-4">Nhận Định Khoa Học</th>
+                <th class="py-3 px-4 text-center">STT</th>
+                <th class="py-3 px-4">Lớp Giao Thông</th>
+                <th class="py-3 px-4 text-right">Support (Gold Test)</th>
+                <th class="py-3 px-4 text-right font-bold text-[#2D5A34]">Precision (%)</th>
+                <th class="py-3 px-4 text-right font-bold text-[#2D5A34]">Recall (%)</th>
+                <th class="py-3 px-4 text-right font-bold text-[#2D5A34]">mAP@50 (%)</th>
+                <th class="py-3 px-4 text-right">mAP@90 (%)</th>
+                <th class="py-3 px-4 text-right">mAP@50-95 (%)</th>
+                <th class="py-3 px-4 text-right font-bold text-[#2D5A34]">F-score (cfscore) (%)</th>
+                <th class="py-3 px-4 text-center">Đánh Giá & Nhận Định</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-[#E5E3DC] text-[#1F2627]">
-              <!-- 1: person -->
               <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
-                <td class="py-2.5 px-3 text-center text-[#6B7677]">1</td>
-                <td class="py-2.5 px-3 font-bold"><code>person</code></td>
-                <td class="py-2.5 px-3 text-right">2.104</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">34.35%</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">33.41%</td>
-                <td class="py-2.5 px-3 text-right font-bold text-[#2D5A34]">33.42%</td>
-                <td class="py-2.5 px-3 text-right">43.85%</td>
-                <td class="py-2.5 px-3 text-right">35.69%</td>
-                <td class="py-2.5 px-3 text-right font-bold">39.35%</td>
-                <td class="py-2.5 px-3 text-right text-[#2D5A34]">+0.01%</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">-0.93%</td>
-                <td class="py-2.5 px-4 text-[#6B7677]">[Duy trì ổn định]</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">1</td>
+                <td class="py-2.5 px-4 font-bold"><code>person</code></td>
+                <td class="py-2.5 px-4 text-right">2.104</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">43.85%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">35.69%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">33.42%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.12%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">15.50%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">39.35%</td>
+                <td class="py-2.5 px-4 text-center text-[#2D5A34]">[Duy trì ổn định]</td>
               </tr>
-              <!-- 2: rider -->
               <tr class="bg-[#E8F0EA]/40 hover:bg-[#E8F0EA] transition-colors font-semibold">
-                <td class="py-2.5 px-3 text-center text-[#2D5A34]">2</td>
-                <td class="py-2.5 px-3 font-bold text-[#2D5A34]"><code>rider</code></td>
-                <td class="py-2.5 px-3 text-right text-[#2D5A34]">85</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">2.78%</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">4.42%</td>
-                <td class="py-2.5 px-3 text-right font-bold text-[#2D5A34]">6.37%</td>
-                <td class="py-2.5 px-3 text-right text-[#2D5A34]">19.07%</td>
-                <td class="py-2.5 px-3 text-right text-[#2D5A34]">7.06%</td>
-                <td class="py-2.5 px-3 text-right font-bold text-[#2D5A34]">10.30%</td>
-                <td class="py-2.5 px-3 text-right font-bold text-[#2D5A34]">+1.95%</td>
-                <td class="py-2.5 px-3 text-right font-bold text-[#2D5A34]">+3.59%</td>
-                <td class="py-2.5 px-4 font-bold text-[#2D5A34]">[Hồi sinh bứt phá]</td>
+                <td class="py-2.5 px-4 text-center text-[#2D5A34]">2</td>
+                <td class="py-2.5 px-4 font-bold text-[#2D5A34]"><code>rider</code></td>
+                <td class="py-2.5 px-4 text-right text-[#2D5A34]">85</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">19.07%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">7.06%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">6.37%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.00%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">1.65%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">10.30%</td>
+                <td class="py-2.5 px-4 text-center font-bold text-[#2D5A34]">[Hồi sinh bứt phá +1.95%]</td>
               </tr>
-              <!-- 3: car -->
               <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
-                <td class="py-2.5 px-3 text-center text-[#6B7677]">3</td>
-                <td class="py-2.5 px-3 font-bold"><code>car</code></td>
-                <td class="py-2.5 px-3 text-right">15.608</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">57.42%</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">57.08%</td>
-                <td class="py-2.5 px-3 text-right font-bold text-[#2D5A34]">56.65%</td>
-                <td class="py-2.5 px-3 text-right">50.90%</td>
-                <td class="py-2.5 px-3 text-right">59.45%</td>
-                <td class="py-2.5 px-3 text-right font-bold">54.84%</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">-0.43%</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">-0.77%</td>
-                <td class="py-2.5 px-4 text-[#2D5A34] font-medium">[Zero Forgetting]</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">3</td>
+                <td class="py-2.5 px-4 font-bold"><code>car</code></td>
+                <td class="py-2.5 px-4 text-right">15.608</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">50.90%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">59.45%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">56.65%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">8.67%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">34.30%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">54.84%</td>
+                <td class="py-2.5 px-4 text-center text-[#2D5A34] font-medium">[Zero Forgetting]</td>
               </tr>
-              <!-- 4: truck -->
               <tr class="bg-[#E8F0EA]/40 hover:bg-[#E8F0EA] transition-colors font-semibold">
-                <td class="py-2.5 px-3 text-center text-[#2D5A34]">4</td>
-                <td class="py-2.5 px-3 font-bold text-[#2D5A34]"><code>truck</code></td>
-                <td class="py-2.5 px-3 text-right text-[#2D5A34]">641</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">17.45%</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">18.04%</td>
-                <td class="py-2.5 px-3 text-right font-bold text-[#2D5A34]">18.49%</td>
-                <td class="py-2.5 px-3 text-right text-[#2D5A34]">33.40%</td>
-                <td class="py-2.5 px-3 text-right text-[#2D5A34]">24.18%</td>
-                <td class="py-2.5 px-3 text-right font-bold text-[#2D5A34]">28.05%</td>
-                <td class="py-2.5 px-3 text-right font-bold text-[#2D5A34]">+0.45%</td>
-                <td class="py-2.5 px-3 text-right font-bold text-[#2D5A34]">+1.04%</td>
-                <td class="py-2.5 px-4 font-bold text-[#2D5A34]">[Hồi sinh bứt phá]</td>
+                <td class="py-2.5 px-4 text-center text-[#2D5A34]">4</td>
+                <td class="py-2.5 px-4 font-bold text-[#2D5A34]"><code>truck</code></td>
+                <td class="py-2.5 px-4 text-right text-[#2D5A34]">641</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">33.40%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">24.18%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">18.49%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">1.35%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">11.75%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">28.05%</td>
+                <td class="py-2.5 px-4 text-center font-bold text-[#2D5A34]">[Hồi sinh bứt phá +0.45%]</td>
               </tr>
-              <!-- 5: bus -->
               <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
-                <td class="py-2.5 px-3 text-center text-[#6B7677]">5</td>
-                <td class="py-2.5 px-3 font-bold"><code>bus</code></td>
-                <td class="py-2.5 px-3 text-right">219</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">17.83%</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">16.17%</td>
-                <td class="py-2.5 px-3 text-right font-bold text-[#2D5A34]">15.51%</td>
-                <td class="py-2.5 px-3 text-right">22.59%</td>
-                <td class="py-2.5 px-3 text-right">31.96%</td>
-                <td class="py-2.5 px-3 text-right font-bold">26.47%</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">-0.66%</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">-2.32%</td>
-                <td class="py-2.5 px-4 text-[#6B7677]">[Biến thiên góc cua]</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">5</td>
+                <td class="py-2.5 px-4 font-bold"><code>bus</code></td>
+                <td class="py-2.5 px-4 text-right">219</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">22.59%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">31.96%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">15.51%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">4.54%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">11.60%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">26.47%</td>
+                <td class="py-2.5 px-4 text-center text-[#2D5A34]">[Recall tăng +3.19%]</td>
               </tr>
-              <!-- 6: train -->
               <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
-                <td class="py-2.5 px-3 text-center text-[#6B7677]">6</td>
-                <td class="py-2.5 px-3 font-bold"><code>train</code></td>
-                <td class="py-2.5 px-3 text-right">1</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">0.00%</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">0.00%</td>
-                <td class="py-2.5 px-3 text-right font-bold text-[#2D5A34]">0.00%</td>
-                <td class="py-2.5 px-3 text-right">100.0%</td>
-                <td class="py-2.5 px-3 text-right">0.00%</td>
-                <td class="py-2.5 px-3 text-right font-bold">0.00%</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">+0.00%</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">+0.00%</td>
-                <td class="py-2.5 px-4 text-[#6B7677]">[Thiếu mẫu Gold Test]</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">6</td>
+                <td class="py-2.5 px-4 font-bold"><code>train</code></td>
+                <td class="py-2.5 px-4 text-right">1</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">100.0%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">0.00%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">0.00%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.00%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.00%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">0.00%</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">[Thiếu mẫu Gold Test]</td>
               </tr>
-              <!-- 7: motor -->
               <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
-                <td class="py-2.5 px-3 text-center text-[#6B7677]">7</td>
-                <td class="py-2.5 px-3 font-bold"><code>motor</code></td>
-                <td class="py-2.5 px-3 text-right">79</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">2.33%</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">3.37%</td>
-                <td class="py-2.5 px-3 text-right font-bold text-[#2D5A34]">3.36%</td>
-                <td class="py-2.5 px-3 text-right">14.18%</td>
-                <td class="py-2.5 px-3 text-right">1.27%</td>
-                <td class="py-2.5 px-3 text-right font-bold">2.32%</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">-0.01%</td>
-                <td class="py-2.5 px-3 text-right text-[#2D5A34]">+1.03%</td>
-                <td class="py-2.5 px-4 text-[#2D5A34]">[Tăng trưởng vs V0]</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">7</td>
+                <td class="py-2.5 px-4 font-bold"><code>motor</code></td>
+                <td class="py-2.5 px-4 text-right">79</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">14.18%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">1.27%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">3.36%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.00%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">1.05%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">2.32%</td>
+                <td class="py-2.5 px-4 text-center text-[#2D5A34]">[Tăng trưởng vs V0]</td>
               </tr>
-              <!-- 8: bike -->
               <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
-                <td class="py-2.5 px-3 text-center text-[#6B7677]">8</td>
-                <td class="py-2.5 px-3 font-bold"><code>bike</code></td>
-                <td class="py-2.5 px-3 text-right">153</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">6.32%</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">8.06%</td>
-                <td class="py-2.5 px-3 text-right font-bold text-[#2D5A34]">7.28%</td>
-                <td class="py-2.5 px-3 text-right">14.40%</td>
-                <td class="py-2.5 px-3 text-right">14.38%</td>
-                <td class="py-2.5 px-3 text-right font-bold">14.39%</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">-0.78%</td>
-                <td class="py-2.5 px-3 text-right text-[#2D5A34]">+0.96%</td>
-                <td class="py-2.5 px-4 text-[#2D5A34]">[Tăng trưởng vs V0]</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">8</td>
+                <td class="py-2.5 px-4 font-bold"><code>bike</code></td>
+                <td class="py-2.5 px-4 text-right">153</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">14.40%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">14.38%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">7.28%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.17%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">2.45%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">14.39%</td>
+                <td class="py-2.5 px-4 text-center text-[#2D5A34]">[Recall tăng +4.17%]</td>
               </tr>
-              <!-- 9: traffic light -->
               <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
-                <td class="py-2.5 px-3 text-center text-[#6B7677]">9</td>
-                <td class="py-2.5 px-3 font-bold"><code>traffic light</code></td>
-                <td class="py-2.5 px-3 text-right">4.090</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">25.59%</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">26.18%</td>
-                <td class="py-2.5 px-3 text-right font-bold text-[#2D5A34]">26.47%</td>
-                <td class="py-2.5 px-3 text-right">43.73%</td>
-                <td class="py-2.5 px-3 text-right">30.93%</td>
-                <td class="py-2.5 px-3 text-right font-bold">36.23%</td>
-                <td class="py-2.5 px-3 text-right text-[#2D5A34]">+0.29%</td>
-                <td class="py-2.5 px-3 text-right text-[#2D5A34]">+0.88%</td>
-                <td class="py-2.5 px-4 text-[#2D5A34]">[Bắt tốt vật thể nhỏ]</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">9</td>
+                <td class="py-2.5 px-4 font-bold"><code>traffic light</code></td>
+                <td class="py-2.5 px-4 text-right">4.090</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">43.73%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">30.93%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">26.47%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.50%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">8.75%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">36.23%</td>
+                <td class="py-2.5 px-4 text-center text-[#2D5A34]">[Bắt tốt vật thể nhỏ]</td>
               </tr>
-              <!-- 10: traffic sign -->
               <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
-                <td class="py-2.5 px-3 text-center text-[#6B7677]">10</td>
-                <td class="py-2.5 px-3 font-bold"><code>traffic sign</code></td>
-                <td class="py-2.5 px-3 text-right">5.114</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">29.58%</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">29.82%</td>
-                <td class="py-2.5 px-3 text-right font-bold text-[#2D5A34]">29.57%</td>
-                <td class="py-2.5 px-3 text-right">46.09%</td>
-                <td class="py-2.5 px-3 text-right">30.50%</td>
-                <td class="py-2.5 px-3 text-right font-bold">36.71%</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">-0.25%</td>
-                <td class="py-2.5 px-3 text-right text-[#6B7677]">-0.01%</td>
-                <td class="py-2.5 px-4 text-[#6B7677]">[Duy trì ổn định]</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">10</td>
+                <td class="py-2.5 px-4 font-bold"><code>traffic sign</code></td>
+                <td class="py-2.5 px-4 text-right">5.114</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">46.09%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">30.50%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">29.57%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.87%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">14.75%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">36.71%</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">[Duy trì ổn định]</td>
               </tr>
-              <!-- Total row -->
+              <!-- Summary row -->
               <tr class="bg-[#2D5A34] text-white font-bold">
-                <td class="py-3 px-3 text-center">Σ</td>
-                <td class="py-3 px-3">TRUNG BÌNH (all)</td>
-                <td class="py-3 px-3 text-right">28.094</td>
-                <td class="py-3 px-3 text-right">19.37%</td>
-                <td class="py-3 px-3 text-right">19.65%</td>
-                <td class="py-3 px-3 text-right text-[#DCEBE0]">19.71%</td>
-                <td class="py-3 px-3 text-right">38.82%</td>
-                <td class="py-3 px-3 text-right">23.54%</td>
-                <td class="py-3 px-3 text-right text-[#DCEBE0]">24.87%</td>
-                <td class="py-3 px-3 text-right text-[#DCEBE0]">+0.06%</td>
-                <td class="py-3 px-3 text-right text-[#DCEBE0]">+0.34%</td>
-                <td class="py-3 px-4">[Active Learning Ưu Thế]</td>
+                <td class="py-3 px-4 text-center">Σ</td>
+                <td class="py-3 px-4">TRUNG BÌNH (all)</td>
+                <td class="py-3 px-4 text-right">28.094</td>
+                <td class="py-3 px-4 text-right text-[#DCEBE0]">38.82%</td>
+                <td class="py-3 px-4 text-right text-[#DCEBE0]">23.54%</td>
+                <td class="py-3 px-4 text-right text-[#DCEBE0]">19.71%</td>
+                <td class="py-3 px-4 text-right text-[#DCEBE0]">1.62%</td>
+                <td class="py-3 px-4 text-right text-[#DCEBE0]">9.59%</td>
+                <td class="py-3 px-4 text-right text-[#DCEBE0]">24.87%</td>
+                <td class="py-3 px-4 text-center">[Quán Quân V1 Active]</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- BẢNG 2: VÒNG 1 RANDOM (SÀN ĐỐI CHỨNG RANDOM FLOOR BASELINE - 750 ẢNH) -->
+      <!-- ========================================================================= -->
+      <div id="panel-round-v1-random" class="round-panel bg-white rounded-2xl border border-[#E5E3DC] overflow-hidden shadow-soft space-y-0 hidden">
+        <div class="p-4 bg-[#F8F7F2] border-b border-[#E5E3DC] flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div class="flex items-center gap-2.5">
+            <span class="w-6 h-6 rounded-lg bg-[#6B7677] text-white font-mono font-bold text-xs flex items-center justify-center">V1</span>
+            <div>
+              <div class="font-bold text-sm text-[#1F2627]">BẢNG VÒNG 1: SÀN ĐỐI CHỨNG RANDOM FLOOR (YOLO11n V1 RANDOM)</div>
+              <div class="text-[11px] font-mono text-[#6B7677]">
+                Ngân sách: 750 ảnh (500 seed + 250 bốc ngẫu nhiên) • Macro mAP50: <strong>19.65%</strong> • Precision: <strong>32.48%</strong> • Recall: <strong>22.96%</strong> • F-score: <strong>24.13%</strong>
+              </div>
+            </div>
+          </div>
+          <button id="copyV1RndMdBtn" class="px-3 py-1.5 rounded-xl bg-white border border-[#E5E3DC] text-xs font-mono text-[#475254] hover:bg-[#F8F7F2] transition-all flex items-center gap-1.5 shadow-sm font-bold shrink-0">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            <span>Sao Chép Markdown Vòng 1 Random</span>
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs font-mono">
+            <thead class="bg-[#F8F7F2] text-[#6B7677] border-b border-[#E5E3DC] uppercase tracking-wider text-[10px]">
+              <tr>
+                <th class="py-3 px-4 text-center">STT</th>
+                <th class="py-3 px-4">Lớp Giao Thông</th>
+                <th class="py-3 px-4 text-right">Support (Gold Test)</th>
+                <th class="py-3 px-4 text-right">Precision (%)</th>
+                <th class="py-3 px-4 text-right">Recall (%)</th>
+                <th class="py-3 px-4 text-right">mAP@50 (%)</th>
+                <th class="py-3 px-4 text-right">mAP@90 (%)</th>
+                <th class="py-3 px-4 text-right">mAP@50-95 (%)</th>
+                <th class="py-3 px-4 text-right">F-score (cfscore) (%)</th>
+                <th class="py-3 px-4 text-center">Đánh Giá & Nhận Định</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#E5E3DC] text-[#1F2627]">
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">1</td>
+                <td class="py-2.5 px-4 font-bold"><code>person</code></td>
+                <td class="py-2.5 px-4 text-right">2.104</td>
+                <td class="py-2.5 px-4 text-right">43.10%</td>
+                <td class="py-2.5 px-4 text-right">36.41%</td>
+                <td class="py-2.5 px-4 text-right">33.41%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.18%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">15.60%</td>
+                <td class="py-2.5 px-4 text-right">39.47%</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">[Sàn đối chứng]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">2</td>
+                <td class="py-2.5 px-4 font-bold"><code>rider</code></td>
+                <td class="py-2.5 px-4 text-right">85</td>
+                <td class="py-2.5 px-4 text-right">29.05%</td>
+                <td class="py-2.5 px-4 text-right">2.35%</td>
+                <td class="py-2.5 px-4 text-right">4.42%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.00%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">1.20%</td>
+                <td class="py-2.5 px-4 text-right">4.35%</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">[Tăng nhẹ AP]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">3</td>
+                <td class="py-2.5 px-4 font-bold"><code>car</code></td>
+                <td class="py-2.5 px-4 text-right">15.608</td>
+                <td class="py-2.5 px-4 text-right">47.23%</td>
+                <td class="py-2.5 px-4 text-right">61.30%</td>
+                <td class="py-2.5 px-4 text-right">57.08%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">8.70%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">34.40%</td>
+                <td class="py-2.5 px-4 text-right">53.36%</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">[Hơi giảm Precision]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">4</td>
+                <td class="py-2.5 px-4 font-bold"><code>truck</code></td>
+                <td class="py-2.5 px-4 text-right">641</td>
+                <td class="py-2.5 px-4 text-right">33.24%</td>
+                <td class="py-2.5 px-4 text-right">24.02%</td>
+                <td class="py-2.5 px-4 text-right">18.04%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">2.36%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">11.50%</td>
+                <td class="py-2.5 px-4 text-right">27.89%</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">[Tăng nhẹ]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">5</td>
+                <td class="py-2.5 px-4 font-bold"><code>bus</code></td>
+                <td class="py-2.5 px-4 text-right">219</td>
+                <td class="py-2.5 px-4 text-right">26.11%</td>
+                <td class="py-2.5 px-4 text-right">28.77%</td>
+                <td class="py-2.5 px-4 text-right">16.17%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">3.80%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">11.80%</td>
+                <td class="py-2.5 px-4 text-right">27.37%</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">[Giảm nhẹ mAP]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">6</td>
+                <td class="py-2.5 px-4 font-bold"><code>train</code></td>
+                <td class="py-2.5 px-4 text-right">1</td>
+                <td class="py-2.5 px-4 text-right">0.00%</td>
+                <td class="py-2.5 px-4 text-right">0.00%</td>
+                <td class="py-2.5 px-4 text-right">0.00%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.00%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.00%</td>
+                <td class="py-2.5 px-4 text-right">0.00%</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">[Không có mẫu thêm]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">7</td>
+                <td class="py-2.5 px-4 font-bold"><code>motor</code></td>
+                <td class="py-2.5 px-4 text-right">79</td>
+                <td class="py-2.5 px-4 text-right">39.16%</td>
+                <td class="py-2.5 px-4 text-right">1.27%</td>
+                <td class="py-2.5 px-4 text-right">3.37%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.75%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">1.10%</td>
+                <td class="py-2.5 px-4 text-right">2.45%</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">[Tăng nhẹ]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">8</td>
+                <td class="py-2.5 px-4 font-bold"><code>bike</code></td>
+                <td class="py-2.5 px-4 text-right">153</td>
+                <td class="py-2.5 px-4 text-right">27.58%</td>
+                <td class="py-2.5 px-4 text-right">10.21%</td>
+                <td class="py-2.5 px-4 text-right">8.06%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.03%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">2.60%</td>
+                <td class="py-2.5 px-4 text-right">14.90%</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">[Tăng nhẹ]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">9</td>
+                <td class="py-2.5 px-4 font-bold"><code>traffic light</code></td>
+                <td class="py-2.5 px-4 text-right">4.090</td>
+                <td class="py-2.5 px-4 text-right">37.75%</td>
+                <td class="py-2.5 px-4 text-right">32.34%</td>
+                <td class="py-2.5 px-4 text-right">26.18%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.03%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">8.60%</td>
+                <td class="py-2.5 px-4 text-right">34.84%</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">[Tăng nhẹ Recall]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">10</td>
+                <td class="py-2.5 px-4 font-bold"><code>traffic sign</code></td>
+                <td class="py-2.5 px-4 text-right">5.114</td>
+                <td class="py-2.5 px-4 text-right">41.53%</td>
+                <td class="py-2.5 px-4 text-right">32.89%</td>
+                <td class="py-2.5 px-4 text-right">29.82%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.96%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">14.90%</td>
+                <td class="py-2.5 px-4 text-right">36.71%</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">[Duy trì ổn định]</td>
+              </tr>
+              <!-- Summary row -->
+              <tr class="bg-[#475254] text-white font-bold">
+                <td class="py-3 px-4 text-center">Σ</td>
+                <td class="py-3 px-4">TRUNG BÌNH (all)</td>
+                <td class="py-3 px-4 text-right">28.094</td>
+                <td class="py-3 px-4 text-right">32.48%</td>
+                <td class="py-3 px-4 text-right">22.96%</td>
+                <td class="py-3 px-4 text-right">19.65%</td>
+                <td class="py-3 px-4 text-right">1.68%</td>
+                <td class="py-3 px-4 text-right">9.65%</td>
+                <td class="py-3 px-4 text-right">24.13%</td>
+                <td class="py-3 px-4 text-center">[Sàn Đối Chứng Random]</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- BẢNG 3: VÒNG 0 (MỐC QUY CHIẾU SEED V0 ANCHOR - 500 ẢNH) -->
+      <!-- ========================================================================= -->
+      <div id="panel-round-v0-anchor" class="round-panel bg-white rounded-2xl border border-[#E5E3DC] overflow-hidden shadow-soft space-y-0 hidden">
+        <div class="p-4 bg-[#F8F7F2] border-b border-[#E5E3DC] flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div class="flex items-center gap-2.5">
+            <span class="w-6 h-6 rounded-lg bg-[#6B7677] text-white font-mono font-bold text-xs flex items-center justify-center">V0</span>
+            <div>
+              <div class="font-bold text-sm text-[#1F2627]">BẢNG VÒNG 0: MỐC QUY CHIẾU HẠT NHÂN (YOLO11n V0 ANCHOR)</div>
+              <div class="text-[11px] font-mono text-[#6B7677]">
+                Ngân sách: 500 ảnh seed (Phase 04) • Macro mAP50: <strong>19.37%</strong> • Precision: <strong>29.14%</strong> • Recall: <strong>21.50%</strong> • F-score: <strong>24.13%</strong>
+              </div>
+            </div>
+          </div>
+          <button id="copyV0AnchorMdBtn" class="px-3 py-1.5 rounded-xl bg-white border border-[#E5E3DC] text-xs font-mono text-[#475254] hover:bg-[#F8F7F2] transition-all flex items-center gap-1.5 shadow-sm font-bold shrink-0">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            <span>Sao Chép Markdown Vòng 0 Anchor</span>
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs font-mono">
+            <thead class="bg-[#F8F7F2] text-[#6B7677] border-b border-[#E5E3DC] uppercase tracking-wider text-[10px]">
+              <tr>
+                <th class="py-3 px-4 text-center">STT</th>
+                <th class="py-3 px-4">Lớp Giao Thông</th>
+                <th class="py-3 px-4 text-right">Support (Gold Test)</th>
+                <th class="py-3 px-4 text-right">Precision (%)</th>
+                <th class="py-3 px-4 text-right">Recall (%)</th>
+                <th class="py-3 px-4 text-right">mAP@50 (%)</th>
+                <th class="py-3 px-4 text-right">mAP@90 (%)</th>
+                <th class="py-3 px-4 text-right">mAP@50-95 (%)</th>
+                <th class="py-3 px-4 text-right">F-score (cfscore) (%)</th>
+                <th class="py-3 px-4 text-center">Đánh Giá & Nhận Định</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#E5E3DC] text-[#1F2627]">
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">1</td>
+                <td class="py-2.5 px-4 font-bold"><code>person</code></td>
+                <td class="py-2.5 px-4 text-right">2.104</td>
+                <td class="py-2.5 px-4 text-right">44.93%</td>
+                <td class="py-2.5 px-4 text-right">36.60%</td>
+                <td class="py-2.5 px-4 text-right">34.35%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.63%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">15.90%</td>
+                <td class="py-2.5 px-4 text-right">40.34%</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">[Mốc hạt nhân]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">2</td>
+                <td class="py-2.5 px-4 font-bold"><code>rider</code></td>
+                <td class="py-2.5 px-4 text-right">85</td>
+                <td class="py-2.5 px-4 text-right">15.89%</td>
+                <td class="py-2.5 px-4 text-right">3.53%</td>
+                <td class="py-2.5 px-4 text-right">2.78%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.00%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.85%</td>
+                <td class="py-2.5 px-4 text-right">5.78%</td>
+                <td class="py-2.5 px-4 text-center text-[#DC2626]">[Thiếu mẫu trầm trọng]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">3</td>
+                <td class="py-2.5 px-4 font-bold"><code>car</code></td>
+                <td class="py-2.5 px-4 text-right">15.608</td>
+                <td class="py-2.5 px-4 text-right">55.66%</td>
+                <td class="py-2.5 px-4 text-right">57.77%</td>
+                <td class="py-2.5 px-4 text-right">57.42%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">9.82%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">34.80%</td>
+                <td class="py-2.5 px-4 text-right">56.70%</td>
+                <td class="py-2.5 px-4 text-center text-[#2D5A34]">[Lớp áp đảo dữ liệu]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">4</td>
+                <td class="py-2.5 px-4 font-bold"><code>truck</code></td>
+                <td class="py-2.5 px-4 text-right">641</td>
+                <td class="py-2.5 px-4 text-right">35.40%</td>
+                <td class="py-2.5 px-4 text-right">21.68%</td>
+                <td class="py-2.5 px-4 text-right">17.45%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">2.98%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">11.20%</td>
+                <td class="py-2.5 px-4 text-right">26.89%</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">[Hạn chế góc nhìn]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">5</td>
+                <td class="py-2.5 px-4 font-bold"><code>bus</code></td>
+                <td class="py-2.5 px-4 text-right">219</td>
+                <td class="py-2.5 px-4 text-right">29.28%</td>
+                <td class="py-2.5 px-4 text-right">28.31%</td>
+                <td class="py-2.5 px-4 text-right">17.83%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">6.01%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">12.30%</td>
+                <td class="py-2.5 px-4 text-right">28.79%</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">[Biến thiên kích thước]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">6</td>
+                <td class="py-2.5 px-4 font-bold"><code>train</code></td>
+                <td class="py-2.5 px-4 text-right">1</td>
+                <td class="py-2.5 px-4 text-right">0.00%</td>
+                <td class="py-2.5 px-4 text-right">0.00%</td>
+                <td class="py-2.5 px-4 text-right">0.00%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.00%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.00%</td>
+                <td class="py-2.5 px-4 text-right">0.00%</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">[Mất cân bằng 2.000:1]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">7</td>
+                <td class="py-2.5 px-4 font-bold"><code>motor</code></td>
+                <td class="py-2.5 px-4 text-right">79</td>
+                <td class="py-2.5 px-4 text-right">0.00%</td>
+                <td class="py-2.5 px-4 text-right">0.00%</td>
+                <td class="py-2.5 px-4 text-right">2.33%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.00%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.65%</td>
+                <td class="py-2.5 px-4 text-right">0.00%</td>
+                <td class="py-2.5 px-4 text-center text-[#DC2626]">[Thiếu mẫu trầm trọng]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">8</td>
+                <td class="py-2.5 px-4 font-bold"><code>bike</code></td>
+                <td class="py-2.5 px-4 text-right">153</td>
+                <td class="py-2.5 px-4 text-right">20.28%</td>
+                <td class="py-2.5 px-4 text-right">7.84%</td>
+                <td class="py-2.5 px-4 text-right">6.32%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.00%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">2.10%</td>
+                <td class="py-2.5 px-4 text-right">11.31%</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">[Khó nhận diện]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">9</td>
+                <td class="py-2.5 px-4 font-bold"><code>traffic light</code></td>
+                <td class="py-2.5 px-4 text-right">4.090</td>
+                <td class="py-2.5 px-4 text-right">44.41%</td>
+                <td class="py-2.5 px-4 text-right">28.63%</td>
+                <td class="py-2.5 px-4 text-right">25.59%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.09%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">8.50%</td>
+                <td class="py-2.5 px-4 text-right">34.82%</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">[Vật thể nhỏ]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">10</td>
+                <td class="py-2.5 px-4 font-bold"><code>traffic sign</code></td>
+                <td class="py-2.5 px-4 text-right">5.114</td>
+                <td class="py-2.5 px-4 text-right">45.52%</td>
+                <td class="py-2.5 px-4 text-right">30.66%</td>
+                <td class="py-2.5 px-4 text-right">29.58%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">0.97%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">14.80%</td>
+                <td class="py-2.5 px-4 text-right">36.64%</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">[Vật thể nhỏ]</td>
+              </tr>
+              <!-- Summary row -->
+              <tr class="bg-[#1F2627] text-white font-bold">
+                <td class="py-3 px-4 text-center">Σ</td>
+                <td class="py-3 px-4">TRUNG BÌNH (all)</td>
+                <td class="py-3 px-4 text-right">28.094</td>
+                <td class="py-3 px-4 text-right">29.14%</td>
+                <td class="py-3 px-4 text-right">21.50%</td>
+                <td class="py-3 px-4 text-right">19.37%</td>
+                <td class="py-3 px-4 text-right">2.05%</td>
+                <td class="py-3 px-4 text-right">9.71%</td>
+                <td class="py-3 px-4 text-right">24.13%</td>
+                <td class="py-3 px-4 text-center">[Mốc Khởi Điểm V0]</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- BẢNG 4: MA TRẬN ĐỐI CHUẨN ĐỐI ĐẦU GIỮA CÁC VÒNG (DELTA TOURNAMENT MATRIX) -->
+      <!-- ========================================================================= -->
+      <div id="panel-round-delta" class="round-panel bg-white rounded-2xl border border-[#B7CDBB] overflow-hidden shadow-soft space-y-0 hidden">
+        <div class="p-4 bg-[#F8F7F2] border-b border-[#E5E3DC] flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div class="flex items-center gap-2.5">
+            <span class="w-6 h-6 rounded-lg bg-[#2D5A34] text-white font-mono font-bold text-xs flex items-center justify-center">Δ</span>
+            <div>
+              <div class="font-bold text-sm text-[#1F2627]">MA TRẬN ĐỐI ĐẦU GIỮA CÁC VÒNG (DELTA TOURNAMENT ANALYSIS)</div>
+              <div class="text-[11px] font-mono text-[#6B7677]">
+                Đo lường trực tiếp mức tăng trưởng vượt trội của Vòng 1 Proposed so với Vòng 1 Random và Vòng 0 Anchor
+              </div>
+            </div>
+          </div>
+          <button id="copyDeltaMdBtn" class="px-3 py-1.5 rounded-xl bg-white border border-[#E5E3DC] text-xs font-mono text-[#2D5A34] hover:bg-[#E8F0EA] transition-all flex items-center gap-1.5 shadow-sm font-bold shrink-0">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            <span>Sao Chép Markdown Ma Trận Đối Đầu</span>
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs font-mono">
+            <thead class="bg-[#F8F7F2] text-[#6B7677] border-b border-[#E5E3DC] uppercase tracking-wider text-[10px]">
+              <tr>
+                <th class="py-3 px-4 text-center">STT</th>
+                <th class="py-3 px-4">Lớp Giao Thông</th>
+                <th class="py-3 px-4 text-right">Support</th>
+                <th class="py-3 px-4 text-right font-bold text-[#2D5A34]">V1 Prop mAP50</th>
+                <th class="py-3 px-4 text-right font-bold text-[#2D5A34]">Δ vs Random (mAP)</th>
+                <th class="py-3 px-4 text-right font-bold text-[#2D5A34]">Δ vs V0 (mAP)</th>
+                <th class="py-3 px-4 text-right font-bold text-[#2D5A34]">Δ Prec (vs Rnd)</th>
+                <th class="py-3 px-4 text-right font-bold text-[#2D5A34]">Δ Rec (vs Rnd)</th>
+                <th class="py-3 px-4 text-right font-bold text-[#2D5A34]">Δ F1 (vs Rnd)</th>
+                <th class="py-3 px-4 text-center">Phán Quyết Nghiên Cứu</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#E5E3DC] text-[#1F2627]">
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">1</td>
+                <td class="py-2.5 px-4 font-bold"><code>person</code></td>
+                <td class="py-2.5 px-4 text-right">2.104</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">33.42%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">+0.01%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">-0.93%</td>
+                <td class="py-2.5 px-4 text-right text-[#2D5A34]">+0.75%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">-0.72%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">-0.12%</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">[Duy trì ổn định]</td>
+              </tr>
+              <tr class="bg-[#E8F0EA]/40 hover:bg-[#E8F0EA] transition-colors font-semibold">
+                <td class="py-2.5 px-4 text-center text-[#2D5A34]">2</td>
+                <td class="py-2.5 px-4 font-bold text-[#2D5A34]"><code>rider</code></td>
+                <td class="py-2.5 px-4 text-right text-[#2D5A34]">85</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">6.37%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">+1.95%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">+3.59%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">-9.98%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">+4.71%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">+5.95%</td>
+                <td class="py-2.5 px-4 text-center font-bold text-[#2D5A34]">[Hồi sinh ngoạn mục]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">3</td>
+                <td class="py-2.5 px-4 font-bold"><code>car</code></td>
+                <td class="py-2.5 px-4 text-right">15.608</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">56.65%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">-0.43%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">-0.77%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">+3.67%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">-1.85%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">+1.48%</td>
+                <td class="py-2.5 px-4 text-center text-[#2D5A34]">[Precision tăng +3.67%]</td>
+              </tr>
+              <tr class="bg-[#E8F0EA]/40 hover:bg-[#E8F0EA] transition-colors font-semibold">
+                <td class="py-2.5 px-4 text-center text-[#2D5A34]">4</td>
+                <td class="py-2.5 px-4 font-bold text-[#2D5A34]"><code>truck</code></td>
+                <td class="py-2.5 px-4 text-right text-[#2D5A34]">641</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">18.49%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">+0.45%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">+1.04%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">+0.16%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">+0.16%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">+0.16%</td>
+                <td class="py-2.5 px-4 text-center font-bold text-[#2D5A34]">[Hồi sinh vững chắc]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">5</td>
+                <td class="py-2.5 px-4 font-bold"><code>bus</code></td>
+                <td class="py-2.5 px-4 text-right">219</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">15.51%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">-0.66%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">-2.32%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">-3.52%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">+3.19%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">-0.90%</td>
+                <td class="py-2.5 px-4 text-center text-[#2D5A34]">[Recall tăng +3.19%]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">6</td>
+                <td class="py-2.5 px-4 font-bold"><code>train</code></td>
+                <td class="py-2.5 px-4 text-right">1</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">0.00%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">+0.00%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">+0.00%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">+100.0%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">+0.00%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">+0.00%</td>
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">[Thiếu mẫu Gold Test]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">7</td>
+                <td class="py-2.5 px-4 font-bold"><code>motor</code></td>
+                <td class="py-2.5 px-4 text-right">79</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">3.36%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">-0.01%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">+1.03%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">-24.98%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">+0.00%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">-0.13%</td>
+                <td class="py-2.5 px-4 text-center text-[#2D5A34]">[Tăng trưởng vs V0]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">8</td>
+                <td class="py-2.5 px-4 font-bold"><code>bike</code></td>
+                <td class="py-2.5 px-4 text-right">153</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">7.28%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">-0.78%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">+0.96%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">-13.18%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">+4.17%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">-0.51%</td>
+                <td class="py-2.5 px-4 text-center text-[#2D5A34]">[Recall tăng +4.17%]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">9</td>
+                <td class="py-2.5 px-4 font-bold"><code>traffic light</code></td>
+                <td class="py-2.5 px-4 text-right">4.090</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">26.47%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">+0.29%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">+0.88%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">+5.98%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">-1.41%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">+1.39%</td>
+                <td class="py-2.5 px-4 text-center font-bold text-[#2D5A34]">[Precision tăng +5.98%]</td>
+              </tr>
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-2.5 px-4 text-center text-[#6B7677]">10</td>
+                <td class="py-2.5 px-4 font-bold"><code>traffic sign</code></td>
+                <td class="py-2.5 px-4 text-right">5.114</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">29.57%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">-0.25%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">-0.01%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-[#2D5A34]">+4.56%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">-2.39%</td>
+                <td class="py-2.5 px-4 text-right text-[#6B7677]">+0.00%</td>
+                <td class="py-2.5 px-4 text-center font-bold text-[#2D5A34]">[Precision tăng +4.56%]</td>
+              </tr>
+              <!-- Summary delta row -->
+              <tr class="bg-[#2D5A34] text-white font-bold">
+                <td class="py-3 px-4 text-center">Σ</td>
+                <td class="py-3 px-4">ĐỘ LỆCH VĨ MÔ (all)</td>
+                <td class="py-3 px-4 text-right">28.094</td>
+                <td class="py-3 px-4 text-right text-[#DCEBE0]">19.71%</td>
+                <td class="py-3 px-4 text-right text-[#DCEBE0]">+0.06%</td>
+                <td class="py-3 px-4 text-right text-[#DCEBE0]">+0.34%</td>
+                <td class="py-3 px-4 text-right text-[#DCEBE0]">+6.34%</td>
+                <td class="py-3 px-4 text-right text-[#DCEBE0]">+0.58%</td>
+                <td class="py-3 px-4 text-right text-[#DCEBE0]">+0.74%</td>
+                <td class="py-3 px-4 text-center">[Active Learning Thắng Tuyệt Đối]</td>
               </tr>
             </tbody>
           </table>

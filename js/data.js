@@ -5,13 +5,13 @@
  *   - reports/seeds/seed_v0_diagnostic_report.md -> seed_v5_diagnostic_report.md
  *   - data/splits/reports/strategy_tournament_benchmark.json
  *   - data/splits/reports/frozen_splits_audit_report.json
- * Tác giả nghiên cứu: Nguyễn Xuân Huỳnh
+ * Tác giả nghiên cứu: T018
  */
 
 export const PROJECT_METADATA = {
   title: "BDD10K Active Learning Lab",
   subtitle: "Hệ thống Tự Động Hóa Vòng Lặp Dữ Liệu Cho Thị Giác Xe Tự Hành",
-  author: "Nguyễn Xuân Huỳnh",
+  author: "T018",
   version: "Production Release v4.0",
   dataset: "BDD10K Autonomous Driving Dataset",
   coreArchitecture: "Dual-Model Engine (YOLO11n Mining Engine vs RT-DETR Counterpart)",

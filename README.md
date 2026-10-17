@@ -1,7 +1,7 @@
 # 🚗 BDD10K Active Learning Lab — Frontend Interactive Simulator
 
 > **Dự án**: Autonomous Driving Human-in-the-Loop Vision Engine Dashboard  
-> **Tác giả**: Nguyễn Xuân Huỳnh  
+> **Tác giả**: T018  
 > **Kiến trúc**: Vanilla JavaScript (ES6+ Modules) + Modern CSS Design System + HTML5 Canvas  
 > **Mục đích**: Giả lập trải nghiệm 9 chặng toàn trình HITL, trực quan hóa đấu trường benchmark mAP@50 và mini-studio thẩm định gán nhãn AI.
 

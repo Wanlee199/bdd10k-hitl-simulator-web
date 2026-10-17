@@ -4,6 +4,9 @@ Chào mừng bạn đến với hệ thống tài liệu kỹ thuật của dự
 
 Hệ thống tài liệu này ghi nhận chi tiết kiến trúc toàn trình, phương pháp luận thực nghiệm qua các Jupyter Notebook, các chỉ số đo lường, kết quả thực tế và cơ sở lý luận cho từng quyết định thuật toán.
 
+> **Tác giả / Nhóm nghiên cứu**: T018  
+> **Trạng thái**: Bản tài liệu chính thức / Đồng bộ 100% với số liệu thực nghiệm  
+
 ---
 
 ## 🗂️ Cấu Trúc Tài Liệu
