@@ -319,10 +319,10 @@ function initAlgorithmWalkthrough() {
       const s = parseInt(t.getAttribute('data-step'), 10);
       if (s === currentStep) {
         t.className = 'wt-step-tab cursor-pointer text-center p-2 rounded-xl transition-all bg-[#E8F0EA] border border-[#2D5A34]';
-        t.querySelector('div:first-child').className = 'text-[10px] font-mono font-bold text-[#2D5A34]';
+        t.querySelector('div:first-child').className = 'text-xs font-mono font-bold text-[#2D5A34]';
       } else {
         t.className = 'wt-step-tab cursor-pointer text-center p-2 rounded-xl transition-all bg-white border border-[#E5E3DC] hover:bg-[#F8F7F2]';
-        t.querySelector('div:first-child').className = 'text-[10px] font-mono font-bold text-[#6B7677]';
+        t.querySelector('div:first-child').className = 'text-xs font-mono font-bold text-[#6B7677]';
       }
     });
 
@@ -331,23 +331,23 @@ function initAlgorithmWalkthrough() {
       <!-- Cột Trái: Diễn giải -->
       <div class="space-y-4">
         <div>
-          <div class="text-[10px] font-mono font-bold text-[#2D5A34] uppercase tracking-wider">${data.subtitle}</div>
+          <div class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">${data.subtitle}</div>
           <h3 class="font-editorial text-xl font-bold text-[#1F2627] mt-1">${data.title}</h3>
         </div>
 
         <div class="space-y-2.5 text-xs font-mono">
           <div class="p-3 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC]">
-            <span class="font-bold text-[#6B7677] uppercase text-[10px] block">Dữ Liệu Đầu Vào (Input):</span>
+            <span class="font-bold text-[#6B7677] uppercase text-xs block">Dữ Liệu Đầu Vào (Input):</span>
             <span class="text-[#1F2627] mt-0.5 block">${data.input}</span>
           </div>
 
           <div class="p-3 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC]">
-            <span class="font-bold text-[#2D5A34] uppercase text-[10px] block">Thao Tác Thuật Toán (Transformation):</span>
+            <span class="font-bold text-[#2D5A34] uppercase text-xs block">Thao Tác Thuật Toán (Transformation):</span>
             <span class="text-[#303A3B] mt-0.5 block leading-relaxed">${data.action}</span>
           </div>
 
           <div class="p-3 rounded-xl bg-[#E8F0EA] border border-[#CDE0D1]">
-            <span class="font-bold text-[#2D5A34] uppercase text-[10px] block">Kết Quả Đầu Ra (Output):</span>
+            <span class="font-bold text-[#2D5A34] uppercase text-xs block">Kết Quả Đầu Ra (Output):</span>
             <span class="text-[#2D5A34] font-bold mt-0.5 block">${data.output}</span>
           </div>
         </div>
@@ -356,10 +356,10 @@ function initAlgorithmWalkthrough() {
       <!-- Cột Phải: Code Box -->
       <div class="p-4 rounded-xl bg-[#1F2627] text-white shadow-soft space-y-2">
         <div class="flex items-center justify-between border-b border-white/10 pb-2">
-          <span class="text-[10px] font-mono text-[#10b981] font-bold uppercase">Python Source Pseudocode (Step ${data.step})</span>
+          <span class="text-xs font-mono text-[#10b981] font-bold uppercase">Python Source Pseudocode (Step ${data.step})</span>
           <span class="text-[9px] font-mono text-gray-400">src/active_mining.py</span>
         </div>
-        <pre class="font-mono text-[11px] leading-relaxed text-gray-200 overflow-x-auto max-h-56 p-1">${data.code}</pre>
+        <pre class="font-mono text-xs leading-relaxed text-gray-200 overflow-x-auto max-h-56 p-1">${data.code}</pre>
       </div>
     `;
 

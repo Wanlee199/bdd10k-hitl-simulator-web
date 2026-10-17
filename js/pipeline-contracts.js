@@ -36,13 +36,13 @@ window.PIPELINE_DATA_CONTRACTS = {
       hardware: "Throughput: 850 FPS (Giải mã CPU song song đa luồng)."
     },
     output: {
-      artifact: "10.000 khung hình thô (.jpg) độc lập kèm tệp manifest `raw_frames_manifest.json`.",
-      volume: "10.000 ảnh tĩnh kích thước chuẩn 1280x720, phân bổ trên 1.000 chuỗi hành trình.",
-      handover: "Bàn giao toàn bộ 10.000 ảnh thô sang Phase 01 để thực hiện lọc trùng tri giác."
+      artifact: "7.000 khung hình thô (.jpg) độc lập kèm tệp manifest `raw_frames_manifest.json`.",
+      volume: "7.000 ảnh tĩnh kích thước chuẩn 1280x720, phân bổ trên 598 chuỗi hành trình.",
+      handover: "Bàn giao toàn bộ 7.000 ảnh thô sang Phase 01 để thực hiện lọc trùng tri giác."
     },
     metrics: [
-      { label: "Tổng Khung Hình", val: "10.000", sub: "1Hz trích xuất", color: "sky" },
-      { label: "Số Video Clip", val: "1.000", sub: "40s mỗi video", color: "slate" },
+      { label: "Tổng Khung Hình", val: "7.000", sub: "1Hz trích xuất", color: "sky" },
+      { label: "Số Video Clip", val: "598", sub: "40s mỗi video", color: "slate" },
       { label: "Độ Phân Giải", val: "720p", sub: "1280x720 RGB", color: "slate" },
       { label: "Tỷ Lệ Lỗi Frame", val: "0.0%", sub: "Zero frame drop", color: "emerald" }
     ],
@@ -59,8 +59,8 @@ window.PIPELINE_DATA_CONTRACTS = {
     champion: "FastDedup pHash 2D-DCT + Keep-Most-Vehicles (KMV Policy)",
     auditStatus: "✓ 360.3 FPS KHÔNG SAI LỆCH",
     input: {
-      source: "10.000 khung hình thô trích xuất từ Step 1.",
-      specs: "Ảnh RGB 1280x720, phân theo sequence ID của 1.000 video.",
+      source: "7.000 khung hình thô trích xuất từ Step 1.",
+      specs: "Ảnh RGB 1280x720, phân theo sequence ID của 598 video.",
       precondition: "Cần loại bỏ các khung hình xe dừng đèn đỏ hoặc bám đuôi gây lãng phí gán nhãn."
     },
     handle: {
