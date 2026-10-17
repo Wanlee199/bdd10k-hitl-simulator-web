@@ -1,7 +1,7 @@
 # Báo cáo thực nghiệm kỹ thuật: Human-in-the-Loop trong môi trường Production: Định hướng nghiên cứu & Lộ trình kiến trúc (Phase 08)
 
 > **Mã tài liệu**: `docs/experiments/08_production_hitl.md`  
-> **Dự án**: BDD10K Active Learning Lab (Hệ thống thị giác máy tính Human-in-the-Loop cho xe tự hành)  
+> **Dự án**: BDD10K Active Learning Lab: Hệ Thống Tự Động Hóa Vòng Lặp Dữ Liệu Học Tập Chủ Động (Human-in-the-Loop)  
 > **Tác giả / Nhóm nghiên cứu**: T018  
 > **Trạng thái**: Đặc tả nghiên cứu khái niệm / Lộ trình kiến trúc đề xuất  
 

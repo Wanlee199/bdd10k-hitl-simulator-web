@@ -10,7 +10,7 @@
 
 export const PROJECT_METADATA = {
   title: "BDD10K Active Learning Lab",
-  subtitle: "Hệ thống Tự Động Hóa Vòng Lặp Dữ Liệu Cho Thị Giác Xe Tự Hành",
+  subtitle: "Hệ Thống Tự Động Hóa Vòng Lặp Dữ Liệu Học Tập Chủ Động (Human-in-the-Loop)",
   author: "T018",
   version: "Production Release v4.0",
   dataset: "BDD10K Autonomous Driving Dataset",

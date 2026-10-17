@@ -1,7 +1,7 @@
 # Báo Cáo Thực Nghiệm Kỹ Thuật: Lọc Trùng Ảnh Nhanh (Phase 01)
 
 > **Mã tài liệu**: `docs/experiments/01_fast_dedup.md`  
-> **Dự án**: BDD10K Active Learning Lab (Động cơ thị giác xe tự hành Human-in-the-Loop)  
+> **Dự án**: BDD10K Active Learning Lab: Hệ Thống Tự Động Hóa Vòng Lặp Dữ Liệu Học Tập Chủ Động (Human-in-the-Loop)  
 > **Notebook thực nghiệm chính**: `notebooks/01_dual_stream_fastdedup_benchmark.ipynb`  
 > **Nguồn thực nghiệm gốc**: `/Users/huynh/orca/workspaces/BuildPhase/tang`  
 > **Tác giả / Nhóm nghiên cứu**: T018  

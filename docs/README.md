@@ -2,7 +2,7 @@
 ## Master Technical Documentation Portal & Experiment Benchmark Index
 
 > **Mã tài liệu**: `docs/README.md`  
-> **Dự án**: BDD10K Active Learning Lab (Hệ Thống Tự Động Hóa Dữ Liệu Thị Giác Xe Tự Hành Human-in-the-Loop)  
+> **Dự án**: BDD10K Active Learning Lab: Hệ Thống Tự Động Hóa Vòng Lặp Dữ Liệu Học Tập Chủ Động (Human-in-the-Loop)  
 > **Kho lưu trữ chính thức**: [nguyenhuynhdt37/autonomous-driving-active-learning-lab](https://github.com/nguyenhuynhdt37/autonomous-driving-active-learning-lab)  
 > **Nguồn thực nghiệm gốc**: `/Users/huynh/orca/workspaces/BuildPhase/tang`  
 > **Tác giả / Nhóm nghiên cứu**: T018  

@@ -1,7 +1,7 @@
 # Báo Cáo Tổng Hợp Kết Quả Thực Nghiệm & Đối Chuẩn Toàn Hệ Thống (Experiment Results & Benchmark Synthesis)
 
 > **Mã tài liệu**: `docs/03_experiment_results.md`  
-> **Dự án**: BDD10K Active Learning Lab (Hệ Thống Tự Động Hóa Dữ Liệu Thị Giác Xe Tự Hành HITL)  
+> **Dự án**: BDD10K Active Learning Lab: Hệ Thống Tự Động Hóa Vòng Lặp Dữ Liệu Học Tập Chủ Động (Human-in-the-Loop)  
 > **Nguồn thực nghiệm gốc**: `/Users/huynh/orca/workspaces/BuildPhase/tang`  
 > **Đối tượng độc giả**: Nhà nghiên cứu Thị giác máy tính, Kỹ sư MLOps và Hội đồng Đánh giá Kỹ thuật  
 > **Tác giả / Nhóm nghiên cứu**: T018  

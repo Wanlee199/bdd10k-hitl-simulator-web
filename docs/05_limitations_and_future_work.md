@@ -1,7 +1,7 @@
 # 05. Các Giới Hạn Hiện Tại & Hướng Phát Triển Tương Lai (Limitations & Future Work)
 
 > **Mã tài liệu**: `docs/05_limitations_and_future_work.md`  
-> **Dự án**: BDD10K Active Learning Lab (Động cơ thị giác xe tự hành Human-in-the-Loop)  
+> **Dự án**: BDD10K Active Learning Lab: Hệ Thống Tự Động Hóa Vòng Lặp Dữ Liệu Học Tập Chủ Động (Human-in-the-Loop)  
 > **Tác giả / Nhóm nghiên cứu**: T018  
 > **Nguồn thực nghiệm gốc**: `/Users/huynh/orca/workspaces/BuildPhase/tang`  
 > **Trạng thái**: Kiểm toán nghiên cứu sản xuất / Dựa trên bằng chứng  
