@@ -1,0 +1,30 @@
+{
+  "overall_status": "PASS",
+  "video_sequence_isolation": {
+    "test_vs_val_overlap": 0,
+    "test_vs_seed_overlap": 0,
+    "test_vs_pool_overlap": 0,
+    "val_vs_seed_overlap": 0,
+    "val_vs_pool_overlap": 0,
+    "seed_vs_pool_overlap": 0,
+    "status": "PASS"
+  },
+  "phash_cross_hamming_scan": {
+    "total_cross_pairs_scanned": 13454400,
+    "test_vs_val_min_hamming_distance": 10.0,
+    "test_vs_val_violations_hd_less_5": 0,
+    "test_vs_seed_min_hamming_distance": 10.0,
+    "test_vs_seed_violations_hd_less_5": 0,
+    "test_vs_pool_min_hamming_distance": 6.0,
+    "test_vs_pool_violations_hd_less_5": 0,
+    "val_vs_seed_min_hamming_distance": 10.0,
+    "val_vs_seed_violations_hd_less_5": 0,
+    "val_vs_pool_min_hamming_distance": 6.0,
+    "val_vs_pool_violations_hd_less_5": 0,
+    "seed_vs_pool_min_hamming_distance": 8.0,
+    "seed_vs_pool_violations_hd_less_5": 0,
+    "total_violations": 0,
+    "status": "PASS"
+  },
+  "elapsed_seconds": 4.24
+}

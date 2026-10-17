@@ -1,0 +1,62 @@
+{
+  "Full Clean Pool": {
+    "person": 8929,
+    "rider": 457,
+    "car": 72021,
+    "truck": 3020,
+    "bus": 1156,
+    "train": 14,
+    "motor": 291,
+    "bike": 729,
+    "traffic light": 19053,
+    "traffic sign": 24244
+  },
+  "Fixed Test": {
+    "person": 2104,
+    "rider": 85,
+    "car": 15608,
+    "truck": 641,
+    "bus": 219,
+    "train": 1,
+    "motor": 79,
+    "bike": 153,
+    "traffic light": 4090,
+    "traffic sign": 5114
+  },
+  "Fixed Val": {
+    "person": 996,
+    "rider": 59,
+    "car": 7401,
+    "truck": 314,
+    "bus": 122,
+    "train": 2,
+    "motor": 31,
+    "bike": 74,
+    "traffic light": 1941,
+    "traffic sign": 2568
+  },
+  "Seed V0": {
+    "person": 771,
+    "rider": 48,
+    "car": 5385,
+    "truck": 220,
+    "bus": 86,
+    "train": 2,
+    "motor": 24,
+    "bike": 65,
+    "traffic light": 1439,
+    "traffic sign": 1847
+  },
+  "Unlabeled Pool": {
+    "person": 5058,
+    "rider": 265,
+    "car": 43627,
+    "truck": 1845,
+    "bus": 729,
+    "train": 9,
+    "motor": 157,
+    "bike": 437,
+    "traffic light": 11583,
+    "traffic sign": 14715
+  }
+}

@@ -48,6 +48,8 @@
   <!-- KaTeX for Math Equations -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="if(window.triggerKaTeXAutoRender) window.triggerKaTeXAutoRender();"></script>
+  <script defer src="js/math-render.js"></script>
 
   <!-- Chart.js for Interactive Charts -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -85,11 +87,14 @@
       </nav>
 
       <!-- Zone 3: Actions -->
-      <div class="flex items-center gap-3">
-        <a href="profiling-point2.html" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-[#E8F0EA] border border-[#CDE0D1] text-[#2D5A34] hover:bg-[#DCEBE0] transition-all shadow-soft-sm">
-          <span>Xem Point 2: Profiling →</span>
+      <div class="flex items-center gap-2">
+        <a href="profiling-point2.html" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#E8F0EA] border border-[#CDE0D1] text-[#2D5A34] hover:bg-[#DCEBE0] transition-all shadow-soft-sm">
+          <span>Point 2: Profiling</span>
         </a>
-        <a href="index.html" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white border border-[#E5E3DC] text-[#475254] hover:bg-[#F8F7F2] transition-all shadow-soft-sm">
+        <a href="splits-point3.html" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#E8F0EA] border border-[#CDE0D1] text-[#2D5A34] hover:bg-[#DCEBE0] transition-all shadow-soft-sm">
+          <span>Point 3: Splits →</span>
+        </a>
+        <a href="index.html" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-white border border-[#E5E3DC] text-[#475254] hover:bg-[#F8F7F2] transition-all shadow-soft-sm">
           <span>Trang Chủ</span>
         </a>
       </div>
@@ -151,6 +156,50 @@
           </div>
           <div class="text-3xl font-bold font-mono text-[#1F2627] mt-2">0.09% <span class="text-sm font-sans font-normal text-[#6B7677]">(6 ảnh)</span></div>
           <div class="text-xs text-[#475254] mt-1">Materialize bằng Symlink 0 KB dung lượng đĩa phụ trội</div>
+        </div>
+      </div>
+
+      <!-- CƠ SỞ TOÁN HỌC & CÔNG THỨC BĂM TRI GIÁC (PHASH DCT & KMV) -->
+      <div class="p-5 md:p-6 rounded-2xl bg-white border border-[#E5E3DC] shadow-soft space-y-4 mt-6">
+        <div class="flex items-center justify-between border-b border-[#E5E3DC] pb-3">
+          <span class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">CƠ SỞ TOÁN HỌC & CÔNG THỨC BĂM TRI GIÁC (PHASH DCT & KEEP-MOST-VEHICLES)</span>
+          <span class="text-[11px] font-mono text-[#6B7677]">Throughput 397 FPS trên CPU</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <!-- Form 1: 2D DCT -->
+          <div class="p-4 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC] space-y-2">
+            <div class="text-[11px] font-mono font-bold text-[#2D5A34]">1. Biến Đổi Cosine Rời Rạc 2D (DCT):</div>
+            <div class="text-center py-2 text-sm text-[#1F2627] overflow-x-auto">
+              $$F(u, v) = \frac{2}{\sqrt{MN}} C(u) C(v) \sum_{x=0}^{M-1} \sum_{y=0}^{N-1} f(x, y) \cos \left[\frac{(2x+1)u\pi}{2M}\right] \cos \left[\frac{(2y+1)v\pi}{2N}\right]$$
+            </div>
+            <div class="text-[11px] text-[#6B7677] leading-relaxed">
+              Thu nhỏ ảnh về $32 \times 32$, trích xuất $8 \times 8$ hệ số tần số thấp để tạo mã băm 64-bit kháng nhiễu.
+            </div>
+          </div>
+
+          <!-- Form 2: Hamming Distance -->
+          <div class="p-4 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC] space-y-2">
+            <div class="text-[11px] font-mono font-bold text-[#2D5A34]">2. Khoảng Cách Hamming Quét Cặp:</div>
+            <div class="text-center py-2 text-sm text-[#1F2627] overflow-x-auto">
+              $$D_H(h_A, h_B) = \sum_{i=0}^{63} \left( h_A[i] \oplus h_B[i] \right)$$
+              $$\text{Conflict Flag} \iff D_H(h_A, h_B) < \tau_{\text{dedup}} = 5 \text{ bits}$$
+            </div>
+            <div class="text-[11px] text-[#6B7677] leading-relaxed">
+              Phát hiện chính xác các khung hình trùng lặp khi dừng xe mà không cần nạp mô hình Deep Learning nặng nề.
+            </div>
+          </div>
+
+          <!-- Form 3: Keep-Most-Vehicles -->
+          <div class="p-4 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC] space-y-2">
+            <div class="text-[11px] font-mono font-bold text-[#2D5A34]">3. Hàm Giữ Đối Tượng Yếu Thế (KMV):</div>
+            <div class="text-center py-2 text-sm text-[#1F2627] overflow-x-auto">
+              $$S_{\text{KMV}}(I) = N_{\text{vehicles}}(I) + 3.0 \cdot N_{\text{vulnerable}}(I) + 0.1 \cdot \sigma^2(\nabla^2 I)$$
+              $$I^* = \arg\max_{I \in \{A, B\}} S_{\text{KMV}}(I)$$
+            </div>
+            <div class="text-[11px] text-[#6B7677] leading-relaxed">
+              Cứu sống 100% khung hình có người đi bộ và xe máy xuất hiện sau khi xe dừng đèn đỏ.
+            </div>
+          </div>
         </div>
       </div>
     </section>

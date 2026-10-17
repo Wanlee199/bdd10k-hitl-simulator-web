@@ -48,6 +48,8 @@
   <!-- KaTeX for Math Equations -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="if(window.triggerKaTeXAutoRender) window.triggerKaTeXAutoRender();"></script>
+  <script defer src="js/math-render.js"></script>
 
   <!-- Chart.js for Interactive Charts -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -85,11 +87,14 @@
       </nav>
 
       <!-- Zone 3: Actions -->
-      <div class="flex items-center gap-3">
-        <a href="fastdedup-point1.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#E8F0EA] text-[#2D5A34] hover:bg-[#DCEBE0] transition-all border border-[#CDE0D1]">
-          <span>Xem Point 1: FastDedup</span>
+      <div class="flex items-center gap-2">
+        <a href="fastdedup-point1.html" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-white border border-[#E5E3DC] text-[#475254] hover:bg-[#F8F7F2] transition-all">
+          <span>Point 1: FastDedup</span>
         </a>
-        <a href="index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-white border border-[#E5E3DC] text-[#475254] hover:bg-[#F8F7F2] transition-all">
+        <a href="splits-point3.html" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#E8F0EA] text-[#2D5A34] hover:bg-[#DCEBE0] transition-all border border-[#CDE0D1] shadow-soft-sm">
+          <span>Point 3: Splits →</span>
+        </a>
+        <a href="index.html" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-white border border-[#E5E3DC] text-[#475254] hover:bg-[#F8F7F2] transition-all">
           <span>Trang Chủ</span>
         </a>
       </div>
@@ -169,6 +174,50 @@
           <div class="text-[11px] font-mono uppercase tracking-wider text-[#6B7677]">Throughput Thực Thi</div>
           <div class="text-2xl md:text-3xl font-bold font-editorial text-[#2D5A34]">330.4 FPS</div>
           <div class="text-[11px] text-[#475254] font-mono">Toàn bộ 6.994 ảnh trong 21.16s</div>
+        </div>
+      </div>
+
+      <!-- CƠ SỞ TOÁN HỌC & CÔNG THỨC QUANG HỌC 5D CỐT LÕI -->
+      <div class="p-5 md:p-6 rounded-2xl bg-white border border-[#E5E3DC] shadow-soft space-y-4">
+        <div class="flex items-center justify-between border-b border-[#E5E3DC] pb-3">
+          <span class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">CƠ SỞ TOÁN HỌC & CHỈ SỐ QUANG HỌC 5D (OPTICAL & SPATIAL FORMULATIONS)</span>
+          <span class="text-[11px] font-mono text-[#6B7677]">5 Trục Thuộc Tính Khai Phá</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <!-- Form 1: Ánh Sáng YCbCr -->
+          <div class="p-4 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC] space-y-2">
+            <div class="text-[11px] font-mono font-bold text-[#2D5A34]">1. Phân Vị Trung Vị Ánh Sáng (P50 Y):</div>
+            <div class="text-center py-2 text-sm text-[#1F2627] overflow-x-auto">
+              $$Y(x,y) = 0.299R + 0.587G + 0.114B$$
+              $$\text{IsNight}(I) \iff P_{50}(Y) \le 45$$
+            </div>
+            <div class="text-[11px] text-[#6B7677] leading-relaxed">
+              Khử lóa đèn pha đối diện, đạt F1 = 97.12% so khớp với <em>timeofday</em> gốc.
+            </div>
+          </div>
+
+          <!-- Form 2: Độ Mờ Laplacian & Tenengrad -->
+          <div class="p-4 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC] space-y-2">
+            <div class="text-[11px] font-mono font-bold text-[#2D5A34]">2. Phương Sai Laplacian & Tần Số:</div>
+            <div class="text-center py-2 text-sm text-[#1F2627] overflow-x-auto">
+              $$\sigma^2(\nabla^2 I) = \frac{1}{|I|} \sum_{(x,y)} \left(\nabla^2 I(x,y) - \overline{\nabla^2 I}\right)^2$$
+              $$\text{Score}_{\text{blur}} = \text{Tenengrad} \times \text{Slope}_{\text{FFT2D}}$$
+            </div>
+            <div class="text-[11px] text-[#6B7677] leading-relaxed">
+              Bắt trọn 100% rung lắc quang học, đạt F1 = 100% trên tập 100 ảnh thẩm định mắt người.
+            </div>
+          </div>
+
+          <!-- Form 3: Che Khuất Đồ Thị DAG -->
+          <div class="p-4 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC] space-y-2">
+            <div class="text-[11px] font-mono font-bold text-[#2D5A34]">3. Đồ Thị Có Hướng Che Khuất (DAG):</div>
+            <div class="text-center py-2 text-sm text-[#1F2627] overflow-x-auto">
+              $$(u \to v) \in \mathcal{E} \iff \begin{cases} \text{IoU}(u, v) > 0.15 \\ y_{\text{bottom}}(u) < y_{\text{bottom}}(v) \end{cases}$$
+            </div>
+            <div class="text-[11px] text-[#6B7677] leading-relaxed">
+              Phân định vật cản trước/sau qua tọa độ chân tiếp đất, đạt F1 = 93.80% trên 70.091 hộp nhãn.
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -510,12 +559,12 @@
             <tbody class="divide-y divide-[#ECEAE2]">
               <tr class="hover:bg-[#F8F7F2]">
                 <td class="py-3 px-3 font-semibold text-[#1F2627]">1. Mean Grayscale</td>
-                <td class="py-3 px-3 text-[#475254]">&mu; &lt; 60 trung bình điểm ảnh</td>
+                <td class="py-3 px-3 text-[#475254]">$\mu < 60$ trung bình điểm ảnh</td>
                 <td class="py-3 px-3 text-right font-mono">92.41%</td>
                 <td class="py-3 px-3 text-right font-mono">88.15%</td>
                 <td class="py-3 px-3 text-right font-mono">90.23%</td>
                 <td class="py-3 px-3 text-right font-mono text-[#2D5A34]">1.240 FPS</td>
-                <td class="py-3 px-3 text-[#991B1B]">Bị đèn pha lóa làm tăng ảo &mu;, bỏ sót xe ngược chiều</td>
+                <td class="py-3 px-3 text-[#991B1B]">Bị đèn pha lóa làm tăng ảo $\mu$, bỏ sót xe ngược chiều</td>
               </tr>
               <tr class="hover:bg-[#F8F7F2]">
                 <td class="py-3 px-3 font-semibold text-[#1F2627]">2. Otsu Adaptive</td>
@@ -528,7 +577,7 @@
               </tr>
               <tr class="bg-[#E8F0EA]/60 font-semibold text-[#2D5A34]">
                 <td class="py-3 px-3 font-bold text-[#2D5A34]">3. YCbCr P50 (Quán Quân)</td>
-                <td class="py-3 px-3 text-[#1F2627]">P50(Y) &le; 45 (Trung vị phân vị)</td>
+                <td class="py-3 px-3 text-[#1F2627]">$P_{50}(Y) \le 45$ (Trung vị phân vị)</td>
                 <td class="py-3 px-3 text-right font-mono font-bold text-[#2D5A34]">96.85%</td>
                 <td class="py-3 px-3 text-right font-mono font-bold text-[#2D5A34]">97.40%</td>
                 <td class="py-3 px-3 text-right font-mono font-bold text-[#2D5A34]">97.12%</td>
@@ -571,7 +620,7 @@
             <tbody class="divide-y divide-[#ECEAE2]">
               <tr class="hover:bg-[#F8F7F2]">
                 <td class="py-3 px-3 font-semibold text-[#1F2627]">1. Laplacian Variance</td>
-                <td class="py-3 px-3 text-[#475254]">Đạo hàm bậc 2 &sigma;&sup2;(&nabla;&sup2;I)</td>
+                <td class="py-3 px-3 text-[#475254]">Đạo hàm bậc 2 $\sigma^2(\nabla^2 I)$</td>
                 <td class="py-3 px-3 text-right font-mono">92.50%</td>
                 <td class="py-3 px-3 text-right font-mono">85.00%</td>
                 <td class="py-3 px-3 text-right font-mono text-[#2D5A34]">920 FPS</td>
@@ -630,7 +679,7 @@
             <tbody class="divide-y divide-[#ECEAE2]">
               <tr class="hover:bg-[#F8F7F2]">
                 <td class="py-3 px-3 font-semibold text-[#1F2627]">1. He et al. DCP</td>
-                <td class="py-3 px-3 text-[#475254]">Dark Channel Prior min_c I^c(x)</td>
+                <td class="py-3 px-3 text-[#475254]">Dark Channel Prior $\min_{c} I^c(x)$</td>
                 <td class="py-3 px-3 text-right font-mono">11.02%</td>
                 <td class="py-3 px-3 text-right font-mono">80.51%</td>
                 <td class="py-3 px-3 text-right font-mono">19.35%</td>
@@ -692,7 +741,7 @@
             <tbody class="divide-y divide-[#ECEAE2]">
               <tr class="hover:bg-[#F8F7F2]">
                 <td class="py-3 px-3 font-semibold text-[#1F2627]">1. Naive 2D IoU Overlap</td>
-                <td class="py-3 px-3 text-[#475254]">Chỉ xét diện tích giao nhau IoU &gt; 0.15</td>
+                <td class="py-3 px-3 text-[#475254]">Chỉ xét diện tích giao nhau $\text{IoU} > 0.15$</td>
                 <td class="py-3 px-3 text-right font-mono">52.30%</td>
                 <td class="py-3 px-3 text-right font-mono">64.50%</td>
                 <td class="py-3 px-3 text-right font-mono">57.75%</td>
@@ -722,7 +771,7 @@
         </div>
 
         <div class="p-4 rounded-xl bg-[#E8F0EA] border border-[#CDE0D1] text-xs text-[#1F2627] leading-relaxed">
-          <strong class="text-[#2D5A34]">Bản chất hình học không gian:</strong> Vật thể nào đứng gần camera hơn sẽ có tọa độ chân tiếp đất thấp hơn trên mặt phẳng ảnh (y_bottom lớn hơn &rArr; đứng trước và che khuất). Thuật toán <strong>Directed DAG</strong> đạt F1 = 93.80%, vượt trội +36.05% so với Naive IoU, được trao quyền ghi trường <code class="font-mono text-[#2D5A34]">is_high_occlusion</code> phục vụ chia quota 20% che khuất cho Phase 03.
+          <strong class="text-[#2D5A34]">Bản chất hình học không gian:</strong> Vật thể nào đứng gần camera hơn sẽ có tọa độ chân tiếp đất thấp hơn trên mặt phẳng ảnh ($y_{\text{bottom}}$ lớn hơn $\Rightarrow$ đứng trước và che khuất). Thuật toán <strong>Directed DAG</strong> đạt F1 = 93.80%, vượt trội +36.05% so với Naive IoU, được trao quyền ghi trường <code class="font-mono text-[#2D5A34]">is_high_occlusion</code> phục vụ chia quota 20% che khuất cho Phase 03.
         </div>
       </div>
 

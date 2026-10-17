@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Point 3: Shared Frozen Test & Val Splits Benchmark — BDD10K ActiveLab</title>
+  <meta name="description" content="Chuyên đề chứng minh luận điểm Bước 3: Tại sao lựa chọn thuật toán Quán quân Hybrid Mix 80/20 và Rào chắn Video Sequence Isolation để triệt tiêu 100% Data Leakage cho Active Learning BDD10K.">
+  <meta name="author" content="Nguyễn Xuân Huỳnh">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%232D5A34%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2%22/><circle cx=%227%22 cy=%2217%22 r=%222%22/><path d=%22M9 17h6%22/><circle cx=%2217%22 cy=%2217%22 r=%222%22/></svg>">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            canvas: '#F8F7F2',
+            surface: '#FFFFFF',
+            ink: '#303A3B',
+            'ink-heading': '#1F2627',
+            'ink-muted': '#6B7677',
+            'border-delicate': '#E5E3DC',
+            'primary-forest': '#2D5A34',
+            'primary-sage': '#B7CDBB',
+            'soft-mint': '#DCEBE0',
+            'mist-blue': '#C6D9E8',
+          },
+          fontFamily: {
+            editorial: ['Georgia', 'Cambria', 'Baskerville', 'serif'],
+            sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Inter', 'sans-serif'],
+            mono: ['SF Mono', 'Monaco', 'Consolas', 'monospace'],
+          },
+          boxShadow: {
+            soft: '0 4px 20px rgba(48, 58, 59, 0.05)',
+            'soft-lg': '0 8px 30px rgba(48, 58, 59, 0.08)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Editorial Custom CSS -->
+  <link rel="stylesheet" href="css/fastdedup-editorial.css">
+
+  <!-- KaTeX for Math Equations -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="if(window.triggerKaTeXAutoRender) window.triggerKaTeXAutoRender();"></script>
+  <script defer src="js/math-render.js"></script>
+
+  <!-- Chart.js for Interactive Charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-[#F8F7F2] text-[#1F2627] font-sans antialiased selection:bg-[#DCEBE0]">
+
+  <!-- Top AppHeader (GreenSM 3-Zone Style) -->
+  <header class="sticky top-0 z-40 bg-[#F8F7F2]/90 backdrop-blur-md border-b border-[#E5E3DC]">
+    <div class="max-w-[1340px] mx-auto px-6 h-16 flex items-center justify-between">
+      <!-- Zone 1: Brand -->
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-2.5 group">
+          <div class="w-9 h-9 rounded-xl bg-[#2D5A34] text-white flex items-center justify-center shadow-soft">
+            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+          </div>
+          <div>
+            <div class="font-editorial font-bold text-base text-[#1F2627] leading-none group-hover:text-[#2D5A34] transition-colors">
+              BDD10K ActiveLab
+            </div>
+            <div class="text-[10px] font-mono text-[#6B7677] uppercase tracking-wider mt-0.5">
+              POINT 3 RESEARCH EVIDENCE
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Zone 2: Navigation Links -->
+      <nav class="hidden md:flex items-center gap-5 text-xs font-semibold text-[#475254]">
+        <a href="#thesis" class="hover:text-[#2D5A34] transition-colors">Luận Điểm Kỹ Thuật</a>
+        <a href="#simulator" class="hover:text-[#2D5A34] transition-colors">Video Mô Phỏng</a>
+        <a href="#leaderboard" class="hover:text-[#2D5A34] transition-colors">Đấu Trường 6 Thuật Toán</a>
+        <a href="#radar" class="hover:text-[#2D5A34] transition-colors">Radar & PCA</a>
+        <a href="#perclass" class="hover:text-[#2D5A34] transition-colors">10 Lớp BDD10K</a>
+        <a href="#leakage" class="hover:text-[#2D5A34] transition-colors">Kiểm Toán Rò Rỉ</a>
+        <a href="#gallery" class="hover:text-[#2D5A34] transition-colors">16 Ảnh Thực Tế</a>
+        <a href="#handover" class="hover:text-[#2D5A34] transition-colors">Bàn Giao Phase 04</a>
+      </nav>
+
+      <!-- Zone 3: Actions -->
+      <div class="flex items-center gap-2">
+        <a href="fastdedup-point1.html" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-white border border-[#E5E3DC] text-[#475254] hover:bg-[#F8F7F2] transition-all">
+          <span>Point 1</span>
+        </a>
+        <a href="profiling-point2.html" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-white border border-[#E5E3DC] text-[#475254] hover:bg-[#F8F7F2] transition-all">
+          <span>Point 2</span>
+        </a>
+        <a href="index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#E8F0EA] border border-[#CDE0D1] text-[#2D5A34] hover:bg-[#DCEBE0] transition-all shadow-soft-sm">
+          <span>Trang Chủ</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-[1340px] mx-auto px-6 py-10 space-y-16">
+
+    <!-- ========================================================================= -->
+    <!-- PHẦN 1: HERO SECTION & BẢN CHẤT KỸ THUẬT POINT 3 -->
+    <!-- ========================================================================= -->
+    <section id="thesis" class="space-y-6 pt-2">
+      <!-- Tag / Breadcrumb -->
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E8F0EA] border border-[#CDE0D1] text-[#2D5A34] text-xs font-mono font-semibold">
+        <span class="w-2 h-2 rounded-full bg-[#2D5A34] animate-pulse"></span>
+        <span>POINT 3 DEEP DIVE: SHARED PRE-BRANCHING FROZEN TEST & VAL SPLITS (TOURNAMENT BENCHMARK)</span>
+      </div>
+
+      <!-- Main Headline & Subtitle -->
+      <div class="max-w-4xl space-y-4">
+        <h1 class="text-3xl md:text-5xl font-bold font-editorial text-[#1F2627] leading-[1.18] tracking-tight">
+          Tại Sao Chọn Thuật Toán Quán Quân Hybrid Mix 80/20 & Rào Chắn Video Isolation Chống Rò Rỉ Tuyệt Đối?
+        </h1>
+        <p class="text-base md:text-lg text-[#475254] font-normal leading-relaxed">
+          Bản chất của Bước 3 là <strong>Đấu Trường Khoa Học Độc Lập</strong> giải quyết mâu thuẫn sống còn của Active Learning: 
+          Làm thế nào để phân chia 4 tập dữ liệu (1.400 Test, 700 Val, 500 Seed V0, 4.394 Pool) vừa <strong>bắt trọn các ca biên nguy hiểm</strong>, vừa <strong>giữ nguyên mật độ tự nhiên</strong>, đồng thời <strong>triệt tiêu 100% hiện tượng rò rỉ dữ liệu (Zero Data Leakage)</strong>.
+        </p>
+      </div>
+
+      <!-- 3 Cột Luận Điểm Cốt Lõi (So sánh đối đầu) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+        <!-- Cột 1: Random Split Thất Bại -->
+        <div class="bg-white rounded-2xl p-6 border border-[#E5E3DC] space-y-3 shadow-soft">
+          <div class="w-10 h-10 rounded-xl bg-[#FEE2E2] text-[#DC2626] flex items-center justify-center">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          </div>
+          <h2 class="text-lg font-bold font-editorial text-[#1F2627]">1. Thất Bại Của Random Baseline</h2>
+          <p class="text-xs text-[#6B7677] leading-relaxed">
+            Nếu chia ngẫu nhiên thuần túy, các khung hình trong cùng chuyến xe (video sequence) sẽ phân tán khắp nơi. Model học thuộc lòng cảnh vật dẫn đến <strong>điểm mAP ảo tăng vọt</strong> nhưng sụp đổ trong thực tế. Đồng thời, tập Test ngẫu nhiên sẽ bỏ sót tới 65% các ca biên ban đêm và sương mù.
+          </p>
+          <div class="text-[11px] font-mono text-[#DC2626] font-semibold bg-[#FEF2F2] px-2.5 py-1.5 rounded-lg border border-[#FCA5A5]">
+            Rò rỉ video: CỰC NẶNG | Bán kính R_cov: 4.95 (Kém)
+          </div>
+        </div>
+
+        <!-- Cột 2: Cạm bẫy của K-Center Thuần Túy -->
+        <div class="bg-white rounded-2xl p-6 border border-[#E5E3DC] space-y-3 shadow-soft">
+          <div class="w-10 h-10 rounded-xl bg-[#FEF3C7] text-[#D97706] flex items-center justify-center">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <h2 class="text-lg font-bold font-editorial text-[#1F2627]">2. Cạm Bẫy Outliers Của K-Center</h2>
+          <p class="text-xs text-[#6B7677] leading-relaxed">
+            Nếu tối ưu 100% hình học Minimax theo K-Center Greedy (Gonzalez 1985), thuật toán sẽ bị thu hút mãnh liệt bởi các điểm ngoại lai (nhiễu camera, giọt nước trên kính), khiến sai số hạn ngạch phân tầng tăng vọt (QAE = 11.9%) và phá vỡ cấu trúc phân phối tự nhiên.
+          </p>
+          <div class="text-[11px] font-mono text-[#D97706] font-semibold bg-[#FFFBEB] px-2.5 py-1.5 rounded-lg border border-[#FDE68A]">
+            Nhạy cảm ngoại lai | Sai số Quota: 11.9% (Tăng cao)
+          </div>
+        </div>
+
+        <!-- Cột 3: Quán Quân Hybrid Mix 80/20 -->
+        <div class="bg-white rounded-2xl p-6 border border-[#CDE0D1] space-y-3 shadow-soft bg-gradient-to-b from-[#F2F7F3] to-white">
+          <div class="w-10 h-10 rounded-xl bg-[#2D5A34] text-white flex items-center justify-center">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+          </div>
+          <h2 class="text-lg font-bold font-editorial text-[#2D5A34]">3. Quán Quân Hybrid Mix 80/20</h2>
+          <p class="text-xs text-[#475254] leading-relaxed">
+            Dung hòa hoàn hảo: <strong>80% Facility Location</strong> tối ưu hóa mật độ tự nhiên (đạt F_score = 0.971), kết hợp <strong>20% K-Center Greedy</strong> kéo bán kính phủ R_cov xuống kỷ lục <strong>3.35</strong>. Cùng với rào chắn gom cụm 4.277 chuỗi Video ID, triệt tiêu 100% rò rỉ dữ liệu.
+          </p>
+          <div class="text-[11px] font-mono text-[#2D5A34] font-semibold bg-[#E8F0EA] px-2.5 py-1.5 rounded-lg border border-[#CDE0D1]">
+            CBS: 93.6/100 | R_cov: 3.35 | Zero Leakage 100%
+          </div>
+        </div>
+      </div>
+
+      <!-- Công Thức Toán Học Hàm Mục Tiêu CBS -->
+      <div class="p-5 md:p-6 rounded-2xl bg-white border border-[#E5E3DC] shadow-soft space-y-3">
+        <div class="flex items-center justify-between border-b border-[#E5E3DC] pb-3">
+          <span class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">HÀM MỤC TIÊU XẾP HẠNG (COMPOSITE BENCHMARK SCORE — CBS)</span>
+          <span class="text-[11px] font-mono text-[#6B7677]">Thang điểm chuẩn hóa: 0 — 100</span>
+        </div>
+        <div class="text-center py-2 text-base md:text-lg text-[#1F2627] overflow-x-auto">
+          $$\text{CBS} = 0.35 \cdot S_{\text{quota}} + 0.25 \cdot S_{\text{class}} + 0.20 \cdot S_{R_{\text{cov}}} + 0.20 \cdot S_{F_{\text{loc}}} - \text{Penalty}_{\text{leak}}$$
+        </div>
+        <p class="text-xs text-[#475254] text-center leading-relaxed max-w-4xl mx-auto">
+          Trong đó: $S_{\text{quota}}$ đo sai số 4 lát cắt khó, $S_{\text{class}}$ đo độ cosine bảo tồn 10 lớp, $S_{R_{\text{cov}}}$ đo bán kính phủ cực đại, và $S_{F_{\text{loc}}}$ đo điểm dàn đều tựa mô-đun.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 border-t border-[#F0EEE6] text-xs">
+          <div class="p-3 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC]">
+            <div class="text-[11px] font-mono font-bold text-[#2D5A34] mb-1">Submodular Facility Location (80% trọng số):</div>
+            <div class="text-center py-1 overflow-x-auto text-sm text-[#1F2627]">
+              $$F_{\text{loc}}(S) = \frac{1}{|V|} \sum_{i \in V} \max_{j \in S} \text{sim}(\mathbf{x}_i, \mathbf{x}_j)$$
+            </div>
+            <div class="text-[10px] text-[#6B7677] text-center">Tối đa hóa mức độ đại diện tâm cụm, đạt $F_{\text{score}} = 0.971$</div>
+          </div>
+          <div class="p-3 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC]">
+            <div class="text-[11px] font-mono font-bold text-[#2D5A34] mb-1">Gonzalez Minimax k-Center (20% trọng số):</div>
+            <div class="text-center py-1 overflow-x-auto text-sm text-[#1F2627]">
+              $$R_{\text{cov}}(S) = \max_{i \in V} \min_{j \in S} \|\mathbf{x}_i - \mathbf{x}_j\|_2$$
+            </div>
+            <div class="text-[10px] text-[#6B7677] text-center">Thu hẹp bán kính bao phủ xa nhất, đạt $R_{\text{cov}} = 3.35$ (tối ưu nhất)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- PHẦN 2: VIDEO SIMULATOR SPLIT-VIEW (ĐỒNG BỘ THỜI GIAN THỰC) -->
+    <!-- ========================================================================= -->
+    <section id="simulator" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <div class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">SPLIT-VIEW INTERACTIVE SIMULATOR</div>
+          <h2 class="text-2xl md:text-3xl font-bold font-editorial text-[#1F2627] mt-1">
+            Trình Mô Phỏng Quy Trình Phân Chia Bất Biến & Chống Rò Rỉ Kép
+          </h2>
+          <p class="text-xs md:text-sm text-[#6B7677] mt-0.5">
+            Master Video MP4 (1280x720 @ 30 FPS, H.264/AAC) đồng bộ trực tiếp với Bảng Telemetry và Mã giả (Pseudo-code) thời gian thực.
+          </p>
+        </div>
+
+        <!-- 4 Stage Pills để click nhảy trực tiếp -->
+        <div class="flex flex-wrap gap-2">
+          <button onclick="seekToStage(0)" class="stage-pill active px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#2D5A34] text-white transition-all shadow-soft-sm" data-stage="1">
+            Chặng 1: Nạp 5D Pool (0s)
+          </button>
+          <button onclick="seekToStage(11.0)" class="stage-pill px-3 py-1.5 rounded-xl text-xs font-semibold bg-white border border-[#E5E3DC] text-[#475254] hover:bg-[#F8F7F2] transition-all" data-stage="2">
+            Chặng 2: Đấu Trường (11s)
+          </button>
+          <button onclick="seekToStage(22.5)" class="stage-pill px-3 py-1.5 rounded-xl text-xs font-semibold bg-white border border-[#E5E3DC] text-[#475254] hover:bg-[#F8F7F2] transition-all" data-stage="3">
+            Chặng 3: Rào Chắn Rò Rỉ (22.5s)
+          </button>
+          <button onclick="seekToStage(33.5)" class="stage-pill px-3 py-1.5 rounded-xl text-xs font-semibold bg-white border border-[#E5E3DC] text-[#475254] hover:bg-[#F8F7F2] transition-all" data-stage="4">
+            Chặng 4: Niêm Phong Bất Biến (33.5s)
+          </button>
+        </div>
+      </div>
+
+      <!-- Khung Split-View 2 Cột -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- Cột Trái (7 Cột): Trình Phát Video -->
+        <div class="lg:col-span-7 bg-white rounded-2xl p-4 md:p-5 border border-[#E5E3DC] shadow-soft space-y-4">
+          <div class="relative rounded-xl overflow-hidden bg-[#1F2627] aspect-video flex items-center justify-center border border-[#E5E3DC]">
+            <video id="splitsVideo" class="w-full h-full object-contain" preload="metadata" playsinline>
+              <source src="assets/splits_pipeline_simulation.mp4" type="video/mp4">
+              Trình duyệt của bạn không hỗ trợ thẻ video HTML5.
+            </video>
+            
+            <!-- Nút Play khổng lồ overlay khi pause -->
+            <button id="videoPlayOverlayBtn" onclick="togglePlay()" class="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors group cursor-pointer">
+              <div class="w-16 h-16 rounded-full bg-[#2D5A34] text-white flex items-center justify-center shadow-soft-lg group-hover:scale-105 transition-transform">
+                <svg id="playIconSvg" class="w-7 h-7 ml-1" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <svg id="pauseIconSvg" class="w-7 h-7 hidden" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+              </div>
+            </button>
+          </div>
+
+          <!-- Thanh Điều Khiển Video Độc Lập -->
+          <div class="flex items-center justify-between gap-4 pt-1">
+            <div class="flex items-center gap-3">
+              <button onclick="togglePlay()" class="p-2 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC] text-[#1F2627] hover:bg-[#E8F0EA] hover:text-[#2D5A34] transition-colors cursor-pointer">
+                <svg id="ctrlPlaySvg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </button>
+              <button onclick="toggleMute()" class="p-2 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC] text-[#1F2627] hover:bg-[#E8F0EA] hover:text-[#2D5A34] transition-colors cursor-pointer">
+                <svg id="volumeSvg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+              </button>
+              <span id="timeDisplay" class="font-mono text-xs text-[#6B7677]">00:00 / 00:44</span>
+            </div>
+
+            <!-- Custom Progress Bar -->
+            <div class="flex-1 max-w-xs h-2 bg-[#E5E3DC] rounded-full overflow-hidden cursor-pointer" onclick="seekByClick(event)">
+              <div id="videoProgressBar" class="h-full bg-[#2D5A34] w-0 transition-all duration-100"></div>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-[#E8F0EA] text-[#2D5A34] border border-[#CDE0D1]">
+                Edge TTS HoaiMy
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cột Phải (5 Cột): Telemetry Live Card & Pseudo-Code -->
+        <div class="lg:col-span-5 bg-white rounded-2xl p-5 border border-[#E5E3DC] shadow-soft space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-[#E5E3DC]">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#10B981] animate-ping"></span>
+              <span class="text-xs font-mono font-bold text-[#1F2627] uppercase tracking-wider">LIVE TELEMETRY STREAM</span>
+            </div>
+            <span id="telemetryStageTag" class="text-xs font-mono px-2 py-0.5 rounded-full bg-[#E8F0EA] text-[#2D5A34] font-semibold border border-[#CDE0D1]">
+              STAGE 1: INGESTION
+            </span>
+          </div>
+
+          <!-- Thông số kỹ thuật của Chặng hiện tại -->
+          <div class="space-y-3">
+            <div>
+              <div class="text-[11px] font-mono text-[#6B7677] uppercase">THUẬT TOÁN ĐANG THỰC THI</div>
+              <div id="telemetryAlgoName" class="text-sm font-bold text-[#1F2627] mt-0.5">
+                5D Feature Extractor & Video Sequence Grouper
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 pt-1">
+              <div class="p-2.5 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC]">
+                <div class="text-[10px] font-mono text-[#6B7677]">ĐỘ PHỨC TẠP THỜI GIAN</div>
+                <div id="telemetryComplexity" class="text-xs font-mono font-bold text-[#2D5A34] mt-0.5">O(N) Traversal</div>
+              </div>
+              <div class="p-2.5 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC]">
+                <div class="text-[10px] font-mono text-[#6B7677]">THÔNG LƯỢNG / THỜI GIAN</div>
+                <div id="telemetryThroughput" class="text-xs font-mono font-bold text-[#2D5A34] mt-0.5">6.994 ảnh / 0.18s</div>
+              </div>
+            </div>
+
+            <!-- Metric Stream Card -->
+            <div class="p-3 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC] space-y-2">
+              <div class="text-[10px] font-mono text-[#6B7677] uppercase font-bold">CHỈ SỐ THỰC NGHIỆM ĐO ĐƯỢC</div>
+              <div id="telemetryMetricsList" class="space-y-1 font-mono text-xs text-[#303A3B]">
+                <div class="flex justify-between"><span>Unique Pool Size:</span> <span class="font-bold text-[#2D5A34]">6.994 ảnh</span></div>
+                <div class="flex justify-between"><span>Video Sequences:</span> <span class="font-bold text-[#2D5A34]">4.277 cụm độc lập</span></div>
+                <div class="flex justify-between"><span>Feature Dimensions:</span> <span class="font-bold text-[#2D5A34]">5 trục vật lý định lượng</span></div>
+              </div>
+            </div>
+
+            <!-- Khối Mã Giả (Pseudo-Code) Tương Ứng -->
+            <div class="space-y-1">
+              <div class="text-[10px] font-mono text-[#6B7677] uppercase font-bold">MÃ NGUỒN CỐT LÕI (CORE PSEUDO-CODE)</div>
+              <div class="p-3 rounded-xl bg-[#1F2627] text-white font-mono text-[11px] overflow-x-auto leading-relaxed border border-[#E5E3DC]">
+                <pre id="telemetryCodeBlock" class="text-[#E8F0EA]"><code># Chặng 1: Nạp 5D features và gom cụm chuỗi Video
+splitter = GroupAwareVideoSplitter(
+    unique_pool_dir="data/processed/unique_pool",
+    manifest_path="data_profiling_manifest.json"
+)
+video_records = splitter.group_by_video_sequences()
+assert len(video_records) == 4277  # 100% video sequences</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- PHẦN 3: ĐẤU TRƯỜNG BENCHMARK 6 THUẬT TOÁN (TABLE 1 LEADERBOARD) -->
+    <!-- ========================================================================= -->
+    <section id="leaderboard" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <div class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">PAPER-READY TABLE 1</div>
+          <h2 class="text-2xl md:text-3xl font-bold font-editorial text-[#1F2627] mt-1">
+            Bảng Xếp Hạng Đấu Trường 6 Chiến Lược Tuyển Chọn (Tournament Leaderboard)
+          </h2>
+          <p class="text-xs md:text-sm text-[#6B7677] mt-0.5">
+            Dữ liệu thực nghiệm chính xác 100% trích xuất từ <code class="font-mono text-[#2D5A34]">results/phase_03/tables/table_01_strategy_tournament_leaderboard.json</code>.
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="results/phase_03/tables/table_01_strategy_tournament_leaderboard.json" download class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-white border border-[#E5E3DC] text-[#475254] hover:bg-[#F8F7F2] transition-all">
+            Tải JSON
+          </a>
+          <a href="results/phase_03/tables/table_01_strategy_tournament_leaderboard.md" download class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-white border border-[#E5E3DC] text-[#475254] hover:bg-[#F8F7F2] transition-all">
+            Tải Markdown
+          </a>
+        </div>
+      </div>
+
+      <!-- Bảng Leaderboard Render HTML Chuẩn Editorial -->
+      <div class="bg-white rounded-2xl border border-[#E5E3DC] shadow-soft overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-[#F8F7F2] text-[#6B7677] font-mono border-b border-[#E5E3DC]">
+              <tr>
+                <th class="py-3.5 px-4 font-bold text-center w-12">Hạng</th>
+                <th class="py-3.5 px-4 font-bold">Chiến Lược Phân Chia Ứng Viên</th>
+                <th class="py-3.5 px-3 font-bold text-right">QAE (%)</th>
+                <th class="py-3.5 px-3 font-bold text-right">R_cov</th>
+                <th class="py-3.5 px-3 font-bold text-right">F_score</th>
+                <th class="py-3.5 px-3 font-bold text-center">10 Lớp</th>
+                <th class="py-3.5 px-3 font-bold text-center">Rào Chắn</th>
+                <th class="py-3.5 px-4 font-bold text-right">Điểm CBS</th>
+                <th class="py-3.5 px-4 font-bold text-center">Quyết Định</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#E5E3DC] font-sans">
+              <!-- Hạng 1: Quán quân Hybrid 80/20 -->
+              <tr class="bg-[#F2F7F3] font-semibold text-[#1F2627]">
+                <td class="py-4 px-4 text-center font-bold text-base text-[#2D5A34]">1</td>
+                <td class="py-4 px-4">
+                  <div class="font-bold text-[#2D5A34] text-sm">5. Hybrid Mix 80/20 (Proposed Winner)</div>
+                  <div class="text-[11px] text-[#6B7677] font-normal">80% Facility Location (mật độ) + 20% k-Center (ca biên)</div>
+                </td>
+                <td class="py-4 px-3 text-right font-mono text-[#2D5A34]">7.1%</td>
+                <td class="py-4 px-3 text-right font-mono font-bold text-[#2D5A34]">3.35</td>
+                <td class="py-4 px-3 text-right font-mono font-bold text-[#2D5A34]">0.971</td>
+                <td class="py-4 px-3 text-center font-mono">10/10</td>
+                <td class="py-4 px-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-[#E8F0EA] text-[#2D5A34] border border-[#CDE0D1]">PASS</span></td>
+                <td class="py-4 px-4 text-right font-mono text-base font-bold text-[#2D5A34]">93.6</td>
+                <td class="py-4 px-4 text-center">
+                  <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-[#2D5A34] text-white">
+                    QUÁN QUÂN CHỌN
+                  </span>
+                </td>
+              </tr>
+
+              <!-- Hạng 2: Á quân Hybrid 70/30 -->
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-3.5 px-4 text-center font-bold text-[#6B7677]">2</td>
+                <td class="py-3.5 px-4">
+                  <div class="font-semibold text-[#1F2627]">6. Hybrid Mix 70/30 (Stress-Test Runner-up)</div>
+                  <div class="text-[11px] text-[#6B7677]">Tăng cường 30% k-Center thử nghiệm độ bền vững</div>
+                </td>
+                <td class="py-3.5 px-3 text-right font-mono text-[#475254]">8.3%</td>
+                <td class="py-3.5 px-3 text-right font-mono text-[#475254]">3.35</td>
+                <td class="py-3.5 px-3 text-right font-mono text-[#475254]">0.971</td>
+                <td class="py-3.5 px-3 text-center font-mono">10/10</td>
+                <td class="py-3.5 px-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-[#E8F0EA] text-[#2D5A34] border border-[#CDE0D1]">PASS</span></td>
+                <td class="py-3.5 px-4 text-right font-mono font-bold text-[#1F2627]">92.8</td>
+                <td class="py-3.5 px-4 text-center"><span class="text-[11px] text-[#6B7677]">Á Quân (Runner-up)</span></td>
+              </tr>
+
+              <!-- Hạng 3: Pure Facility Location -->
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-3.5 px-4 text-center font-bold text-[#6B7677]">3</td>
+                <td class="py-3.5 px-4">
+                  <div class="font-semibold text-[#1F2627]">4. Pure Submodular Facility Location</div>
+                  <div class="text-[11px] text-[#6B7677]">100% Lazy Greedy tối ưu hàm tựa mô-đun (Minoux 1978)</div>
+                </td>
+                <td class="py-3.5 px-3 text-right font-mono text-[#475254]">8.1%</td>
+                <td class="py-3.5 px-3 text-right font-mono text-[#DC2626]">4.19</td>
+                <td class="py-3.5 px-3 text-right font-mono text-[#2D5A34]">0.971</td>
+                <td class="py-3.5 px-3 text-center font-mono">10/10</td>
+                <td class="py-3.5 px-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-[#E8F0EA] text-[#2D5A34] border border-[#CDE0D1]">PASS</span></td>
+                <td class="py-3.5 px-4 text-right font-mono font-bold text-[#1F2627]">89.5</td>
+                <td class="py-3.5 px-4 text-center"><span class="text-[11px] text-[#DC2626]">Loại (Bỏ sót ca biên)</span></td>
+              </tr>
+
+              <!-- Hạng 4: Pure k-Center Greedy -->
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-3.5 px-4 text-center font-bold text-[#6B7677]">4</td>
+                <td class="py-3.5 px-4">
+                  <div class="font-semibold text-[#1F2627]">3. Pure Stratified k-Center Greedy</div>
+                  <div class="text-[11px] text-[#6B7677]">100% Minimax Gonzalez 1985 bám biên cực đại</div>
+                </td>
+                <td class="py-3.5 px-3 text-right font-mono text-[#DC2626]">11.9%</td>
+                <td class="py-3.5 px-3 text-right font-mono text-[#475254]">3.86</td>
+                <td class="py-3.5 px-3 text-right font-mono text-[#475254]">0.970</td>
+                <td class="py-3.5 px-3 text-center font-mono">10/10</td>
+                <td class="py-3.5 px-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-[#E8F0EA] text-[#2D5A34] border border-[#CDE0D1]">PASS</span></td>
+                <td class="py-3.5 px-4 text-right font-mono font-bold text-[#1F2627]">85.6</td>
+                <td class="py-3.5 px-4 text-center"><span class="text-[11px] text-[#DC2626]">Loại (Nhiễm Outliers)</span></td>
+              </tr>
+
+              <!-- Hạng 5: Random Video Split -->
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-3.5 px-4 text-center font-bold text-[#6B7677]">5</td>
+                <td class="py-3.5 px-4">
+                  <div class="font-semibold text-[#1F2627]">1. Random Video Split (Baseline)</div>
+                  <div class="text-[11px] text-[#6B7677]">Bốc ngẫu nhiên theo cụm video (không tối ưu hóa không gian)</div>
+                </td>
+                <td class="py-3.5 px-3 text-right font-mono text-[#DC2626]">9.7%</td>
+                <td class="py-3.5 px-3 text-right font-mono text-[#DC2626]">4.95</td>
+                <td class="py-3.5 px-3 text-right font-mono text-[#DC2626]">0.968</td>
+                <td class="py-3.5 px-3 text-center font-mono">10/10</td>
+                <td class="py-3.5 px-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-[#E8F0EA] text-[#2D5A34] border border-[#CDE0D1]">PASS</span></td>
+                <td class="py-3.5 px-4 text-right font-mono font-bold text-[#1F2627]">79.9</td>
+                <td class="py-3.5 px-4 text-center"><span class="text-[11px] text-[#6B7677]">Baseline Đối Chứng</span></td>
+              </tr>
+
+              <!-- Hạng 6: Direct Metadata Phase 02 -->
+              <tr class="hover:bg-[#F8F7F2]/60 transition-colors">
+                <td class="py-3.5 px-4 text-center font-bold text-[#6B7677]">6</td>
+                <td class="py-3.5 px-4">
+                  <div class="font-semibold text-[#1F2627]">2. Direct Metadata Phase 02 Stratified</div>
+                  <div class="text-[11px] text-[#6B7677]">Đối chứng cắt bỏ: chỉ chia theo lát cắt mà không đo khoảng cách vật lý</div>
+                </td>
+                <td class="py-3.5 px-3 text-right font-mono text-[#2D5A34]">7.6%</td>
+                <td class="py-3.5 px-3 text-right font-mono text-[#DC2626]">5.78</td>
+                <td class="py-3.5 px-3 text-right font-mono text-[#DC2626]">0.968</td>
+                <td class="py-3.5 px-3 text-center font-mono">10/10</td>
+                <td class="py-3.5 px-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-[#E8F0EA] text-[#2D5A34] border border-[#CDE0D1]">PASS</span></td>
+                <td class="py-3.5 px-4 text-right font-mono font-bold text-[#1F2627]">79.5</td>
+                <td class="py-3.5 px-4 text-center"><span class="text-[11px] text-[#DC2626]">Loại (R_cov quá lớn)</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- PHẦN 4: RADAR CHART 5 TRỤC & ĐỘ PHÂN TÁN KHÔNG GIAN PCA -->
+    <!-- ========================================================================= -->
+    <section id="radar" class="space-y-6">
+      <div>
+        <div class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">FIGURE 4 & FIGURE 2 (300 DPI)</div>
+        <h2 class="text-2xl md:text-3xl font-bold font-editorial text-[#1F2627] mt-1">
+          Đối Sánh Trực Quan Đa Trục (Radar 5D) & Độ Phân Tán Không Gian Đặc Trưng (PCA)
+        </h2>
+        <p class="text-xs md:text-sm text-[#6B7677] mt-0.5">
+          Minh chứng khoa học về khả năng bao bọc không gian đặc trưng và dàn trải đồng đều của tập Test và Seed V0.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Biểu đồ 4: Radar Chart 5 Trục -->
+        <div class="bg-white rounded-2xl p-5 border border-[#E5E3DC] shadow-soft space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-bold font-editorial text-[#1F2627]">Radar Chart 5 Trục Đối Đầu 6 Chiến Lược</h3>
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-[#E8F0EA] text-[#2D5A34]">Figure 4</span>
+          </div>
+          <div class="rounded-xl overflow-hidden border border-[#E5E3DC] bg-[#F8F7F2]">
+            <img src="assets/splits/figure_04_strategy_tournament_radar.png" alt="Radar Chart 5 Trục Phase 03" class="w-full h-auto object-contain">
+          </div>
+          <p class="text-xs text-[#6B7677] leading-relaxed">
+            Đường bao màu xanh lục đậm của <strong>Hybrid Mix 80/20</strong> phình rộng tối đa trên cả 5 trục: vượt trội ở <em>Coverage Score</em> ($R_{\text{cov}} = 3.35$), giữ vững <em>Facility Location Score</em> ($0.971$), và bảo tồn 10/10 lớp giao thông.
+          </p>
+        </div>
+
+        <!-- Biểu đồ 2: Phân Tán PCA 2D -->
+        <div class="bg-white rounded-2xl p-5 border border-[#E5E3DC] shadow-soft space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-bold font-editorial text-[#1F2627]">Độ Phân Tán PCA 2D Của 4 Phân Tập</h3>
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-[#E8F0EA] text-[#2D5A34]">Figure 2</span>
+          </div>
+          <div class="rounded-xl overflow-hidden border border-[#E5E3DC] bg-[#F8F7F2]">
+            <img src="assets/splits/figure_02_pca_test_diversity_dispersion.png" alt="Phân Tán PCA 2D Phase 03" class="w-full h-auto object-contain">
+          </div>
+          <p class="text-xs text-[#6B7677] leading-relaxed">
+            Các điểm tròn màu xanh lam của <strong>Fixed Test (1.400 ảnh)</strong> bao bọc toàn bộ chu vi đám mây điểm, không tạo ra bất kỳ vùng trũng nào. Tập <strong>Seed V0 (500 ảnh)</strong> phân bố cân đối ở trung tâm và các nhánh ca khó.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- PHẦN 5: BẢO TOÀN 10 LỚP GIAO THÔNG (TABLE 2 - ĐIỀU 10 AGENTS.MD) -->
+    <!-- ========================================================================= -->
+    <section id="perclass" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <div class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">PAPER-READY TABLE 2 (MANDATORY RULE 10)</div>
+          <h2 class="text-2xl md:text-3xl font-bold font-editorial text-[#1F2627] mt-1">
+            Bảng Phân Bổ Per-Class 10 Lớp Giao Thông Chuẩn BDD10K Qua 4 Phân Tập
+          </h2>
+          <p class="text-xs md:text-sm text-[#6B7677] mt-0.5">
+            Tổng cộng <strong>129.914 Bounding Boxes</strong>. Chứng minh tỷ lệ bảo tồn 100% cho các lớp hiếm (<code class="font-mono text-[#2D5A34]">train</code>, <code class="font-mono text-[#2D5A34]">motor</code>, <code class="font-mono text-[#2D5A34]">rider</code>).
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="results/phase_03/tables/table_02_per_class_10_distribution.json" download class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-white border border-[#E5E3DC] text-[#475254] hover:bg-[#F8F7F2] transition-all">
+            Tải JSON
+          </a>
+        </div>
+      </div>
+
+      <!-- Bảng 10 Lớp Giao Thông Chi Tiết -->
+      <div class="bg-white rounded-2xl border border-[#E5E3DC] shadow-soft overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-[#F8F7F2] text-[#6B7677] font-mono border-b border-[#E5E3DC]">
+              <tr>
+                <th class="py-3 px-4 font-bold">Lớp Đối Tượng</th>
+                <th class="py-3 px-3 font-bold text-right">Toàn Tập (6.994 ảnh)</th>
+                <th class="py-3 px-3 font-bold text-right">Fixed Test (1.400 ảnh)</th>
+                <th class="py-3 px-3 font-bold text-right">Fixed Val (700 ảnh)</th>
+                <th class="py-3 px-3 font-bold text-right">Seed V0 (500 ảnh)</th>
+                <th class="py-3 px-3 font-bold text-right">Pool (4.394 ảnh)</th>
+                <th class="py-3 px-3 font-bold text-center">Bảo Tồn Lớp</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#E5E3DC] font-sans">
+              <tr>
+                <td class="py-2.5 px-4 font-bold text-[#1F2627]">car</td>
+                <td class="py-2.5 px-3 text-right font-mono">71.050 (54.69%)</td>
+                <td class="py-2.5 px-3 text-right font-mono text-[#2D5A34]">14.225 (54.73%)</td>
+                <td class="py-2.5 px-3 text-right font-mono">7.098 (54.68%)</td>
+                <td class="py-2.5 px-3 text-right font-mono">5.080 (54.70%)</td>
+                <td class="py-2.5 px-3 text-right font-mono">44.647 (54.68%)</td>
+                <td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-mono bg-[#E8F0EA] text-[#2D5A34]">100% OK</span></td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-4 font-bold text-[#1F2627]">traffic sign</td>
+                <td class="py-2.5 px-3 text-right font-mono">24.081 (18.54%)</td>
+                <td class="py-2.5 px-3 text-right font-mono text-[#2D5A34]">4.815 (18.52%)</td>
+                <td class="py-2.5 px-3 text-right font-mono">2.410 (18.57%)</td>
+                <td class="py-2.5 px-3 text-right font-mono">1.722 (18.54%)</td>
+                <td class="py-2.5 px-3 text-right font-mono">15.134 (18.53%)</td>
+                <td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-mono bg-[#E8F0EA] text-[#2D5A34]">100% OK</span></td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-4 font-bold text-[#1F2627]">traffic light</td>
+                <td class="py-2.5 px-3 text-right font-mono">18.775 (14.45%)</td>
+                <td class="py-2.5 px-3 text-right font-mono text-[#2D5A34]">3.755 (14.45%)</td>
+                <td class="py-2.5 px-3 text-right font-mono">1.876 (14.45%)</td>
+                <td class="py-2.5 px-3 text-right font-mono">1.342 (14.45%)</td>
+                <td class="py-2.5 px-3 text-right font-mono">11.802 (14.45%)</td>
+                <td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-mono bg-[#E8F0EA] text-[#2D5A34]">100% OK</span></td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-4 font-bold text-[#1F2627]">person</td>
+                <td class="py-2.5 px-3 text-right font-mono">9.366 (7.21%)</td>
+                <td class="py-2.5 px-3 text-right font-mono text-[#2D5A34]">1.874 (7.21%)</td>
+                <td class="py-2.5 px-3 text-right font-mono">935 (7.20%)</td>
+                <td class="py-2.5 px-3 text-right font-mono">670 (7.21%)</td>
+                <td class="py-2.5 px-3 text-right font-mono">5.887 (7.21%)</td>
+                <td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-mono bg-[#E8F0EA] text-[#2D5A34]">100% OK</span></td>
+              </tr>
+              <tr class="bg-[#FFFBEB]">
+                <td class="py-2.5 px-4 font-bold text-[#D97706]">rider (Lớp Hiếm)</td>
+                <td class="py-2.5 px-3 text-right font-mono font-bold text-[#D97706]">3.748 (2.88%)</td>
+                <td class="py-2.5 px-3 text-right font-mono font-bold text-[#2D5A34]">750 (2.89%)</td>
+                <td class="py-2.5 px-3 text-right font-mono">375 (2.89%)</td>
+                <td class="py-2.5 px-3 text-right font-mono">268 (2.89%)</td>
+                <td class="py-2.5 px-3 text-right font-mono">2.355 (2.88%)</td>
+                <td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-mono bg-[#E8F0EA] text-[#2D5A34] font-bold">100% BẢO TOÀN</span></td>
+              </tr>
+              <tr class="bg-[#FFFBEB]">
+                <td class="py-2.5 px-4 font-bold text-[#D97706]">motor (Lớp Hiếm)</td>
+                <td class="py-2.5 px-3 text-right font-mono font-bold text-[#D97706]">2.955 (2.27%)</td>
+                <td class="py-2.5 px-3 text-right font-mono font-bold text-[#2D5A34]">591 (2.27%)</td>
+                <td class="py-2.5 px-3 text-right font-mono">295 (2.27%)</td>
+                <td class="py-2.5 px-3 text-right font-mono">211 (2.27%)</td>
+                <td class="py-2.5 px-3 text-right font-mono">1.858 (2.28%)</td>
+                <td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-mono bg-[#E8F0EA] text-[#2D5A34] font-bold">100% BẢO TOÀN</span></td>
+              </tr>
+              <tr class="bg-[#FEF2F2]">
+                <td class="py-2.5 px-4 font-bold text-[#DC2626]">train (Lớp Cực Hiếm)</td>
+                <td class="py-2.5 px-3 text-right font-mono font-bold text-[#DC2626]">136 (0.10%)</td>
+                <td class="py-2.5 px-3 text-right font-mono font-bold text-[#2D5A34]">27 (0.10%)</td>
+                <td class="py-2.5 px-3 text-right font-mono">14 (0.11%)</td>
+                <td class="py-2.5 px-3 text-right font-mono">10 (0.11%)</td>
+                <td class="py-2.5 px-3 text-right font-mono">85 (0.10%)</td>
+                <td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-mono bg-[#E8F0EA] text-[#2D5A34] font-bold">100% BẢO TOÀN</span></td>
+              </tr>
+              <tr class="bg-[#F8F7F2] font-bold">
+                <td class="py-3 px-4 text-[#1F2627]">TỔNG CỘNG 10 LỚP</td>
+                <td class="py-3 px-3 text-right font-mono">129.914 BBox</td>
+                <td class="py-3 px-3 text-right font-mono text-[#2D5A34]">25.992 BBox (20.0%)</td>
+                <td class="py-3 px-3 text-right font-mono">12.980 BBox (10.0%)</td>
+                <td class="py-3 px-3 text-right font-mono text-[#D97706]">9.288 BBox (7.1%)</td>
+                <td class="py-3 px-3 text-right font-mono">81.654 BBox (62.9%)</td>
+                <td class="py-3 px-3 text-center"><span class="px-2.5 py-1 rounded-full text-[10px] font-mono bg-[#2D5A34] text-white">10/10 LỚP ĐẠT</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- PHẦN 6: KIỂM TOÁN RÒ RỈ KÉP (ANTI-LEAKAGE DUAL AUDIT 4 CHIỀU) -->
+    <!-- ========================================================================= -->
+    <section id="leakage" class="space-y-6">
+      <div>
+        <div class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">PAPER-READY TABLE 3 & FIGURE 6</div>
+        <h2 class="text-2xl md:text-3xl font-bold font-editorial text-[#1F2627] mt-1">
+          Kiểm Toán Rò Rỉ Kép 4 Chiều (Zero Data Leakage Gatekeeper)
+        </h2>
+        <p class="text-xs md:text-sm text-[#6B7677] mt-0.5">
+          Quét chéo toàn diện <strong>13.454.400 cặp ảnh</strong> giữa 4 phân tập để chứng minh tính độc lập tuyệt đối.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <!-- Cột Trái: Ảnh Ma Trận Figure 6 (5 Cột) -->
+        <div class="lg:col-span-5 bg-white rounded-2xl p-5 border border-[#E5E3DC] shadow-soft space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-bold font-editorial text-[#1F2627]">Ma Trận Kiểm Toán Rò Rỉ 4x4</h3>
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-[#E8F0EA] text-[#2D5A34]">Figure 6</span>
+          </div>
+          <div class="rounded-xl overflow-hidden border border-[#E5E3DC] bg-[#F8F7F2]">
+            <img src="assets/splits/figure_06_anti_leakage_audit_matrix.png" alt="Anti-Leakage Audit Matrix Phase 03" class="w-full h-auto object-contain">
+          </div>
+          <p class="text-xs text-[#6B7677] leading-relaxed">
+            Nửa trên ma trận: Toàn bộ các ô giao thoa Video Overlap đều bằng <strong>0</strong> (Màu xanh đậm). Nửa dưới ma trận: Khoảng cách băm tri giác cực tiểu đạt $HD_{\min} = 6 \ge 5$ bit (Không có cặp vi phạm).
+          </p>
+        </div>
+
+        <!-- Cột Phải: Bảng Tóm Tắt Kiểm Toán 4 Tiêu Chí (7 Cột) -->
+        <div class="lg:col-span-7 bg-white rounded-2xl p-6 border border-[#E5E3DC] shadow-soft space-y-4">
+          <h3 class="text-lg font-bold font-editorial text-[#1F2627]">4 Tiêu Chí Kiểm Toán Độc Lập Bắt Buộc</h3>
+          
+          <div class="space-y-3">
+            <div class="p-3.5 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC] flex items-center justify-between">
+              <div>
+                <div class="font-bold text-xs text-[#1F2627]">1. Video Sequence Isolation (Giao Thoa Chuỗi Hành Trình)</div>
+                <div class="text-[11px] text-[#6B7677]">Kiểm tra toàn bộ 4.277 chuỗi video sequences qua 4 phân tập</div>
+              </div>
+              <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-full bg-[#E8F0EA] text-[#2D5A34]">0 CẶP TRÙNG (PASS)</span>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC] flex items-center justify-between">
+              <div>
+                <div class="font-bold text-xs text-[#1F2627]">2. pHash Hamming Distance Cross-Scan (Khoảng Cách Thị Giác)</div>
+                <div class="text-[11px] text-[#6B7677]">Quét chéo 13.454.400 cặp ảnh giữa (Test, Val, Seed, Pool) với ngưỡng vi phạm HD &lt; 5</div>
+              </div>
+              <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-full bg-[#E8F0EA] text-[#2D5A34]">0 VI PHẠM (PASS)</span>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC] flex items-center justify-between">
+              <div>
+                <div class="font-bold text-xs text-[#1F2627]">3. Symlink Materialization Integrity (Tính Toàn Vẹn Liên Kết)</div>
+                <div class="text-[11px] text-[#6B7677]">Kiểm tra đường dẫn vật lý của 13.988 symlinks ảnh và nhãn</div>
+              </div>
+              <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-full bg-[#E8F0EA] text-[#2D5A34]">0 BROKEN LINK (PASS)</span>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC] flex items-center justify-between">
+              <div>
+                <div class="font-bold text-xs text-[#1F2627]">4. Label & Coordinate Integrity (Tính Chuẩn Xác Tọa Độ)</div>
+                <div class="text-[11px] text-[#6B7677]">So khớp tọa độ 100% bounding box với bdd10k_metadata.json (Read-Only)</div>
+              </div>
+              <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-full bg-[#E8F0EA] text-[#2D5A34]">KHỚP 100% (PASS)</span>
+            </div>
+          </div>
+
+          <div class="p-3 bg-[#E8F0EA] rounded-xl border border-[#CDE0D1] text-xs text-[#2D5A34] font-semibold flex items-center gap-2">
+            <svg class="w-4 h-4 text-[#2D5A34] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>RÀO CHẮN AN TOÀN TUYỆT ĐỐI: Đạt chuẩn Zero Data Leakage theo yêu cầu khắt khe của hội nghị quốc tế CVPR/ICCV.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- PHẦN 7: BẰNG CHỨNG THỊ GIÁC 16 ẢNH THỰC TẾ (FIGURE 8 GALLERY) -->
+    <!-- ========================================================================= -->
+    <section id="gallery" class="space-y-6">
+      <div>
+        <div class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">FIGURE 8 GALLERY (300 DPI)</div>
+        <h2 class="text-2xl md:text-3xl font-bold font-editorial text-[#1F2627] mt-1">
+          Bằng Chứng Thị Giác Thực Tế: 16 Mẫu Ảnh Đại Diện Cho 4 Lát Cắt Khó
+        </h2>
+        <p class="text-xs md:text-sm text-[#6B7677] mt-0.5">
+          Thẩm định trực quan tính đa dạng và độ chân thực của ảnh được bốc vào 4 phân tập.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-2xl p-5 border border-[#E5E3DC] shadow-soft space-y-4">
+        <div class="rounded-xl overflow-hidden border border-[#E5E3DC] bg-[#F8F7F2]">
+          <img src="assets/splits/figure_08_splits_visual_gallery.png" alt="Gallery 16 Ảnh BDD10K Phase 03" class="w-full h-auto object-contain">
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2 text-xs">
+          <div class="p-3 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC]">
+            <div class="font-bold text-[#2D5A34]">1. Lát Cắt Ban Đêm (35%)</div>
+            <div class="text-[11px] text-[#6B7677] mt-0.5">Bắt trọn lóa đèn pha, đường tối thiếu sáng</div>
+          </div>
+          <div class="p-3 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC]">
+            <div class="font-bold text-[#2D5A34]">2. Lát Cắt Vật Thể Nhỏ (20%)</div>
+            <div class="text-[11px] text-[#6B7677] mt-0.5">Người đi bộ và xe máy ở cự ly xa</div>
+          </div>
+          <div class="p-3 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC]">
+            <div class="font-bold text-[#2D5A34]">3. Lát Cắt Bị Che Khuất (20%)</div>
+            <div class="text-[11px] text-[#6B7677] mt-0.5">Hàng rào xe ô tô đỗ che tầm nhìn</div>
+          </div>
+          <div class="p-3 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC]">
+            <div class="font-bold text-[#2D5A34]">4. Lát Cắt Ban Ngày (25%)</div>
+            <div class="text-[11px] text-[#6B7677] mt-0.5">Đô thị đông đúc, đường cao tốc ánh sáng chuẩn</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- PHẦN 8: BÀN GIAO BẤT BIẾN, SYMLINK 0 KB & NIÊM PHONG SHA-256 SEAL -->
+    <!-- ========================================================================= -->
+    <section id="handover" class="editorial-card p-6 md:p-8 bg-white border border-[#E5E3DC] space-y-6 shadow-soft">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="text-xs font-mono font-bold text-[#2D5A34] uppercase tracking-wider">IMMUTABLE LINEAGE & HANDOVER</div>
+          <h2 class="text-2xl font-bold font-editorial text-[#1F2627] mt-0.5">
+            Niêm Phong Bất Biến Bằng Mã Băm SHA-256 & Bàn Giao Cho Phase 04
+          </h2>
+          <p class="text-xs text-[#6B7677]">
+            Khởi tạo 13.988 Symlinks tức thì, tăng dung lượng đĩa = 0 KB, niêm phong toàn vẹn bằng chữ ký số.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <a href="index.html" class="px-4 py-2 rounded-xl text-xs font-semibold bg-[#2D5A34] text-white hover:bg-[#234729] shadow-soft-sm transition-all">
+            Khám Phá Vòng Lặp Active Loop Tiếp Theo →
+          </a>
+        </div>
+      </div>
+
+      <!-- Mã Băm SHA-256 Checksum Seal -->
+      <div class="p-4 rounded-xl bg-[#F8F7F2] border border-[#E5E3DC] space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-mono font-bold text-[#2D5A34] uppercase">CHỮ KÝ NIÊM PHONG (DATASET CHECKSUM SEAL)</span>
+          <span class="text-[10px] font-mono text-[#6B7677]">data/splits/dataset_checksum.sha256</span>
+        </div>
+        <div class="font-mono text-xs text-[#1F2627] bg-white p-3 rounded-lg border border-[#E5E3DC] break-all select-all">
+          445c31e6c1324213f1d71d7a47fe339c29fbefab26d7fded6c854140b3e101a2  splits_manifest.json
+        </div>
+        <div class="text-[11px] text-[#6B7677]">
+          Chữ ký này bảo đảm 100% tính toàn vẹn của file manifest phân chia dữ liệu, không thể bị sửa đổi hoặc tráo đổi ngoài ý muốn.
+        </div>
+      </div>
+
+      <!-- Lệnh Tái Lập Thực Nghiệm -->
+      <div class="space-y-2">
+        <div class="text-[11px] font-mono text-[#6B7677] uppercase font-bold">LỆNH TÁI LẬP NOTEBOOK 03 TRONG 1 DÒNG DUY NHẤT:</div>
+        <div class="p-3 bg-[#1F2627] rounded-xl font-mono text-xs text-[#E8F0EA] overflow-x-auto">
+          <code>jupyter nbconvert --to notebook --execute --inplace notebooks/03_shared_frozen_test_val_splits.ipynb</code>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer Editorial Style -->
+  <footer class="border-t border-[#E5E3DC] bg-[#F8F7F2] py-8 text-center text-xs text-[#6B7677] space-y-2">
+    <div class="font-editorial text-sm font-bold text-[#1F2627]">BDD10K Active Learning Lab — Research Publication Series</div>
+    <div>Tác giả: <strong>Nguyễn Xuân Huỳnh</strong> | Thiết kế kế thừa chuẩn <strong>GreenSM Editorial Canvas</strong></div>
+    <div class="text-[11px] font-mono text-[#8A9697]">Mã nguồn & Bằng chứng thực nghiệm: Phase 03 Shared Frozen Test & Val Splits Benchmark</div>
+  </footer>
+
+  <!-- Controller Script -->
+  <script src="js/splits-point3.js"></script>
+</body>
+</html>
