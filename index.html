@@ -68,7 +68,19 @@
   <script>
     window.autoResizePipelineIframe = function (iframe) {
       if (!iframe) return;
-      iframe.style.height = "3200px";
+      try {
+        if (iframe.contentDocument && iframe.contentDocument.documentElement) {
+          const doc = iframe.contentDocument;
+          const h = Math.max(doc.body ? doc.body.scrollHeight : 0, doc.documentElement ? doc.documentElement.scrollHeight : 0);
+          if (h > 1000) {
+            iframe.style.height = h + "px";
+            iframe.style.minHeight = h + "px";
+            return;
+          }
+        }
+      } catch (err) { }
+      iframe.style.height = "2950px";
+      iframe.style.minHeight = "2000px";
     };
   </script>
 
@@ -271,8 +283,7 @@
             class="flex items-center justify-between p-2 rounded-xl bg-[#E8F0EA] border border-[#2D5A34] shadow-soft-sm transition-all sidebar-item-link"
             title="Master Visualizer (8 STAGES • Đang xem)">
             <div class="flex items-center gap-2 overflow-hidden">
-              <span
-                class="text-xs font-bold text-[#2D5A34] truncate sidebar-text-expand">Master
+              <span class="text-xs font-bold text-[#2D5A34] truncate sidebar-text-expand">Master
                 Visualizer</span>
             </div>
             <span
@@ -781,8 +792,8 @@
           <!-- Khung Nhúng Trực Tiếp Master Pipeline Visualizer (Full Width & Dynamic Fit Height) -->
           <div class="relative w-full rounded-2xl border border-[#E5E3DC] shadow-soft bg-[#F9FAFB]">
             <iframe id="pipelineVisualizerIframe" src="pipeline_visualizer.html"
-              class="w-full border-0 transition-all duration-300 rounded-2xl"
-              style="width: 100%; border: none; min-height: 3200px; height: 3200px;" scrolling="no" loading="lazy"
+              class="w-full border-0 transition-[height] duration-300 rounded-2xl"
+              style="width: 100%; border: none; min-height: 2000px; height: 2950px;" scrolling="no" loading="lazy"
               allow="autoplay" onload="autoResizePipelineIframe(this)"
               title="Master Pipeline Architecture Visualizer — BDD10K ActiveLab">
             </iframe>
@@ -958,7 +969,7 @@
 
           <!-- Tầng 2: Hệ Thống Đối Chuẩn Tiến Hóa Theo Từng Vòng Lặp (Round-by-Round Showdown) -->
           <div class="pt-6 border-t border-[#E5E3DC] space-y-6">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-[#E5E3DC] pb-4">
+            <div class="flex flex-col items-left justify-between gap-3 border-b border-[#E5E3DC] pb-4">
               <div>
                 <div class="flex flex-col items-left gap-2">
                   <span class="text-sm font-mono font-bold text-[#1F2627]">

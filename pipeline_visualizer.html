@@ -2047,6 +2047,9 @@
           });
         }
       }
+
+      // Thông báo cập nhật kích thước nếu DOM thay đổi độ cao sau render step
+      debouncedNotifyParent();
     }
 
     function updateDataCounts() {
@@ -2059,13 +2062,38 @@
       }
     }
 
-    let hasReportedHeight = false;
+    // =========================================================================
+    // Dynamic Auto-Fit Height Reporting (Deadband Guard 8px + RAF Debounce)
+    // Triệt tiêu 100% vòng lặp vô hạn (Infinite Feedback Loop) do dao động sub-pixel
+    // =========================================================================
+    let lastReportedHeight = 0;
+    let resizeDebounceTimer = null;
+
     function notifyParentOfResize() {
-      if (window.parent && window.parent !== window && !hasReportedHeight) {
-        hasReportedHeight = true;
-        // Chiều cao chuẩn 3200px ôm trọn 3146px nội dung thực tế, triệt tiêu hoàn toàn layout shift và infinite loop
-        window.parent.postMessage({ type: 'PIPELINE_RESIZE', height: 3200 }, '*');
+      if (window.parent && window.parent !== window) {
+        const body = document.body;
+        const html = document.documentElement;
+        const scrollH = Math.max(
+          body ? body.scrollHeight : 0,
+          body ? body.offsetHeight : 0,
+          html ? html.clientHeight : 0,
+          html ? html.scrollHeight : 0,
+          html ? html.offsetHeight : 0
+        );
+
+        // Deadband Guard 8px: Chỉ gửi khi chênh lệch >= 8px để triệt tiêu dao động sub-pixel
+        if (scrollH > 500 && Math.abs(scrollH - lastReportedHeight) >= 8) {
+          lastReportedHeight = scrollH;
+          window.parent.postMessage({ type: 'PIPELINE_RESIZE', height: scrollH }, '*');
+        }
       }
+    }
+
+    function debouncedNotifyParent() {
+      if (resizeDebounceTimer) clearTimeout(resizeDebounceTimer);
+      resizeDebounceTimer = setTimeout(function () {
+        requestAnimationFrame(notifyParentOfResize);
+      }, 80);
     }
 
     // Window Initialization
@@ -2074,9 +2102,13 @@
       renderSlot2(10, 0);
       activateStep(1);
       setTimeout(updateLoopArrow, 100);
-      setTimeout(notifyParentOfResize, 300);
+      // Gửi chiều cao thực sau khi layout và font đã vẽ ổn định
+      setTimeout(notifyParentOfResize, 200);
+      setTimeout(notifyParentOfResize, 600);
     };
-    // TUYỆT ĐỐI KHÔNG gắn notifyParentOfResize vào window.onresize để chống infinite feedback loop!
+
+    // Lắng nghe co giãn viewport (window resize / zoom) với debounce an toàn
+    window.addEventListener('resize', debouncedNotifyParent);
   </script>
 </body>
 

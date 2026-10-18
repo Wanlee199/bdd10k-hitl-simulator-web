@@ -417,21 +417,34 @@ function showToast(message) {
 // =============================================================================
 window.autoResizePipelineIframe = function (iframe) {
   if (!iframe) return;
-  // Chiều cao tiêu chuẩn 3200px ôm trọn 3146px nội dung thực tế, triệt tiêu hoàn toàn layout shift
-  iframe.style.height = "3200px";
+  try {
+    if (iframe.contentDocument && iframe.contentDocument.documentElement) {
+      const doc = iframe.contentDocument;
+      const h = Math.max(doc.body ? doc.body.scrollHeight : 0, doc.documentElement ? doc.documentElement.scrollHeight : 0);
+      if (h > 1000) {
+        iframe.style.height = h + "px";
+        iframe.style.minHeight = h + "px";
+        return;
+      }
+    }
+  } catch (err) {}
+  iframe.style.height = "2950px";
+  iframe.style.minHeight = "2000px";
 };
 
-// Lắng nghe postMessage báo kích thước với cơ chế khóa 1 lần (Hard Lock Once) chống feedback loop
-let isPipelineHeightSet = false;
+// Lắng nghe postMessage báo kích thước động với Deadband Guard chống feedback loop
+let lastAppliedIframeHeight = 0;
 window.addEventListener("message", function (e) {
   if (e.data && e.data.type === "PIPELINE_RESIZE" && e.data.height) {
     const iframe = document.getElementById("pipelineVisualizerIframe");
-    if (iframe && !isPipelineHeightSet) {
-      isPipelineHeightSet = true;
-      // Khóa trần cứng trong khoảng [3180, 3250]px để ngăn chặn triệt để mọi hành vi cộng dồn vô hạn
-      const rawH = parseInt(e.data.height, 10) || 3200;
-      const targetH = Math.min(Math.max(rawH, 3180), 3250);
-      iframe.style.height = targetH + "px";
+    if (iframe) {
+      const rawH = parseInt(e.data.height, 10);
+      // Chỉ cập nhật nếu hợp lệ (> 1000px) và thay đổi đáng kể (>= 6px) để loại bỏ dao động sub-pixel
+      if (rawH > 1000 && Math.abs(rawH - lastAppliedIframeHeight) >= 6) {
+        lastAppliedIframeHeight = rawH;
+        iframe.style.height = rawH + "px";
+        iframe.style.minHeight = rawH + "px";
+      }
     }
   }
 });
@@ -447,10 +460,10 @@ function initIndexLab() {
     window.switchIndexRound("v5");
   }
 
-  // Khóa chiều cao cố định cho iframe visualizer
+  // Tự động căn chỉnh kích thước động cho iframe visualizer
   const pipeIframe = document.getElementById("pipelineVisualizerIframe");
-  if (pipeIframe) {
-    pipeIframe.style.height = "3200px";
+  if (pipeIframe && typeof window.autoResizePipelineIframe === "function") {
+    window.autoResizePipelineIframe(pipeIframe);
   }
 
   // Kích hoạt render KaTeX nếu có
