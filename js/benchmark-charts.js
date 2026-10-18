@@ -165,7 +165,7 @@ export class BenchmarkCharts {
     // 1. Grid lines & Y-Axis Labels (Explicitly Right-Aligned at padLeft - 14)
     ctx.textAlign = 'right';
     ctx.textBaseline = 'middle';
-    ctx.font = '600 11px "JetBrains Mono", monospace';
+    ctx.font = '600 11px "Roboto Mono", monospace';
 
     for (let m = 18; m <= 30; m += 2) {
       const y = getY(m);
@@ -200,12 +200,12 @@ export class BenchmarkCharts {
 
       // Main Iteration label
       ctx.fillStyle = isSelected ? 'var(--neon-emerald)' : 'rgba(255, 255, 255, 0.5)';
-      ctx.font = isSelected ? 'bold 12.5px "JetBrains Mono", monospace' : '11px "JetBrains Mono", monospace';
+      ctx.font = isSelected ? 'bold 12.5px "Roboto Mono", monospace' : '11px "Roboto Mono", monospace';
       ctx.fillText(`V${i}`, x, h - padBottom + 12);
 
       // Sub-label with Pool percent
       ctx.fillStyle = isSelected ? 'rgba(56, 189, 248, 0.95)' : 'rgba(255, 255, 255, 0.3)';
-      ctx.font = '9.5px "JetBrains Mono", monospace';
+      ctx.font = '9.5px "Roboto Mono", monospace';
       ctx.fillText(`${iter.poolPercent}%`, x, h - padBottom + 28);
     });
 
@@ -222,7 +222,7 @@ export class BenchmarkCharts {
 
     // Ceiling Label Badge
     ctx.fillStyle = '#fbbf24';
-    ctx.font = 'bold 11px "JetBrains Mono", monospace';
+    ctx.font = 'bold 11px "Roboto Mono", monospace';
     ctx.textAlign = 'right';
     ctx.textBaseline = 'bottom';
     ctx.fillText('100% Target Ceiling (26.85%)', w - padRight - 4, ceilingY - 6);
@@ -309,7 +309,7 @@ export class BenchmarkCharts {
       // Score Value Badge above point
       ctx.textAlign = 'center';
       ctx.textBaseline = 'bottom';
-      ctx.font = isSelected ? 'bold 12px "JetBrains Mono", monospace' : '600 10.5px "JetBrains Mono", monospace';
+      ctx.font = isSelected ? 'bold 12px "Roboto Mono", monospace' : '600 10.5px "Roboto Mono", monospace';
       ctx.fillStyle = isSelected ? '#34d399' : 'rgba(255, 255, 255, 0.85)';
 
       const badgeY = isSelected ? y - 18 : y - 8;

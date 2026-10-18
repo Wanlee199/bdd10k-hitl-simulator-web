@@ -10,6 +10,11 @@
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%232D5A34%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2%22/><circle cx=%227%22 cy=%2217%22 r=%222%22/><path d=%22M9 17h6%22/><circle cx=%2217%22 cy=%2217%22 r=%222%22/></svg>">
 
+  <!-- Google Fonts (Roboto & Roboto Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400..700;1,400..700&family=Roboto:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -29,9 +34,9 @@
             'mist-blue': '#C6D9E8',
           },
           fontFamily: {
-            editorial: ['Georgia', 'Cambria', 'Baskerville', 'serif'],
-            sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Inter', 'sans-serif'],
-            mono: ['SF Mono', 'Monaco', 'Consolas', 'monospace'],
+            editorial: ['Roboto', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+            sans: ['Roboto', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+            mono: ['Roboto Mono', 'SF Mono', 'Monaco', 'Consolas', 'monospace'],
           },
           boxShadow: {
             soft: '0 4px 20px rgba(48, 58, 59, 0.05)',
@@ -87,10 +92,22 @@
 </head>
 <body class="bg-[#F9FAFB] text-[#1F2627] font-sans antialiased selection:bg-[#DCEBE0]">
 
+  <!-- Global Page Preloader (GreenSM Nordic Editorial Style - Zero FOUC) -->
+  <div id="al-global-preloader">
+    <div class="preloader-card">
+      <div class="preloader-logo">AL</div>
+      <div class="preloader-title">BDD10K ActiveLab</div>
+      <div class="preloader-subtitle">Đang nạp dữ liệu Point 4: Seed Model V0...</div>
+      <div class="preloader-progress-track">
+        <div class="preloader-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- ========================================================================= -->
   <!-- LEFT FIXED ADMIN SIDEBAR (GreenSM Nordic Editorial Style) -->
   <!-- ========================================================================= -->
-  <aside id="app-sidebar" class="fixed inset-y-0 left-0 w-72 bg-white border-r border-[#E5E3DC] flex flex-col z-50 shadow-soft transition-all duration-300 ease-in-out">
+  <aside id="app-sidebar" class="fixed inset-y-0 left-0 w-72 bg-white border-r border-[#E5E3DC] flex flex-col z-50 shadow-soft">
         <!-- Zone 1: Sidebar Brand Header -->
     <div id="sidebar-brand-header" class="h-16 border-b border-[#E5E3DC] px-4 flex items-center justify-between shrink-0">
       <a href="index.html" class="flex items-center gap-2.5 overflow-hidden group">
@@ -119,88 +136,109 @@
     <div class="flex-1 overflow-y-auto px-4 py-4 space-y-6 no-scrollbar">
       
             <!-- Nav Group 1: 5 Phases Pipeline Rail -->
+      <!-- Nav Group 1: Các Trang Chuyên Đề Chi Tiết -->
       <div class="space-y-2">
         <div class="flex items-center justify-between text-xs font-mono font-bold text-[#475254] uppercase tracking-wider px-1 sidebar-text-expand">
-          <span>TIẾN TRÌNH 6 PHASES</span>
+          <span>Trang Chuyên Đề (Deep-Dive)</span>
           <span class="text-xs text-[#2D5A34] font-semibold">ActiveLab</span>
         </div>
         <div class="space-y-1.5">
-          <!-- Phase 01 -->
-          <a href="fastdedup-point1.html" class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F9FAFB] transition-all group sidebar-item-link" title="Phase 01: FastDedup (397 FPS)">
+          <!-- Master Visualizer (Trang Gốc) -->
+          <a href="index.html"
+            class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F9FAFB] transition-all group sidebar-item-link"
+            title="Master Visualizer (8 STAGES)">
             <div class="flex items-center gap-2 overflow-hidden">
-              <span class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-xs flex items-center justify-center shrink-0">01</span>
-              <div class="sidebar-text-expand truncate">
-                <div class="text-xs font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">FastDedup</div>
-                <div class="text-xs font-mono text-[#475254]">397 FPS • Lọc Trùng</div>
-              </div>
+              <span
+                class="text-xs font-semibold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors truncate sidebar-text-expand">Master
+                Visualizer</span>
             </div>
-            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-md bg-[#F9FAFB] text-[#475254] border border-[#E5E3DC] shrink-0 sidebar-text-expand">→</span>
+            <span
+              class="text-xs font-mono font-semibold px-2 py-1 rounded-md bg-white text-[#2D5A34] border border-[#CDE0D1] shrink-0 sidebar-text-expand">8
+              STAGES</span>
           </a>
-          <!-- Phase 02 -->
-          <a href="profiling-point2.html" class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F9FAFB] transition-all group sidebar-item-link" title="Phase 02: Profiling 5D (F1 97.1%)">
+
+          <!-- 01 FastDedup -->
+          <a href="fastdedup-point1.html"
+            class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F9FAFB] transition-all group sidebar-item-link"
+            title="Point 01: FastDedup CPU (397 FPS)">
             <div class="flex items-center gap-2 overflow-hidden">
-              <span class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-xs flex items-center justify-center shrink-0">02</span>
-              <div class="sidebar-text-expand truncate">
-                <div class="text-xs font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Profiling 5D</div>
-                <div class="text-xs font-mono text-[#475254]">F1 97.1% • Manifest</div>
-              </div>
+              <span
+                class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-xs flex items-center justify-center shrink-0">01</span>
+              <span
+                class="text-xs font-semibold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors truncate sidebar-text-expand">FastDedup CPU</span>
             </div>
-            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-md bg-[#F9FAFB] text-[#475254] border border-[#E5E3DC] shrink-0 sidebar-text-expand">→</span>
+            <span
+              class="text-xs font-mono font-semibold px-2 py-1 rounded-md bg-[#F9FAFB] text-[#2D5A34] border border-[#CDE0D1] shrink-0 sidebar-text-expand">397 FPS</span>
           </a>
-          <!-- Phase 03 -->
-          <a href="splits-point3.html" class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F9FAFB] transition-all group sidebar-item-link" title="Phase 03: Splits Seed V0 (0% Leak)">
+
+          <!-- 02 Data Profiling -->
+          <a href="profiling-point2.html"
+            class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F9FAFB] transition-all group sidebar-item-link"
+            title="Point 02: Data Profiling 5D (F1 97.1%)">
             <div class="flex items-center gap-2 overflow-hidden">
-              <span class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-xs flex items-center justify-center shrink-0">03</span>
-              <div class="sidebar-text-expand truncate">
-                <div class="text-xs font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Splits Seed V0</div>
-                <div class="text-xs font-mono text-[#475254]">Hybrid Mix 80/20</div>
-              </div>
+              <span
+                class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-xs flex items-center justify-center shrink-0">02</span>
+              <span
+                class="text-xs font-semibold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors truncate sidebar-text-expand">Data Profiling 5D</span>
             </div>
-            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-md bg-[#F9FAFB] text-[#475254] border border-[#E5E3DC] shrink-0 sidebar-text-expand">→</span>
+            <span
+              class="text-xs font-mono font-semibold px-2 py-1 rounded-md bg-[#F9FAFB] text-[#2D5A34] border border-[#CDE0D1] shrink-0 sidebar-text-expand">F1 97.1%</span>
           </a>
-          <!-- Phase 04: Active -->
-          <a href="training-point4.html" class="flex items-center justify-between p-2 rounded-xl bg-[#E8F0EA] border border-[#2D5A34] shadow-soft-sm transition-all sidebar-item-link" title="Phase 04: Training Model V0 (mAP 20.2% • Đang xem)">
+
+          <!-- 03 Frozen Splits -->
+          <a href="splits-point3.html"
+            class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F9FAFB] transition-all group sidebar-item-link"
+            title="Point 03: Frozen Splits (0% Leakage)">
             <div class="flex items-center gap-2 overflow-hidden">
-              <span class="w-6 h-6 rounded-lg bg-[#2D5A34] text-white font-mono font-bold text-xs flex items-center justify-center shrink-0">04</span>
-              <div class="sidebar-text-expand truncate">
-                <div class="text-xs font-bold text-[#2D5A34]">Training Model V0</div>
-                <div class="text-xs font-mono text-[#2D5A34]">YOLO11n 20.2%</div>
-              </div>
+              <span
+                class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-xs flex items-center justify-center shrink-0">03</span>
+              <span
+                class="text-xs font-semibold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors truncate sidebar-text-expand">Frozen Splits</span>
             </div>
-            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-md bg-white text-[#2D5A34] border border-[#CDE0D1] shrink-0 sidebar-text-expand">ĐANG XEM</span>
+            <span
+              class="text-xs font-mono font-semibold px-2 py-1 rounded-md bg-[#F9FAFB] text-[#2D5A34] border border-[#CDE0D1] shrink-0 sidebar-text-expand">0% Leak</span>
           </a>
-          <!-- Phase 05 -->
-          <a href="active-mining-point5.html" class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F9FAFB] transition-all group sidebar-item-link" title="Phase 05: Active Mining (K=250)">
+
+          <!-- 04 Seed Model V0: Active -->
+          <a href="training-point4.html"
+            class="flex items-center justify-between p-2 rounded-xl bg-[#E8F0EA] border border-[#2D5A34] shadow-soft-sm transition-all sidebar-item-link"
+            title="Point 04: Seed Model V0 (mAP 20.2% • Đang xem)">
             <div class="flex items-center gap-2 overflow-hidden">
-              <span class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-xs flex items-center justify-center shrink-0">05</span>
-              <div class="sidebar-text-expand truncate">
-                <div class="text-xs font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Active Mining</div>
-                <div class="text-xs font-mono text-[#475254]">Facility Location • K=250</div>
-              </div>
+              <span
+                class="w-6 h-6 rounded-lg bg-[#2D5A34] text-white font-mono font-bold text-xs flex items-center justify-center shrink-0">04</span>
+              <span
+                class="text-xs font-bold text-[#2D5A34] truncate sidebar-text-expand">Seed Model V0</span>
             </div>
-            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-md bg-[#F9FAFB] text-[#475254] border border-[#E5E3DC] shrink-0 sidebar-text-expand">→</span>
+            <span
+              class="text-xs font-mono font-semibold px-2 py-1 rounded-md bg-white text-[#2D5A34] border border-[#CDE0D1] shrink-0 sidebar-text-expand">mAP 20.2%</span>
           </a>
-          <!-- Phase 06 -->
-          <a href="retraining-point6.html" class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F9FAFB] transition-all group sidebar-item-link" title="Phase 06: Retraining & Eval (Prec +6.3%)">
+
+          <!-- 05 Active Mining -->
+          <a href="active-mining-point5.html"
+            class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F9FAFB] transition-all group sidebar-item-link"
+            title="Point 05: Active Mining (K=250 Super-Fusion)">
             <div class="flex items-center gap-2 overflow-hidden">
-              <span class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-xs flex items-center justify-center shrink-0">06</span>
-              <div class="sidebar-text-expand truncate">
-                <div class="text-xs font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Retraining & Eval</div>
-                <div class="text-xs font-mono text-[#475254]">A/B/C • 750 ảnh</div>
-              </div>
+              <span
+                class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-xs flex items-center justify-center shrink-0">05</span>
+              <span
+                class="text-xs font-semibold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors truncate sidebar-text-expand">Active Mining</span>
             </div>
-            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-md bg-[#F9FAFB] text-[#475254] border border-[#E5E3DC] shrink-0 sidebar-text-expand">→</span>
+            <span
+              class="text-xs font-mono font-semibold px-2 py-1 rounded-md bg-[#F9FAFB] text-[#2D5A34] border border-[#CDE0D1] shrink-0 sidebar-text-expand">K=250</span>
           </a>
-          <!-- Phase 07 -->
-          <a href="index.html" class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F9FAFB] transition-all group sidebar-item-link" title="Phase 07: Autonomous Loop (Trang Gốc)">
+
+          <!-- 06 Retraining V1 -->
+          <a href="retraining-point6.html"
+            class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E5E3DC] hover:border-[#B7CDBB] hover:bg-[#F9FAFB] transition-all group sidebar-item-link"
+            title="Point 06: Retraining V1 (Prec +6.34%)">
             <div class="flex items-center gap-2 overflow-hidden">
-              <span class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-xs flex items-center justify-center shrink-0">07</span>
-              <div class="sidebar-text-expand truncate">
-                <div class="text-xs font-bold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors">Autonomous Loop</div>
-                <div class="text-xs font-mono text-[#475254]">Trang Gốc • 6 Metrics</div>
-              </div>
+              <span
+                class="w-6 h-6 rounded-lg bg-[#F0EEE6] text-[#475254] group-hover:bg-[#2D5A34] group-hover:text-white transition-colors font-mono font-bold text-xs flex items-center justify-center shrink-0">06</span>
+              <span
+                class="text-xs font-semibold text-[#1F2627] group-hover:text-[#2D5A34] transition-colors truncate sidebar-text-expand">Retraining V1</span>
             </div>
-            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-md bg-[#F9FAFB] text-[#475254] border border-[#E5E3DC] shrink-0 sidebar-text-expand">→</span>
+            <span
+              class="text-xs font-mono font-semibold px-2 py-1 rounded-md bg-[#F9FAFB] text-[#2D5A34] border border-[#CDE0D1] shrink-0 sidebar-text-expand">Prec +6.3%</span>
           </a>
         </div>
       </div>
@@ -298,7 +336,7 @@
   <!-- ========================================================================= -->
   <!-- MAIN WRAPPER CONTAINER (pl-72 cho Sidebar layout, co giãn theo toggle) -->
   <!-- ========================================================================= -->
-  <div id="main-wrapper" class="pl-72 flex flex-col min-h-screen transition-all duration-300 ease-in-out">
+  <div id="main-wrapper" class="pl-72 flex flex-col min-h-screen">
 
   <!-- ========================================================================= -->
   <!-- TOP ADMIN HEADER (Ghim cố định, liền mạch bên phải Sidebar ml-72) -->
@@ -1019,5 +1057,6 @@
   <script src="js/training-point4.js"></script>
   <script src="js/sidebar-toggle.js"></script>
   <script src="js/media-viewer.js"></script>
+  <script src="js/page-preloader.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
    Autonomous Vehicle Mission Control / Dark Cyberpunk HUD Aesthetics
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400..700;1,400..700&family=Roboto:ital,wght@0,300..900;1,300..900&display=swap');
 
 :root {
   /* Color Palette - Deep Dark Obsidian & Cyber Accents */
@@ -44,8 +44,8 @@
   --text-crimson: #f87171;
 
   /* Fonts */
-  --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-main: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Roboto Mono', 'Fira Code', monospace;
 
   /* Elevation & Shadows */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);

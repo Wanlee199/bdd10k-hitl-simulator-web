@@ -1786,12 +1786,12 @@ const PROFILING_CANVAS_ENGINE = {
     ctx.stroke();
 
     ctx.fillStyle = active ? '#2D5A34' : '#6B7677';
-    ctx.font = 'bold 11px SF Mono, monospace';
+    ctx.font = 'bold 11px "Roboto Mono", monospace';
     ctx.textAlign = 'center';
     ctx.fillText(t1, x, y - bh/2 + 25);
 
     ctx.fillStyle = '#1F2627';
-    ctx.font = 'bold 12px Georgia, serif';
+    ctx.font = 'bold 12px Roboto, sans-serif';
     ctx.fillText(t2, x, y - bh/2 + 45);
     ctx.restore();
   },

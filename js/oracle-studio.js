@@ -117,7 +117,7 @@ export class OracleStudio {
       ctx.fillRect(0, 0, w, h);
 
       ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-      ctx.font = '12px "JetBrains Mono", monospace';
+      ctx.font = '12px "Roboto Mono", monospace';
       ctx.textAlign = 'center';
       ctx.fillText(`Đang nạp ảnh thực tế ${sample.imageName}...`, w / 2, h / 2);
       ctx.textAlign = 'start';
@@ -130,7 +130,7 @@ export class OracleStudio {
     });
 
     // 3. Draw Watermark HUD Overlay
-    ctx.font = '10px "JetBrains Mono", monospace';
+    ctx.font = '10px "Roboto Mono", monospace';
     ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
     ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
     ctx.shadowBlur = 4;
@@ -178,7 +178,7 @@ export class OracleStudio {
     ctx.fillRect(bx, by, bw, bh);
 
     // Label Badge
-    ctx.font = '10px "JetBrains Mono", monospace';
+    ctx.font = '10px "Roboto Mono", monospace';
     const displayLabel = isCorrected && box.gtLabel ? box.gtLabel : box.label;
     const statusText = isCorrected ? '✓ BDD10K GT' : isApproved ? '✓ AUTO ACC' : isTier1 ? 'AI PRE-LABEL' : '? TIER 2';
     const labelText = `${displayLabel.toUpperCase()} (${(box.conf * 100).toFixed(0)}%) ${statusText}`;
@@ -188,7 +188,7 @@ export class OracleStudio {
     ctx.fillRect(bx, by - 18, textW + 8, 18);
 
     ctx.fillStyle = '#06090f';
-    ctx.font = 'bold 9.5px "JetBrains Mono", monospace';
+    ctx.font = 'bold 9.5px "Roboto Mono", monospace';
     ctx.fillText(labelText, bx + 4, by - 5);
 
     ctx.restore();

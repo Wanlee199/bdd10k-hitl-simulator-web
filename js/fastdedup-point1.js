@@ -1583,12 +1583,12 @@ function drawCanvasFrame(t) {
   ctx.fillText(`CHẶNG ${stageNum}`, 50, 41);
 
   ctx.fillStyle = '#1F2627';
-  ctx.font = 'bold 18px Georgia, serif';
+  ctx.font = 'bold 18px Roboto, sans-serif';
   ctx.fillText(stageName, 170, 42);
 
   // Time Telemetry Right
   ctx.fillStyle = '#6B7677';
-  ctx.font = '16px Monaco, monospace';
+  ctx.font = '16px "Roboto Mono", monospace';
   ctx.fillText(`00:${String(Math.floor(t)).padStart(2, '0')} / 00:36`, W - 160, 42);
 
   // Progress Line
