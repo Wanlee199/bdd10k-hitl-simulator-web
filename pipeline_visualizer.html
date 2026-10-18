@@ -734,491 +734,531 @@
 
     <!-- ================================================================================= -->
     <!-- ROW 3: TẦNG 3 VÒNG LẶP ACTIVE & DEMO BENCHMARK (CHUNG 1 KHUNG BORDER)             -->
-    <!-- ================================================================================= -->
-    <div id="slot-2-container" class="w-full relative transition-all duration-300">
-      <div id="slot-2-card"
-        class="bg-white border-2 border-purple-300 rounded-2xl p-5 w-full flex flex-col shadow-soft relative overflow-hidden bg-purple-50/15 transition-all duration-300 space-y-4">
+    <section id="tier3-container" class="w-full relative overflow-visible pb-8">
 
-        <!-- PHẦN 1: TẦNG 3 - QUY TRÌNH VÒNG LẶP ACTIVE (1 DÒNG NGANG) -->
-        <section id="tier3-container" class="w-full relative overflow-visible pb-7">
+      <!-- DYNAMIC SVG MULTI-CONNECTOR & LOOPBACK ARROW OVERLAY -->
+      <svg id="dynamic-loop-svg" class="absolute inset-0 w-full h-full pointer-events-none z-20 overflow-visible">
+        <defs>
+          <linearGradient id="loopGradient" x1="100%" y1="0%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#e11d48" />
+            <stop offset="50%" stop-color="#d97706" />
+            <stop offset="100%" stop-color="#059669" />
+          </linearGradient>
 
-          <!-- DYNAMIC SVG LOOPBACK ARROW OVERLAY -->
-          <svg id="dynamic-loop-svg"
-            class="absolute inset-0 w-full h-full pointer-events-none z-30 overflow-visible opacity-0 transition-opacity duration-500">
-            <defs>
-              <linearGradient id="loopGradient" x1="100%" y1="0%" x2="0%" y2="0%">
-                <stop offset="0%" stop-color="#e11d48" />
-                <stop offset="50%" stop-color="#d97706" />
-                <stop offset="100%" stop-color="#059669" />
-              </linearGradient>
+          <!-- Gradient for conn-9 (Indigo -> Purple) -->
+          <linearGradient id="conn9Gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#4f46e5" />
+            <stop offset="100%" stop-color="#7c3aed" />
+          </linearGradient>
 
-              <!-- Sharp Arrowhead Marker pointing directly UP into Step 10 -->
-              <marker id="loop-arrowhead" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8"
-                orient="auto-start-reverse">
-                <path d="M 0 0 L 10 5 L 0 10 z" fill="#059669" />
-              </marker>
-            </defs>
+          <!-- Gradient for conn-15 (Emerald -> Green) -->
+          <linearGradient id="conn15Gradient" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#059669" />
+            <stop offset="100%" stop-color="#10b981" />
+          </linearGradient>
 
-            <!-- Dynamic Curved Path -->
-            <path id="loop-curve-path" d="M 0 0 C 0 0, 0 0, 0 0" fill="none" stroke="url(#loopGradient)" stroke-width="3"
-              class="loopback-dash" marker-end="url(#loop-arrowhead)" />
+          <!-- Sharp Arrowhead Marker pointing directly UP into Step 10 (Loopback) -->
+          <marker id="loop-arrowhead" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8"
+            orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#059669" />
+          </marker>
 
-            <!-- Dynamic Label along Loop Curve -->
-            <text id="loop-text-label" x="0" y="0" fill="#d97706" font-size="11"
-              font-family="JetBrains Mono, Roboto, monospace" font-weight="700" letter-spacing="0.5">
-              Vòng lặp V1 &rarr; V5 (Re-mine &amp; Retrain)
-            </text>
-          </svg>
+          <!-- Arrowhead Marker for conn-9 pointing DOWN into Step 10 -->
+          <marker id="arrow-conn9" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8"
+            orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#7c3aed" />
+          </marker>
 
-          <!-- Parent Header -->
-          <div class="flex items-center justify-between pb-3 mb-3 border-b border-purple-100">
-            <div class="flex items-center gap-2.5">
-              <span
-                class="px-2.5 py-1 rounded-md bg-purple-600 text-white font-mono font-bold text-xs sm:text-sm shadow-sm">TẦNG
-                3</span>
-              <div>
-                <h2 class="text-sm sm:text-base font-extrabold text-purple-950 uppercase tracking-wide">Vòng Lặp Active (V0 &rarr; V5)</h2>
-                <p class="text-xs sm:text-sm text-slate-500">C6 Mining, Consensus, Retraining</p>
-              </div>
-            </div>
-            <span id="active-loop-iter-tag"
-              class="text-xs sm:text-sm font-mono font-bold px-2.5 py-0.5 rounded bg-purple-100 text-purple-800 border border-purple-200">V0
-              BASELINE</span>
+          <!-- Arrowhead Marker for conn-15 pointing UP into Step 16 -->
+          <marker id="arrow-conn15" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8"
+            orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#10b981" />
+          </marker>
+        </defs>
+
+        <!-- Dynamic conn-9 background track (subtle guide) -->
+        <path id="conn-9-bg" d="M 0 0" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="3 3"
+          opacity="0.6" />
+        <!-- Dynamic conn-9 active glowing path -->
+        <path id="conn-9" d="M 0 0" fill="none" stroke="url(#conn9Gradient)" stroke-width="2.5"
+          class="glowing-dash hidden connector" marker-end="url(#arrow-conn9)" />
+
+        <!-- Dynamic conn-15 background track (subtle guide) -->
+        <path id="conn-15-bg" d="M 0 0" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="3 3"
+          opacity="0.6" />
+        <!-- Dynamic conn-15 active glowing path -->
+        <path id="conn-15" d="M 0 0" fill="none" stroke="url(#conn15Gradient)" stroke-width="2.5"
+          class="glowing-dash hidden connector" marker-end="url(#arrow-conn15)" />
+
+        <!-- Dynamic Curved Path for Recurrent Loopback -->
+        <path id="loop-curve-path" d="M 0 0 C 0 0, 0 0, 0 0" fill="none" stroke="url(#loopGradient)" stroke-width="3"
+          class="loopback-dash opacity-0 transition-opacity duration-300" marker-end="url(#loop-arrowhead)" />
+
+        <!-- Dynamic Label along Loop Curve -->
+        <text id="loop-text-label" x="0" y="0" fill="#d97706" font-size="11"
+          font-family="JetBrains Mono, Roboto, monospace" font-weight="700" letter-spacing="0.5"
+          class="opacity-0 transition-opacity duration-300">
+          Vòng lặp V1 &rarr; V5 (Re-mine &amp; Retrain)
+        </text>
+      </svg>
+
+      <!-- Parent Header -->
+      <div class="flex items-center justify-between pb-3 mb-3 border-b border-purple-100">
+        <div class="flex items-center gap-2.5">
+          <span
+            class="px-2.5 py-1 rounded-md bg-purple-600 text-white font-mono font-bold text-xs sm:text-sm shadow-sm">TẦNG
+            3</span>
+          <div>
+            <h2 class="text-sm sm:text-base font-extrabold text-purple-950 uppercase tracking-wide">Vòng Lặp Active (V0
+              &rarr; V5)</h2>
+            <p class="text-xs sm:text-sm text-slate-500">C6 Mining, Consensus, Retraining &amp; Deploy INT8</p>
           </div>
+        </div>
+        <span id="active-loop-iter-tag"
+          class="text-xs sm:text-sm font-mono font-bold px-2.5 py-0.5 rounded bg-purple-100 text-purple-800 border border-purple-200">V0
+          BASELINE</span>
+      </div>
 
-          <!-- Horizontal Steps Track (Supports smooth horizontal scroll on mobile/tablet) -->
-          <div id="tier3-scroll-track" class="overflow-x-auto pb-2 pt-1 -mx-1 px-1">
-            <div class="flex items-center min-w-[960px] lg:min-w-0 justify-between gap-1.5 sm:gap-2 relative">
+      <!-- Two-Row Steps Track -->
+      <div id="tier3-scroll-track" class="overflow-x-auto pb-4 pt-1 -mx-1 px-1">
+        <div class="min-w-[840px] lg:min-w-0 flex flex-col gap-4 relative">
 
-            <!-- Step 8: Phase 04 Seed Baseline Training -->
-            <div id="step-8" onclick="jumpToStep(8)" class="child-step-box child-step-box-h">
-              <div class="flex items-center justify-between gap-1">
-                <span
-                  class="text-[10px] sm:text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-800">PHASE
-                  04</span>
-                <span
-                  class="status-badge text-[10px] sm:text-xs font-mono font-bold px-1 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+          <!-- HÀNG 1: PHASE 04, MODEL V0 VÀ DEPLOY (CĂN 2 ĐẦU + BRIDGE Ở GIỮA) -->
+          <div class="flex items-center justify-between gap-2.5 sm:gap-4 w-full">
+
+            <!-- Nhóm Trái: Phase 04 + conn-8 + Model V0 -->
+            <div class="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+
+              <!-- Step 8: Phase 04 Seed Baseline Training -->
+              <div id="step-8" onclick="jumpToStep(8)" class="child-step-box child-step-box-h w-[150px] sm:w-[175px]">
+                <div class="flex items-center justify-between gap-1">
+                  <span
+                    class="text-[10px] sm:text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-800">PHASE
+                    04</span>
+                  <span
+                    class="status-badge text-[10px] sm:text-xs font-mono font-bold px-1 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-slate-800">
+                  <i class="fa-solid fa-graduation-cap text-indigo-600 text-xs flex-shrink-0"></i>
+                  <span class="truncate">Huấn Luyện Seed V0</span>
+                </div>
+                <div class="text-[10px] sm:text-[11px] text-slate-500 font-mono truncate">Công Thức Cfg-3 (AdamW)</div>
               </div>
-              <div class="flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-slate-800">
-                <i class="fa-solid fa-graduation-cap text-indigo-600 text-xs flex-shrink-0"></i>
-                <span class="truncate">Huấn Luyện Seed V0</span>
+
+              <!-- Connector Horizontal (8 -> 9) -->
+              <svg class="w-3 sm:w-4 h-3 text-slate-300 flex-shrink-0" overflow="visible">
+                <line x1="0" y1="6" x2="16" y2="6" stroke="currentColor" stroke-width="2" />
+                <line x1="0" y1="6" x2="16" y2="6" stroke="#7c3aed" stroke-width="2"
+                  class="glowing-dash hidden connector" id="conn-8" />
+              </svg>
+
+              <!-- Step 9: Model V0 Baseline Evaluated -->
+              <div id="step-9" onclick="jumpToStep(9)" class="child-step-box child-step-box-h w-[150px] sm:w-[175px]">
+                <div class="flex items-center justify-between gap-1">
+                  <span
+                    class="text-[10px] sm:text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700">MODEL
+                    V0</span>
+                  <span
+                    class="status-badge text-[10px] sm:text-xs font-mono font-bold px-1 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-slate-800">
+                  <i class="fa-solid fa-microchip text-sky-600 text-xs flex-shrink-0"></i>
+                  <span class="truncate">Model V0 Baseline</span>
+                </div>
+                <div class="text-[10px] sm:text-[11px] text-slate-500 font-mono font-bold truncate">20.23% mAP@50</div>
               </div>
-              <div class="text-[10px] sm:text-[11px] text-slate-500 font-mono truncate">Công Thức Cfg-3 (AdamW)</div>
+
             </div>
 
-            <!-- Connector Horizontal (8 -> 9) -->
-            <svg class="w-3 sm:w-4 h-3 text-slate-300 flex-shrink-0" overflow="visible">
-              <line x1="0" y1="6" x2="16" y2="6" stroke="currentColor" stroke-width="2" />
-              <line x1="0" y1="6" x2="16" y2="6" stroke="#7c3aed" stroke-width="2" class="glowing-dash hidden connector"
-                id="conn-8" />
-            </svg>
-
-            <!-- Step 9: Model V0 Baseline Evaluated -->
-            <div id="step-9" onclick="jumpToStep(9)" class="child-step-box child-step-box-h">
-              <div class="flex items-center justify-between gap-1">
-                <span
-                  class="text-[10px] sm:text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700">MODEL
-                  V0</span>
-                <span
-                  class="status-badge text-[10px] sm:text-xs font-mono font-bold px-1 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
-              </div>
-              <div class="flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-slate-800">
-                <i class="fa-solid fa-microchip text-sky-600 text-xs flex-shrink-0"></i>
-                <span class="truncate">Model V0 Baseline</span>
-              </div>
-              <div class="text-[10px] sm:text-[11px] text-slate-500 font-mono font-bold truncate">20.23% mAP@50</div>
-            </div>
-
-            <!-- Connector Horizontal (9 -> 10) -->
-            <svg class="w-3 sm:w-4 h-3 text-slate-300 flex-shrink-0" overflow="visible">
-              <line x1="0" y1="6" x2="16" y2="6" stroke="currentColor" stroke-width="2" />
-              <line x1="0" y1="6" x2="16" y2="6" stroke="#7c3aed" stroke-width="2" class="glowing-dash hidden connector"
-                id="conn-9" />
-            </svg>
-
-            <!-- ACTIVE RECURRENT LOOP BOUNDARY BOX (STEPS 10 -> 15) -->
-            <div
-              class="flex-[6] p-2 sm:p-2.5 rounded-xl border-2 border-dashed border-purple-300 bg-purple-100/35 relative">
+            <!-- Dải Bridge Thông Tin Điều Kiện Thoát Vòng Lặp Ở Giữa -->
+            <div class="hidden md:flex flex-1 items-center justify-center px-2">
               <div
-                class="w-full flex items-center justify-between text-xs font-mono font-bold text-purple-800 pb-1 mb-1.5 border-b border-purple-200/60">
-                <span class="flex items-center gap-1.5 text-[11px] sm:text-xs">
-                  <i class="fa-solid fa-arrows-spin text-purple-600 animate-spin"></i>
-                  KHU VỰC VÒNG LẶP ACTIVE (05 &rarr; 07)
-                </span>
-                <span id="active-batch-size-tag"
-                  class="px-2 py-0.5 rounded bg-purple-200 text-purple-900 font-bold text-[10px] sm:text-xs">+556 Ảnh /
-                  Vòng</span>
+                class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-purple-50/80 border border-purple-200/90 text-purple-900 text-xs font-mono shadow-2xs">
+                <i class="fa-solid fa-flag-checkered text-amber-500 text-xs"></i>
+                <span class="font-bold">ĐIỀU KIỆN THOÁT VÒNG:</span>
+                <span class="text-purple-700">Victory Gate &ge; 26.85% mAP &rarr; Xuất Bản INT8</span>
               </div>
+            </div>
 
-              <!-- Steps 10-15 Row -->
-              <div class="flex items-center justify-between gap-1 sm:gap-1.5 relative">
-
-                <!-- Step 10: Phase 05 Active Mining C6 Super-Fusion -->
-                <div id="step-10" onclick="jumpToStep(10)" class="child-step-box child-step-box-h">
-                  <div class="flex items-center justify-between gap-1">
-                    <span
-                      class="text-[10px] sm:text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800">PHASE
-                      05</span>
-                    <span
-                      class="status-badge text-[10px] sm:text-xs font-mono font-bold px-1 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
-                  </div>
-                  <div class="flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-slate-800">
-                    <i class="fa-solid fa-filter-circle-dollar text-amber-600 text-xs flex-shrink-0"></i>
-                    <span class="truncate">Khai Phá C6</span>
-                  </div>
-                  <div class="text-[10px] sm:text-[11px] text-slate-500 font-mono truncate">Bất Định x PCA 32D</div>
+            <!-- Nhóm Phải: Step 16 Deploy Production INT8 -->
+            <div class="flex items-center flex-shrink-0">
+              <!-- Step 16: Phase 08 Production Export & INT8 Engine -->
+              <div id="step-16" onclick="jumpToStep(16)"
+                class="child-step-box child-step-box-h w-[150px] sm:w-[175px] border-emerald-300">
+                <div class="flex items-center justify-between gap-1">
+                  <span
+                    class="text-[10px] sm:text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800">DEPLOY</span>
+                  <span
+                    class="status-badge text-[10px] sm:text-xs font-mono font-bold px-1 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
                 </div>
-
-                <!-- Connector Horizontal (10 -> 11) -->
-                <svg class="w-2.5 sm:w-3.5 h-3 text-purple-300 flex-shrink-0" overflow="visible">
-                  <line x1="0" y1="6" x2="14" y2="6" stroke="currentColor" stroke-width="2" />
-                  <line x1="0" y1="6" x2="14" y2="6" stroke="#7c3aed" stroke-width="2"
-                    class="glowing-dash hidden connector" id="conn-10" />
-                </svg>
-
-                <!-- Step 11: Consensus Router & Oracle Gold Labeling -->
-                <div id="step-11" onclick="jumpToStep(11)" class="child-step-box child-step-box-h">
-                  <div class="flex items-center justify-between gap-1">
-                    <span
-                      class="text-[10px] sm:text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-purple-100 text-purple-800">HITL</span>
-                    <span
-                      class="status-badge text-[10px] sm:text-xs font-mono font-bold px-1 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
-                  </div>
-                  <div class="flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-slate-800">
-                    <i class="fa-solid fa-user-check text-purple-600 text-xs flex-shrink-0"></i>
-                    <span class="truncate">Consensus HITL</span>
-                  </div>
-                  <div class="text-[10px] sm:text-[11px] text-slate-500 font-mono truncate">Tier 1 Gated Oracle</div>
+                <div class="flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-slate-800">
+                  <i class="fa-solid fa-rocket text-emerald-600 text-xs flex-shrink-0"></i>
+                  <span class="truncate">Xuất Bản INT8</span>
                 </div>
-
-                <!-- Connector Horizontal (11 -> 12) -->
-                <svg class="w-2.5 sm:w-3.5 h-3 text-purple-300 flex-shrink-0" overflow="visible">
-                  <line x1="0" y1="6" x2="14" y2="6" stroke="currentColor" stroke-width="2" />
-                  <line x1="0" y1="6" x2="14" y2="6" stroke="#7c3aed" stroke-width="2"
-                    class="glowing-dash hidden connector" id="conn-11" />
-                </svg>
-
-                <!-- Step 12: Cumulative Data Merge -->
-                <div id="step-12" onclick="jumpToStep(12)" class="child-step-box child-step-box-h">
-                  <div class="flex items-center justify-between gap-1">
-                    <span
-                      class="text-[10px] sm:text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800">MERGE</span>
-                    <span
-                      class="status-badge text-[10px] sm:text-xs font-mono font-bold px-1 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
-                  </div>
-                  <div class="flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-slate-800">
-                    <i class="fa-solid fa-layer-group text-emerald-600 text-xs flex-shrink-0"></i>
-                    <span class="truncate">Gộp Lũy Kế</span>
-                  </div>
-                  <div id="train-count-text" class="text-[10px] sm:text-[11px] text-slate-400 font-mono truncate">
-                    D_train(k)</div>
-                </div>
-
-                <!-- Connector Horizontal (12 -> 13) -->
-                <svg class="w-2.5 sm:w-3.5 h-3 text-purple-300 flex-shrink-0" overflow="visible">
-                  <line x1="0" y1="6" x2="14" y2="6" stroke="currentColor" stroke-width="2" />
-                  <line x1="0" y1="6" x2="14" y2="6" stroke="#7c3aed" stroke-width="2"
-                    class="glowing-dash hidden connector" id="conn-12" />
-                </svg>
-
-                <!-- Step 13: Phase 06 Adaptive Retraining -->
-                <div id="step-13" onclick="jumpToStep(13)" class="child-step-box child-step-box-h">
-                  <div class="flex items-center justify-between gap-1">
-                    <span
-                      class="text-[10px] sm:text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-sky-100 text-sky-700">PHASE
-                      06</span>
-                    <span
-                      class="status-badge text-[10px] sm:text-xs font-mono font-bold px-1 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
-                  </div>
-                  <div class="flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-slate-800">
-                    <i class="fa-solid fa-rotate text-sky-600 text-xs flex-shrink-0"></i>
-                    <span class="truncate">Tái Huấn Luyện</span>
-                  </div>
-                  <div class="text-[10px] sm:text-[11px] text-slate-500 font-mono truncate">C_w Equalizer (8 Ep)</div>
-                </div>
-
-                <!-- Connector Horizontal (13 -> 14) -->
-                <svg class="w-2.5 sm:w-3.5 h-3 text-purple-300 flex-shrink-0" overflow="visible">
-                  <line x1="0" y1="6" x2="14" y2="6" stroke="currentColor" stroke-width="2" />
-                  <line x1="0" y1="6" x2="14" y2="6" stroke="#7c3aed" stroke-width="2"
-                    class="glowing-dash hidden connector" id="conn-13" />
-                </svg>
-
-                <!-- Step 14: Phase 07 Test Set Evaluation -->
-                <div id="step-14" onclick="jumpToStep(14)" class="child-step-box child-step-box-h">
-                  <div class="flex items-center justify-between gap-1">
-                    <span
-                      class="text-[10px] sm:text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-sky-100 text-sky-700">PHASE
-                      07</span>
-                    <span
-                      class="status-badge text-[10px] sm:text-xs font-mono font-bold px-1 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
-                  </div>
-                  <div class="flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-slate-800">
-                    <i class="fa-solid fa-chart-line text-indigo-600 text-xs flex-shrink-0"></i>
-                    <span class="truncate">Đánh Giá Test Set</span>
-                  </div>
-                  <div id="current-map-text"
-                    class="text-[10px] sm:text-[11px] text-indigo-600 font-mono font-bold truncate">mAP@50: --%</div>
-                </div>
-
-                <!-- Connector Horizontal (14 -> 15) -->
-                <svg class="w-2.5 sm:w-3.5 h-3 text-purple-300 flex-shrink-0" overflow="visible">
-                  <line x1="0" y1="6" x2="14" y2="6" stroke="currentColor" stroke-width="2" />
-                  <line x1="0" y1="6" x2="14" y2="6" stroke="#7c3aed" stroke-width="2"
-                    class="glowing-dash hidden connector" id="conn-14" />
-                </svg>
-
-                <!-- Step 15: 5-Tier Stopping Barrier Checkpoint -->
-                <div id="step-15" onclick="jumpToStep(15)" class="child-step-box child-step-box-h border-rose-300">
-                  <div class="flex items-center justify-between gap-1">
-                    <span
-                      class="text-[10px] sm:text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-rose-100 text-rose-800">GATES</span>
-                    <span
-                      class="status-badge text-[10px] sm:text-xs font-mono font-bold px-1 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
-                  </div>
-                  <div class="flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-slate-800">
-                    <i class="fa-solid fa-shield-halved text-rose-600 text-xs flex-shrink-0"></i>
-                    <span class="truncate">Rào Chắn Dừng</span>
-                  </div>
-                  <div class="text-[10px] sm:text-[11px] text-slate-500 font-mono truncate">Target: 26.85%</div>
-                </div>
-
-              </div> <!-- END Steps 10-15 Row -->
-
-            </div> <!-- END ACTIVE RECURRENT LOOP BOUNDARY BOX -->
-
-            <!-- Connector Horizontal (15 -> 16) -->
-            <svg class="w-3 sm:w-4 h-3 text-slate-300 flex-shrink-0" overflow="visible">
-              <line x1="0" y1="6" x2="16" y2="6" stroke="currentColor" stroke-width="2" />
-              <line x1="0" y1="6" x2="16" y2="6" stroke="#10b981" stroke-width="2" class="glowing-dash hidden connector"
-                id="conn-15" />
-            </svg>
-
-            <!-- Step 16: Phase 08 Production Export & INT8 Engine -->
-            <div id="step-16" onclick="jumpToStep(16)" class="child-step-box child-step-box-h border-emerald-300">
-              <div class="flex items-center justify-between gap-1">
-                <span
-                  class="text-[10px] sm:text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800">DEPLOY</span>
-                <span
-                  class="status-badge text-[10px] sm:text-xs font-mono font-bold px-1 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+                <div class="text-[10px] sm:text-[11px] text-slate-500 font-mono truncate">SHA-256 Sealed</div>
               </div>
-              <div class="flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-slate-800">
-                <i class="fa-solid fa-rocket text-emerald-600 text-xs flex-shrink-0"></i>
-                <span class="truncate">Xuất Bản INT8</span>
-              </div>
-              <div class="text-[10px] sm:text-[11px] text-slate-500 font-mono truncate">SHA-256 Sealed</div>
             </div>
 
           </div>
-        </div>
-      </section>
 
-        <!-- SUBTLE DIVIDER LINE CHIA TẦNG 3 VÀ DEMO BENCHMARK TRONG CÙNG 1 KHUNG BORDER -->
-        <div class="border-t border-purple-200/80 -mx-5 my-2"></div>
-
-        <!-- PHẦN 2: SLOT 2 DEMO BENCHMARK CONSOLE -->
-
-        <!-- Slot 2 Header: Tương Tác Vòng Lặp V0 -> V5 Pills Selector -->
-        <div class="flex flex-wrap items-center justify-between pb-3 border-b border-slate-200 gap-2">
-          <div class="flex items-center gap-2.5">
-            <div id="slot2-icon-box"
-              class="w-9 h-9 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center text-base shadow-sm">
-              <i id="slot2-icon" class="fa-solid fa-chart-line"></i>
-            </div>
-            <div>
-              <div class="flex items-center gap-2">
-                <span id="slot2-phase-badge"
-                  class="px-2 py-0.5 rounded bg-purple-100 text-purple-900 text-xs sm:text-sm font-mono font-bold">PHASE
-                  05</span>
-                <span id="slot2-title"
-                  class="text-sm sm:text-base font-bold text-slate-900 tracking-wide uppercase">Active Mining C6 & Vòng
-                  Lặp Đa Chu Kỳ</span>
-              </div>
-              <div id="slot2-champion" class="text-xs sm:text-sm text-purple-700 font-mono font-bold mt-0.5">🏆 Quán
-                Quân: C6 Super-Fusion (Margin x Cw Deficit x PCA 32D)</div>
-            </div>
-          </div>
-
-          <!-- Iteration Pills Selector (V0 -> V5) -->
+          <!-- HÀNG 2: ACTIVE RECURRENT LOOP BOUNDARY BOX (STEPS 10 -> 15) -->
           <div
-            class="flex items-center bg-slate-100/90 rounded-xl p-1 border border-slate-200 shadow-2xs font-mono text-xs sm:text-sm gap-1.5">
-            <span class="text-xs sm:text-sm text-slate-400 font-bold px-1 hidden sm:inline">CHỌN VÒNG:</span>
-            <button onclick="selectIteration(0)" id="btn-iter-0"
-              class="px-2.5 py-1 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V0</button>
-            <button onclick="selectIteration(1)" id="btn-iter-1"
-              class="px-2.5 py-1 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V1</button>
-            <button onclick="selectIteration(2)" id="btn-iter-2"
-              class="px-2.5 py-1 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V2</button>
-            <button onclick="selectIteration(3)" id="btn-iter-3"
-              class="px-2.5 py-1 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V3</button>
-            <button onclick="selectIteration(4)" id="btn-iter-4"
-              class="px-2.5 py-1 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V4</button>
-            <button onclick="selectIteration(5)" id="btn-iter-5"
-              class="px-3 py-1 rounded-lg font-bold transition-all bg-emerald-600 text-white shadow-sm">V5 🏆</button>
-          </div>
-        </div>
-
-        <!-- Slot 2 Body: Layout 1 Cột Tận Dụng Khoảng Trống Trên Dưới (Giữ nguyên cấu trúc 1 cột theo yêu cầu) -->
-        <div class="flex flex-col space-y-3 my-auto py-2">
-
-          <!-- 1. KHỐI BỘ BA DỮ LIỆU NGUYÊN TỬ BIẾN ĐỔI THEO VÒNG (INPUT ➔ HANDLE ➔ OUTPUT) - FULL WIDTH -->
-          <div class="space-y-2 p-3 bg-slate-50/90 rounded-xl border border-slate-200">
-
-            <!-- 1.1 INPUT BOX -->
-            <div class="p-2.5 bg-white rounded-lg border border-slate-200 space-y-1">
-              <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-slate-800">
-                <span class="flex items-center gap-1.5">
-                  <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
-                  <span>📥 INPUT (Dữ Liệu Vòng Hiện Tại)</span>
-                </span>
-                <span id="slot2-input-source"
-                  class="text-xs sm:text-sm font-mono px-2.5 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">Unlabeled
-                  Pool: 1.691</span>
-              </div>
-              <p id="slot2-input-specs" class="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
-                Model V4 (mAP 27.20%) làm nền tảng khai phá trên kho mỏ chưa gán nhãn còn lại.
-              </p>
-              <div id="slot2-input-precond" class="text-xs sm:text-[13px] text-slate-500 font-mono">
-                Giao thức xác nhận chiến thắng (Confirmation Round Guard).
-              </div>
-            </div>
-
-            <!-- 1.2 HANDLE BOX (QUÁN QUÂN TẠI VÒNG HIỆN TẠI) -->
-            <div class="p-2.5 bg-purple-50/60 rounded-lg border border-purple-200 space-y-1">
-              <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-purple-950">
-                <span class="flex items-center gap-1.5">
-                  <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-                  <span>⚙️ HANDLE (Thuật Toán Vòng Lặp)</span>
-                </span>
-                <span id="slot2-handle-speed"
-                  class="text-xs sm:text-sm font-mono px-2.5 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">Cw(4)
-                  Steering</span>
-              </div>
-              <p id="slot2-handle-algo" class="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
-                Áp dụng C6 Super-Fusion với vector trọng số thích ứng Cw(4): train 19.88x, rider 20.88x, motor 19.64x.
-              </p>
-              <div id="slot2-handle-params" class="text-xs sm:text-[13px] text-purple-700 font-mono">
-                Đa dạng cụm PCA 32D | Submodular Facility Location | Khóa car 0.20x.
-              </div>
-            </div>
-
-            <!-- 1.3 OUTPUT & ARTIFACT BOX -->
-            <div class="p-2.5 bg-emerald-50/60 rounded-lg border border-emerald-200 space-y-1">
-              <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-emerald-900">
-                <span class="flex items-center gap-1.5">
-                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
-                  <span>📤 OUTPUT & ARTIFACT (Kết Quả Vòng Lặp)</span>
-                </span>
-                <span id="slot2-output-vol"
-                  class="text-xs sm:text-sm font-mono px-2.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">mAP@50:
-                  27.85%</span>
-              </div>
-              <p id="slot2-output-art" class="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
-                Mô hình V5 đạt 27.85% mAP@50 (Vượt trần +1.00% so với 100% Target 26.85%), tiết kiệm 40.1% ngân sách.
-              </p>
-              <div id="slot2-output-handover" class="text-xs sm:text-[13px] text-emerald-700 font-mono">
-                Artifact: `active_loop_v5_best.pt` | Niêm phong `VICTORY_CONFIRMED`.
-              </div>
-            </div>
-
-          </div>
-
-          <!-- 2. KHỐI BIỂU ĐỒ THỰC NGHIỆM, 4 METRICS & BẢNG LỚP HIẾM (NẰM DƯỚI) -->
-          <div
-            class="grid grid-cols-1 md:grid-cols-12 gap-3 p-3 bg-slate-50/90 rounded-xl border border-slate-200 items-stretch">
-
-            <!-- Nhúng Biểu Đồ Thực Nghiệm Chuẩn 300 DPI -->
+            class="w-full p-2.5 sm:p-3 rounded-xl border-2 border-dashed border-purple-300 bg-purple-100/35 relative">
             <div
-              class="md:col-span-6 relative rounded-xl overflow-hidden border border-slate-200 bg-white shadow-2xs group flex items-center justify-center min-h-[150px]">
-              <img id="slot2-img" src="assets/autonomous_loop/figure_07a_active_learning_curve.png"
-                alt="Biểu đồ vòng lặp thực nghiệm" class="w-full h-44 object-contain p-1 transition-all duration-300"
-                loading="lazy" />
-              <div
-                class="absolute inset-0 bg-slate-900/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
-                <span id="slot2-img-caption"
-                  class="px-2 py-1 rounded bg-black/75 text-white text-xs sm:text-sm font-mono font-bold text-center">
-                  Figure 07a: 4-Panel Active Curve vs 100% Target
-                </span>
-              </div>
+              class="w-full flex items-center justify-between text-xs font-mono font-bold text-purple-800 pb-1 mb-2 border-b border-purple-200/60">
+              <span class="flex items-center gap-1.5 text-[11px] sm:text-xs">
+                <i class="fa-solid fa-arrows-spin text-purple-600 animate-spin"></i>
+                KHU VỰC VÒNG LẶP ACTIVE LEARNING (GIAI ĐOẠN 05 &rarr; 07)
+              </span>
+              <span id="active-batch-size-tag"
+                class="px-2 py-0.5 rounded bg-purple-200 text-purple-900 font-bold text-[10px] sm:text-xs">+556 Ảnh /
+                Vòng</span>
             </div>
 
-            <!-- Cột Phải Dưới: 4 Metrics + Bảng Tiến Hóa Lớp Yếu Thế -->
-            <div class="md:col-span-6 flex flex-col justify-between space-y-2">
+            <!-- Steps 10-15 Row -->
+            <div class="flex items-center justify-between gap-1 sm:gap-2 relative">
 
-              <!-- 4 Thẻ Metrics Đo Lường Vĩ Mô Vòng Lặp -->
-              <div class="grid grid-cols-2 gap-2 text-center font-mono">
-                <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
-                  <div id="slot2-m1-lbl" class="text-xs sm:text-sm text-slate-500 uppercase font-semibold">mAP@50 Đỉnh
-                  </div>
-                  <div id="slot2-m1-val" class="text-base sm:text-lg font-extrabold text-emerald-700 mt-0.5">27.85%
-                  </div>
-                  <div id="slot2-m1-sub" class="text-xs sm:text-[13px] text-sky-700 font-bold">+1.00% vs Target</div>
+              <!-- Step 10: Phase 05 Active Mining C6 Super-Fusion -->
+              <div id="step-10" onclick="jumpToStep(10)" class="child-step-box child-step-box-h">
+                <div class="flex items-center justify-between gap-1">
+                  <span
+                    class="text-[10px] sm:text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800">PHASE
+                    05</span>
+                  <span
+                    class="status-badge text-[10px] sm:text-xs font-mono font-bold px-1 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
                 </div>
-                <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
-                  <div id="slot2-m2-lbl" class="text-xs sm:text-sm text-slate-500 uppercase font-semibold">mAP@50:95
-                  </div>
-                  <div id="slot2-m2-val" class="text-base sm:text-lg font-extrabold text-purple-700 mt-0.5">16.15%</div>
-                  <div id="slot2-m2-sub" class="text-xs sm:text-[13px] text-sky-700 font-bold">+0.75% vs Target</div>
+                <div class="flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-slate-800">
+                  <i class="fa-solid fa-filter-circle-dollar text-amber-600 text-xs flex-shrink-0"></i>
+                  <span class="truncate">Khai Phá C6</span>
                 </div>
-                <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
-                  <div id="slot2-m3-lbl" class="text-xs sm:text-sm text-slate-500 uppercase font-semibold">Recall</div>
-                  <div id="slot2-m3-val" class="text-base sm:text-lg font-extrabold text-emerald-700 mt-0.5">30.64%
-                  </div>
-                  <div id="slot2-m3-sub" class="text-xs sm:text-[13px] text-sky-700 font-bold">+1.14% vs Target</div>
-                </div>
-                <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
-                  <div id="slot2-m4-lbl" class="text-xs sm:text-sm text-slate-500 uppercase font-semibold">CF-Score
-                  </div>
-                  <div id="slot2-m4-val" class="text-base sm:text-lg font-extrabold text-purple-800 mt-0.5">25.18</div>
-                  <div id="slot2-m4-sub" class="text-xs sm:text-[13px] text-sky-700 font-bold">+0.97 vs Target</div>
-                </div>
+                <div class="text-[10px] sm:text-[11px] text-slate-500 font-mono truncate">Bất Định x PCA 32D</div>
               </div>
 
-              <!-- Bảng Giải Cứu Lớp Yếu Thế (Thay Đổi Theo Vòng) -->
-              <div class="p-2.5 bg-white rounded-lg border border-slate-200 space-y-1.5 font-mono text-xs sm:text-sm">
-                <div
-                  class="text-xs sm:text-sm font-bold text-slate-700 flex items-center justify-between border-b border-slate-100 pb-1">
-                  <span>Tiến Hóa Lớp Yếu Thế</span>
-                  <span id="slot2-class-round-lbl" class="text-xs sm:text-sm text-purple-700 font-bold">VÒNG 5</span>
+              <!-- Connector Horizontal (10 -> 11) -->
+              <svg class="w-2.5 sm:w-3.5 h-3 text-purple-300 flex-shrink-0" overflow="visible">
+                <line x1="0" y1="6" x2="14" y2="6" stroke="currentColor" stroke-width="2" />
+                <line x1="0" y1="6" x2="14" y2="6" stroke="#7c3aed" stroke-width="2"
+                  class="glowing-dash hidden connector" id="conn-10" />
+              </svg>
+
+              <!-- Step 11: Consensus Router & Oracle Gold Labeling -->
+              <div id="step-11" onclick="jumpToStep(11)" class="child-step-box child-step-box-h">
+                <div class="flex items-center justify-between gap-1">
+                  <span
+                    class="text-[10px] sm:text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-purple-100 text-purple-800">HITL</span>
+                  <span
+                    class="status-badge text-[10px] sm:text-xs font-mono font-bold px-1 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
                 </div>
-                <div class="grid grid-cols-2 gap-x-2 gap-y-1">
-                  <div class="flex justify-between items-center">
-                    <span class="text-slate-500">🏍️ rider:</span>
-                    <span id="slot2-cls-rider" class="font-bold text-emerald-700">10.1% (+7.9%)</span>
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="text-slate-500">🚂 train:</span>
-                    <span id="slot2-cls-train" class="font-bold text-emerald-700">16.2% (+16.2%)</span>
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="text-slate-500">🛵 motor:</span>
-                    <span id="slot2-cls-motor" class="font-bold text-emerald-700">14.8% (+12.7%)</span>
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="text-slate-500">🚗 car:</span>
-                    <span id="slot2-cls-car" class="font-bold text-slate-700">64.9% (Chuẩn)</span>
-                  </div>
+                <div class="flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-slate-800">
+                  <i class="fa-solid fa-user-check text-purple-600 text-xs flex-shrink-0"></i>
+                  <span class="truncate">Consensus HITL</span>
                 </div>
+                <div class="text-[10px] sm:text-[11px] text-slate-500 font-mono truncate">Tier 1 Gated Oracle</div>
               </div>
 
-            </div>
+              <!-- Connector Horizontal (11 -> 12) -->
+              <svg class="w-2.5 sm:w-3.5 h-3 text-purple-300 flex-shrink-0" overflow="visible">
+                <line x1="0" y1="6" x2="14" y2="6" stroke="currentColor" stroke-width="2" />
+                <line x1="0" y1="6" x2="14" y2="6" stroke="#7c3aed" stroke-width="2"
+                  class="glowing-dash hidden connector" id="conn-11" />
+              </svg>
 
-          </div>
+              <!-- Step 12: Cumulative Data Merge -->
+              <div id="step-12" onclick="jumpToStep(12)" class="child-step-box child-step-box-h">
+                <div class="flex items-center justify-between gap-1">
+                  <span
+                    class="text-[10px] sm:text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800">MERGE</span>
+                  <span
+                    class="status-badge text-[10px] sm:text-xs font-mono font-bold px-1 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-slate-800">
+                  <i class="fa-solid fa-layer-group text-emerald-600 text-xs flex-shrink-0"></i>
+                  <span class="truncate">Gộp Lũy Kế</span>
+                </div>
+                <div id="train-count-text" class="text-[10px] sm:text-[11px] text-slate-400 font-mono truncate">
+                  D_train(k)</div>
+              </div>
+
+              <!-- Connector Horizontal (12 -> 13) -->
+              <svg class="w-2.5 sm:w-3.5 h-3 text-purple-300 flex-shrink-0" overflow="visible">
+                <line x1="0" y1="6" x2="14" y2="6" stroke="currentColor" stroke-width="2" />
+                <line x1="0" y1="6" x2="14" y2="6" stroke="#7c3aed" stroke-width="2"
+                  class="glowing-dash hidden connector" id="conn-12" />
+              </svg>
+
+              <!-- Step 13: Phase 06 Adaptive Retraining -->
+              <div id="step-13" onclick="jumpToStep(13)" class="child-step-box child-step-box-h">
+                <div class="flex items-center justify-between gap-1">
+                  <span
+                    class="text-[10px] sm:text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-sky-100 text-sky-700">PHASE
+                    06</span>
+                  <span
+                    class="status-badge text-[10px] sm:text-xs font-mono font-bold px-1 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-slate-800">
+                  <i class="fa-solid fa-rotate text-sky-600 text-xs flex-shrink-0"></i>
+                  <span class="truncate">Tái Huấn Luyện</span>
+                </div>
+                <div class="text-[10px] sm:text-[11px] text-slate-500 font-mono truncate">C_w Equalizer (8 Ep)</div>
+              </div>
+
+              <!-- Connector Horizontal (13 -> 14) -->
+              <svg class="w-2.5 sm:w-3.5 h-3 text-purple-300 flex-shrink-0" overflow="visible">
+                <line x1="0" y1="6" x2="14" y2="6" stroke="currentColor" stroke-width="2" />
+                <line x1="0" y1="6" x2="14" y2="6" stroke="#7c3aed" stroke-width="2"
+                  class="glowing-dash hidden connector" id="conn-13" />
+              </svg>
+
+              <!-- Step 14: Phase 07 Test Set Evaluation -->
+              <div id="step-14" onclick="jumpToStep(14)" class="child-step-box child-step-box-h">
+                <div class="flex items-center justify-between gap-1">
+                  <span
+                    class="text-[10px] sm:text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-sky-100 text-sky-700">PHASE
+                    07</span>
+                  <span
+                    class="status-badge text-[10px] sm:text-xs font-mono font-bold px-1 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-slate-800">
+                  <i class="fa-solid fa-chart-line text-indigo-600 text-xs flex-shrink-0"></i>
+                  <span class="truncate">Đánh Giá Test Set</span>
+                </div>
+                <div id="current-map-text"
+                  class="text-[10px] sm:text-[11px] text-indigo-600 font-mono font-bold truncate">mAP@50: --%</div>
+              </div>
+
+              <!-- Connector Horizontal (14 -> 15) -->
+              <svg class="w-2.5 sm:w-3.5 h-3 text-purple-300 flex-shrink-0" overflow="visible">
+                <line x1="0" y1="6" x2="14" y2="6" stroke="currentColor" stroke-width="2" />
+                <line x1="0" y1="6" x2="14" y2="6" stroke="#7c3aed" stroke-width="2"
+                  class="glowing-dash hidden connector" id="conn-14" />
+              </svg>
+
+              <!-- Step 15: 5-Tier Stopping Barrier Checkpoint -->
+              <div id="step-15" onclick="jumpToStep(15)" class="child-step-box child-step-box-h border-rose-300">
+                <div class="flex items-center justify-between gap-1">
+                  <span
+                    class="text-[10px] sm:text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-rose-100 text-rose-800">GATES</span>
+                  <span
+                    class="status-badge text-[10px] sm:text-xs font-mono font-bold px-1 py-0.5 rounded bg-slate-100 text-slate-500">CHỜ</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-slate-800">
+                  <i class="fa-solid fa-shield-halved text-rose-600 text-xs flex-shrink-0"></i>
+                  <span class="truncate">Rào Chắn Dừng</span>
+                </div>
+                <div class="text-[10px] sm:text-[11px] text-slate-500 font-mono truncate">Target: 26.85%</div>
+              </div>
+
+            </div> <!-- END Steps 10-15 Row -->
+
+          </div> <!-- END ACTIVE RECURRENT LOOP BOUNDARY BOX -->
 
         </div>
+      </div>
+    </section>
 
-        <!-- Slot 2 Footer -->
-        <div
-          class="pt-2.5 border-t border-slate-200 flex flex-wrap items-center justify-between text-xs sm:text-sm font-mono text-slate-500 gap-1">
-          <span class="flex items-center gap-1.5">
-            <span id="slot2-stop-dot" class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span id="slot2-stop-decision-text" class="text-emerald-800 font-bold">PHÁN QUYẾT: VICTORY_CONFIRMED (Tiết
-              kiệm 40.1% nhãn)</span>
-          </span>
-          <span id="slot2-footer-tag" class="text-purple-700 font-bold">Niêm Phong Bởi AutonomousLoopOrchestrator</span>
+    <!-- PHẦN 2: SLOT 2 DEMO BENCHMARK CONSOLE -->
+
+    <!-- Slot 2 Header: Tương Tác Vòng Lặp V0 -> V5 Pills Selector -->
+    <div class="flex flex-wrap items-center justify-between pb-3 border-b border-slate-200 gap-2">
+      <div class="flex items-center gap-2.5">
+        <div id="slot2-icon-box"
+          class="w-9 h-9 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center text-base shadow-sm">
+          <i id="slot2-icon" class="fa-solid fa-chart-line"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span id="slot2-phase-badge"
+              class="px-2 py-0.5 rounded bg-purple-100 text-purple-900 text-xs sm:text-sm font-mono font-bold">PHASE
+              05</span>
+            <span id="slot2-title" class="text-sm sm:text-base font-bold text-slate-900 tracking-wide uppercase">Active
+              Mining C6 & Vòng
+              Lặp Đa Chu Kỳ</span>
+          </div>
+          <div id="slot2-champion" class="text-xs sm:text-sm text-purple-700 font-mono font-bold mt-0.5">🏆 Quán
+            Quân: C6 Super-Fusion (Margin x Cw Deficit x PCA 32D)</div>
+        </div>
+      </div>
+
+      <!-- Iteration Pills Selector (V0 -> V5) -->
+      <div
+        class="flex items-center bg-slate-100/90 rounded-xl p-1 border border-slate-200 shadow-2xs font-mono text-xs sm:text-sm gap-1.5">
+        <span class="text-xs sm:text-sm text-slate-400 font-bold px-1 hidden sm:inline">CHỌN VÒNG:</span>
+        <button onclick="selectIteration(0)" id="btn-iter-0"
+          class="px-2.5 py-1 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V0</button>
+        <button onclick="selectIteration(1)" id="btn-iter-1"
+          class="px-2.5 py-1 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V1</button>
+        <button onclick="selectIteration(2)" id="btn-iter-2"
+          class="px-2.5 py-1 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V2</button>
+        <button onclick="selectIteration(3)" id="btn-iter-3"
+          class="px-2.5 py-1 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V3</button>
+        <button onclick="selectIteration(4)" id="btn-iter-4"
+          class="px-2.5 py-1 rounded-lg font-bold transition-all text-slate-600 hover:bg-white hover:text-slate-900">V4</button>
+        <button onclick="selectIteration(5)" id="btn-iter-5"
+          class="px-3 py-1 rounded-lg font-bold transition-all bg-emerald-600 text-white shadow-sm">V5 🏆</button>
+      </div>
+    </div>
+
+    <!-- Slot 2 Body: Layout 1 Cột Tận Dụng Khoảng Trống Trên Dưới (Giữ nguyên cấu trúc 1 cột theo yêu cầu) -->
+    <div class="flex flex-col space-y-3 my-auto py-2">
+
+      <!-- 1. KHỐI BỘ BA DỮ LIỆU NGUYÊN TỬ BIẾN ĐỔI THEO VÒNG (INPUT ➔ HANDLE ➔ OUTPUT) - FULL WIDTH -->
+      <div class="space-y-2 p-3 bg-slate-50/90 rounded-xl border border-slate-200">
+
+        <!-- 1.1 INPUT BOX -->
+        <div class="p-2.5 bg-white rounded-lg border border-slate-200 space-y-1">
+          <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-slate-800">
+            <span class="flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+              <span>📥 INPUT (Dữ Liệu Vòng Hiện Tại)</span>
+            </span>
+            <span id="slot2-input-source"
+              class="text-xs sm:text-sm font-mono px-2.5 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">Unlabeled
+              Pool: 1.691</span>
+          </div>
+          <p id="slot2-input-specs" class="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
+            Model V4 (mAP 27.20%) làm nền tảng khai phá trên kho mỏ chưa gán nhãn còn lại.
+          </p>
+          <div id="slot2-input-precond" class="text-xs sm:text-[13px] text-slate-500 font-mono">
+            Giao thức xác nhận chiến thắng (Confirmation Round Guard).
+          </div>
+        </div>
+
+        <!-- 1.2 HANDLE BOX (QUÁN QUÂN TẠI VÒNG HIỆN TẠI) -->
+        <div class="p-2.5 bg-purple-50/60 rounded-lg border border-purple-200 space-y-1">
+          <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-purple-950">
+            <span class="flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+              <span>⚙️ HANDLE (Thuật Toán Vòng Lặp)</span>
+            </span>
+            <span id="slot2-handle-speed"
+              class="text-xs sm:text-sm font-mono px-2.5 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">Cw(4)
+              Steering</span>
+          </div>
+          <p id="slot2-handle-algo" class="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
+            Áp dụng C6 Super-Fusion với vector trọng số thích ứng Cw(4): train 19.88x, rider 20.88x, motor 19.64x.
+          </p>
+          <div id="slot2-handle-params" class="text-xs sm:text-[13px] text-purple-700 font-mono">
+            Đa dạng cụm PCA 32D | Submodular Facility Location | Khóa car 0.20x.
+          </div>
+        </div>
+
+        <!-- 1.3 OUTPUT & ARTIFACT BOX -->
+        <div class="p-2.5 bg-emerald-50/60 rounded-lg border border-emerald-200 space-y-1">
+          <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-emerald-900">
+            <span class="flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+              <span>📤 OUTPUT & ARTIFACT (Kết Quả Vòng Lặp)</span>
+            </span>
+            <span id="slot2-output-vol"
+              class="text-xs sm:text-sm font-mono px-2.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">mAP@50:
+              27.85%</span>
+          </div>
+          <p id="slot2-output-art" class="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
+            Mô hình V5 đạt 27.85% mAP@50 (Vượt trần +1.00% so với 100% Target 26.85%), tiết kiệm 40.1% ngân sách.
+          </p>
+          <div id="slot2-output-handover" class="text-xs sm:text-[13px] text-emerald-700 font-mono">
+            Artifact: `active_loop_v5_best.pt` | Niêm phong `VICTORY_CONFIRMED`.
+          </div>
         </div>
 
       </div>
+
+      <!-- 2. KHỐI BIỂU ĐỒ THỰC NGHIỆM, 4 METRICS & BẢNG LỚP HIẾM (NẰM DƯỚI) -->
+      <div
+        class="grid grid-cols-1 md:grid-cols-12 gap-3 p-3 bg-slate-50/90 rounded-xl border border-slate-200 items-stretch">
+
+        <!-- Nhúng Biểu Đồ Thực Nghiệm Chuẩn 300 DPI -->
+        <div
+          class="md:col-span-6 relative rounded-xl overflow-hidden border border-slate-200 bg-white shadow-2xs group flex items-center justify-center min-h-[150px]">
+          <img id="slot2-img" src="assets/autonomous_loop/figure_07a_active_learning_curve.png"
+            alt="Biểu đồ vòng lặp thực nghiệm" class="w-full h-44 object-contain p-1 transition-all duration-300"
+            loading="lazy" />
+          <div
+            class="absolute inset-0 bg-slate-900/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+            <span id="slot2-img-caption"
+              class="px-2 py-1 rounded bg-black/75 text-white text-xs sm:text-sm font-mono font-bold text-center">
+              Figure 07a: 4-Panel Active Curve vs 100% Target
+            </span>
+          </div>
+        </div>
+
+        <!-- Cột Phải Dưới: 4 Metrics + Bảng Tiến Hóa Lớp Yếu Thế -->
+        <div class="md:col-span-6 flex flex-col justify-between space-y-2">
+
+          <!-- 4 Thẻ Metrics Đo Lường Vĩ Mô Vòng Lặp -->
+          <div class="grid grid-cols-2 gap-2 text-center font-mono">
+            <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
+              <div id="slot2-m1-lbl" class="text-xs sm:text-sm text-slate-500 uppercase font-semibold">mAP@50 Đỉnh
+              </div>
+              <div id="slot2-m1-val" class="text-base sm:text-lg font-extrabold text-emerald-700 mt-0.5">27.85%
+              </div>
+              <div id="slot2-m1-sub" class="text-xs sm:text-[13px] text-sky-700 font-bold">+1.00% vs Target</div>
+            </div>
+            <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
+              <div id="slot2-m2-lbl" class="text-xs sm:text-sm text-slate-500 uppercase font-semibold">mAP@50:95
+              </div>
+              <div id="slot2-m2-val" class="text-base sm:text-lg font-extrabold text-purple-700 mt-0.5">16.15%</div>
+              <div id="slot2-m2-sub" class="text-xs sm:text-[13px] text-sky-700 font-bold">+0.75% vs Target</div>
+            </div>
+            <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
+              <div id="slot2-m3-lbl" class="text-xs sm:text-sm text-slate-500 uppercase font-semibold">Recall</div>
+              <div id="slot2-m3-val" class="text-base sm:text-lg font-extrabold text-emerald-700 mt-0.5">30.64%
+              </div>
+              <div id="slot2-m3-sub" class="text-xs sm:text-[13px] text-sky-700 font-bold">+1.14% vs Target</div>
+            </div>
+            <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-center">
+              <div id="slot2-m4-lbl" class="text-xs sm:text-sm text-slate-500 uppercase font-semibold">CF-Score
+              </div>
+              <div id="slot2-m4-val" class="text-base sm:text-lg font-extrabold text-purple-800 mt-0.5">25.18</div>
+              <div id="slot2-m4-sub" class="text-xs sm:text-[13px] text-sky-700 font-bold">+0.97 vs Target</div>
+            </div>
+          </div>
+
+          <!-- Bảng Giải Cứu Lớp Yếu Thế (Thay Đổi Theo Vòng) -->
+          <div class="p-2.5 bg-white rounded-lg border border-slate-200 space-y-1.5 font-mono text-xs sm:text-sm">
+            <div
+              class="text-xs sm:text-sm font-bold text-slate-700 flex items-center justify-between border-b border-slate-100 pb-1">
+              <span>Tiến Hóa Lớp Yếu Thế</span>
+              <span id="slot2-class-round-lbl" class="text-xs sm:text-sm text-purple-700 font-bold">VÒNG 5</span>
+            </div>
+            <div class="grid grid-cols-2 gap-x-2 gap-y-1">
+              <div class="flex justify-between items-center">
+                <span class="text-slate-500">🏍️ rider:</span>
+                <span id="slot2-cls-rider" class="font-bold text-emerald-700">10.1% (+7.9%)</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-500">🚂 train:</span>
+                <span id="slot2-cls-train" class="font-bold text-emerald-700">16.2% (+16.2%)</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-500">🛵 motor:</span>
+                <span id="slot2-cls-motor" class="font-bold text-emerald-700">14.8% (+12.7%)</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-500">🚗 car:</span>
+                <span id="slot2-cls-car" class="font-bold text-slate-700">64.9% (Chuẩn)</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Slot 2 Footer -->
+    <div
+      class="pt-2.5 border-t border-slate-200 flex flex-wrap items-center justify-between text-xs sm:text-sm font-mono text-slate-500 gap-1">
+      <span class="flex items-center gap-1.5">
+        <span id="slot2-stop-dot" class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span id="slot2-stop-decision-text" class="text-emerald-800 font-bold">PHÁN QUYẾT: VICTORY_CONFIRMED (Tiết
+          kiệm 40.1% nhãn)</span>
+      </span>
+      <span id="slot2-footer-tag" class="text-purple-700 font-bold">Niêm Phong Bởi AutonomousLoopOrchestrator</span>
+    </div>
+
+    </div>
     </div> <!-- END ROW 3B (SLOT DEMO BENCHMARK 2) -->
 
   </main>
@@ -1263,51 +1303,80 @@
     ];
 
     // =========================================================================
-    // DYNAMIC SVG LOOPBACK ARROW CALCULATION
+    // DYNAMIC SVG LOOPBACK & TIER 3 MULTI-CONNECTOR CALCULATION
     // =========================================================================
     function updateLoopArrow() {
       const tier3 = document.getElementById('tier3-container');
+      const step9 = document.getElementById('step-9');
       const step10 = document.getElementById('step-10');
       const step15 = document.getElementById('step-15');
-      const svg = document.getElementById('dynamic-loop-svg');
-      const path = document.getElementById('loop-curve-path');
-      const label = document.getElementById('loop-text-label');
+      const step16 = document.getElementById('step-16');
+      const pathLoop = document.getElementById('loop-curve-path');
+      const labelLoop = document.getElementById('loop-text-label');
 
-      if (!tier3 || !step10 || !step15 || !svg || !path) return;
+      if (!tier3 || !step9 || !step10 || !step15 || !step16) return;
 
       const tRect = tier3.getBoundingClientRect();
+      const s9Rect = step9.getBoundingClientRect();
       const s10Rect = step10.getBoundingClientRect();
       const s15Rect = step15.getBoundingClientRect();
+      const s16Rect = step16.getBoundingClientRect();
 
-      // Start Point: Bottom-center of Step 15
-      const startX = (s15Rect.left - tRect.left) + (s15Rect.width / 2);
-      const startY = (s15Rect.bottom - tRect.top);
+      // 1. Dynamic conn-9: Smooth curve from Step 9 (Row 1) down into Step 10 (Row 2)
+      const path9 = document.getElementById('conn-9');
+      const path9Bg = document.getElementById('conn-9-bg');
+      if (path9) {
+        const s9X = (s9Rect.left - tRect.left) + (s9Rect.width / 2);
+        const s9Y = (s9Rect.bottom - tRect.top);
+        const s10X = (s10Rect.left - tRect.left) + (s10Rect.width / 2);
+        const s10Y = (s10Rect.top - tRect.top);
 
-      // End Point: Bottom-center of Step 10
-      const endX = (s10Rect.left - tRect.left) + (s10Rect.width / 2);
-      const endY = (s10Rect.bottom - tRect.top);
-
-      // Arc Control Offset (curves 24px below the steps)
-      const curveY = Math.max(startY, endY) + 24;
-
-      // Construct Smooth Cubic Bezier Path from Step 15 (right) curving left into Step 10
-      const d = `M ${startX} ${startY + 2} C ${startX} ${curveY}, ${endX} ${curveY}, ${endX} ${endY + 6}`;
-      path.setAttribute('d', d);
-
-      // Position Text Label along the horizontal arc
-      if (label) {
-        const midX = (startX + endX) / 2;
-        label.setAttribute('x', midX.toString());
-        label.setAttribute('y', (curveY + 11).toString());
-        label.setAttribute('text-anchor', 'middle');
-        label.removeAttribute('transform');
+        const d9 = `M ${s9X} ${s9Y} C ${s9X} ${s9Y + 24}, ${s10X} ${s10Y - 24}, ${s10X} ${s10Y - 4}`;
+        path9.setAttribute('d', d9);
+        if (path9Bg) path9Bg.setAttribute('d', d9);
       }
 
-      // Visibility Control during active iterations (V1 -> V5)
-      if (currentIteration >= 1 && currentStepIndex >= 10 && currentStepIndex <= 15) {
-        svg.style.opacity = '1';
-      } else {
-        svg.style.opacity = '0';
+      // 2. Dynamic conn-15: Smooth curve from Step 15 (Row 2) up into Step 16 (Row 1)
+      const path15 = document.getElementById('conn-15');
+      const path15Bg = document.getElementById('conn-15-bg');
+      if (path15) {
+        const s15X = (s15Rect.left - tRect.left) + (s15Rect.width / 2);
+        const s15Y = (s15Rect.top - tRect.top);
+        const s16X = (s16Rect.left - tRect.left) + (s16Rect.width / 2);
+        const s16Y = (s16Rect.bottom - tRect.top);
+
+        const d15 = `M ${s15X} ${s15Y} C ${s15X} ${s15Y - 24}, ${s16X} ${s16Y + 24}, ${s16X} ${s16Y + 4}`;
+        path15.setAttribute('d', d15);
+        if (path15Bg) path15Bg.setAttribute('d', d15);
+      }
+
+      // 3. Dynamic Loopback Arrow (Step 15 bottom -> Step 10 bottom)
+      if (pathLoop) {
+        const startX = (s15Rect.left - tRect.left) + (s15Rect.width / 2);
+        const startY = (s15Rect.bottom - tRect.top);
+        const endX = (s10Rect.left - tRect.left) + (s10Rect.width / 2);
+        const endY = (s10Rect.bottom - tRect.top);
+
+        const curveY = Math.max(startY, endY) + 26;
+        const d = `M ${startX} ${startY + 2} C ${startX} ${curveY}, ${endX} ${curveY}, ${endX} ${endY + 6}`;
+        pathLoop.setAttribute('d', d);
+
+        if (labelLoop) {
+          const midX = (startX + endX) / 2;
+          labelLoop.setAttribute('x', midX.toString());
+          labelLoop.setAttribute('y', (curveY + 11).toString());
+          labelLoop.setAttribute('text-anchor', 'middle');
+          labelLoop.removeAttribute('transform');
+        }
+
+        // Visibility Control during active iterations (V1 -> V5)
+        if (currentIteration >= 1 && currentStepIndex >= 10 && currentStepIndex <= 15) {
+          pathLoop.style.opacity = '1';
+          if (labelLoop) labelLoop.style.opacity = '1';
+        } else {
+          pathLoop.style.opacity = '0';
+          if (labelLoop) labelLoop.style.opacity = '0';
+        }
       }
 
       // Ensure scroll events re-align loop arrow on mobile/tablet
@@ -1319,6 +1388,15 @@
     }
 
     window.addEventListener('resize', updateLoopArrow);
+
+    // ResizeObserver để tự động căn chỉnh tọa độ khi có layout shift
+    if (window.ResizeObserver) {
+      const roTier3 = new ResizeObserver(() => {
+        updateLoopArrow();
+      });
+      const t3Target = document.getElementById('tier3-container');
+      if (t3Target) roTier3.observe(t3Target);
+    }
 
     // =========================================================================
     // SYNTHESIZED ZERO-DEPENDENCY AUDIO ENGINE (VANILLA WEB AUDIO API)
@@ -2047,6 +2125,9 @@
           });
         }
       }
+
+      // Cập nhật tọa độ chính xác cho các đường nối SVG Tầng 3
+      updateLoopArrow();
 
       // Thông báo cập nhật kích thước nếu DOM thay đổi độ cao sau render step
       debouncedNotifyParent();
